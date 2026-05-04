@@ -48,6 +48,11 @@
     .section-sm { padding: 80px 0; }
     .tc  { text-align: center; }
     .tc .section-sub { margin-left: auto; margin-right: auto; }
+    #inicio,
+    #beneficios,
+    #cambio,
+    #proceso,
+    #para-quien { scroll-margin-top: 90px; }
 
     .eyebrow {
       display: inline-block;
@@ -179,23 +184,74 @@
     nav.scrolled { box-shadow: var(--shadow-sm); }
     .nav-inner {
       display: flex; align-items:center; justify-content:space-between;
-      height: 68px; max-width:1100px; margin:0 auto; padding:0 28px;
+      height: 72px; max-width:1100px; margin:0 auto; padding:0 28px;
+      gap: 24px;
     }
     .nav-logo {
       font-weight: 800; font-size: 19px; letter-spacing:-.5px;
       color: var(--primary); text-decoration:none; flex-shrink:0;
     }
     .nav-logo span { color: var(--accent); }
-    .nav-links { display:flex; align-items:center; gap:4px; list-style:none; }
-    .nav-links a {
-      font-size:14px; font-weight:500; color:var(--text);
-      text-decoration:none; padding:6px 14px; border-radius:8px;
-      transition: background .2s, color .2s;
+    .nav-links {
+      display:flex; align-items:center; gap:30px;
+      list-style:none; flex:1; justify-content:center;
     }
-    .nav-links a:hover { background:rgba(11,31,58,.06); color:var(--primary); }
+    .nav-main-link {
+      position: relative;
+      font-size:14px;
+      font-weight:600;
+      color:var(--text);
+      text-decoration:none;
+      padding:6px 0;
+      transition: color .2s ease;
+      white-space:nowrap;
+    }
+    .nav-main-link::after {
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-2px;
+      width:100%;
+      height:2px;
+      background: var(--accent);
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .22s ease;
+      border-radius:2px;
+    }
+    .nav-main-link:hover,
+    .nav-main-link.active { color: var(--primary); }
+    .nav-main-link:hover::after,
+    .nav-main-link.active::after { transform:scaleX(1); }
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .nav-cta {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:40px;
+      padding:0 18px;
+      border-radius:999px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration:none;
+      font-size:13px;
+      font-weight:600;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 4px 16px rgba(11,31,58,.22);
+    }
+    .nav-cta:hover {
+      background: var(--primary-h);
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 8px 22px rgba(11,31,58,.28);
+    }
     .lang-toggle {
       display:flex; gap:0; background:var(--muted-fill);
-      border-radius:8px; padding:3px; margin-left:10px;
+      border-radius:8px; padding:3px; margin-left:0;
     }
     .lang-btn {
       font-size:12px; font-weight:700; letter-spacing:.5px;
@@ -215,7 +271,7 @@
       background:var(--primary); border-radius:2px; transition:all .3s;
     }
     .mobile-menu {
-      display:none; position:fixed; top:68px; left:0; right:0;
+      display:none; position:fixed; top:72px; left:0; right:0;
       background:rgba(247,247,245,.97); backdrop-filter:blur(20px);
       border-bottom:1px solid var(--muted-border);
       padding:16px 28px 28px; z-index:999;
@@ -226,6 +282,19 @@
       font-size:16px; font-weight:500; color:var(--text);
       text-decoration:none; padding:13px 0;
       border-bottom:1px solid rgba(11,31,58,.06);
+    }
+    .mobile-menu a.active { color: var(--primary); }
+    .mobile-cta {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:14px;
+      height:44px;
+      border-radius:12px;
+      background:var(--primary);
+      color:var(--white) !important;
+      font-weight:600;
+      border-bottom:none !important;
     }
     .mobile-lang { display:flex; margin-top:20px; }
 
@@ -649,28 +718,103 @@
     .outcome-note { font-size:12px; color:#B0B8C4; }
 
     /* ─── MOBILE PREVIEW ─── */
-    .mobile-preview-section { background: var(--white); padding-top: 28px; }
-    .mobile-preview-wrap {
-      max-width: 340px;
-      margin: 42px auto 0;
+    .mobile-preview-section {
+      background: linear-gradient(180deg, #F2F5FA 0%, #FFFFFF 100%);
+      padding-top: 74px;
+      padding-bottom: 74px;
+    }
+    .mobile-preview-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 56px;
+    }
+    .mobile-preview-sub {
+      margin-top: 14px;
+      max-width: 600px;
+    }
+    .mobile-preview-text {
+      margin-top: 18px;
+      max-width: 570px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: #4B5563;
+    }
+    .mobile-preview-benefits {
+      list-style: none;
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+      max-width: 560px;
+    }
+    .mobile-preview-benefit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1F2937;
+    }
+    .mobile-preview-benefit-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(26,110,250,.14);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mobile-preview-benefit-dot svg {
+      width: 9px;
+      height: 9px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mobile-preview-cta {
+      margin-top: 24px;
+      padding: 14px 24px;
+      font-size: 14px;
+      border-radius: 11px;
+    }
+    .mobile-preview-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-preview-stage {
+      width: 100%;
+      max-width: 460px;
+      border-radius: 28px;
+      padding: 28px 32px;
+      background:
+        radial-gradient(120% 110% at 50% 15%, rgba(26,110,250,.14) 0%, rgba(26,110,250,.03) 52%, rgba(255,255,255,.96) 100%);
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 20px 46px rgba(11,31,58,.11);
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     .mobile-preview-phone {
+      width: 340px;
       background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
-      border-radius: 34px;
-      padding: 14px 9px 12px;
-      border: 1.5px solid rgba(255,255,255,0.07);
-      box-shadow: 0 16px 44px rgba(11,31,58,0.20);
+      border-radius: 40px;
+      padding: 15px 10px 12px;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 46px rgba(11,31,58,0.30);
     }
     .mobile-preview-notch {
-      width: 42px;
-      height: 8px;
+      width: 62px;
+      height: 10px;
       background: #1d1d1f;
-      border-radius: 0 0 6px 6px;
+      border-radius: 0 0 8px 8px;
       margin: 0 auto 10px;
     }
     .mobile-preview-screen {
       background: #000;
-      border-radius: 22px;
+      border-radius: 24px;
       overflow: hidden;
       aspect-ratio: 9 / 19.5;
       line-height: 0;
@@ -684,11 +828,11 @@
       display: block;
     }
     .mobile-preview-home {
-      width: 36px;
-      height: 4px;
+      width: 44px;
+      height: 5px;
       border-radius: 4px;
       margin: 10px auto 0;
-      background: rgba(255,255,255,0.18);
+      background: rgba(255,255,255,0.2);
     }
 
     /* ─── BEFORE / AFTER ─── */
@@ -976,6 +1120,8 @@
       .hero-proof        { justify-content:center; }
       .hero-visual       { max-width:500px; margin:0 auto; }
       .vision-grid       { grid-template-columns:1fr; }
+      .mobile-preview-grid { grid-template-columns:1fr; gap:36px; }
+      .mobile-preview-stage { margin:0 auto; }
       .outcomes-grid     { grid-template-columns:1fr; }
       .ba-grid           { grid-template-columns:1fr; }
       .ps-inner          { grid-template-columns:1fr; gap:52px; }
@@ -985,6 +1131,7 @@
       .get-grid          { grid-template-columns:1fr; }
       .whom-grid         { grid-template-columns:1fr; }
       .nav-links         { display:none; }
+      .nav-cta           { display:none; }
       .hamburger         { display:flex; }
       /* Soften perspective on tablet */
       .laptop-mockup     { transform: rotateX(1deg) rotateY(-2deg); }
@@ -1006,7 +1153,8 @@
       .vision-card { padding:32px 24px; }
       .sol-card { padding:32px 24px; }
       .device-comp-wrap { padding-right: 18px; padding-bottom: 44px; }
-      .mobile-preview-wrap { max-width: 296px; }
+      .mobile-preview-stage { padding: 22px 18px; }
+      .mobile-preview-phone { width: 292px; }
     }
   </style>
 </head>
@@ -1017,26 +1165,32 @@
   <div class="nav-inner">
     <a href="#" class="nav-logo">Next<span>Web</span></a>
     <ul class="nav-links">
-      <li><a href="#inicio"   data-key="nav_home">Inicio</a></li>
-      <li><a href="#proceso"  data-key="nav_process">Proceso</a></li>
-      <li><a href="#contacto" data-key="nav_contact">Contacto</a></li>
-      <li>
-        <div class="lang-toggle">
-          <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
-          <button class="lang-btn"        id="btnEN" onclick="setLang('en')">EN</button>
-        </div>
-      </li>
+      <li><a class="nav-main-link" href="#inicio" data-key="nav_home">Inicio</a></li>
+      <li><a class="nav-main-link" href="#beneficios" data-key="nav_benefits">Beneficios</a></li>
+      <li><a class="nav-main-link" href="#cambio" data-key="nav_results">Resultados</a></li>
+      <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
+      <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
     </ul>
-    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
-      <span></span><span></span><span></span>
+    <div class="nav-right">
+      <a href="https://wa.me/593XXXXXXXXX?text=Hola%21%20quiero%20mejorar%20mi%20web" target="_blank" class="nav-cta" data-key="nav_cta">Mejorar mi web</a>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
+        <button class="lang-btn"        id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
     </div>
   </div>
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="#inicio"   onclick="toggleMenu()" data-key="nav_home">Inicio</a>
-  <a href="#proceso"  onclick="toggleMenu()" data-key="nav_process">Proceso</a>
-  <a href="#contacto" onclick="toggleMenu()" data-key="nav_contact">Contacto</a>
+  <a class="mobile-nav-link" href="#inicio" onclick="toggleMenu()" data-key="nav_home">Inicio</a>
+  <a class="mobile-nav-link" href="#beneficios" onclick="toggleMenu()" data-key="nav_benefits">Beneficios</a>
+  <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
+  <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
+  <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
+  <a class="mobile-cta" href="https://wa.me/593XXXXXXXXX?text=Hola%21%20quiero%20mejorar%20mi%20web" target="_blank" data-key="nav_cta">Mejorar mi web</a>
   <div class="mobile-lang">
     <div class="lang-toggle">
       <button class="lang-btn active" id="btnES2" onclick="setLang('es');toggleMenu()">ES</button>
@@ -1107,7 +1261,7 @@
 <div class="divider"></div>
 
 <!-- ─── VISION: WHAT YOUR BUSINESS COULD LOOK LIKE ─── -->
-<section class="section vision-section">
+<section class="section vision-section" id="beneficios">
   <div class="container">
     <div class="tc fi">
       <span class="eyebrow" data-key="vis_eyebrow">Tu negocio online</span>
@@ -1178,8 +1332,53 @@
 
 <div class="divider"></div>
 
+<!-- ─── MOBILE PREVIEW ─── -->
+<section class="section-sm mobile-preview-section" id="movil">
+  <div class="container">
+    <div class="mobile-preview-grid">
+      <div class="mobile-preview-copy">
+        <h2 class="section-title fi" data-key="mob_prev_title">Siempre lista para celular</h2>
+        <p class="section-sub mobile-preview-sub fi d1" data-key="mob_prev_sub">Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y facilitar el contacto en segundos.</p>
+        <p class="mobile-preview-text fi d2" data-key="mob_prev_text">La mayoría de clientes no revisa tu negocio desde una computadora. Lo hace desde el celular, rápido, comparando opciones y decidiendo en segundos.</p>
+        <ul class="mobile-preview-benefits fi d3">
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b1">Diseño adaptado a pantallas pequeñas</span>
+          </li>
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b2">Botones claros para contacto por WhatsApp</span>
+          </li>
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b3">Navegación simple y rápida</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/593XXXXXXXXX?text=Hola%21%20quiero%20una%20web%20lista%20para%20celular" target="_blank" class="btn btn-primary mobile-preview-cta fi d4" data-key="mob_prev_cta">Quiero una web lista para celular</a>
+      </div>
+      <div class="mobile-preview-visual fi d2">
+        <div class="mobile-preview-stage">
+          <div class="mobile-preview-phone">
+            <div class="mobile-preview-notch"></div>
+            <div class="mobile-preview-screen">
+              <img
+                src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
+                alt="Vista móvil real del sitio"
+                loading="lazy"
+              />
+            </div>
+            <div class="mobile-preview-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
 <!-- ─── BEFORE / AFTER ─── -->
-<section class="section ba-section">
+<section class="section ba-section" id="cambio">
   <div class="container">
     <div class="tc fi">
       <span class="eyebrow" style="color:rgba(255,255,255,.3)" data-key="ba_eyebrow">El cambio real</span>
@@ -1229,7 +1428,7 @@
 </section>
 
 <!-- ─── PROBLEM / SOLUTION ─── -->
-<section class="section ps-section">
+<section class="section ps-section" id="situacion">
   <div class="container">
     <div class="ps-inner">
       <div class="fi">
@@ -1255,7 +1454,7 @@
         </ul>
       </div>
       <div class="fi d2">
-        <div class="sol-card">
+        <div class="sol-card" id="solucion">
           <span class="sol-overline" data-key="sol_label">La solución</span>
           <h3 class="sol-title" data-key="sol_title">Te guiamos paso a paso hasta tener una web que trabaja para tu negocio.</h3>
           <div class="sol-feat">
@@ -1358,29 +1557,6 @@
   </div>
 </section>
 
-<!-- ─── MOBILE PREVIEW ─── -->
-<section class="section-sm mobile-preview-section">
-  <div class="container">
-    <div class="tc fi">
-      <h2 class="section-title" data-key="mob_prev_title">Tus clientes navegan desde el celular. Tu web debe estar lista.</h2>
-      <p class="section-sub" data-key="mob_prev_sub">Una experiencia móvil que genera confianza y facilita el contacto en segundos.</p>
-    </div>
-    <div class="mobile-preview-wrap fi d2">
-      <div class="mobile-preview-phone">
-        <div class="mobile-preview-notch"></div>
-        <div class="mobile-preview-screen">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
-            alt="Vista móvil real del sitio"
-            loading="lazy"
-          />
-        </div>
-        <div class="mobile-preview-home"></div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <div class="divider"></div>
 
 <!-- ─── FOR WHOM ─── -->
@@ -1457,7 +1633,7 @@
 /* ─── TRANSLATIONS ─── */
 const T = {
   es: {
-    nav_home:"Inicio", nav_process:"Proceso", nav_examples:"Ejemplos", nav_contact:"Contacto",
+    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_clients:"Clientes", nav_cta:"Mejorar mi web",
     hero_badge:"NextWeb Ecuador",
     hero_t1:"Tu página web puede verse mejor,", hero_t2:"generar confianza", hero_t3:"y traerte clientes",
     hero_sub:"Creamos o rediseñamos tu web con un proceso guiado y claro. Sin conocimientos técnicos de tu parte.",
@@ -1519,8 +1695,13 @@ const T = {
     ex1_t:"Una tienda digital que vende confianza antes de vender un producto",
     ex1_d:"Así puede verse tu negocio online: diseño premium, navegación clara y contacto directo por WhatsApp para cerrar ventas sin intermediarios.",
     ex1_cta:"Ver sitio", ex1_note:"jdcwatches.com",
-    mob_prev_title:"Tus clientes navegan desde el celular. Tu web debe estar lista.",
-    mob_prev_sub:"Una experiencia móvil que genera confianza y facilita el contacto en segundos.",
+    mob_prev_title:"Siempre lista para celular",
+    mob_prev_sub:"Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y facilitar el contacto en segundos.",
+    mob_prev_text:"La mayoría de clientes no revisa tu negocio desde una computadora. Lo hace desde el celular, rápido, comparando opciones y decidiendo en segundos.",
+    mob_prev_b1:"Diseño adaptado a pantallas pequeñas",
+    mob_prev_b2:"Botones claros para contacto por WhatsApp",
+    mob_prev_b3:"Navegación simple y rápida",
+    mob_prev_cta:"Quiero una web lista para celular",
     ex2_type:"Resultado posible", ex2_cat:"Cualquier negocio",
     ex2_t:"Tu negocio, con una imagen que genera confianza desde el primer momento",
     ex2_d:"Con el diseño correcto, tu web puede comunicar exactamente lo que tu negocio vale. Claro, directo y pensado para convertir visitas en clientes.",
@@ -1541,7 +1722,7 @@ const T = {
     wa_tip:"Hablemos",
   },
   en: {
-    nav_home:"Home", nav_process:"Process", nav_examples:"Examples", nav_contact:"Contact",
+    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_clients:"Clients", nav_cta:"Improve my website",
     hero_badge:"NextWeb Ecuador",
     hero_t1:"Your website can look better,", hero_t2:"build trust", hero_t3:"and bring you clients",
     hero_sub:"We create or redesign your website with a clear, guided process. No technical knowledge needed.",
@@ -1602,8 +1783,13 @@ const T = {
     ex1_t:"A digital store that sells trust before selling a product",
     ex1_d:"This is how your business could look online: premium design, clear navigation, and direct WhatsApp contact to close sales without intermediaries.",
     ex1_cta:"View site", ex1_note:"jdcwatches.com",
-    mob_prev_title:"Your clients browse on mobile. Your website must be ready.",
-    mob_prev_sub:"A mobile experience that builds trust and makes contact easy in seconds.",
+    mob_prev_title:"Always ready for mobile",
+    mob_prev_sub:"Today your clients look for you on their phones. Your website must look great, load fast, and make contact easy in seconds.",
+    mob_prev_text:"Most clients do not check your business from a computer. They do it from their phones, quickly, comparing options and deciding in seconds.",
+    mob_prev_b1:"Design adapted for small screens",
+    mob_prev_b2:"Clear buttons for WhatsApp contact",
+    mob_prev_b3:"Simple and fast navigation",
+    mob_prev_cta:"I want a mobile-ready website",
     ex2_type:"Possible result", ex2_cat:"Any business",
     ex2_t:"Your business, with an image that builds trust from the very first moment",
     ex2_d:"With the right design, your website can communicate exactly what your business is worth. Clear, direct, and built to convert visits into clients.",
@@ -1653,6 +1839,37 @@ document.addEventListener('click', e => {
   const h = document.getElementById('hamburger');
   if (m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) m.classList.remove('open');
 });
+
+/* Scroll spy for active nav links */
+const navLinks = Array.from(document.querySelectorAll('.nav-main-link, .mobile-nav-link'));
+const sectionIds = ['inicio', 'beneficios', 'cambio', 'proceso', 'para-quien'];
+
+function setActiveNav(targetId) {
+  navLinks.forEach(link => {
+    const active = link.getAttribute('href') === `#${targetId}`;
+    link.classList.toggle('active', active);
+  });
+}
+
+function updateActiveOnScroll() {
+  let current = sectionIds[0];
+  const trigger = window.scrollY + 120;
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= trigger) current = id;
+  });
+  setActiveNav(current);
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const targetId = link.getAttribute('href').replace('#', '');
+    setActiveNav(targetId);
+  });
+});
+
+window.addEventListener('scroll', updateActiveOnScroll);
+updateActiveOnScroll();
 
 /* Fade-in on scroll */
 const obs = new IntersectionObserver(entries => {
