@@ -365,13 +365,13 @@
     }
 
     /* ─── OUTCOMES VISION ─── */
-    .vision-section { background:var(--white); }
+    .vision-section { background:var(--white); padding-bottom: 72px; }
     .vision-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 64px;
-      align-items: start;
-      margin-top: 72px;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 52px;
+      align-items: center;
+      margin-top: 48px;
     }
     .vision-list { list-style:none; }
     .vision-item {
@@ -451,24 +451,48 @@
     .vision-feat-check svg { width:10px; height:10px; fill:none; stroke: var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
     /* image column */
     /* ─── DEVICE MOCKUP COMPOSITION ─── */
+    /* ─── DEVICE PERSPECTIVE WRAPPER ─── */
     .device-comp-wrap {
       position: relative;
-      padding-bottom: 52px;
-      padding-right: 28px;
-      transition: transform .4s ease;
+      padding-bottom: 72px;
+      padding-right: 0;
+      perspective: 1200px;
+      transform-style: preserve-3d;
     }
-    .device-comp-wrap:hover .laptop-mockup {
-      transform: translateY(-7px);
-      filter: drop-shadow(0 32px 64px rgba(0,0,0,0.30));
+    /* Glow behind the composition */
+    .device-comp-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 10% 5% -10% 5%;
+      background: radial-gradient(ellipse at 50% 80%, rgba(26,110,250,0.15) 0%, transparent 70%);
+      z-index: 0;
+      pointer-events: none;
     }
-    .device-comp-wrap:hover .phone-mockup {
-      transform: translateY(-4px);
+    /* Ground reflection */
+    .device-comp-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 28px;
+      height: 28px;
+      background: linear-gradient(to bottom, rgba(11,31,58,0.08), transparent);
+      border-radius: 0 0 12px 12px;
+      z-index: 0;
+      pointer-events: none;
     }
     /* Laptop */
     .laptop-mockup {
       width: 100%;
+      position: relative;
+      z-index: 1;
+      transform: rotateX(3deg) rotateY(-6deg);
+      transform-origin: center bottom;
+      transform-style: preserve-3d;
       transition: transform .4s ease, filter .4s ease;
-      filter: drop-shadow(0 20px 48px rgba(0,0,0,0.20));
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.22));
+    }
+    .device-comp-wrap:hover .laptop-mockup {
+      transform: rotateX(2deg) rotateY(-4deg) translateY(-6px);
+      filter: drop-shadow(0 48px 96px rgba(0,0,0,0.28));
     }
     .laptop-lid {
       background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
@@ -495,6 +519,7 @@
     .laptop-screen img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: left top;
       display: block;
     }
     .laptop-base {
@@ -514,11 +539,17 @@
     .phone-mockup {
       position: absolute;
       bottom: 0;
-      right: -4px;
-      width: 24%;
+      right: -8px;
+      width: 27%;
       z-index: 10;
-      transition: transform .4s ease;
-      filter: drop-shadow(0 16px 36px rgba(0,0,0,0.38));
+      transform: rotateY(-10deg) rotateZ(2deg) translateZ(40px);
+      transform-origin: center bottom;
+      transition: transform .4s ease, filter .4s ease;
+      filter: drop-shadow(0 35px 70px rgba(0,0,0,0.34));
+    }
+    .device-comp-wrap:hover .phone-mockup {
+      transform: rotateY(-8deg) rotateZ(1deg) translateZ(55px) translateY(-8px);
+      filter: drop-shadow(0 40px 80px rgba(0,0,0,0.40));
     }
     .phone-frame {
       background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
@@ -542,6 +573,7 @@
     .phone-screen img {
       width: 100%; height: 100%;
       object-fit: cover;
+      object-position: center top;
       display: block;
     }
     .phone-home-bar {
@@ -958,6 +990,20 @@
       .whom-grid         { grid-template-columns:1fr; }
       .nav-links         { display:none; }
       .hamburger         { display:flex; }
+      /* Flatten 3D on tablet so it doesn't clip */
+      .laptop-mockup     { transform: rotateX(2deg) rotateY(-4deg); }
+      .phone-mockup      { transform: rotateY(-7deg) rotateZ(1deg) translateZ(20px); }
+      .device-comp-wrap:hover .laptop-mockup { transform: rotateX(1deg) rotateY(-3deg) translateY(-4px); }
+      .device-comp-wrap:hover .phone-mockup  { transform: rotateY(-6deg) rotateZ(1deg) translateZ(28px) translateY(-6px); }
+    }
+    @media (max-width:768px) {
+      .laptop-mockup,
+      .phone-mockup,
+      .device-comp-wrap:hover .laptop-mockup,
+      .device-comp-wrap:hover .phone-mockup {
+        transform: none;
+      }
+      .device-comp-wrap { perspective: none; }
     }
     @media (max-width:600px) {
       .section    { padding:76px 0; }
