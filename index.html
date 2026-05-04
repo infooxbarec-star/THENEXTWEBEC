@@ -450,28 +450,105 @@
     }
     .vision-feat-check svg { width:10px; height:10px; fill:none; stroke: var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
     /* image column */
-    .vision-image-col { display:flex; flex-direction:column; gap:16px; align-items:stretch; justify-content:flex-start; }
-    .vision-image-label {
-      font-size: 11px; font-weight:700; letter-spacing:2.5px;
-      text-transform:uppercase; color: var(--accent);
-      margin-bottom: 8px;
+    /* ─── DEVICE MOCKUP COMPOSITION ─── */
+    .device-comp-wrap {
+      position: relative;
+      padding-bottom: 52px;
+      padding-right: 28px;
+      transition: transform .4s ease;
     }
-    .vision-image-container {
-      position:relative; width:100%; border-radius:16px; overflow:hidden;
-      box-shadow: 0 8px 32px rgba(11,31,58,.12);
-      transition: transform .3s ease, box-shadow .3s ease;
-      cursor: default;
-      background: var(--white);
-      border: 1px solid rgba(11,31,58,.08);
+    .device-comp-wrap:hover .laptop-mockup {
+      transform: translateY(-7px);
+      filter: drop-shadow(0 32px 64px rgba(0,0,0,0.30));
     }
-    .vision-image-container:hover {
-      transform: scale(1.03);
-      box-shadow: 0 16px 48px rgba(11,31,58,.18);
+    .device-comp-wrap:hover .phone-mockup {
+      transform: translateY(-4px);
     }
-    .vision-image-container img {
-      width:100%; height:auto; display:block;
-      object-fit:contain; object-position:center;
-      .vision-image-container:hover { transform: scale(1.02); }
+    /* Laptop */
+    .laptop-mockup {
+      width: 100%;
+      transition: transform .4s ease, filter .4s ease;
+      filter: drop-shadow(0 20px 48px rgba(0,0,0,0.20));
+    }
+    .laptop-lid {
+      background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
+      border-radius: 14px 14px 0 0;
+      padding: 10px 10px 7px;
+      position: relative;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-bottom: none;
+    }
+    .laptop-cam {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #333;
+      margin: 0 auto 7px;
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.06);
+    }
+    .laptop-screen {
+      background: #000;
+      border-radius: 5px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      line-height: 0;
+    }
+    .laptop-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .laptop-base {
+      background: linear-gradient(to bottom, #2c2c2e, #222224);
+      height: 18px;
+      border-radius: 0 0 3px 3px;
+      border: 1.5px solid rgba(255,255,255,0.05);
+      border-top: none;
+    }
+    .laptop-foot {
+      height: 5px;
+      background: #1a1a1c;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.22);
+    }
+    /* Phone */
+    .phone-mockup {
+      position: absolute;
+      bottom: 0;
+      right: -4px;
+      width: 24%;
+      z-index: 10;
+      transition: transform .4s ease;
+      filter: drop-shadow(0 16px 36px rgba(0,0,0,0.38));
+    }
+    .phone-frame {
+      background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
+      border-radius: 30px;
+      padding: 13px 8px 11px;
+      border: 1.5px solid rgba(255,255,255,0.07);
+    }
+    .phone-notch {
+      width: 34px; height: 7px;
+      background: #1d1d1f;
+      border-radius: 0 0 5px 5px;
+      margin: 0 auto 8px;
+    }
+    .phone-screen {
+      background: #000;
+      border-radius: 20px;
+      overflow: hidden;
+      aspect-ratio: 9 / 19.5;
+      line-height: 0;
+    }
+    .phone-screen img {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+    .phone-home-bar {
+      width: 34px; height: 4px;
+      border-radius: 4px;
+      background: rgba(255,255,255,0.18);
+      margin: 9px auto 0;
     }
 
     /* ─── EXAMPLE OUTCOMES ─── */
@@ -890,6 +967,8 @@
       .ba-col { padding:28px 22px; }
       .vision-card { padding:32px 24px; }
       .sol-card { padding:32px 24px; }
+      .device-comp-wrap { padding-right: 18px; padding-bottom: 44px; }
+      .phone-mockup { width: 28%; right: -4px; }
     }
   </style>
 </head>
@@ -1038,13 +1117,35 @@
         </li>
       </ul>
       <div class="vision-right fi d2">
-        <div class="vision-image-col">
-          <div class="vision-image-label" data-key="vis_img_label">Ejemplo real</div>
-          <div class="vision-image-container">
-            <img
-              src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
-              alt="Vista real de una web desarrollada"
-            />
+        <div class="device-comp-wrap">
+          <!-- Laptop mockup -->
+          <div class="laptop-mockup">
+            <div class="laptop-lid">
+              <div class="laptop-cam"></div>
+              <div class="laptop-screen">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
+                  alt="Diseño web en escritorio"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-foot"></div>
+          </div>
+          <!-- Phone mockup -->
+          <div class="phone-mockup">
+            <div class="phone-frame">
+              <div class="phone-notch"></div>
+              <div class="phone-screen">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
+                  alt="Diseño web en móvil"
+                  loading="lazy"
+                />
+              </div>
+              <div class="phone-home-bar"></div>
+            </div>
           </div>
         </div>
       </div>
