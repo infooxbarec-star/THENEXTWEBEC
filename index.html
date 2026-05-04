@@ -89,10 +89,6 @@
       0%,100%{ opacity:1; transform:scale(1);   }
       50%    { opacity:.4; transform:scale(.75); }
     }
-    @keyframes phonefloat {
-      0%, 100% { transform: rotate(-4deg) translateY(0); }
-      50%       { transform: rotate(-4deg) translateY(-9px); }
-    }
 
     .section-title {
       font-size: clamp(28px, 3.8vw, 44px);
@@ -400,7 +396,7 @@
       position: relative;
       display: flex; justify-content:center; align-items:center;
     }
-    .mockup-wrap { position:relative; width:100%; margin-top:-40px; }
+    .mockup-wrap { position:relative; width:100%; margin-top:-60px; }
     .browser {
       width:100%;
       background: var(--primary);
@@ -467,9 +463,8 @@
       width:115px; background:var(--primary);
       border-radius:22px; padding:9px 9px 14px;
       box-shadow: 0 18px 48px rgba(11,31,58,.30), 0 4px 14px rgba(11,31,58,.16);
-      transform: rotate(-4deg);
+      transform: none;
       z-index: 10;
-      animation: phonefloat 4s ease-in-out infinite;
     }
     .phone-screen {
       background:#000; border-radius:12px; height:168px; overflow:hidden;
