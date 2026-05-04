@@ -244,10 +244,10 @@
     }
     .hero-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 88px;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 52px;
       align-items: center;
-      padding: 88px 0;
+      padding: 64px 0;
     }
     .hero-title {
       font-size: clamp(34px, 4.6vw, 58px);
@@ -255,7 +255,7 @@
       color: var(--primary);
       line-height: 1.11;
       letter-spacing: -1.6px;
-      margin-bottom: 22px;
+      margin-bottom: 16px;
     }
     .hero-title em {
       font-style: normal;
@@ -265,12 +265,12 @@
       font-size: 19px;
       color: var(--muted-text);
       line-height: 1.7;
-      margin-bottom: 40px;
+      margin-bottom: 28px;
       max-width: 460px;
     }
     .hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
     .hero-proof {
-      margin-top: 44px;
+      margin-top: 28px;
       display: flex;
       align-items: center;
       gap: 20px;
@@ -287,7 +287,7 @@
       position: relative;
       display: flex; justify-content:center; align-items:center;
     }
-    .mockup-wrap { position:relative; width:100%; max-width:480px; }
+    .mockup-wrap { position:relative; width:100%; }
     .browser {
       width:100%;
       background: var(--primary);
@@ -313,7 +313,7 @@
     }
     .browser-screen {
       background: #000;
-      height: 258px; overflow:hidden; position:relative;
+      height: 316px; overflow:hidden; position:relative;
       display:flex; align-items:center; justify-content:center;
     }
     .browser-screen img {
@@ -974,7 +974,7 @@
       .hero-sub          { margin-left:auto; margin-right:auto; }
       .hero-actions      { justify-content:center; }
       .hero-proof        { justify-content:center; }
-      .hero-visual       { max-width:380px; margin:0 auto; }
+      .hero-visual       { max-width:500px; margin:0 auto; }
       .vision-grid       { grid-template-columns:1fr; }
       .outcomes-grid     { grid-template-columns:1fr; }
       .ba-grid           { grid-template-columns:1fr; }
@@ -1064,6 +1064,7 @@
             <span data-key="hero_cta">Mejorar mi web</span>
           </a>
           <a href="#proceso" class="btn btn-ghost" data-key="hero_cta2">Ver cómo funciona</a>
+          <a href="#incluye" class="btn btn-ghost" data-key="hero_cta3">Ver lo que incluye</a>
         </div>
         <div class="hero-proof fi d4">
           <p class="hero-proof-line" data-key="hero_proof">Proyectos diseñados para negocios reales en Ecuador</p>
@@ -1320,11 +1321,11 @@
 <div class="divider"></div>
 
 <!-- ─── WHAT YOU GET ─── -->
-<section class="section get-section">
+<section class="section get-section" id="incluye">
   <div class="container">
     <div class="tc fi">
       <span class="eyebrow" data-key="get_eyebrow">Lo que incluye</span>
-      <h2 class="section-title" data-key="get_title">Lo que obtienes</h2>
+      <h2 class="section-title" data-key="get_title">Todo lo que incluye tu web</h2>
       <p class="section-sub" data-key="get_sub">No vendemos páginas. Entregamos resultados concretos para tu negocio.</p>
     </div>
     <div class="get-grid">
@@ -1357,8 +1358,6 @@
   </div>
 </section>
 
-<!-- ─── EXAMPLE OUTCOMES ─── -->
-<
 <!-- ─── MOBILE PREVIEW ─── -->
 <section class="section-sm mobile-preview-section">
   <div class="container">
@@ -1505,8 +1504,9 @@ const T = {
     s4_n:"Revisión contigo",   s4_d:"Ajustamos juntos hasta que estés completamente satisfecho.",
     s5_n:"Lanzamiento",        s5_d:"Publicamos tu web y te dejamos listo para empezar a usarla.",
     get_eyebrow:"Lo que incluye",
-    get_title:"Lo que obtienes",
+    get_title:"Todo lo que incluye tu web",
     get_sub:"No vendemos páginas. Entregamos resultados concretos para tu negocio.",
+    hero_cta3:"Ver lo que incluye",
     get1_t:"Una web que representa bien tu negocio", get1_d:"Diseñada para reflejar quién eres y generar confianza desde el primer momento en que alguien la visita.",
     get2_t:"Un diseño que genera confianza", get2_d:"Visual limpio, profesional y coherente con tu marca. La confianza se construye antes de que el cliente diga hola.",
     get3_t:"Estructura pensada para convertir visitas en consultas", get3_d:"Cada sección tiene un propósito: guiar al visitante hacia el contacto de forma natural y sin fricción.",
@@ -1545,7 +1545,7 @@ const T = {
     hero_badge:"NextWeb Ecuador",
     hero_t1:"Your website can look better,", hero_t2:"build trust", hero_t3:"and bring you clients",
     hero_sub:"We create or redesign your website with a clear, guided process. No technical knowledge needed.",
-    hero_cta:"Improve my website", hero_cta2:"See how it works",
+    hero_cta:"Improve my website", hero_cta2:"See how it works", hero_cta3:"See what's included",
     hero_proof:"Projects designed for real businesses in Ecuador",
     vis_eyebrow:"Your business online",
     vis_title:"This is what your business could look like online",
@@ -1588,7 +1588,7 @@ const T = {
     s4_n:"Review together",     s4_d:"We adjust together until you are completely satisfied.",
     s5_n:"Launch",              s5_d:"We publish your website and leave you ready to start using it.",
     get_eyebrow:"What's included",
-    get_title:"What you get",
+    get_title:"Everything included with your website",
     get_sub:"We don't sell pages. We deliver concrete results for your business.",
     get1_t:"A website that represents your business properly", get1_d:"Designed to reflect who you are and build trust from the moment someone visits it.",
     get2_t:"A design that builds trust", get2_d:"Clean, professional, and consistent with your brand. Trust is built before the client says hello.",
