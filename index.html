@@ -1,1 +1,1557 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>The Next Web Ecuador</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    :root {
+      --bg: #F7F7F5;
+      --primary: #0B1F3A;
+      --text: #111111;
+      --muted: #D9D9D9;
+      --white: #FFFFFF;
+      --primary-hover: #142d54;
+      --accent: #1a73e8;
+      --shadow-sm: 0 2px 12px rgba(11,31,58,0.07);
+      --shadow-md: 0 8px 32px rgba(11,31,58,0.11);
+      --shadow-lg: 0 20px 60px rgba(11,31,58,0.13);
+      --radius: 16px;
+      --radius-sm: 10px;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+    }
+
+    /* ─── UTILITY ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .section { padding: 100px 0; }
+    .section-label {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      opacity: 0.45;
+      margin-bottom: 18px;
+    }
+    .section-title {
+      font-size: clamp(28px, 4vw, 44px);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+    }
+    .section-subtitle {
+      font-size: 18px;
+      color: #555;
+      margin-top: 16px;
+      max-width: 580px;
+      line-height: 1.7;
+    }
+    .text-center { text-align: center; }
+    .text-center .section-subtitle { margin-left: auto; margin-right: auto; }
+
+    /* ─── FADE IN ─── */
+    .fade-in {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.75s ease, transform 0.75s ease;
+    }
+    .fade-in.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .fade-in-delay-1 { transition-delay: 0.1s; }
+    .fade-in-delay-2 { transition-delay: 0.2s; }
+    .fade-in-delay-3 { transition-delay: 0.3s; }
+    .fade-in-delay-4 { transition-delay: 0.4s; }
+    .fade-in-delay-5 { transition-delay: 0.5s; }
+
+    /* ─── NAVBAR ─── */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 1000;
+      background: rgba(247,247,245,0.88);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid rgba(11,31,58,0.07);
+      transition: box-shadow 0.3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-inner {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 68px;
+      max-width: 1100px;
+      margin: 0 auto;
+      padding: 0 28px;
+    }
+    .nav-logo {
+      font-weight: 800;
+      font-size: 19px;
+      color: var(--primary);
+      letter-spacing: -0.5px;
+      text-decoration: none;
+      flex-shrink: 0;
+    }
+    .nav-logo span { color: #1a73e8; }
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      list-style: none;
+    }
+    .nav-links a {
+      font-size: 14px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 6px 14px;
+      border-radius: 8px;
+      transition: background 0.2s, color 0.2s;
+    }
+    .nav-links a:hover { background: rgba(11,31,58,0.06); color: var(--primary); }
+    .lang-toggle {
+      display: flex;
+      align-items: center;
+      gap: 0;
+      background: var(--muted);
+      border-radius: 8px;
+      padding: 3px;
+      margin-left: 8px;
+    }
+    .lang-btn {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 5px 12px;
+      border: none;
+      background: transparent;
+      border-radius: 6px;
+      cursor: pointer;
+      color: #666;
+      transition: background 0.2s, color 0.2s;
+    }
+    .lang-btn.active {
+      background: var(--primary);
+      color: var(--white);
+    }
+    .hamburger {
+      display: none;
+      flex-direction: column;
+      gap: 5px;
+      cursor: pointer;
+      padding: 6px;
+      border-radius: 8px;
+      transition: background 0.2s;
+    }
+    .hamburger:hover { background: rgba(11,31,58,0.06); }
+    .hamburger span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--primary);
+      border-radius: 2px;
+      transition: all 0.3s;
+    }
+    .mobile-menu {
+      display: none;
+      position: fixed;
+      top: 68px; left: 0; right: 0;
+      background: rgba(247,247,245,0.97);
+      backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--muted);
+      padding: 16px 28px 24px;
+      z-index: 999;
+      flex-direction: column;
+      gap: 4px;
+    }
+    .mobile-menu.open { display: flex; }
+    .mobile-menu a {
+      font-size: 16px;
+      font-weight: 500;
+      color: var(--text);
+      text-decoration: none;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(11,31,58,0.06);
+    }
+    .mobile-lang { display: flex; gap: 8px; margin-top: 16px; }
+
+    /* ─── BUTTON ─── */
+    .btn-primary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 16px 32px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
+      box-shadow: 0 4px 20px rgba(11,31,58,0.22);
+      letter-spacing: -0.1px;
+    }
+    .btn-primary:hover {
+      background: var(--primary-hover);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(11,31,58,0.28);
+    }
+    .btn-primary svg { flex-shrink: 0; }
+    .btn-secondary {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: transparent;
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 600;
+      padding: 15px 30px;
+      border-radius: 12px;
+      border: 2px solid var(--primary);
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.22s, color 0.22s, transform 0.18s;
+    }
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: var(--white);
+      transform: translateY(-2px);
+    }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      padding-top: 68px;
+      position: relative;
+      overflow: hidden;
+    }
+    .hero::before {
+      content: '';
+      position: absolute;
+      top: -200px; right: -200px;
+      width: 700px; height: 700px;
+      background: radial-gradient(circle, rgba(26,115,232,0.08) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero::after {
+      content: '';
+      position: absolute;
+      bottom: -100px; left: -100px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(11,31,58,0.05) 0%, transparent 65%);
+      pointer-events: none;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+      padding: 80px 0;
+    }
+    .hero-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(26,115,232,0.09);
+      border: 1px solid rgba(26,115,232,0.18);
+      color: #1a73e8;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      padding: 7px 16px;
+      border-radius: 100px;
+      margin-bottom: 24px;
+    }
+    .hero-badge::before {
+      content: '';
+      width: 6px; height: 6px;
+      background: #1a73e8;
+      border-radius: 50%;
+      animation: pulse 2s infinite;
+    }
+    @keyframes pulse {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.5; transform: scale(0.8); }
+    }
+    .hero-title {
+      font-size: clamp(36px, 5vw, 60px);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.12;
+      letter-spacing: -1.5px;
+      margin-bottom: 22px;
+    }
+    .hero-title span { color: #1a73e8; }
+    .hero-sub {
+      font-size: 19px;
+      color: #555;
+      line-height: 1.65;
+      margin-bottom: 38px;
+      max-width: 460px;
+    }
+    .hero-actions { display: flex; gap: 14px; flex-wrap: wrap; }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 40px;
+      color: #888;
+      font-size: 13px;
+    }
+    .hero-trust-dots { display: flex; gap: -4px; }
+    .hero-trust-dot {
+      width: 28px; height: 28px;
+      border-radius: 50%;
+      border: 2px solid var(--white);
+      background: var(--muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-left: -8px;
+      overflow: hidden;
+    }
+    .hero-trust-dot:first-child { margin-left: 0; }
+
+    /* Hero Mockup */
+    .hero-visual {
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+    .mockup-wrapper {
+      position: relative;
+      width: 100%;
+      max-width: 480px;
+    }
+    .mockup-laptop {
+      width: 100%;
+      background: var(--primary);
+      border-radius: 18px 18px 0 0;
+      padding: 12px 12px 0;
+      box-shadow: var(--shadow-lg);
+    }
+    .mockup-laptop-screen {
+      background: #F0F4FF;
+      border-radius: 8px 8px 0 0;
+      height: 260px;
+      overflow: hidden;
+      position: relative;
+    }
+    .mockup-screen-header {
+      background: var(--white);
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      border-bottom: 1px solid var(--muted);
+    }
+    .dot { width: 8px; height: 8px; border-radius: 50%; }
+    .dot-r { background: #FF5F57; }
+    .dot-y { background: #FFBD2E; }
+    .dot-g { background: #28CA41; }
+    .mockup-url {
+      background: var(--bg);
+      border-radius: 4px;
+      padding: 4px 12px;
+      font-size: 10px;
+      color: #888;
+      flex: 1;
+      text-align: center;
+    }
+    .mockup-screen-content {
+      padding: 18px 16px;
+    }
+    .mockup-bar {
+      height: 8px;
+      border-radius: 4px;
+      background: var(--primary);
+      margin-bottom: 10px;
+    }
+    .mockup-bar-short { width: 55%; }
+    .mockup-bar-muted {
+      background: var(--muted);
+      height: 6px;
+      border-radius: 4px;
+      margin-bottom: 8px;
+    }
+    .mockup-bar-muted-2 { width: 80%; }
+    .mockup-bar-muted-3 { width: 65%; }
+    .mockup-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 8px;
+      margin-top: 14px;
+    }
+    .mockup-card-mini {
+      background: var(--white);
+      border-radius: 6px;
+      height: 50px;
+      box-shadow: 0 2px 8px rgba(11,31,58,0.07);
+    }
+    .mockup-laptop-base {
+      background: #0a1929;
+      height: 14px;
+      border-radius: 0 0 4px 4px;
+    }
+    .mockup-laptop-foot {
+      background: #071422;
+      height: 5px;
+      border-radius: 0 0 16px 16px;
+      margin: 0 -12px;
+    }
+    .mockup-mobile {
+      position: absolute;
+      bottom: -20px;
+      right: -20px;
+      width: 110px;
+      background: var(--primary);
+      border-radius: 20px;
+      padding: 8px 8px 12px;
+      box-shadow: var(--shadow-md);
+    }
+    .mockup-mobile-screen {
+      background: #F0F4FF;
+      border-radius: 12px;
+      height: 170px;
+      overflow: hidden;
+    }
+    .mockup-mobile-notch {
+      background: var(--primary);
+      height: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mockup-mobile-notch::after {
+      content: '';
+      width: 30px; height: 4px;
+      background: rgba(255,255,255,0.2);
+      border-radius: 2px;
+    }
+    .mockup-mobile-content { padding: 10px 8px; }
+    .mockup-mobile-bar {
+      height: 5px;
+      border-radius: 3px;
+      background: var(--primary);
+      margin-bottom: 6px;
+    }
+    .mockup-mobile-bar-short { width: 70%; }
+    .mockup-mobile-bar-muted {
+      background: var(--muted);
+      height: 4px;
+      border-radius: 3px;
+      margin-bottom: 5px;
+    }
+    .mockup-mobile-card {
+      background: var(--white);
+      border-radius: 4px;
+      height: 36px;
+      margin-top: 8px;
+      box-shadow: 0 1px 4px rgba(11,31,58,0.1);
+    }
+
+    /* ─── SOCIAL PROOF ─── */
+    .proof-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 56px;
+    }
+    .proof-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      overflow: hidden;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.28s, box-shadow 0.28s;
+      border: 1px solid rgba(11,31,58,0.06);
+    }
+    .proof-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+    }
+    .proof-image {
+      width: 100%;
+      height: 220px;
+      background: linear-gradient(135deg, #e8edf5 0%, #d1daea 100%);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      overflow: hidden;
+    }
+    .proof-image::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(11,31,58,0.04) 0%, rgba(26,115,232,0.08) 100%);
+    }
+    .proof-image-icon {
+      font-size: 48px;
+      opacity: 0.3;
+    }
+    .proof-image-tag {
+      position: absolute;
+      top: 16px; left: 16px;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 10px;
+      font-weight: 700;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 12px;
+      border-radius: 6px;
+    }
+    .proof-body {
+      padding: 28px;
+    }
+    .proof-category {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: #1a73e8;
+      margin-bottom: 10px;
+    }
+    .proof-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 10px;
+      letter-spacing: -0.3px;
+    }
+    .proof-desc {
+      font-size: 14px;
+      color: #666;
+      line-height: 1.65;
+    }
+    .proof-footer {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 20px;
+      padding-top: 18px;
+      border-top: 1px solid var(--muted);
+    }
+    .proof-metric {
+      font-size: 13px;
+      color: #888;
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .proof-metric strong { color: var(--primary); font-weight: 700; }
+
+    /* ─── PROBLEM → SOLUTION ─── */
+    .ps-section { background: var(--primary); }
+    .ps-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 80px;
+      align-items: center;
+    }
+    .ps-title-light {
+      font-size: clamp(26px, 3.5vw, 40px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.2;
+      letter-spacing: -0.5px;
+      margin-bottom: 36px;
+    }
+    .ps-label-light {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.35);
+      margin-bottom: 18px;
+      display: block;
+    }
+    .problem-list { list-style: none; }
+    .problem-item {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.07);
+      color: rgba(255,255,255,0.72);
+      font-size: 17px;
+      font-weight: 400;
+    }
+    .problem-item:last-child { border-bottom: none; }
+    .problem-icon {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(255,255,255,0.08);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      font-size: 16px;
+    }
+    .ps-divider {
+      width: 1px;
+      background: rgba(255,255,255,0.1);
+      align-self: stretch;
+    }
+    .ps-solution {
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 20px;
+      padding: 48px;
+    }
+    .ps-solution-icon {
+      width: 56px; height: 56px;
+      background: #1a73e8;
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 24px;
+      font-size: 24px;
+    }
+    .ps-solution-title {
+      font-size: clamp(22px, 2.5vw, 32px);
+      font-weight: 700;
+      color: var(--white);
+      line-height: 1.3;
+      letter-spacing: -0.3px;
+      margin-bottom: 24px;
+    }
+    .ps-feature {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: rgba(255,255,255,0.75);
+      font-size: 15px;
+    }
+    .ps-feature-check {
+      width: 22px; height: 22px;
+      background: rgba(26,115,232,0.2);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      color: #60a5fa;
+      font-size: 11px;
+    }
+
+    /* ─── PROCESS ─── */
+    .process-steps {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 24px;
+      margin-top: 64px;
+      position: relative;
+    }
+    .process-steps::before {
+      content: '';
+      position: absolute;
+      top: 30px;
+      left: calc(10% + 20px);
+      right: calc(10% + 20px);
+      height: 2px;
+      background: linear-gradient(90deg, var(--primary) 0%, rgba(11,31,58,0.12) 100%);
+    }
+    .step-card {
+      background: var(--white);
+      border-radius: var(--radius);
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid rgba(11,31,58,0.06);
+      box-shadow: var(--shadow-sm);
+      position: relative;
+      transition: transform 0.28s, box-shadow 0.28s;
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+      box-shadow: var(--shadow-md);
+    }
+    .step-number {
+      width: 48px; height: 48px;
+      background: var(--primary);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      font-weight: 800;
+      color: var(--white);
+      margin: 0 auto 18px;
+      position: relative;
+      z-index: 1;
+      border: 3px solid var(--bg);
+      box-shadow: 0 2px 12px rgba(11,31,58,0.25);
+    }
+    .step-icon {
+      font-size: 22px;
+      margin-bottom: 10px;
+      display: block;
+    }
+    .step-name {
+      font-size: 15px;
+      font-weight: 700;
+      color: var(--primary);
+      margin-bottom: 8px;
+      letter-spacing: -0.2px;
+    }
+    .step-desc {
+      font-size: 13px;
+      color: #777;
+      line-height: 1.6;
+    }
+
+    /* ─── INCLUDED ─── */
+    .included-section { background: var(--white); }
+    .included-grid {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 20px;
+      margin-top: 56px;
+    }
+    .included-item {
+      background: var(--bg);
+      border-radius: var(--radius-sm);
+      padding: 28px 20px;
+      text-align: center;
+      border: 1px solid rgba(11,31,58,0.05);
+      transition: transform 0.24s, box-shadow 0.24s, border-color 0.24s;
+    }
+    .included-item:hover {
+      transform: translateY(-4px);
+      box-shadow: var(--shadow-sm);
+      border-color: rgba(11,31,58,0.12);
+    }
+    .included-icon {
+      width: 52px; height: 52px;
+      background: var(--primary);
+      border-radius: 14px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 16px;
+      font-size: 22px;
+    }
+    .included-name {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--primary);
+      line-height: 1.4;
+    }
+
+    /* ─── RESULTS ─── */
+    .results-section {
+      background: linear-gradient(135deg, #0B1F3A 0%, #142d54 100%);
+      position: relative;
+      overflow: hidden;
+    }
+    .results-section::before {
+      content: '';
+      position: absolute;
+      top: -150px; right: -150px;
+      width: 500px; height: 500px;
+      background: radial-gradient(circle, rgba(26,115,232,0.15) 0%, transparent 65%);
+    }
+    .results-headline {
+      font-size: clamp(36px, 5vw, 64px);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      letter-spacing: -1.5px;
+      max-width: 700px;
+      margin: 0 auto;
+    }
+    .results-headline span { color: #60a5fa; }
+    .results-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 32px;
+      margin-top: 72px;
+    }
+    .result-metric {
+      text-align: center;
+      padding: 36px 24px;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: var(--radius);
+    }
+    .result-metric-num {
+      font-size: 52px;
+      font-weight: 800;
+      color: var(--white);
+      letter-spacing: -2px;
+      line-height: 1;
+      margin-bottom: 8px;
+    }
+    .result-metric-num span { color: #60a5fa; }
+    .result-metric-label {
+      font-size: 15px;
+      color: rgba(255,255,255,0.55);
+      font-weight: 400;
+    }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta-inner {
+      max-width: 680px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .cta-headline {
+      font-size: clamp(32px, 4.5vw, 54px);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.15;
+      letter-spacing: -1px;
+      margin-bottom: 20px;
+    }
+    .cta-sub {
+      font-size: 18px;
+      color: #666;
+      margin-bottom: 40px;
+      line-height: 1.65;
+    }
+    .cta-actions {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+    .btn-whatsapp {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      background: #25D366;
+      color: var(--white);
+      font-size: 15px;
+      font-weight: 700;
+      padding: 17px 34px;
+      border-radius: 12px;
+      border: none;
+      cursor: pointer;
+      text-decoration: none;
+      transition: background 0.22s, transform 0.18s, box-shadow 0.22s;
+      box-shadow: 0 4px 20px rgba(37,211,102,0.3);
+    }
+    .btn-whatsapp:hover {
+      background: #20bd5a;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,0.4);
+    }
+    .cta-note {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      margin-top: 24px;
+      color: #aaa;
+      font-size: 13px;
+    }
+    .cta-note-dot { width: 4px; height: 4px; background: #ccc; border-radius: 50%; }
+
+    /* ─── FLOATING WHATSAPP ─── */
+    .wa-float {
+      position: fixed;
+      bottom: 28px;
+      right: 28px;
+      width: 60px;
+      height: 60px;
+      background: #25D366;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      box-shadow: 0 4px 24px rgba(37,211,102,0.45);
+      cursor: pointer;
+      text-decoration: none;
+      z-index: 999;
+      transition: transform 0.24s, box-shadow 0.24s;
+    }
+    .wa-float:hover {
+      transform: scale(1.1);
+      box-shadow: 0 8px 32px rgba(37,211,102,0.55);
+    }
+    .wa-float svg { width: 30px; height: 30px; }
+    .wa-tooltip {
+      position: absolute;
+      right: 72px;
+      background: var(--primary);
+      color: var(--white);
+      font-size: 13px;
+      font-weight: 500;
+      padding: 8px 16px;
+      border-radius: 8px;
+      white-space: nowrap;
+      opacity: 0;
+      transform: translateX(8px);
+      transition: opacity 0.24s, transform 0.24s;
+      pointer-events: none;
+    }
+    .wa-tooltip::after {
+      content: '';
+      position: absolute;
+      right: -5px; top: 50%;
+      transform: translateY(-50%);
+      border: 5px solid transparent;
+      border-left-color: var(--primary);
+      border-right: 0;
+    }
+    .wa-float:hover .wa-tooltip {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background: var(--primary);
+      color: rgba(255,255,255,0.5);
+      padding: 40px 0;
+      text-align: center;
+    }
+    .footer-logo {
+      font-weight: 800;
+      font-size: 18px;
+      color: var(--white);
+      margin-bottom: 10px;
+    }
+    .footer-logo span { color: #60a5fa; }
+    .footer-text { font-size: 13px; }
+
+    /* ─── RESPONSIVE ─── */
+    @media (max-width: 900px) {
+      .hero-inner { grid-template-columns: 1fr; gap: 60px; text-align: center; }
+      .hero-sub { max-width: 100%; margin-left: auto; margin-right: auto; }
+      .hero-actions { justify-content: center; }
+      .hero-trust { justify-content: center; }
+      .hero-visual { max-width: 400px; margin: 0 auto; }
+      .ps-inner { grid-template-columns: 1fr; gap: 48px; }
+      .ps-divider { display: none; }
+      .process-steps { grid-template-columns: 1fr 1fr; }
+      .process-steps::before { display: none; }
+      .included-grid { grid-template-columns: repeat(3, 1fr); }
+      .results-metrics { grid-template-columns: 1fr 1fr; }
+      .proof-grid { grid-template-columns: 1fr; }
+      .nav-links { display: none; }
+      .hamburger { display: flex; }
+    }
+
+    @media (max-width: 600px) {
+      .section { padding: 72px 0; }
+      .process-steps { grid-template-columns: 1fr; }
+      .included-grid { grid-template-columns: 1fr 1fr; }
+      .results-metrics { grid-template-columns: 1fr; }
+      .mockup-mobile { display: none; }
+      .ps-solution { padding: 32px 24px; }
+    }
+
+    @media (max-width: 400px) {
+      .included-grid { grid-template-columns: 1fr; }
+    }
+
+    /* ─── SCROLL SNAP FOR VISUAL CONSISTENCY ─── */
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--muted), transparent);
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAVBAR ─── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Next<span>Web</span></a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#hero" data-key="nav_home">Inicio</a></li>
+      <li><a href="#proceso" data-key="nav_process">Proceso</a></li>
+      <li><a href="#ejemplos" data-key="nav_examples">Ejemplos</a></li>
+      <li><a href="#contacto" data-key="nav_contact">Contacto</a></li>
+      <li>
+        <div class="lang-toggle">
+          <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
+          <button class="lang-btn" id="btnEN" onclick="setLang('en')">EN</button>
+        </div>
+      </li>
+    </ul>
+    <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+      <span></span><span></span><span></span>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#hero" onclick="toggleMenu()" data-key="nav_home">Inicio</a>
+  <a href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
+  <a href="#ejemplos" onclick="toggleMenu()" data-key="nav_examples">Ejemplos</a>
+  <a href="#contacto" onclick="toggleMenu()" data-key="nav_contact">Contacto</a>
+  <div class="mobile-lang">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnES2" onclick="setLang('es'); toggleMenu()">ES</button>
+      <button class="lang-btn" id="btnEN2" onclick="setLang('en'); toggleMenu()">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="hero">
+  <div class="container">
+    <div class="hero-inner">
+      <div>
+        <div class="hero-badge fade-in" data-key="hero_badge">🇪🇨 Ecuador · Web Agency</div>
+        <h1 class="hero-title fade-in fade-in-delay-1">
+          <span data-key="hero_title_1">Creamos o modernizamos</span><br>
+          <span data-key="hero_title_2">tu página web</span><br>
+          <span style="color:#1a73e8;" data-key="hero_title_3">paso a paso</span>
+        </h1>
+        <p class="hero-sub fade-in fade-in-delay-2" data-key="hero_sub">Desde cero o mejora total. Sin que tengas que saber nada técnico.</p>
+        <div class="hero-actions fade-in fade-in-delay-3">
+          <a href="https://wa.me/593XXXXXXXXX" target="_blank" class="btn-primary">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-key="hero_cta">Quiero mi página web</span>
+          </a>
+          <a href="#proceso" class="btn-secondary" data-key="hero_cta2">Ver el proceso</a>
+        </div>
+        <div class="hero-trust fade-in fade-in-delay-4">
+          <div class="hero-trust-dots">
+            <div class="hero-trust-dot">JG</div>
+            <div class="hero-trust-dot">MP</div>
+            <div class="hero-trust-dot">AR</div>
+            <div class="hero-trust-dot">LT</div>
+          </div>
+          <span data-key="hero_trust">+20 empresas en Ecuador confían en nosotros</span>
+        </div>
+      </div>
+      <div class="hero-visual fade-in fade-in-delay-3">
+        <div class="mockup-wrapper">
+          <div class="mockup-laptop">
+            <div class="mockup-laptop-screen">
+              <div class="mockup-screen-header">
+                <div class="dot dot-r"></div>
+                <div class="dot dot-y"></div>
+                <div class="dot dot-g"></div>
+                <div class="mockup-url">tunegocio.com</div>
+              </div>
+              <div class="mockup-screen-content">
+                <div class="mockup-bar mockup-bar-short"></div>
+                <div class="mockup-bar-muted mockup-bar-muted-2"></div>
+                <div class="mockup-bar-muted mockup-bar-muted-3"></div>
+                <div class="mockup-grid">
+                  <div class="mockup-card-mini"></div>
+                  <div class="mockup-card-mini"></div>
+                  <div class="mockup-card-mini"></div>
+                </div>
+              </div>
+            </div>
+            <div class="mockup-laptop-base"></div>
+            <div class="mockup-laptop-foot"></div>
+          </div>
+          <div class="mockup-mobile">
+            <div class="mockup-mobile-screen">
+              <div class="mockup-mobile-notch"></div>
+              <div class="mockup-mobile-content">
+                <div class="mockup-mobile-bar mockup-mobile-bar-short"></div>
+                <div class="mockup-mobile-bar-muted"></div>
+                <div class="mockup-mobile-bar-muted" style="width:85%"></div>
+                <div class="mockup-mobile-card"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── EXAMPLES / SOCIAL PROOF ─── -->
+<section class="section" id="ejemplos">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-label" data-key="proof_label">Proyectos realizados</span>
+      <h2 class="section-title" data-key="proof_title">Así quedan nuestras webs</h2>
+      <p class="section-subtitle" data-key="proof_sub">Cada proyecto es único. Diseñamos para que tu marca comunique confianza desde el primer clic.</p>
+    </div>
+    <div class="proof-grid">
+      <div class="proof-card fade-in fade-in-delay-1">
+        <div class="proof-image">
+          <div class="proof-image-icon">🌟</div>
+          <div class="proof-image-tag" data-key="proof1_tag">SALÓN DE BELLEZA</div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+            <div style="width:80%;background:var(--white);border-radius:12px;padding:16px;box-shadow:0 4px 20px rgba(11,31,58,0.15);opacity:0.85;">
+              <div style="height:8px;background:var(--primary);border-radius:4px;width:55%;margin-bottom:8px;"></div>
+              <div style="height:5px;background:var(--muted);border-radius:4px;margin-bottom:6px;"></div>
+              <div style="height:5px;background:var(--muted);border-radius:4px;width:70%;margin-bottom:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="height:28px;background:#f0f4ff;border-radius:6px;"></div>
+                <div style="height:28px;background:#f0f4ff;border-radius:6px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-body">
+          <div class="proof-category" data-key="proof1_cat">Salud & Belleza</div>
+          <h3 class="proof-title" data-key="proof1_title">Q2 Saloon</h3>
+          <p class="proof-desc" data-key="proof1_desc">Modernizamos la presencia digital de un salón de belleza en Guayaquil. Reservas online, galería de trabajos y conexión con WhatsApp desde el primer día.</p>
+          <div class="proof-footer">
+            <span class="proof-metric" data-key="proof1_metric1"><strong>+3×</strong> consultas por semana</span>
+            <span class="proof-metric" data-key="proof1_metric2"><strong>100%</strong> responsive</span>
+          </div>
+        </div>
+      </div>
+      <div class="proof-card fade-in fade-in-delay-2">
+        <div class="proof-image" style="background:linear-gradient(135deg,#1a1a2e 0%,#16213e 100%)">
+          <div class="proof-image-icon" style="font-size:52px">⌚</div>
+          <div class="proof-image-tag" data-key="proof2_tag">TIENDA ONLINE</div>
+          <div style="position:absolute;inset:0;display:flex;align-items:center;justify-content:center;pointer-events:none;">
+            <div style="width:80%;background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);border-radius:12px;padding:16px;backdrop-filter:blur(10px);">
+              <div style="height:8px;background:rgba(255,255,255,0.7);border-radius:4px;width:55%;margin-bottom:8px;"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.2);border-radius:4px;margin-bottom:6px;"></div>
+              <div style="height:5px;background:rgba(255,255,255,0.2);border-radius:4px;width:70%;margin-bottom:12px;"></div>
+              <div style="display:grid;grid-template-columns:1fr 1fr;gap:6px;">
+                <div style="height:28px;background:rgba(255,255,255,0.1);border-radius:6px;"></div>
+                <div style="height:28px;background:rgba(255,255,255,0.1);border-radius:6px;"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="proof-body">
+          <div class="proof-category" data-key="proof2_cat">Lujo & Moda</div>
+          <h3 class="proof-title" data-key="proof2_title">JDC Watches</h3>
+          <p class="proof-desc" data-key="proof2_desc">Catálogo digital premium para una marca de relojes. Diseño oscuro y elegante, galería de productos y botón de compra por WhatsApp integrado. Presencia internacional.</p>
+          <div class="proof-footer">
+            <span class="proof-metric" data-key="proof2_metric1"><strong>+150%</strong> ventas digitales</span>
+            <span class="proof-metric"><a href="http://jdcwatches.com" target="_blank" style="color:#1a73e8;text-decoration:none;font-weight:600;">jdcwatches.com →</a></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROBLEM → SOLUTION ─── -->
+<section class="section ps-section">
+  <div class="container">
+    <div class="ps-inner">
+      <div class="fade-in">
+        <span class="ps-label-light" data-key="ps_label">¿Te identificas?</span>
+        <h2 class="ps-title-light" data-key="ps_title">¿Cuál es tu situación ahora?</h2>
+        <ul class="problem-list">
+          <li class="problem-item">
+            <div class="problem-icon">❌</div>
+            <span data-key="prob1">No tienes página web</span>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">🕰️</div>
+            <span data-key="prob2">Tu web se ve antigua</span>
+          </li>
+          <li class="problem-item">
+            <div class="problem-icon">📉</div>
+            <span data-key="prob3">No te genera clientes</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fade-in fade-in-delay-2">
+        <div class="ps-solution">
+          <div class="ps-solution-icon">✨</div>
+          <h3 class="ps-solution-title" data-key="ps_solution">Te guiamos desde cero hasta una web moderna lista para crecer.</h3>
+          <div class="ps-feature">
+            <div class="ps-feature-check">✓</div>
+            <span data-key="ps_f1">Sin tecnicismos ni complicaciones</span>
+          </div>
+          <div class="ps-feature">
+            <div class="ps-feature-check">✓</div>
+            <span data-key="ps_f2">Proceso claro y acompañado</span>
+          </div>
+          <div class="ps-feature">
+            <div class="ps-feature-check">✓</div>
+            <span data-key="ps_f3">Resultados en semanas, no meses</span>
+          </div>
+          <div class="ps-feature">
+            <div class="ps-feature-check">✓</div>
+            <span data-key="ps_f4">Diseño que genera confianza</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROCESS ─── -->
+<section class="section" id="proceso">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-label" data-key="process_label">Cómo trabajamos</span>
+      <h2 class="section-title" data-key="process_title">Un proceso simple y guiado</h2>
+      <p class="section-subtitle" data-key="process_sub">Cinco pasos para llevarte de donde estás hoy a una web que trabaja para tu negocio.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step-card fade-in fade-in-delay-1">
+        <div class="step-number">1</div>
+        <span class="step-icon">🔍</span>
+        <div class="step-name" data-key="step1_name">Diagnóstico</div>
+        <div class="step-desc" data-key="step1_desc">Entendemos tu negocio, tus objetivos y qué necesita tu web.</div>
+      </div>
+      <div class="step-card fade-in fade-in-delay-2">
+        <div class="step-number">2</div>
+        <span class="step-icon">🎨</span>
+        <div class="step-name" data-key="step2_name">Diseño</div>
+        <div class="step-desc" data-key="step2_desc">Creamos el look & feel de tu web. Tú apruebas antes de construir.</div>
+      </div>
+      <div class="step-card fade-in fade-in-delay-3">
+        <div class="step-number">3</div>
+        <span class="step-icon">⚙️</span>
+        <div class="step-name" data-key="step3_name">Desarrollo</div>
+        <div class="step-desc" data-key="step3_desc">Construimos tu web optimizada, rápida y lista para celulares.</div>
+      </div>
+      <div class="step-card fade-in fade-in-delay-4">
+        <div class="step-number">4</div>
+        <span class="step-icon">👁️</span>
+        <div class="step-name" data-key="step4_name">Revisión contigo</div>
+        <div class="step-desc" data-key="step4_desc">Revisamos juntos y aplicamos tus ajustes hasta que estés satisfecho.</div>
+      </div>
+      <div class="step-card fade-in fade-in-delay-5">
+        <div class="step-number">5</div>
+        <span class="step-icon">🚀</span>
+        <div class="step-name" data-key="step5_name">Lanzamiento</div>
+        <div class="step-desc" data-key="step5_desc">Tu web sale al mundo. Te damos soporte para los primeros pasos.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WHAT'S INCLUDED ─── -->
+<section class="section included-section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-label" data-key="inc_label">Todo incluido</span>
+      <h2 class="section-title" data-key="inc_title">¿Qué obtienes?</h2>
+      <p class="section-subtitle" data-key="inc_sub">Nada a medias. Cada proyecto incluye todo lo que tu negocio necesita para brillar en internet.</p>
+    </div>
+    <div class="included-grid">
+      <div class="included-item fade-in fade-in-delay-1">
+        <div class="included-icon">✦</div>
+        <div class="included-name" data-key="inc1">Diseño moderno premium</div>
+      </div>
+      <div class="included-item fade-in fade-in-delay-2">
+        <div class="included-icon">📱</div>
+        <div class="included-name" data-key="inc2">Optimizado para celular</div>
+      </div>
+      <div class="included-item fade-in fade-in-delay-3">
+        <div class="included-icon">💬</div>
+        <div class="included-name" data-key="inc3">Integración con WhatsApp</div>
+      </div>
+      <div class="included-item fade-in fade-in-delay-4">
+        <div class="included-icon">🌐</div>
+        <div class="included-name" data-key="inc4">Dominio y publicación</div>
+      </div>
+      <div class="included-item fade-in fade-in-delay-5">
+        <div class="included-icon">🛡️</div>
+        <div class="included-name" data-key="inc5">Soporte inicial</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── RESULTS ─── -->
+<section class="section results-section">
+  <div class="container">
+    <div class="text-center fade-in">
+      <span class="section-label" style="color:rgba(255,255,255,0.35)" data-key="res_label">Resultados reales</span>
+      <h2 class="results-headline">
+        <span data-key="res_line1">Más clientes.</span><br>
+        <span data-key="res_line2">Más confianza.</span><br>
+        <span style="color:#60a5fa" data-key="res_line3">Mejor imagen.</span>
+      </h2>
+    </div>
+    <div class="results-metrics">
+      <div class="result-metric fade-in fade-in-delay-1">
+        <div class="result-metric-num">3<span>×</span></div>
+        <div class="result-metric-label" data-key="res_m1">Más consultas por semana</div>
+      </div>
+      <div class="result-metric fade-in fade-in-delay-2">
+        <div class="result-metric-num">100<span>%</span></div>
+        <div class="result-metric-label" data-key="res_m2">Adaptado a celulares</div>
+      </div>
+      <div class="result-metric fade-in fade-in-delay-3">
+        <div class="result-metric-num">+<span>20</span></div>
+        <div class="result-metric-label" data-key="res_m3">Empresas en Ecuador</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ─── -->
+<section class="section" id="contacto">
+  <div class="container">
+    <div class="final-cta-inner fade-in">
+      <span class="section-label" data-key="cta_label">Empieza hoy</span>
+      <h2 class="cta-headline" data-key="cta_title">Tu web lista para crecer</h2>
+      <p class="cta-sub" data-key="cta_sub">Un mensaje es todo lo que necesitas para comenzar. Te guiamos desde el primer paso.</p>
+      <div class="cta-actions">
+        <a href="https://wa.me/593XXXXXXXXX" target="_blank" class="btn-whatsapp">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-key="cta_wa">Escríbeme por WhatsApp</span>
+        </a>
+      </div>
+      <div class="cta-note">
+        <span data-key="cta_note1">Respuesta en menos de 1 hora</span>
+        <div class="cta-note-dot"></div>
+        <span data-key="cta_note2">Sin compromiso</span>
+        <div class="cta-note-dot"></div>
+        <span data-key="cta_note3">Totalmente gratis la consulta</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Next<span>Web</span> Ecuador</div>
+  <p class="footer-text" data-key="footer">© 2025 The Next Web Ecuador · Diseñado con ❤️ en Ecuador</p>
+</footer>
+
+<!-- ─── FLOATING WHATSAPP ─── -->
+<a href="https://wa.me/593XXXXXXXXX" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <div class="wa-tooltip" data-key="wa_tooltip">¡Hablemos!</div>
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<script>
+  /* ─── TRANSLATIONS ─── */
+  const translations = {
+    es: {
+      nav_home: "Inicio",
+      nav_process: "Proceso",
+      nav_examples: "Ejemplos",
+      nav_contact: "Contacto",
+      hero_badge: "🇪🇨 Ecuador · Web Agency",
+      hero_title_1: "Creamos o modernizamos",
+      hero_title_2: "tu página web",
+      hero_title_3: "paso a paso",
+      hero_sub: "Desde cero o mejora total. Sin que tengas que saber nada técnico.",
+      hero_cta: "Quiero mi página web",
+      hero_cta2: "Ver el proceso",
+      hero_trust: "+20 empresas en Ecuador confían en nosotros",
+      proof_label: "Proyectos realizados",
+      proof_title: "Así quedan nuestras webs",
+      proof_sub: "Cada proyecto es único. Diseñamos para que tu marca comunique confianza desde el primer clic.",
+      proof1_tag: "SALÓN DE BELLEZA",
+      proof1_cat: "Salud & Belleza",
+      proof1_title: "Q2 Saloon",
+      proof1_desc: "Modernizamos la presencia digital de un salón de belleza en Guayaquil. Reservas online, galería de trabajos y conexión con WhatsApp desde el primer día.",
+      proof1_metric1: "<strong>+3×</strong> consultas por semana",
+      proof1_metric2: "<strong>100%</strong> responsive",
+      proof2_tag: "TIENDA ONLINE",
+      proof2_cat: "Lujo & Moda",
+      proof2_title: "JDC Watches",
+      proof2_desc: "Catálogo digital premium para una marca de relojes. Diseño oscuro y elegante, galería de productos y botón de compra por WhatsApp integrado. Presencia internacional.",
+      proof2_metric1: "<strong>+150%</strong> ventas digitales",
+      ps_label: "¿Te identificas?",
+      ps_title: "¿Cuál es tu situación ahora?",
+      prob1: "No tienes página web",
+      prob2: "Tu web se ve antigua",
+      prob3: "No te genera clientes",
+      ps_solution: "Te guiamos desde cero hasta una web moderna lista para crecer.",
+      ps_f1: "Sin tecnicismos ni complicaciones",
+      ps_f2: "Proceso claro y acompañado",
+      ps_f3: "Resultados en semanas, no meses",
+      ps_f4: "Diseño que genera confianza",
+      process_label: "Cómo trabajamos",
+      process_title: "Un proceso simple y guiado",
+      process_sub: "Cinco pasos para llevarte de donde estás hoy a una web que trabaja para tu negocio.",
+      step1_name: "Diagnóstico",
+      step1_desc: "Entendemos tu negocio, tus objetivos y qué necesita tu web.",
+      step2_name: "Diseño",
+      step2_desc: "Creamos el look & feel de tu web. Tú apruebas antes de construir.",
+      step3_name: "Desarrollo",
+      step3_desc: "Construimos tu web optimizada, rápida y lista para celulares.",
+      step4_name: "Revisión contigo",
+      step4_desc: "Revisamos juntos y aplicamos tus ajustes hasta que estés satisfecho.",
+      step5_name: "Lanzamiento",
+      step5_desc: "Tu web sale al mundo. Te damos soporte para los primeros pasos.",
+      inc_label: "Todo incluido",
+      inc_title: "¿Qué obtienes?",
+      inc_sub: "Nada a medias. Cada proyecto incluye todo lo que tu negocio necesita para brillar en internet.",
+      inc1: "Diseño moderno premium",
+      inc2: "Optimizado para celular",
+      inc3: "Integración con WhatsApp",
+      inc4: "Dominio y publicación",
+      inc5: "Soporte inicial",
+      res_label: "Resultados reales",
+      res_line1: "Más clientes.",
+      res_line2: "Más confianza.",
+      res_line3: "Mejor imagen.",
+      res_m1: "Más consultas por semana",
+      res_m2: "Adaptado a celulares",
+      res_m3: "Empresas en Ecuador",
+      cta_label: "Empieza hoy",
+      cta_title: "Tu web lista para crecer",
+      cta_sub: "Un mensaje es todo lo que necesitas para comenzar. Te guiamos desde el primer paso.",
+      cta_wa: "Escríbeme por WhatsApp",
+      cta_note1: "Respuesta en menos de 1 hora",
+      cta_note2: "Sin compromiso",
+      cta_note3: "Totalmente gratis la consulta",
+      footer: "© 2025 The Next Web Ecuador · Diseñado con ❤️ en Ecuador",
+      wa_tooltip: "¡Hablemos!",
+    },
+    en: {
+      nav_home: "Home",
+      nav_process: "Process",
+      nav_examples: "Examples",
+      nav_contact: "Contact",
+      hero_badge: "🇪🇨 Ecuador · Web Agency",
+      hero_title_1: "We build or redesign",
+      hero_title_2: "your website",
+      hero_title_3: "step by step",
+      hero_sub: "From scratch or full redesign. No technical knowledge needed.",
+      hero_cta: "Get my website",
+      hero_cta2: "See the process",
+      hero_trust: "+20 businesses in Ecuador trust us",
+      proof_label: "Projects done",
+      proof_title: "This is how our websites look",
+      proof_sub: "Every project is unique. We design so your brand communicates trust from the very first click.",
+      proof1_tag: "BEAUTY SALON",
+      proof1_cat: "Health & Beauty",
+      proof1_title: "Q2 Saloon",
+      proof1_desc: "We modernized the digital presence of a beauty salon in Guayaquil. Online bookings, portfolio gallery, and WhatsApp connection from day one.",
+      proof1_metric1: "<strong>+3×</strong> inquiries per week",
+      proof1_metric2: "<strong>100%</strong> responsive",
+      proof2_tag: "ONLINE STORE",
+      proof2_cat: "Luxury & Fashion",
+      proof2_title: "JDC Watches",
+      proof2_desc: "Premium digital catalog for a watch brand. Elegant dark design, product gallery, and integrated WhatsApp buy button. International reach.",
+      proof2_metric1: "<strong>+150%</strong> digital sales",
+      ps_label: "Sound familiar?",
+      ps_title: "What's your situation today?",
+      prob1: "You don't have a website",
+      prob2: "Your site looks outdated",
+      prob3: "It doesn't bring clients",
+      ps_solution: "We guide you from zero to a modern website ready to grow.",
+      ps_f1: "No tech jargon or complications",
+      ps_f2: "Clear and supported process",
+      ps_f3: "Results in weeks, not months",
+      ps_f4: "Design that builds trust",
+      process_label: "How we work",
+      process_title: "A simple, guided process",
+      process_sub: "Five steps to take you from where you are today to a website that works for your business.",
+      step1_name: "Discovery",
+      step1_desc: "We understand your business, your goals, and what your website needs.",
+      step2_name: "Design",
+      step2_desc: "We create the look & feel of your site. You approve before we build.",
+      step3_name: "Development",
+      step3_desc: "We build your website — optimized, fast, and mobile-ready.",
+      step4_name: "Review",
+      step4_desc: "We review together and apply your feedback until you're satisfied.",
+      step5_name: "Launch",
+      step5_desc: "Your website goes live. We support you through the first steps.",
+      inc_label: "Everything included",
+      inc_title: "What do you get?",
+      inc_sub: "Nothing halfway. Every project includes everything your business needs to shine online.",
+      inc1: "Premium modern design",
+      inc2: "Mobile optimized",
+      inc3: "WhatsApp integration",
+      inc4: "Domain & launch support",
+      inc5: "Initial support",
+      res_label: "Real results",
+      res_line1: "More clients.",
+      res_line2: "More trust.",
+      res_line3: "Better presence.",
+      res_m1: "More inquiries per week",
+      res_m2: "Fully mobile optimized",
+      res_m3: "Businesses in Ecuador",
+      cta_label: "Start today",
+      cta_title: "Your website ready to grow",
+      cta_sub: "One message is all you need to get started. We guide you from the very first step.",
+      cta_wa: "Contact me on WhatsApp",
+      cta_note1: "Response in under 1 hour",
+      cta_note2: "No commitment",
+      cta_note3: "Free consultation",
+      footer: "© 2025 The Next Web Ecuador · Crafted with ❤️ in Ecuador",
+      wa_tooltip: "Let's talk!",
+    }
+  };
+
+  let currentLang = 'es';
+
+  function setLang(lang) {
+    currentLang = lang;
+    const t = translations[lang];
+    document.querySelectorAll('[data-key]').forEach(el => {
+      const key = el.getAttribute('data-key');
+      if (t[key] !== undefined) {
+        el.innerHTML = t[key];
+      }
+    });
+    // Update lang buttons
+    document.getElementById('btnES').classList.toggle('active', lang === 'es');
+    document.getElementById('btnEN').classList.toggle('active', lang === 'en');
+    document.getElementById('btnES2').classList.toggle('active', lang === 'es');
+    document.getElementById('btnEN2').classList.toggle('active', lang === 'en');
+    document.documentElement.lang = lang;
+  }
+
+  /* ─── NAVBAR SCROLL ─── */
+  window.addEventListener('scroll', () => {
+    document.getElementById('navbar').classList.toggle('scrolled', window.scrollY > 20);
+  });
+
+  /* ─── MOBILE MENU ─── */
+  function toggleMenu() {
+    document.getElementById('mobileMenu').classList.toggle('open');
+  }
+
+  /* ─── FADE IN ON SCROLL ─── */
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('visible');
+      }
+    });
+  }, { threshold: 0.12 });
+
+  document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
+
+  /* ─── SMOOTH NAV CLOSE ON OUTSIDE CLICK ─── */
+  document.addEventListener('click', (e) => {
+    const menu = document.getElementById('mobileMenu');
+    const hamburger = document.getElementById('hamburger');
+    if (menu.classList.contains('open') && !menu.contains(e.target) && !hamburger.contains(e.target)) {
+      menu.classList.remove('open');
+    }
+  });
+</script>
+</body>
+</html>
 
