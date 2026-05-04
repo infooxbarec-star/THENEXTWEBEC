@@ -369,20 +369,20 @@
     .vision-grid {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 56px;
-      align-items: center;
-      margin-top: 64px;
+      gap: 64px;
+      align-items: start;
+      margin-top: 72px;
     }
     .vision-list { list-style:none; }
     .vision-item {
       display: flex;
-      gap: 18px;
-      padding: 20px 0;
-      border-bottom: 1px solid var(--muted-border);
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(11,31,58,.07);
     }
     .vision-item:last-child { border-bottom:none; padding-bottom:0; }
     .vision-check {
-      width: 24px; height: 24px;
+      width: 26px; height: 26px;
       border-radius: 50%;
       background: var(--primary);
       flex-shrink: 0;
@@ -391,40 +391,87 @@
     }
     .vision-check svg { width:11px; height:11px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
     .vision-item-title {
-      font-size: 16px; font-weight: 600; color: var(--primary);
-      margin-bottom: 4px; letter-spacing:-.1px;
+      font-size: 17px; font-weight: 600; color: var(--primary);
+      margin-bottom: 6px; letter-spacing:-.15px;
     }
     .vision-item-desc {
-      font-size: 14px; color: var(--muted-text); line-height:1.65;
+      font-size: 14px; color: var(--muted-text); line-height:1.7;
+      max-width: 340px;
     }
-    .vision-card {
-      background: var(--primary);
-      border-radius: var(--r-lg);
-      padding: 48px 40px;
-      color: var(--white);
+    /* right side: two stacked light cards */
+    .vision-right { display:flex; flex-direction:column; gap:16px; }
+    .vision-headline-card {
+      background: #F8F9FB;
+      border: 1px solid rgba(11,31,58,.08);
+      border-radius: 16px;
+      padding: 36px 36px 32px;
+      box-shadow: 0 2px 16px rgba(11,31,58,.05);
+      transition: box-shadow .25s, transform .25s;
     }
-    .vision-card-label {
+    .vision-headline-card:hover {
+      box-shadow: 0 8px 32px rgba(11,31,58,.10);
+      transform: translateY(-3px);
+    }
+    .vision-headline-card-label {
       font-size: 11px; font-weight:700; letter-spacing:2.5px;
-      text-transform:uppercase; color:rgba(255,255,255,.35);
-      margin-bottom: 20px;
+      text-transform:uppercase; color: var(--accent);
+      margin-bottom: 14px; display:block;
     }
-    .vision-card-title {
-      font-size: clamp(22px, 2.4vw, 30px);
-      font-weight: 700; line-height:1.25; letter-spacing:-.4px;
-      color:var(--white); margin-bottom:28px;
+    .vision-headline-card-title {
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 700; line-height:1.3; letter-spacing:-.35px;
+      color: var(--primary);
     }
-    .vision-card-title span { color:#93C5FD; }
-    .vision-card-features { list-style:none; }
-    .vision-card-feat {
-      display: flex; align-items:center; gap:12px;
-      font-size: 15px; color:rgba(255,255,255,.75);
-      padding: 11px 0;
-      border-bottom: 1px solid rgba(255,255,255,.07);
+    .vision-headline-card-title span { color: var(--accent); }
+    .vision-feats-card {
+      border: 1px solid rgba(11,31,58,.08);
+      border-radius: 16px;
+      padding: 28px 36px;
+      background: var(--white);
+      box-shadow: 0 1px 8px rgba(11,31,58,.04);
+      transition: box-shadow .25s, transform .25s;
     }
-    .vision-card-feat:last-child { border-bottom:none; }
-    .feat-dot {
-      width: 6px; height:6px; border-radius:50%;
-      background: #93C5FD; flex-shrink:0;
+    .vision-feats-card:hover {
+      box-shadow: 0 6px 24px rgba(11,31,58,.09);
+      transform: translateY(-2px);
+    }
+    .vision-feat {
+      display: flex; align-items:center; gap:14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(11,31,58,.06);
+      font-size: 14px; color: #444; font-weight:500;
+    }
+    .vision-feat:last-child { border-bottom:none; padding-bottom:0; }
+    .vision-feat-check {
+      width:20px; height:20px; border-radius:50%;
+      background: rgba(26,115,232,.1);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .vision-feat-check svg { width:10px; height:10px; fill:none; stroke: var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    /* image column */
+    .vision-image-col { display:flex; flex-direction:column; gap:16px; align-items:stretch; justify-content:flex-start; }
+    .vision-image-label {
+      font-size: 11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color: var(--accent);
+      margin-bottom: 8px;
+    }
+    .vision-image-container {
+      position:relative; width:100%; border-radius:16px; overflow:hidden;
+      box-shadow: 0 8px 32px rgba(11,31,58,.12);
+      transition: transform .3s ease, box-shadow .3s ease;
+      cursor: default;
+      background: var(--white);
+      border: 1px solid rgba(11,31,58,.08);
+    }
+    .vision-image-container:hover {
+      transform: scale(1.03);
+      box-shadow: 0 16px 48px rgba(11,31,58,.18);
+    }
+    .vision-image-container img {
+      width:100%; height:auto; display:block;
+      object-fit:contain; object-position:center;
+      .vision-image-container:hover { transform: scale(1.02); }
     }
 
     /* ─── EXAMPLE OUTCOMES ─── */
@@ -990,16 +1037,16 @@
           </div>
         </li>
       </ul>
-      <div class="vision-card fi d2">
-        <div class="vision-card-label" data-key="vis_card_label">Lo que obtienes</div>
-        <h3 class="vision-card-title" data-key="vis_card_title">Un activo digital que <span>trabaja por tu negocio</span> todos los dias.</h3>
-        <ul class="vision-card-features">
-          <li class="vision-card-feat"><div class="feat-dot"></div><span data-key="vis_f1">Imagen profesional desde el primer vistazo</span></li>
-          <li class="vision-card-feat"><div class="feat-dot"></div><span data-key="vis_f2">Estructura pensada para convertir visitas en consultas</span></li>
-          <li class="vision-card-feat"><div class="feat-dot"></div><span data-key="vis_f3">Optimizada para celulares</span></li>
-          <li class="vision-card-feat"><div class="feat-dot"></div><span data-key="vis_f4">Canal directo de contacto por WhatsApp</span></li>
-          <li class="vision-card-feat"><div class="feat-dot"></div><span data-key="vis_f5">Base sólida para crecer online</span></li>
-        </ul>
+      <div class="vision-right fi d2">
+        <div class="vision-image-col">
+          <div class="vision-image-label" data-key="vis_img_label">Ejemplo real</div>
+          <div class="vision-image-container">
+            <img
+              src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
+              alt="Vista real de una web desarrollada"
+            />
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -1369,6 +1416,7 @@ const T = {
     vis_i2_t:"Clientes que confían desde el primer clic", vis_i2_d:"Un diseño claro y bien estructurado genera confianza antes de que el cliente diga una sola palabra.",
     vis_i3_t:"Contacto directo por WhatsApp", vis_i3_d:"Con un solo toque, el cliente te escribe. Sin formularios complicados, sin fricciones.",
     vis_i4_t:"Una presencia que compite con empresas más grandes", vis_i4_d:"Tu web puede verse tan profesional como la de cualquier empresa del sector, sin importar el tamaño de tu negocio.",
+    vis_img_label:"Ejemplo real",
     vis_card_label:"Lo que obtienes",
     vis_card_title:"Un activo digital que <span>trabaja por tu negocio</span> todos los dias.",
     vis_f1:"Imagen profesional desde el primer vistazo", vis_f2:"Estructura pensada para convertir visitas en consultas",
@@ -1449,6 +1497,7 @@ const T = {
     vis_i2_t:"Clients who trust you from the first click", vis_i2_d:"A clear, well-structured design builds trust before the client says a single word.",
     vis_i3_t:"Direct contact through WhatsApp", vis_i3_d:"With one tap, the client writes to you. No complicated forms, no friction.",
     vis_i4_t:"A presence that competes with bigger companies", vis_i4_d:"Your website can look as professional as any company in the industry, regardless of your business size.",
+    vis_img_label:"Real example",
     vis_card_label:"What you get",
     vis_card_title:"A digital asset that <span>works for your business</span> every day.",
     vis_f1:"Professional image from the first glance", vis_f2:"Structure built to convert visits into inquiries",
