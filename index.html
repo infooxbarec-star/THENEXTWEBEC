@@ -516,6 +516,92 @@
       border-radius: inherit;
     }
 
+    /* ─── LIGHTBOX ─── */
+    .lightbox-trigger {
+      cursor: zoom-in;
+      transition: transform .2s ease;
+    }
+    .lightbox-trigger:hover {
+      transform: scale(1.01);
+    }
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .26s ease-in-out, visibility .26s ease-in-out;
+      z-index: 3000;
+    }
+    .lightbox-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-stage {
+      position: relative;
+      width: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .lightbox-img {
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 28px 80px rgba(0,0,0,.45);
+      transform-origin: center center;
+      transform: translate(var(--lb-x, 0px), var(--lb-y, 0px)) scale(var(--lb-scale, .95));
+      opacity: 0;
+      transition: transform .26s ease-in-out, opacity .26s ease-in-out;
+      object-fit: contain;
+      pointer-events: auto;
+      cursor: default;
+    }
+    .lightbox-overlay.open .lightbox-img {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease, transform .2s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+    .lightbox-close:hover {
+      background: rgba(255,255,255,.2);
+      transform: scale(1.04);
+    }
+    body.lb-open {
+      overflow: hidden;
+      touch-action: none;
+    }
+
     /* ─── OUTCOMES VISION ─── */
     .vision-section { background:var(--white); padding-bottom: 72px; }
     .vision-grid {
@@ -1245,6 +1331,16 @@
       .device-comp-wrap { padding-right: 18px; padding-bottom: 44px; }
       .mobile-preview-stage { padding: 22px 18px; }
       .mobile-preview-phone { width: 292px; }
+      .lightbox-overlay { padding: 14px; }
+      .lightbox-img {
+        max-width: 96vw;
+        max-height: 86vh;
+        border-radius: 8px;
+      }
+      .lightbox-close {
+        top: 12px;
+        right: 12px;
+      }
     }
   </style>
 </head>
@@ -1329,6 +1425,7 @@
               <img
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/main/Screenshot%202026-05-04%20at%2013.05.40.jpeg"
                 alt="Vista previa del sitio web"
+                class="lightbox-trigger"
               />
             </div>
             <div class="browser-base"></div>
@@ -1339,6 +1436,7 @@
               <img
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3677.PNG"
                 alt="Vista móvil del sitio web"
+                class="lightbox-trigger"
               />
             </div>
           </div>
@@ -1370,6 +1468,7 @@
         <img
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
           alt="Vista de sitio web premium en escritorio"
+          class="lightbox-trigger"
           loading="lazy"
         />
       </figure>
@@ -1377,6 +1476,7 @@
         <img
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
           alt="Detalle de interfaz web moderna"
+          class="lightbox-trigger"
           loading="lazy"
         />
       </figure>
@@ -1384,6 +1484,7 @@
         <img
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
           alt="Composición visual de web profesional"
+          class="lightbox-trigger"
           loading="lazy"
         />
       </figure>
@@ -1450,6 +1551,7 @@
                 <img
                   src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
                   alt="Diseño web en escritorio"
+                  class="lightbox-trigger"
                   loading="lazy"
                 />
               </div>
@@ -1497,6 +1599,7 @@
               <img
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
                 alt="Vista móvil real del sitio"
+                class="lightbox-trigger"
                 loading="lazy"
               />
             </div>
@@ -1762,6 +1865,13 @@
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
 
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
+  <div class="lightbox-stage" id="lightboxStage">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar vista">&times;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Vista ampliada" />
+  </div>
+</div>
+
 <script>
 /* ─── TRANSLATIONS ─── */
 const T = {
@@ -2019,6 +2129,68 @@ const obs = new IntersectionObserver(entries => {
   entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
 }, { threshold: 0.10 });
 document.querySelectorAll('.fi, .fi-slide').forEach(el => obs.observe(el));
+
+/* Lightbox */
+const lightboxOverlay = document.getElementById('lightboxOverlay');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxTriggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
+let lastOrigin = { x: 0, y: 0, scale: .95 };
+
+function setLightboxStartFromElement(el) {
+  const r = el.getBoundingClientRect();
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const cx = r.left + (r.width / 2);
+  const cy = r.top + (r.height / 2);
+  const dx = cx - (vw / 2);
+  const dy = cy - (vh / 2);
+  const scale = Math.max(0.2, Math.min(0.95, Math.min(r.width / vw, r.height / vh)));
+  lastOrigin = { x: dx, y: dy, scale };
+  lightboxImg.style.setProperty('--lb-x', `${dx}px`);
+  lightboxImg.style.setProperty('--lb-y', `${dy}px`);
+  lightboxImg.style.setProperty('--lb-scale', `${scale}`);
+}
+
+function openLightbox(imgEl) {
+  if (!imgEl) return;
+  setLightboxStartFromElement(imgEl);
+  lightboxImg.src = imgEl.currentSrc || imgEl.src;
+  lightboxImg.alt = imgEl.alt || 'Vista ampliada';
+  document.body.classList.add('lb-open');
+  lightboxOverlay.classList.add('open');
+  lightboxOverlay.setAttribute('aria-hidden', 'false');
+}
+
+function closeLightbox() {
+  lightboxImg.style.setProperty('--lb-x', `${lastOrigin.x}px`);
+  lightboxImg.style.setProperty('--lb-y', `${lastOrigin.y}px`);
+  lightboxImg.style.setProperty('--lb-scale', `${lastOrigin.scale}`);
+  lightboxOverlay.classList.remove('open');
+  lightboxOverlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('lb-open');
+  window.setTimeout(() => {
+    if (!lightboxOverlay.classList.contains('open')) {
+      lightboxImg.src = '';
+    }
+  }, 260);
+}
+
+lightboxTriggers.forEach(imgEl => {
+  imgEl.addEventListener('click', () => openLightbox(imgEl));
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightboxOverlay.addEventListener('click', (e) => {
+  if (e.target === lightboxOverlay) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightboxOverlay.classList.contains('open')) {
+    closeLightbox();
+  }
+});
 </script>
 </body>
 </html>
