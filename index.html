@@ -476,6 +476,37 @@
       border-radius:10px; display:block;
     }
 
+    /* ─── SCREENSHOT SHOWCASE ─── */
+    .shots-section { background: var(--white); }
+    .shots-grid {
+      margin-top: 56px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 20px;
+    }
+    .shot-card {
+      position: relative;
+      border-radius: 14px;
+      overflow: hidden;
+      border: 1px solid rgba(11,31,58,.08);
+      background: #F3F5F9;
+      box-shadow: 0 6px 24px rgba(11,31,58,.08);
+      transition: transform .2s ease, box-shadow .2s ease;
+      aspect-ratio: 16 / 10;
+    }
+    .shot-card:hover {
+      transform: translateY(-2px) scale(1.01);
+      box-shadow: 0 12px 28px rgba(11,31,58,.12);
+    }
+    .shot-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      display: block;
+      background: #0b1f3a;
+    }
+
     /* ─── OUTCOMES VISION ─── */
     .vision-section { background:var(--white); padding-bottom: 72px; }
     .vision-grid {
@@ -1162,6 +1193,7 @@
       .hero-actions      { justify-content:center; }
       .hero-proof        { justify-content:center; }
       .hero-visual       { max-width:500px; margin:0 auto; }
+      .shots-grid        { grid-template-columns:1fr 1fr; }
       .vision-grid       { grid-template-columns:1fr; }
       .mobile-preview-grid { grid-template-columns:1fr; gap:36px; }
       .mobile-preview-stage { margin:0 auto; }
@@ -1190,6 +1222,7 @@
     @media (max-width:600px) {
       .section    { padding:76px 0; }
       .section-sm { padding:60px 0; }
+      .shots-grid { grid-template-columns:1fr; gap:16px; }
       .process-steps { grid-template-columns:1fr; }
       .phone-float { display:none; }
       .ba-col { padding:28px 22px; }
@@ -1307,6 +1340,42 @@
     <p class="hero-transition-text"><strong data-key="hero_transition">Así es como cambia tu negocio cuando tu web funciona</strong></p>
   </div>
 </div>
+
+<div class="divider"></div>
+
+<!-- ─── SCREENSHOT SHOWCASE ─── -->
+<section class="section shots-section" id="capturas">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="shots_eyebrow">Ejemplos visuales</span>
+      <h2 class="section-title" data-key="shots_title">Así puede verse una web premium para tu negocio</h2>
+      <p class="section-sub" data-key="shots_sub">Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.</p>
+    </div>
+    <div class="shots-grid">
+      <figure class="shot-card fi d1">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
+          alt="Vista de sitio web premium en escritorio"
+          loading="lazy"
+        />
+      </figure>
+      <figure class="shot-card fi d2">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
+          alt="Detalle de interfaz web moderna"
+          loading="lazy"
+        />
+      </figure>
+      <figure class="shot-card fi d3">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
+          alt="Composición visual de web profesional"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
 
 <div class="divider"></div>
 
@@ -1691,6 +1760,9 @@ const T = {
     hero_trust:"Webs diseñadas para generar contactos reales",
     hero_transition:"Así es como cambia tu negocio cuando tu web funciona",
     hero_proof:"Proyectos diseñados para negocios reales en Ecuador",
+    shots_eyebrow:"Ejemplos visuales",
+    shots_title:"Así puede verse una web premium para tu negocio",
+    shots_sub:"Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.",
     vis_eyebrow:"Tu negocio online",
     vis_title:"Así podría verse tu negocio en internet",
     vis_sub:"Una web bien hecha no es un gasto. Es la diferencia entre un cliente que te contacta y uno que se va con la competencia.",
@@ -1782,6 +1854,9 @@ const T = {
     hero_trust:"Websites designed to generate real inquiries",
     hero_transition:"This is how your business changes when your website works",
     hero_proof:"Projects designed for real businesses in Ecuador",
+    shots_eyebrow:"Visual examples",
+    shots_title:"This is how a premium website can look for your business",
+    shots_sub:"Three real views integrated with a focus on visual clarity, trust, and conversion.",
     vis_eyebrow:"Your business online",
     vis_title:"This is what your business could look like online",
     vis_sub:"A well-built website is not an expense. It is the difference between a client who contacts you and one who goes to the competition.",
