@@ -396,7 +396,16 @@
       position: relative;
       display: flex; justify-content:center; align-items:center;
     }
-    .mockup-wrap { position:relative; width:100%; margin-top:-60px; }
+    .mockup-wrap {
+      position:relative;
+      width:100%;
+      margin-top:-60px;
+      transform: translate3d(0, var(--hero-device-y, 0px), 0) scale(var(--hero-device-scale, 1));
+      opacity: var(--hero-device-opacity, 1);
+      will-change: transform, opacity;
+      transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+      transform-origin: 50% 45%;
+    }
     .browser {
       width:100%;
       background: var(--primary);
@@ -1457,6 +1466,7 @@
       .hero-actions      { justify-content:center; }
       .hero-proof        { justify-content:center; margin-top:24px; }
       .hero-visual       { max-width:520px; margin:0 auto; }
+      .mockup-wrap       { transform:none; opacity:1; }
 
       /* Screenshots */
       .shots-section     { padding-top: 88px; padding-bottom: 88px; }
@@ -2526,6 +2536,69 @@ document.addEventListener('keydown', (e) => {
     closeLightbox();
   }
 });
+
+/* Hero mockup scroll animation (desktop only) */
+const heroSection = document.getElementById('inicio');
+const heroMockupWrap = document.querySelector('.mockup-wrap');
+const desktopMQ = window.matchMedia('(min-width: 901px)');
+const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+let heroAnimFrame = null;
+let heroAnimEnabled = false;
+
+function setHeroMockupStyle(y = 0, scale = 1, opacity = 1) {
+  if (!heroMockupWrap) return;
+  heroMockupWrap.style.setProperty('--hero-device-y', `${y.toFixed(2)}px`);
+  heroMockupWrap.style.setProperty('--hero-device-scale', `${scale.toFixed(4)}`);
+  heroMockupWrap.style.setProperty('--hero-device-opacity', `${opacity.toFixed(4)}`);
+}
+
+function updateHeroMockupOnScroll() {
+  heroAnimFrame = null;
+  if (!heroAnimEnabled || !heroSection || !heroMockupWrap) return;
+
+  const rect = heroSection.getBoundingClientRect();
+  const vh = window.innerHeight || 1;
+  const rawProgress = Math.min(Math.max((-rect.top) / (vh * 0.95), 0), 1);
+  const eased = 1 - Math.pow(1 - rawProgress, 3);
+
+  const y = eased * 34;
+  const scale = 1 - (eased * 0.03);
+  const opacity = 1 - (eased * 0.08);
+
+  setHeroMockupStyle(y, scale, opacity);
+}
+
+function requestHeroMockupUpdate() {
+  if (!heroAnimEnabled) return;
+  if (heroAnimFrame !== null) return;
+  heroAnimFrame = window.requestAnimationFrame(updateHeroMockupOnScroll);
+}
+
+function resetHeroMockupAnimation() {
+  if (heroAnimFrame !== null) {
+    window.cancelAnimationFrame(heroAnimFrame);
+    heroAnimFrame = null;
+  }
+  setHeroMockupStyle(0, 1, 1);
+}
+
+function setupHeroMockupAnimation() {
+  heroAnimEnabled = !!heroMockupWrap && !!heroSection && desktopMQ.matches && !reducedMotionMQ.matches;
+
+  if (!heroAnimEnabled) {
+    resetHeroMockupAnimation();
+    return;
+  }
+
+  requestHeroMockupUpdate();
+}
+
+window.addEventListener('scroll', requestHeroMockupUpdate, { passive: true });
+window.addEventListener('resize', setupHeroMockupAnimation);
+desktopMQ.addEventListener('change', setupHeroMockupAnimation);
+reducedMotionMQ.addEventListener('change', setupHeroMockupAnimation);
+setupHeroMockupAnimation();
 </script>
 </body>
 </html>
