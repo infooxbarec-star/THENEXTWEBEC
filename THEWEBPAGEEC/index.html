@@ -1,0 +1,2635 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>NextWebEC — Diseño Web Profesional</title>
+  <meta property="og:type" content="website" />
+  <meta property="og:url" content="https://thenextwebec.com/" />
+  <meta property="og:title" content="NextWebEC | Páginas web profesionales" />
+  <meta property="og:description" content="Landing pages premium que inspiran confianza y convierten." />
+  <meta property="og:image" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/fixed_image_v2.png?v=4" />
+  <meta property="og:image:secure_url" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/fixed_image_v2.png?v=4" />
+  <meta property="og:image:type" content="image/png" />
+  <meta property="og:image:width" content="1200" />
+  <meta property="og:image:height" content="630" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="NextWebEC | Páginas web profesionales" />
+  <meta name="twitter:description" content="Landing pages premium que inspiran confianza y convierten." />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/fixed_image_v2.png?v=4" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <style>
+    /* ─── TOKENS ─── */
+    :root {
+      --bg:            #F7F7F5;
+      --primary:       #0B1F3A;
+      --primary-h:     #142d54;
+      --text:          #111111;
+      --muted-text:    #6B7280;
+      --muted-border:  #E5E5E3;
+      --muted-fill:    #EBEBEA;
+      --white:         #FFFFFF;
+      --accent:        #1A6EFA;
+      --accent-soft:   rgba(26,110,250,0.09);
+      --accent-border: rgba(26,110,250,0.18);
+      --green:         #25D366;
+      --green-h:       #1fbc59;
+      --shadow-xs:  0 1px 4px  rgba(11,31,58,0.06);
+      --shadow-sm:  0 2px 14px rgba(11,31,58,0.08);
+      --shadow-md:  0 8px 32px rgba(11,31,58,0.11);
+      --shadow-lg:  0 20px 64px rgba(11,31,58,0.13);
+      --r-sm:  10px;
+      --r-md:  16px;
+      --r-lg:  22px;
+    }
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+    }
+
+    /* ─── UTILITIES ─── */
+    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
+    .section    { padding: 112px 0; }
+    .section-sm { padding: 80px 0; }
+    .tc  { text-align: center; }
+    .tc .section-sub { margin-left: auto; margin-right: auto; }
+    #inicio,
+    #beneficios,
+    #cambio,
+    #proceso,
+    #para-quien { scroll-margin-top: 90px; }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: var(--primary);
+      opacity: 0.4;
+      margin-bottom: 18px;
+    }
+    .eyebrow-accent {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.5px;
+      color: var(--accent);
+      background: var(--accent-soft);
+      border: 1px solid var(--accent-border);
+      padding: 6px 16px;
+      border-radius: 100px;
+      margin-bottom: 26px;
+    }
+    .eyebrow-accent::before {
+      content: '';
+      width: 6px; height: 6px;
+      border-radius: 50%;
+      background: var(--accent);
+      animation: blink 2s ease infinite;
+    }
+    @keyframes blink {
+      0%,100%{ opacity:1; transform:scale(1);   }
+      50%    { opacity:.4; transform:scale(.75); }
+    }
+
+    .section-title {
+      font-size: clamp(28px, 3.8vw, 44px);
+      font-weight: 700;
+      color: var(--primary);
+      line-height: 1.18;
+      letter-spacing: -0.6px;
+    }
+    .section-sub {
+      font-size: 18px;
+      color: var(--muted-text);
+      margin-top: 16px;
+      max-width: 580px;
+      line-height: 1.75;
+    }
+    .divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--muted-border), transparent);
+    }
+
+    /* ─── FADE-IN ─── */
+    .fi {
+      opacity: 0;
+      transform: translateY(26px);
+      transition: opacity .72s ease, transform .72s ease;
+    }
+    .fi.in { opacity:1; transform:translateY(0); }
+    .d1{ transition-delay:.08s; }
+    .d2{ transition-delay:.16s; }
+    .d3{ transition-delay:.24s; }
+    .d4{ transition-delay:.32s; }
+    .d5{ transition-delay:.40s; }
+    .fi-slide {
+      opacity: 0;
+      transform: translateX(40px);
+      transition: opacity .9s ease, transform .9s cubic-bezier(.22,.68,0,1.2);
+    }
+    .fi-slide.in { opacity:1; transform:translateX(0); }
+
+    /* ─── BUTTONS ─── */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-family: 'Inter', sans-serif;
+      font-size: 15px;
+      font-weight: 600;
+      text-decoration: none;
+      border: none;
+      cursor: pointer;
+      border-radius: 12px;
+      transition: background .22s, transform .18s, box-shadow .22s, color .22s;
+      letter-spacing: -.1px;
+    }
+    .btn-primary {
+      background: var(--primary);
+      color: var(--white);
+      padding: 17px 34px;
+      box-shadow: 0 4px 22px rgba(11,31,58,.22);
+    }
+    .btn-primary:hover {
+      background: var(--primary-h);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 32px rgba(11,31,58,.28);
+    }
+    .btn-ghost {
+      background: transparent;
+      color: var(--primary);
+      padding: 16px 30px;
+      border: 1.5px solid rgba(11,31,58,.2);
+    }
+    .btn-ghost:hover {
+      background: var(--primary);
+      color: var(--white);
+      border-color: var(--primary);
+      transform: translateY(-2px);
+    }
+    .btn-wa {
+      background: var(--green);
+      color: var(--white);
+      padding: 17px 34px;
+      box-shadow: 0 4px 22px rgba(37,211,102,.28);
+    }
+    .btn-wa:hover {
+      background: var(--green-h);
+      transform: translateY(-2px);
+      box-shadow: 0 8px 30px rgba(37,211,102,.38);
+    }
+
+    /* ─── NAV ─── */
+    nav {
+      position: fixed; top:0; left:0; right:0; z-index:1000;
+      background: rgba(247,247,245,.90);
+      backdrop-filter: blur(22px);
+      -webkit-backdrop-filter: blur(22px);
+      border-bottom: 1px solid rgba(11,31,58,.07);
+      transition: box-shadow .3s;
+    }
+    nav.scrolled { box-shadow: var(--shadow-sm); }
+    .nav-inner {
+      display: flex; align-items:center; justify-content:space-between;
+      height: 72px; max-width:1100px; margin:0 auto; padding:0 28px;
+      gap: 24px;
+    }
+    .nav-logo {
+      font-weight: 800; font-size: 19px; letter-spacing:-.5px;
+      color: var(--primary); text-decoration:none; flex-shrink:0;
+    }
+    .nav-logo span { color: var(--accent); }
+    .nav-links {
+      display:flex; align-items:center; gap:30px;
+      list-style:none; flex:1; justify-content:center;
+    }
+    .nav-main-link {
+      position: relative;
+      font-size:14px;
+      font-weight:600;
+      color:var(--text);
+      text-decoration:none;
+      padding:6px 0;
+      transition: color .2s ease;
+      white-space:nowrap;
+    }
+    .nav-main-link::after {
+      content:'';
+      position:absolute;
+      left:0;
+      bottom:-2px;
+      width:100%;
+      height:2px;
+      background: var(--accent);
+      transform:scaleX(0);
+      transform-origin:left;
+      transition:transform .22s ease;
+      border-radius:2px;
+    }
+    .nav-main-link:hover,
+    .nav-main-link.active { color: var(--primary); }
+    .nav-main-link:hover::after,
+    .nav-main-link.active::after { transform:scaleX(1); }
+    .nav-right {
+      display:flex;
+      align-items:center;
+      gap:12px;
+      flex-shrink:0;
+    }
+    .nav-cta {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      height:40px;
+      padding:0 18px;
+      border-radius:999px;
+      background: var(--primary);
+      color: var(--white);
+      text-decoration:none;
+      font-size:13px;
+      font-weight:600;
+      transition: transform .2s ease, box-shadow .2s ease, background .2s ease;
+      box-shadow: 0 4px 16px rgba(11,31,58,.22);
+    }
+    .nav-cta:hover {
+      background: var(--primary-h);
+      transform: translateY(-1px) scale(1.03);
+      box-shadow: 0 8px 22px rgba(11,31,58,.28);
+    }
+    .lang-toggle {
+      display:flex; gap:0; background:var(--muted-fill);
+      border-radius:8px; padding:3px; margin-left:0;
+    }
+    .lang-btn {
+      font-size:12px; font-weight:700; letter-spacing:.5px;
+      padding:5px 12px; border:none; background:transparent;
+      border-radius:6px; cursor:pointer; color:#777;
+      transition: background .2s, color .2s;
+    }
+    .lang-btn.active { background:var(--primary); color:var(--white); }
+    .hamburger {
+      display:none; flex-direction:column; gap:5px;
+      cursor:pointer; padding:6px; border-radius:8px;
+      transition:background .2s;
+    }
+    .hamburger:hover { background:rgba(11,31,58,.06); }
+    .hamburger span {
+      display:block; width:22px; height:2px;
+      background:var(--primary); border-radius:2px; transition:all .3s;
+    }
+    .mobile-menu {
+      display:none; position:fixed; top:72px; left:0; right:0;
+      background:rgba(247,247,245,.97); backdrop-filter:blur(20px);
+      border-bottom:1px solid var(--muted-border);
+      padding:16px 28px 28px; z-index:999;
+      flex-direction:column; gap:4px;
+    }
+    .mobile-menu.open { display:flex; }
+    .mobile-menu a {
+      font-size:16px; font-weight:500; color:var(--text);
+      text-decoration:none; padding:13px 0;
+      border-bottom:1px solid rgba(11,31,58,.06);
+    }
+    .mobile-menu a.active { color: var(--primary); }
+    .mobile-cta {
+      display:inline-flex;
+      align-items:center;
+      justify-content:center;
+      margin-top:14px;
+      height:44px;
+      border-radius:12px;
+      background:var(--primary);
+      color:var(--white) !important;
+      font-weight:600;
+      border-bottom:none !important;
+    }
+    .mobile-lang { display:flex; margin-top:20px; }
+
+    /* ─── HERO ─── */
+    .hero {
+      min-height: 100vh;
+      display: flex; align-items:center;
+      padding-top: 68px;
+      position: relative; overflow:hidden;
+    }
+    .hero::before {
+      content:''; position:absolute; top:-160px; right:-160px;
+      width:740px; height:740px;
+      background: radial-gradient(circle, rgba(26,110,250,.09) 0%, transparent 60%);
+      pointer-events:none; z-index:0;
+    }
+    .hero::after {
+      content:''; position:absolute; bottom:-80px; left:-60px;
+      width:500px; height:500px;
+      background: radial-gradient(circle, rgba(26,110,250,.05) 0%, transparent 60%);
+      pointer-events:none; z-index:0;
+    }
+    .hero-inner {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 80px;
+      align-items: center;
+      padding: 72px 0;
+    }
+    .hero-title {
+      font-size: clamp(34px, 4.6vw, 58px);
+      font-weight: 800;
+      color: var(--primary);
+      line-height: 1.04;
+      letter-spacing: -1.8px;
+      margin-bottom: 18px;
+    }
+    .hero-title em {
+      font-style: normal;
+      color: var(--accent);
+    }
+    .hero-text { max-width: 520px; }
+    .hero-sub {
+      font-size: 19px;
+      color: var(--muted-text);
+      line-height: 1.7;
+      margin-bottom: 14px;
+    }
+    .hero-remote {
+      font-size: 32px;
+      font-weight: 700;
+      line-height: 1.2;
+      margin-top: 20px;
+      margin-bottom: 28px;
+      letter-spacing: -0.02em;
+    }
+    .hero-remote strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .hero-remote span {
+      color: var(--accent);
+    }
+    .hero-actions { display:flex; gap:14px; flex-wrap:wrap; }
+    .hero-proof {
+      margin-top: 28px;
+      display: flex;
+      align-items: center;
+      gap: 20px;
+    }
+    .hero-proof-line {
+      font-size: 13px;
+      color: #9CA3AF;
+      line-height: 1.6;
+    }
+    .hero-proof-line strong { color: var(--muted-text); font-weight: 600; }
+    .hero-trust {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 24px;
+      font-size: 13.5px;
+      color: var(--muted-text);
+      font-weight: 500;
+    }
+    .hero-trust::before {
+      content: '';
+      display: inline-block;
+      width: 22px; height: 2px;
+      background: var(--accent);
+      border-radius: 2px;
+      flex-shrink: 0;
+    }
+    .hero-transition-band {
+      padding: 0 0 40px;
+      text-align: center;
+    }
+    .hero-transition-text {
+      font-size: 14px;
+      color: var(--muted-text);
+      font-weight: 500;
+      letter-spacing: 0.2px;
+    }
+    .hero-transition-text strong { color: var(--primary); font-weight: 600; }
+
+    /* Browser mockup */
+    .hero-visual {
+      position: relative;
+      display: flex; justify-content:center; align-items:center;
+    }
+    .mockup-wrap {
+      position:relative;
+      width:100%;
+      margin-top:-60px;
+      transform: translate3d(0, var(--hero-device-y, 0px), 0) scale(var(--hero-device-scale, 1));
+      opacity: var(--hero-device-opacity, 1);
+      will-change: transform, opacity;
+      transition: transform .55s cubic-bezier(.22,.61,.36,1), opacity .45s ease;
+      transform-origin: 50% 45%;
+    }
+    .browser {
+      width:100%;
+      background: var(--primary);
+      border-radius: 18px 18px 0 0;
+      padding: 12px 12px 0;
+      box-shadow: 0 32px 90px rgba(11,31,58,.24), 0 8px 28px rgba(11,31,58,.12);
+      position:relative; z-index:1;
+    }
+    .browser-bar {
+      background: var(--white);
+      border-radius: 8px 8px 0 0;
+      padding: 10px 14px;
+      display: flex; align-items:center; gap:8px;
+      border-bottom: 1px solid var(--muted-border);
+    }
+    .b-dot { width:8px; height:8px; border-radius:50%; }
+    .b-dot-r { background:#FF5F57; }
+    .b-dot-y { background:#FFBD2E; }
+    .b-dot-g { background:#28CA41; }
+    .b-url {
+      background: var(--bg); border-radius:5px;
+      padding:4px 12px; font-size:10px; color:#999;
+      flex:1; text-align:center;
+    }
+    .browser-screen {
+      background: #000;
+      height: 360px; overflow:hidden; position:relative;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .browser-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      border-radius: 6px;
+      display: block;
+    }
+    .bs-hero-band {
+      background: var(--primary);
+      height: 68px;
+      display: flex; align-items:center;
+      padding: 0 20px;
+      gap: 10px;
+    }
+    .bs-logo-block { width:80px; height:10px; background:rgba(255,255,255,.7); border-radius:3px; }
+    .bs-nav-dots { display:flex; gap:8px; margin-left:auto; }
+    .bs-nav-dot { width:32px; height:6px; background:rgba(255,255,255,.25); border-radius:3px; }
+    .bs-content { padding:20px 20px 0; }
+    .bs-h { height:10px; border-radius:4px; background:var(--primary); margin-bottom:8px; }
+    .bs-h-sm { width:52%; }
+    .bs-sub { height:6px; border-radius:3px; background:var(--muted-border); margin-bottom:6px; }
+    .bs-sub-2 { width:78%; }
+    .bs-sub-3 { width:62%; }
+    .bs-btn { display:inline-block; height:22px; width:100px; background:var(--primary); border-radius:6px; margin-top:14px; }
+    .bs-cards {
+      display:grid; grid-template-columns:1fr 1fr 1fr;
+      gap:8px; margin-top:20px;
+    }
+    .bs-card { background:var(--white); border-radius:8px; height:46px; box-shadow:var(--shadow-xs); }
+    .browser-base { background:#0a1929; height:13px; border-radius:0 0 3px 3px; }
+    .browser-foot { background:#071422; height:5px; border-radius:0 0 16px 16px; margin:0 -12px; }
+    .phone-float {
+      position:absolute; bottom:-20px; right:-30px;
+      width:115px; background:var(--primary);
+      border-radius:22px; padding:9px 9px 14px;
+      box-shadow: 0 18px 48px rgba(11,31,58,.30), 0 4px 14px rgba(11,31,58,.16);
+      transform: none;
+      z-index: 10;
+    }
+    .phone-screen {
+      background:#000; border-radius:12px; height:168px; overflow:hidden;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .phone-screen img {
+      width:100%; height:100%;
+      object-fit:contain; object-position:center;
+      border-radius:10px; display:block;
+    }
+
+    /* ─── SCREENSHOT SHOWCASE ─── */
+    .shots-section {
+      background: var(--white);
+      padding-top: 120px;
+      padding-bottom: 120px;
+    }
+    .shots-section .container {
+      max-width: 1220px;
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .shots-grid {
+      margin-top: 60px;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 24px;
+    }
+    .shot-card {
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      border: 1px solid rgba(11,31,58,.10);
+      background: #0B1F3A;
+      box-shadow: 0 10px 30px rgba(11,31,58,.10);
+      transition: transform .2s ease, box-shadow .2s ease;
+      aspect-ratio: 16 / 9;
+    }
+    .shot-card:hover {
+      transform: translateY(-2px) scale(1.012);
+      box-shadow: 0 16px 36px rgba(11,31,58,.14);
+    }
+    .shot-card img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center;
+      display: block;
+      border-radius: inherit;
+    }
+
+    /* ─── LIGHTBOX ─── */
+    .lightbox-trigger {
+      cursor: zoom-in;
+      transition: transform .2s ease;
+    }
+    .lightbox-trigger:hover {
+      transform: scale(1.01);
+    }
+    .lightbox-overlay {
+      position: fixed;
+      inset: 0;
+      background: rgba(0,0,0,.85);
+      backdrop-filter: blur(6px);
+      -webkit-backdrop-filter: blur(6px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 28px;
+      opacity: 0;
+      visibility: hidden;
+      transition: opacity .26s ease-in-out, visibility .26s ease-in-out;
+      z-index: 3000;
+    }
+    .lightbox-overlay.open {
+      opacity: 1;
+      visibility: visible;
+    }
+    .lightbox-stage {
+      position: relative;
+      width: 100%;
+      max-width: 90vw;
+      max-height: 90vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      pointer-events: none;
+    }
+    .lightbox-img {
+      width: auto;
+      height: auto;
+      max-width: 90vw;
+      max-height: 90vh;
+      border-radius: 10px;
+      box-shadow: 0 28px 80px rgba(0,0,0,.45);
+      transform-origin: center center;
+      transform: translate(var(--lb-x, 0px), var(--lb-y, 0px)) scale(var(--lb-scale, .95));
+      opacity: 0;
+      transition: transform .26s ease-in-out, opacity .26s ease-in-out;
+      object-fit: contain;
+      pointer-events: auto;
+      cursor: default;
+    }
+    .lightbox-overlay.open .lightbox-img {
+      transform: translate(0, 0) scale(1);
+      opacity: 1;
+    }
+    .lightbox-close {
+      position: fixed;
+      top: 18px;
+      right: 18px;
+      width: 40px;
+      height: 40px;
+      border: none;
+      border-radius: 999px;
+      background: rgba(255,255,255,.12);
+      color: #fff;
+      font-size: 28px;
+      line-height: 1;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      transition: background .2s ease, transform .2s ease;
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      pointer-events: auto;
+    }
+    .lightbox-close:hover {
+      background: rgba(255,255,255,.2);
+      transform: scale(1.04);
+    }
+    body.lb-open {
+      overflow: hidden;
+      touch-action: none;
+    }
+
+    /* ─── OUTCOMES VISION ─── */
+    .vision-section { background:var(--white); padding-bottom: 72px; }
+    .vision-grid {
+      display: grid;
+      grid-template-columns: 1fr 1.2fr;
+      gap: 52px;
+      align-items: center;
+      margin-top: 48px;
+    }
+    .vision-list { list-style:none; }
+    .vision-item {
+      display: flex;
+      gap: 20px;
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(11,31,58,.07);
+    }
+    .vision-item:last-child { border-bottom:none; padding-bottom:0; }
+    .vision-check {
+      width: 26px; height: 26px;
+      border-radius: 50%;
+      background: var(--primary);
+      flex-shrink: 0;
+      display: flex; align-items:center; justify-content:center;
+      margin-top: 2px;
+    }
+    .vision-check svg { width:11px; height:11px; fill:none; stroke:#fff; stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .vision-item-title {
+      font-size: 17px; font-weight: 600; color: var(--primary);
+      margin-bottom: 6px; letter-spacing:-.15px;
+    }
+    .vision-item-desc {
+      font-size: 14px; color: var(--muted-text); line-height:1.7;
+      max-width: 340px;
+    }
+    /* right side: two stacked light cards */
+    .vision-right { display:flex; flex-direction:column; gap:16px; }
+    .vision-headline-card {
+      background: #F8F9FB;
+      border: 1px solid rgba(11,31,58,.08);
+      border-radius: 16px;
+      padding: 36px 36px 32px;
+      box-shadow: 0 2px 16px rgba(11,31,58,.05);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .vision-headline-card:hover {
+      box-shadow: 0 8px 32px rgba(11,31,58,.10);
+      transform: translateY(-3px);
+    }
+    .vision-headline-card-label {
+      font-size: 11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color: var(--accent);
+      margin-bottom: 14px; display:block;
+    }
+    .vision-headline-card-title {
+      font-size: clamp(20px, 2.2vw, 26px);
+      font-weight: 700; line-height:1.3; letter-spacing:-.35px;
+      color: var(--primary);
+    }
+    .vision-headline-card-title span { color: var(--accent); }
+    .vision-feats-card {
+      border: 1px solid rgba(11,31,58,.08);
+      border-radius: 16px;
+      padding: 28px 36px;
+      background: var(--white);
+      box-shadow: 0 1px 8px rgba(11,31,58,.04);
+      transition: box-shadow .25s, transform .25s;
+    }
+    .vision-feats-card:hover {
+      box-shadow: 0 6px 24px rgba(11,31,58,.09);
+      transform: translateY(-2px);
+    }
+    .vision-feat {
+      display: flex; align-items:center; gap:14px;
+      padding: 12px 0;
+      border-bottom: 1px solid rgba(11,31,58,.06);
+      font-size: 14px; color: #444; font-weight:500;
+    }
+    .vision-feat:last-child { border-bottom:none; padding-bottom:0; }
+    .vision-feat-check {
+      width:20px; height:20px; border-radius:50%;
+      background: rgba(26,115,232,.1);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .vision-feat-check svg { width:10px; height:10px; fill:none; stroke: var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    /* image column */
+    /* ─── DEVICE MOCKUP COMPOSITION ─── */
+    /* ─── DEVICE MOCKUP COMPOSITION ─── */
+    .device-comp-wrap {
+      position: relative;
+      padding-bottom: 68px;
+      margin-top: 12px;
+      perspective: 1800px;
+      transform-style: preserve-3d;
+    }
+    /* Soft ambient glow — very subtle */
+    .device-comp-wrap::before {
+      content: '';
+      position: absolute;
+      inset: 20% 8% -5% 8%;
+      background: radial-gradient(ellipse at 50% 90%, rgba(26,110,250,0.10) 0%, transparent 65%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* Ground shadow to anchor devices */
+    .device-comp-wrap::after {
+      content: '';
+      position: absolute;
+      bottom: 12px; left: 6%; right: 6%;
+      height: 40px;
+      background: radial-gradient(ellipse at 50% 0%, rgba(11,31,58,0.18) 0%, transparent 80%);
+      z-index: 0;
+      pointer-events: none;
+    }
+    /* ── Laptop ── */
+    .laptop-mockup {
+      width: 100%;
+      position: relative;
+      z-index: 1;
+      transform: rotateX(2deg) rotateY(-3deg);
+      transform-origin: center bottom;
+      transform-style: preserve-3d;
+      transition: transform .45s ease, filter .45s ease;
+      filter: drop-shadow(0 20px 48px rgba(0,0,0,0.16));
+    }
+    .device-comp-wrap:hover .laptop-mockup {
+      transform: rotateX(1deg) rotateY(-2deg) translateY(-5px);
+      filter: drop-shadow(0 28px 60px rgba(0,0,0,0.20));
+    }
+    .laptop-lid {
+      background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
+      border-radius: 14px 14px 0 0;
+      padding: 10px 10px 7px;
+      position: relative;
+      border: 1.5px solid rgba(255,255,255,0.07);
+      border-bottom: none;
+    }
+    .laptop-cam {
+      width: 5px; height: 5px;
+      border-radius: 50%;
+      background: #333;
+      margin: 0 auto 7px;
+      box-shadow: 0 0 0 1.5px rgba(255,255,255,0.06);
+    }
+    .laptop-screen {
+      background: #000;
+      border-radius: 5px;
+      overflow: hidden;
+      aspect-ratio: 16 / 10;
+      line-height: 0;
+    }
+    .laptop-screen img {
+      width: 100%; height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+      display: block;
+    }
+    .laptop-base {
+      background: linear-gradient(to bottom, #2c2c2e, #222224);
+      height: 18px;
+      border-radius: 0 0 3px 3px;
+      border: 1.5px solid rgba(255,255,255,0.05);
+      border-top: none;
+    }
+    .laptop-foot {
+      height: 5px;
+      background: #1a1a1c;
+      border-radius: 0 0 8px 8px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.18);
+    }
+
+    /* ─── EXAMPLE OUTCOMES ─── */
+    .outcomes-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 28px;
+      margin-top: 60px;
+    }
+    .outcome-card {
+      background: var(--white);
+      border-radius: var(--r-md);
+      overflow: hidden;
+      border: 1px solid rgba(11,31,58,.06);
+      box-shadow: var(--shadow-xs);
+      text-decoration: none;
+      display: block;
+      transition: transform .28s, box-shadow .28s, border-color .28s;
+    }
+    .outcome-card:hover {
+      transform: translateY(-6px);
+      box-shadow: var(--shadow-md);
+      border-color: rgba(11,31,58,.12);
+    }
+    .outcome-thumb {
+      width:100%; height:220px;
+      position:relative; overflow:hidden;
+    }
+    .outcome-thumb-inner {
+      position:absolute; inset:0;
+      display:flex; align-items:center; justify-content:center;
+    }
+    .thumb-light {
+      background: linear-gradient(135deg, #e8edf5 0%, #d5dde9 100%);
+    }
+    .thumb-dark {
+      background: linear-gradient(135deg, #131929 0%, #1c2842 100%);
+    }
+    .thumb-browser-mini {
+      width:82%; background:var(--white);
+      border-radius:10px; padding:10px 10px 0;
+      box-shadow: 0 6px 24px rgba(11,31,58,.18);
+    }
+    .tbm-bar {
+      background: var(--bg); border-radius:4px;
+      padding:4px 10px; display:flex; align-items:center; gap:5px;
+      margin-bottom:8px;
+    }
+    .tbm-dot { width:5px; height:5px; border-radius:50%; }
+    .tbm-url { width:100%; height:5px; background:var(--muted-border); border-radius:2px; }
+    .tbm-hero-band {
+      background: var(--primary); border-radius:4px 4px 0 0;
+      height:40px; display:flex; align-items:center; padding:0 12px; gap:8px;
+    }
+    .tbm-l { height:5px; background:rgba(255,255,255,.6); border-radius:2px; flex:0 0 50px; }
+    .tbm-rows { padding:10px 0 0; }
+    .tbm-row { height:5px; background:var(--muted-border); border-radius:2px; margin-bottom:5px; }
+    .tbm-row-sm { width:65%; }
+    .tbm-card-row { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+    .tbm-card { height:22px; background:var(--bg); border-radius:4px; }
+    .thumb-browser-dark {
+      width:82%; background:rgba(255,255,255,.06);
+      border:1px solid rgba(255,255,255,.12);
+      border-radius:10px; padding:10px 10px 0;
+      backdrop-filter:blur(10px);
+      box-shadow: 0 6px 24px rgba(0,0,0,.35);
+    }
+    .tbm-dark-bar { background:rgba(255,255,255,.05); border-radius:4px; padding:4px 10px; margin-bottom:8px; display:flex; gap:5px; align-items:center; }
+    .tbm-dark-url { width:100%; height:5px; background:rgba(255,255,255,.1); border-radius:2px; }
+    .tbm-dark-hero { background:rgba(255,255,255,.04); border-radius:4px 4px 0 0; height:40px; display:flex; align-items:center; padding:0 12px; }
+    .tbm-dark-l { height:5px; background:rgba(255,255,255,.4); border-radius:2px; flex:0 0 50px; }
+    .tbm-dark-rows { padding:10px 0 0; }
+    .tbm-dark-row { height:5px; background:rgba(255,255,255,.1); border-radius:2px; margin-bottom:5px; }
+    .tbm-dark-row-sm { width:65%; }
+    .tbm-dark-card-row { display:grid; grid-template-columns:1fr 1fr; gap:6px; margin-top:8px; }
+    .tbm-dark-card { height:22px; background:rgba(255,255,255,.06); border-radius:4px; }
+
+    .outcome-label-wrap {
+      position:absolute; top:16px; left:16px;
+      display:flex; gap:8px;
+    }
+    .outcome-tag {
+      font-size:10px; font-weight:700; letter-spacing:1px;
+      text-transform:uppercase; padding:5px 12px;
+      border-radius:6px;
+    }
+    .tag-dark { background:var(--primary); color:var(--white); }
+    .tag-accent { background:var(--accent); color:var(--white); }
+    .outcome-body { padding:30px; }
+    .outcome-category {
+      font-size:11px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--accent); margin-bottom:10px;
+    }
+    .outcome-title {
+      font-size:20px; font-weight:700; color:var(--primary);
+      margin-bottom:12px; letter-spacing:-.3px;
+    }
+    .outcome-desc {
+      font-size:14px; color:var(--muted-text); line-height:1.7;
+    }
+    .outcome-footer {
+      display:flex; align-items:center; justify-content:space-between;
+      margin-top:22px; padding-top:18px;
+      border-top:1px solid var(--muted-border);
+    }
+    .outcome-cta {
+      font-size:13px; font-weight:600;
+      color:var(--accent); text-decoration:none;
+      display:flex; align-items:center; gap:5px;
+      transition: gap .2s;
+    }
+    .outcome-cta:hover { gap:8px; }
+    .outcome-note { font-size:12px; color:#B0B8C4; }
+
+    /* ─── MOBILE PREVIEW ─── */
+    .mobile-preview-section {
+      background: linear-gradient(180deg, #F2F5FA 0%, #FFFFFF 100%);
+      padding-top: 74px;
+      padding-bottom: 74px;
+    }
+    .mobile-preview-grid {
+      display: grid;
+      grid-template-columns: 1.05fr .95fr;
+      align-items: center;
+      gap: 56px;
+    }
+    .mobile-preview-sub {
+      margin-top: 14px;
+      max-width: 600px;
+    }
+    .mobile-preview-text {
+      margin-top: 18px;
+      max-width: 570px;
+      font-size: 16px;
+      line-height: 1.75;
+      color: #4B5563;
+    }
+    .mobile-preview-benefits {
+      list-style: none;
+      margin-top: 24px;
+      display: grid;
+      gap: 12px;
+      max-width: 560px;
+    }
+    .mobile-preview-benefit {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-size: 15px;
+      font-weight: 500;
+      color: #1F2937;
+    }
+    .mobile-preview-benefit-dot {
+      width: 18px;
+      height: 18px;
+      border-radius: 50%;
+      background: rgba(26,110,250,.14);
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .mobile-preview-benefit-dot svg {
+      width: 9px;
+      height: 9px;
+      fill: none;
+      stroke: var(--accent);
+      stroke-width: 2.4;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+    .mobile-preview-cta {
+      margin-top: 24px;
+      padding: 14px 24px;
+      font-size: 14px;
+      border-radius: 11px;
+    }
+    .mobile-preview-visual {
+      display: flex;
+      justify-content: center;
+    }
+    .mobile-preview-stage {
+      width: 100%;
+      max-width: 460px;
+      border-radius: 28px;
+      padding: 28px 32px;
+      background:
+        radial-gradient(120% 110% at 50% 15%, rgba(26,110,250,.14) 0%, rgba(26,110,250,.03) 52%, rgba(255,255,255,.96) 100%);
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 20px 46px rgba(11,31,58,.11);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .mobile-preview-phone {
+      width: 340px;
+      background: linear-gradient(160deg, #2c2c2e, #1d1d1f);
+      border-radius: 40px;
+      padding: 15px 10px 12px;
+      border: 1.5px solid rgba(255,255,255,0.08);
+      box-shadow: 0 18px 46px rgba(11,31,58,0.30);
+    }
+    .mobile-preview-notch {
+      width: 62px;
+      height: 10px;
+      background: #1d1d1f;
+      border-radius: 0 0 8px 8px;
+      margin: 0 auto 10px;
+    }
+    .mobile-preview-screen {
+      background: #000;
+      border-radius: 24px;
+      overflow: hidden;
+      aspect-ratio: 9 / 19.5;
+      line-height: 0;
+    }
+    .mobile-preview-screen img {
+      width: 100%;
+      height: 100%;
+      object-fit: contain;
+      object-position: center;
+      background: #000;
+      display: block;
+    }
+    .mobile-preview-home {
+      width: 44px;
+      height: 5px;
+      border-radius: 4px;
+      margin: 10px auto 0;
+      background: rgba(255,255,255,0.2);
+    }
+
+    /* ─── BEFORE / AFTER ─── */
+    .ba-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(120% 95% at 50% -8%, rgba(245,232,210,.16) 0%, rgba(245,232,210,0) 52%),
+        linear-gradient(180deg, #08111E 0%, #0E1A2B 52%, #111F33 100%);
+    }
+    .ba-section::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background:
+        radial-gradient(80% 50% at 12% 82%, rgba(255,255,255,.06) 0%, transparent 72%),
+        radial-gradient(70% 48% at 88% 14%, rgba(255,255,255,.045) 0%, transparent 75%);
+      opacity:.75;
+    }
+    .ba-section::after {
+      content:'';
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+      background-image: repeating-linear-gradient(
+        0deg,
+        rgba(255,255,255,.015) 0px,
+        rgba(255,255,255,.015) 1px,
+        transparent 1px,
+        transparent 3px
+      );
+      opacity:.2;
+    }
+    .ba-section .container { max-width: 1180px; }
+    .ba-grid {
+      display:grid;
+      grid-template-columns:1fr 1fr;
+      gap:24px;
+      margin-top:56px;
+      position:relative;
+      z-index:1;
+    }
+    .ba-grid::before {
+      content:'';
+      position:absolute;
+      top:10px;
+      bottom:10px;
+      left:50%;
+      width:1px;
+      background:linear-gradient(180deg, transparent, rgba(255,255,255,.2), transparent);
+      pointer-events:none;
+    }
+    .ba-col {
+      border-radius:24px;
+      padding:34px 28px 30px;
+      border:1px solid;
+      position:relative;
+      overflow:hidden;
+      backdrop-filter: blur(7px);
+      -webkit-backdrop-filter: blur(7px);
+      transition: transform .32s ease, box-shadow .32s ease, border-color .32s ease;
+    }
+    .ba-col::before {
+      content:'';
+      position:absolute;
+      inset:0;
+      pointer-events:none;
+    }
+    .ba-col::after {
+      content:'';
+      position:absolute;
+      left:26px;
+      right:26px;
+      top:0;
+      height:1px;
+      pointer-events:none;
+      opacity:.65;
+    }
+    .ba-col-before {
+      background:linear-gradient(180deg, rgba(255,255,255,.045) 0%, rgba(255,255,255,.02) 100%);
+      border-color:rgba(255,255,255,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .ba-col-before::before {
+      background:linear-gradient(180deg, rgba(255,255,255,.04), rgba(255,255,255,0));
+    }
+    .ba-col-before::after {
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.3), transparent);
+    }
+    .ba-col-after {
+      background:linear-gradient(180deg, rgba(255,255,255,.125) 0%, rgba(245,232,210,.12) 66%, rgba(245,232,210,.07) 100%);
+      border-color:rgba(245,232,210,.44);
+      box-shadow: 0 26px 58px rgba(0,0,0,.26), inset 0 1px 0 rgba(255,255,255,.24);
+    }
+    .ba-col-after::before {
+      background:radial-gradient(120% 70% at 50% 0%, rgba(245,232,210,.27), rgba(245,232,210,0));
+    }
+    .ba-col-after::after {
+      background:linear-gradient(90deg, transparent, rgba(255,255,255,.65), transparent);
+    }
+    .ba-col:hover {
+      transform: translateY(-3px);
+    }
+    .ba-col-before:hover {
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1), 0 14px 34px rgba(0,0,0,.18);
+      border-color: rgba(255,255,255,.2);
+    }
+    .ba-col-after:hover {
+      box-shadow: 0 30px 64px rgba(0,0,0,.3), inset 0 1px 0 rgba(255,255,255,.28), 0 0 0 1px rgba(245,232,210,.3);
+      border-color: rgba(245,232,210,.62);
+    }
+    .ba-col-label {
+      font-size:11px;
+      font-weight:700;
+      letter-spacing:2.6px;
+      text-transform:uppercase;
+      margin-bottom:16px;
+      display:block;
+    }
+    .ba-before-label { color:rgba(255,255,255,.52); }
+    .ba-after-label  { color:#F5E8D2; }
+    .ba-metrics {
+      display:grid;
+      gap:12px;
+      position:relative;
+      z-index:1;
+    }
+    .ba-metric {
+      border-radius:14px;
+      padding:16px 16px 14px;
+      border:1px solid;
+      transition: transform .28s ease, box-shadow .28s ease, border-color .28s ease, background .28s ease;
+    }
+    .ba-col-before .ba-metric {
+      background:rgba(255,255,255,.035);
+      border-color:rgba(255,255,255,.12);
+    }
+    .ba-col-after .ba-metric {
+      background:linear-gradient(180deg, rgba(255,255,255,.17), rgba(255,255,255,.12));
+      border-color:rgba(245,232,210,.45);
+      box-shadow: 0 8px 18px rgba(0,0,0,.16);
+    }
+    .ba-col-after .ba-metric:hover {
+      transform: translateY(-2px) scale(1.012);
+      box-shadow: 0 14px 28px rgba(245,232,210,.12), 0 10px 24px rgba(0,0,0,.18);
+      border-color: rgba(245,232,210,.72);
+      background: linear-gradient(180deg, rgba(255,255,255,.22), rgba(255,255,255,.16));
+    }
+    .ba-metric-title {
+      font-size:12px;
+      line-height:1.45;
+      letter-spacing:.2px;
+      margin-bottom:8px;
+    }
+    .ba-col-before .ba-metric-title { color: rgba(255,255,255,.63); }
+    .ba-col-after .ba-metric-title  { color: rgba(255,255,255,.89); }
+    .ba-metric-value {
+      font-size: clamp(22px, 2.1vw, 30px);
+      line-height:1;
+      font-weight:800;
+      letter-spacing:-.5px;
+      margin-bottom:6px;
+    }
+    .ba-col-before .ba-metric-value { color: #F7A8A8; }
+    .ba-col-after .ba-metric-value  { color: #F5E8D2; }
+    .ba-metric-note {
+      font-size:12px;
+      line-height:1.45;
+      letter-spacing:.1px;
+    }
+    .ba-col-before .ba-metric-note { color: rgba(255,255,255,.48); }
+    .ba-col-after .ba-metric-note  { color: rgba(255,255,255,.68); }
+    .ba-section-title {
+      font-size:clamp(28px,3.7vw,44px);
+      font-weight:700;
+      color:var(--white);
+      line-height:1.18;
+      letter-spacing:-.6px;
+      max-width: 780px;
+      margin-left:auto;
+      margin-right:auto;
+      text-wrap: balance;
+      text-shadow: 0 8px 24px rgba(0,0,0,.28);
+    }
+    .ba-cta-wrap {
+      margin-top:34px;
+      text-align:center;
+      position:relative;
+      z-index:1;
+    }
+    .ba-cta-text {
+      font-size:18px;
+      color:rgba(255,255,255,.88);
+      letter-spacing:-.25px;
+      margin-bottom:18px;
+    }
+    .ba-cta-wrap .btn-primary {
+      background: linear-gradient(180deg, #F5E8D2 0%, #E6D6BC 100%);
+      color: #1A2433;
+      box-shadow: 0 10px 28px rgba(0,0,0,.25), 0 0 0 1px rgba(245,232,210,.35) inset;
+    }
+    .ba-cta-wrap .btn-primary:hover {
+      background: linear-gradient(180deg, #FAF0DD 0%, #EEDFC8 100%);
+      color: #101A29;
+      box-shadow: 0 14px 34px rgba(0,0,0,.3), 0 0 0 1px rgba(255,255,255,.55) inset;
+    }
+
+    /* ─── PROBLEM / SOLUTION ─── */
+    .ps-section { background:var(--bg); }
+    .ps-inner {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:80px; align-items:start;
+    }
+    .ps-side-label {
+      font-size:11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--primary);
+      opacity:.4; display:block; margin-bottom:20px;
+    }
+    .ps-side-title {
+      font-size:clamp(24px,3vw,36px);
+      font-weight:700; color:var(--primary); line-height:1.22;
+      letter-spacing:-.4px; margin-bottom:36px;
+    }
+    .prob-list { list-style:none; }
+    .prob-item {
+      display:flex; align-items:flex-start; gap:16px;
+      padding:17px 0;
+      border-bottom:1px solid var(--muted-border);
+      font-size:16px; color:#4B5563; line-height:1.55;
+    }
+    .prob-item:last-child { border-bottom:none; }
+    .prob-num {
+      width:32px; height:32px; border-radius:8px;
+      background:var(--muted-fill);
+      display:flex; align-items:center; justify-content:center;
+      font-size:13px; font-weight:700; color:var(--primary);
+      flex-shrink:0; margin-top:2px;
+    }
+    .sol-card {
+      background:var(--white);
+      border-radius:var(--r-lg);
+      padding:44px 40px;
+      border:1px solid rgba(11,31,58,.07);
+      box-shadow:var(--shadow-sm);
+      position:sticky; top:92px;
+    }
+    .sol-overline {
+      font-size:11px; font-weight:700; letter-spacing:2.5px;
+      text-transform:uppercase; color:var(--accent);
+      margin-bottom:16px; display:block;
+    }
+    .sol-title {
+      font-size:clamp(20px,2.2vw,26px);
+      font-weight:700; color:var(--primary);
+      line-height:1.3; letter-spacing:-.3px; margin-bottom:28px;
+    }
+    .sol-feat {
+      display:flex; align-items:center; gap:12px;
+      padding:12px 0;
+      border-bottom:1px solid var(--muted-border);
+      font-size:15px; color:#374151;
+    }
+    .sol-feat:last-child { border-bottom:none; padding-bottom:0; }
+    .sol-check {
+      width:22px; height:22px; border-radius:50%;
+      background:rgba(26,110,250,.1);
+      display:flex; align-items:center; justify-content:center;
+      flex-shrink:0;
+    }
+    .sol-check svg { width:10px; height:10px; fill:none; stroke:var(--accent); stroke-width:2.5; stroke-linecap:round; stroke-linejoin:round; }
+    .sol-cta { margin-top:32px; }
+
+    /* ─── PROCESS ─── */
+    .process-section { background:var(--white); }
+    .process-steps {
+      display:grid; grid-template-columns:repeat(4,1fr);
+      gap:20px; margin-top:64px;
+      position:relative;
+    }
+    .process-steps::before {
+      content:''; position:absolute;
+      top:28px; left:calc(12.5% + 16px); right:calc(12.5% + 16px);
+      height:1px;
+      background:linear-gradient(90deg, var(--primary) 0%, rgba(11,31,58,.12) 100%);
+    }
+    .step {
+      background:var(--bg);
+      border-radius:var(--r-md);
+      padding:28px 20px 26px;
+      text-align:center;
+      border:1px solid rgba(11,31,58,.05);
+      position:relative;
+      transition:transform .28s, box-shadow .28s;
+    }
+    .step:hover { transform:translateY(-5px); box-shadow:var(--shadow-md); }
+    .step-num {
+      width:48px; height:48px; border-radius:50%;
+      background:var(--primary);
+      border:3px solid var(--white);
+      display:flex; align-items:center; justify-content:center;
+      font-size:15px; font-weight:800; color:var(--white);
+      margin:0 auto 18px;
+      box-shadow:0 2px 14px rgba(11,31,58,.22);
+      position:relative; z-index:1;
+    }
+    .step-name {
+      font-size:15px; font-weight:700; color:var(--primary);
+      margin-bottom:8px; letter-spacing:-.2px;
+    }
+    .step-desc {
+      font-size:13px; color:var(--muted-text); line-height:1.65;
+    }
+
+    /* ─── WHAT YOU GET ─── */
+    .get-section { background:var(--bg); }
+    .get-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:20px; margin-top:60px;
+    }
+    .get-item {
+      background:var(--white);
+      border-radius:var(--r-md);
+      padding:32px 28px;
+      border:1px solid rgba(11,31,58,.06);
+      box-shadow:var(--shadow-xs);
+      transition:transform .24s, box-shadow .24s;
+    }
+    .get-item:hover { transform:translateY(-4px); box-shadow:var(--shadow-sm); }
+    .get-num {
+      font-size:11px; font-weight:700; letter-spacing:2px;
+      text-transform:uppercase; color:var(--accent);
+      margin-bottom:14px; display:block;
+    }
+    .get-title {
+      font-size:17px; font-weight:700; color:var(--primary);
+      margin-bottom:8px; letter-spacing:-.2px;
+    }
+    .get-desc {
+      font-size:14px; color:var(--muted-text); line-height:1.7;
+    }
+
+    /* ─── FOR WHOM ─── */
+    .whom-section { background:var(--white); }
+    .whom-grid {
+      display:grid; grid-template-columns:1fr 1fr;
+      gap:20px; margin-top:60px;
+    }
+    .whom-card {
+      border-radius:var(--r-md);
+      padding:32px 28px;
+      border:1px solid rgba(11,31,58,.07);
+      transition:transform .24s, box-shadow .24s, background .24s;
+      cursor:default;
+    }
+    .whom-card:hover {
+      transform:translateY(-4px);
+      box-shadow:var(--shadow-sm);
+      background:var(--bg);
+    }
+    .whom-title {
+      font-size:17px; font-weight:700; color:var(--primary);
+      margin-bottom:8px; letter-spacing:-.2px;
+    }
+    .whom-desc {
+      font-size:14px; color:var(--muted-text); line-height:1.7;
+    }
+    .whom-indicator {
+      width:8px; height:8px; border-radius:50%;
+      background:var(--primary); margin-bottom:18px;
+      opacity:.25;
+    }
+
+    /* ─── FINAL CTA ─── */
+    .final-cta-section { background:var(--bg); }
+    .final-cta-inner {
+      max-width:680px; margin:0 auto; text-align:center;
+    }
+    .final-cta-title {
+      font-size:clamp(28px,4vw,50px);
+      font-weight:800; color:var(--primary);
+      line-height:1.15; letter-spacing:-1px; margin-bottom:20px;
+    }
+    .final-cta-title em { font-style:normal; color:var(--accent); }
+    .final-cta-sub {
+      font-size:18px; color:var(--muted-text);
+      line-height:1.7; margin-bottom:44px;
+    }
+    .cta-row { display:flex; gap:14px; justify-content:center; flex-wrap:wrap; }
+    .cta-reassure {
+      display:flex; align-items:center; justify-content:center;
+      gap:10px; margin-top:26px;
+      font-size:13px; color:#B0B8C4;
+    }
+    .cr-dot { width:3px; height:3px; background:var(--muted-border); border-radius:50%; }
+
+    /* ─── FLOATING WA ─── */
+    .wa-float {
+      position:fixed; bottom:28px; right:28px;
+      width:60px; height:60px; border-radius:50%;
+      background:var(--green);
+      display:flex; align-items:center; justify-content:center;
+      box-shadow:0 4px 24px rgba(37,211,102,.42);
+      text-decoration:none; z-index:999;
+      transition:transform .24s, box-shadow .24s;
+    }
+    .wa-float:hover { transform:scale(1.1); box-shadow:0 8px 32px rgba(37,211,102,.52); }
+    .wa-float svg { width:30px; height:30px; }
+    .wa-tip {
+      position:absolute; right:72px;
+      background:var(--primary); color:var(--white);
+      font-size:13px; font-weight:500;
+      padding:8px 16px; border-radius:8px;
+      white-space:nowrap;
+      opacity:0; transform:translateX(8px);
+      transition:opacity .24s, transform .24s;
+      pointer-events:none;
+    }
+    .wa-tip::after {
+      content:''; position:absolute;
+      right:-5px; top:50%; transform:translateY(-50%);
+      border:5px solid transparent;
+      border-left-color:var(--primary); border-right:0;
+    }
+    .wa-float:hover .wa-tip { opacity:1; transform:translateX(0); }
+
+    /* ─── FOOTER ─── */
+    footer {
+      background:var(--primary);
+      text-align:center;
+      padding:44px 0;
+    }
+    .footer-logo {
+      font-weight:800; font-size:18px;
+      color:var(--white); margin-bottom:10px;
+    }
+    .footer-logo span { color:#93C5FD; }
+    .footer-copy { font-size:13px; color:rgba(255,255,255,.4); }
+
+    /* ─── RESPONSIVE ─── */
+
+    /* ── Tablet (≤900px) ── */
+    @media (max-width:900px) {
+      /* Nav */
+      .nav-links         { display:none; }
+      .nav-cta           { display:none; }
+      .hamburger         { display:flex; }
+
+      /* Hero */
+      .hero-inner        { grid-template-columns:1fr; gap:52px; text-align:center; padding:56px 0 40px; }
+      .hero-sub          { margin-left:auto; margin-right:auto; max-width:480px; }
+      .hero-trust        { justify-content:center; }
+      .hero-actions      { justify-content:center; }
+      .hero-proof        { justify-content:center; margin-top:24px; }
+      .hero-visual       { max-width:520px; margin:0 auto; }
+      .mockup-wrap       { transform:none; opacity:1; }
+
+      /* Screenshots */
+      .shots-section     { padding-top: 88px; padding-bottom: 88px; }
+      .shots-section .container { padding-left: 20px; padding-right: 20px; }
+      .shots-grid        { grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; }
+
+      /* Vision */
+      .vision-grid       { grid-template-columns:1fr; gap:44px; margin-top:44px; }
+
+      /* Outcomes */
+      .outcomes-grid     { grid-template-columns:1fr; gap:20px; margin-top:48px; }
+
+      /* Mobile preview */
+      .mobile-preview-grid { grid-template-columns:1fr; gap:40px; }
+      .mobile-preview-stage { margin:0 auto; }
+
+      /* Before/After */
+      .ba-grid           { grid-template-columns:1fr; gap:18px; margin-top:48px; }
+      .ba-grid::before   { display:none; }
+      .ba-col            { padding:30px 24px 24px; }
+
+      /* Problem/Solution */
+      .ps-inner          { grid-template-columns:1fr; gap:48px; }
+      .sol-card          { position:static; }
+
+      /* Process */
+      .process-steps     { grid-template-columns:1fr 1fr; gap:16px; margin-top:52px; }
+      .process-steps::before { display:none; }
+
+      /* What you get / For whom */
+      .get-grid          { grid-template-columns:1fr; gap:16px; margin-top:48px; }
+      .whom-grid         { grid-template-columns:1fr; gap:16px; margin-top:48px; }
+
+      /* Soften perspective on tablet */
+      .laptop-mockup     { transform: rotateX(1deg) rotateY(-2deg); }
+      .device-comp-wrap:hover .laptop-mockup { transform: rotateX(1deg) rotateY(-1deg) translateY(-4px); }
+
+      /* Section sub font */
+      .section-sub       { font-size: 17px; }
+    }
+
+    /* ── Mid (≤768px) ── */
+    @media (max-width:768px) {
+      .laptop-mockup,
+      .device-comp-wrap:hover .laptop-mockup { transform: none; }
+      .device-comp-wrap  { perspective: none; }
+
+      /* Tighten section padding a touch */
+      .section           { padding: 88px 0; }
+      .section-sm        { padding: 68px 0; }
+
+      /* Hero */
+      .hero-inner        { gap: 44px; padding: 48px 0 36px; }
+
+      /* Vision cards padding */
+      .vision-headline-card { padding: 30px 28px; }
+      .vision-feats-card    { padding: 24px 28px; }
+
+      /* Process */
+      .process-steps     { gap: 14px; }
+      .step              { padding: 26px 18px 22px; }
+
+      /* Final CTA */
+      .final-cta-sub     { font-size: 17px; margin-bottom: 36px; }
+    }
+
+    /* ── Mobile (≤600px) ── */
+    @media (max-width:600px) {
+      /* Global */
+      .container         { padding: 0 18px; }
+      .section           { padding: 68px 0; }
+      .section-sm        { padding: 56px 0; }
+      .section-sub       { font-size: 15px; margin-top: 12px; max-width: 100%; }
+      .tc .section-sub   { max-width: 100%; }
+      .eyebrow           { margin-bottom: 12px; font-size: 10.5px; }
+      .eyebrow-accent    { margin-bottom: 18px; font-size: 11.5px; }
+
+      /* Hero */
+      .hero              { padding-bottom: 20px; }
+      .hero-inner        { gap: 40px; padding: 36px 0 28px; }
+      .hero-title        { font-size: 30px; letter-spacing: -1px; margin-bottom: 14px; line-height: 1.1; }
+      .hero-sub          { font-size: 16px; margin-bottom: 22px; max-width: 100%; }
+      .hero-trust        { justify-content: center; font-size: 13px; margin-bottom: 20px; }
+      .hero-actions      { flex-direction: column; gap: 10px; align-items: stretch; }
+      .hero-actions .btn { width: 100%; justify-content: center; padding: 16px 20px; }
+      .hero-proof        { margin-top: 20px; }
+      .hero-proof-line   { font-size: 12px; }
+
+      /* Screenshots section */
+      .shots-section     { padding-top: 68px; padding-bottom: 68px; }
+      .shots-section .container { padding-left: 14px; padding-right: 14px; }
+      .shots-grid        { grid-template-columns:1fr; gap:14px; margin-top: 36px; }
+      .shot-card         { aspect-ratio: 16 / 10; }
+
+      /* Vision section */
+      .vision-section    { padding-bottom: 0; }
+      .vision-grid       { margin-top: 32px; gap: 32px; }
+      .vision-item       { padding: 20px 0; gap: 16px; }
+      .vision-item-title { font-size: 16px; }
+      .vision-item-desc  { font-size: 13.5px; }
+      .vision-headline-card { padding: 26px 22px 22px; }
+      .vision-feats-card    { padding: 18px 22px; }
+      .vision-feat          { font-size: 13.5px; gap: 12px; }
+      .device-comp-wrap  { padding-right: 14px; padding-bottom: 36px; }
+
+      /* Outcomes section */
+      .outcomes-grid     { gap: 14px; margin-top: 36px; }
+      .outcome-thumb     { height: 170px; }
+      .outcome-body      { padding: 22px 20px; }
+      .outcome-title     { font-size: 18px; }
+      .outcome-footer    { margin-top: 16px; padding-top: 14px; }
+
+      /* Mobile preview section */
+      .mobile-preview-section { padding-top: 56px; padding-bottom: 56px; }
+      .mobile-preview-grid   { gap: 32px; }
+      .mobile-preview-text   { font-size: 15px; margin-top: 14px; }
+      .mobile-preview-benefits { margin-top: 20px; gap: 10px; }
+      .mobile-preview-benefit  { font-size: 14px; }
+      .mobile-preview-stage  { padding: 20px 16px; border-radius: 20px; }
+      .mobile-preview-phone  { width: 280px; }
+      .mobile-preview-cta    { margin-top: 20px; }
+
+      /* Before/After section */
+      .ba-grid           { gap: 12px; margin-top: 34px; }
+      .ba-col            { padding: 24px 18px 20px; border-radius: 16px; }
+      .ba-col-label      { margin-bottom: 14px; }
+      .ba-metrics        { gap: 10px; }
+      .ba-metric         { padding: 14px 12px 12px; border-radius: 12px; }
+      .ba-metric-title   { font-size: 11.5px; margin-bottom: 6px; }
+      .ba-metric-value   { font-size: 24px; margin-bottom: 5px; }
+      .ba-metric-note    { font-size: 11.5px; }
+      .ba-section-title  { font-size: 26px; }
+      .ba-cta-text       { font-size: 16px; margin-bottom: 14px; }
+
+      /* Problem/Solution */
+      .ps-inner          { gap: 32px; }
+      .ps-side-title     { margin-bottom: 22px; font-size: 22px; }
+      .prob-item         { font-size: 15px; padding: 15px 0; }
+      .sol-card          { padding: 30px 22px; }
+      .sol-title         { font-size: 20px; margin-bottom: 22px; }
+      .sol-feat          { font-size: 14px; }
+      .sol-cta           { margin-top: 26px; }
+
+      /* Process section */
+      .process-steps     { grid-template-columns:1fr; gap: 12px; margin-top: 36px; }
+      .step              { padding: 22px 18px 20px; }
+      .step-num          { width: 42px; height: 42px; font-size: 14px; margin-bottom: 14px; }
+      .step-name         { font-size: 14px; }
+      .step-desc         { font-size: 12.5px; }
+
+      /* What you get */
+      .get-grid          { gap: 12px; margin-top: 36px; }
+      .get-item          { padding: 26px 22px; }
+      .get-title         { font-size: 16px; }
+      .get-desc          { font-size: 13.5px; }
+
+      /* For whom */
+      .whom-grid         { gap: 12px; margin-top: 36px; }
+      .whom-card         { padding: 26px 22px; }
+      .whom-title        { font-size: 16px; }
+      .whom-desc         { font-size: 13.5px; }
+
+      /* Final CTA section */
+      .final-cta-sub     { font-size: 16px; margin-bottom: 30px; }
+      .cta-row           { flex-direction: column; gap: 10px; align-items: stretch; }
+      .cta-row .btn      { width: 100%; justify-content: center; }
+      .cta-reassure      { flex-wrap: wrap; font-size: 12px; gap: 8px; }
+
+      /* Misc */
+      .phone-float       { display: none; }
+      .vision-card       { padding: 32px 24px; }
+      .hero-transition-band { padding: 0 0 32px; }
+
+      /* Footer */
+      footer             { padding: 36px 0; }
+
+      /* Lightbox */
+      .lightbox-overlay  { padding: 14px; }
+      .lightbox-img      { max-width: 96vw; max-height: 86vh; border-radius: 8px; }
+      .lightbox-close    { top: 12px; right: 12px; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- ─── NAV ─── -->
+<nav id="navbar">
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">Next<span>WebEC</span></a>
+    <ul class="nav-links">
+      <li><a class="nav-main-link" href="#inicio" data-key="nav_home">Inicio</a></li>
+      <li><a class="nav-main-link" href="#beneficios" data-key="nav_benefits">Beneficios</a></li>
+      <li><a class="nav-main-link" href="#cambio" data-key="nav_results">Resultados</a></li>
+      <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
+      <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
+    </ul>
+    <div class="nav-right">
+      <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="nav-cta" data-key="nav_cta">Mejorar mi web</a>
+      <div class="lang-toggle">
+        <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
+        <button class="lang-btn"        id="btnEN" onclick="setLang('en')">EN</button>
+      </div>
+      <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </div>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a class="mobile-nav-link" href="#inicio" onclick="toggleMenu()" data-key="nav_home">Inicio</a>
+  <a class="mobile-nav-link" href="#beneficios" onclick="toggleMenu()" data-key="nav_benefits">Beneficios</a>
+  <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
+  <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
+  <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
+  <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" data-key="nav_cta">Mejorar mi web</a>
+  <div class="mobile-lang">
+    <div class="lang-toggle">
+      <button class="lang-btn active" id="btnES2" onclick="setLang('es');toggleMenu()">ES</button>
+      <button class="lang-btn"        id="btnEN2" onclick="setLang('en');toggleMenu()">EN</button>
+    </div>
+  </div>
+</div>
+
+<!-- ─── HERO ─── -->
+<section class="hero" id="inicio">
+  <div class="container">
+    <div class="hero-inner">
+
+      <div class="hero-text">
+        <div class="eyebrow-accent fi" data-key="hero_badge">NextWebEC</div>
+        <h1 class="hero-title fi d1">
+          <span data-key="hero_t1">Tu página web puede verse mejor,</span><br>
+          <span data-key="hero_t2">generar confianza</span><br>
+          <em data-key="hero_t3">y traerte clientes</em>
+        </h1>
+        <p class="hero-sub fi d2" data-key="hero_sub">Creamos o rediseñamos tu web con un proceso guiado y claro. Sin conocimientos técnicos de tu parte.</p>
+        <p class="hero-remote fi d2" data-key="hero_remote"><strong>100%</strong> <span>remoto</span></p>
+        <p class="hero-trust fi d3" data-key="hero_trust">Webs diseñadas para generar contactos reales</p>
+        <div class="hero-actions fi d4">
+          <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-key="hero_cta">Quiero mejorar mi web</span>
+          </a>
+          <a href="#proceso" class="btn btn-ghost" data-key="hero_cta2">Ver cómo funciona</a>
+        </div>
+        <div class="hero-proof fi d4">
+          <p class="hero-proof-line" data-key="hero_proof">Proyectos diseñados para negocios reales en Ecuador</p>
+        </div>
+      </div>
+
+      <div class="hero-visual fi-slide d3">
+        <div class="mockup-wrap">
+          <div class="mockup-glow"></div>
+          <div class="browser">
+            <div class="browser-bar">
+              <div class="b-dot b-dot-r"></div>
+              <div class="b-dot b-dot-y"></div>
+              <div class="b-dot b-dot-g"></div>
+              <div class="b-url">tunegocio.com</div>
+            </div>
+            <div class="browser-screen">
+              <img
+                src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/main/Screenshot%202026-05-04%20at%2013.05.40.jpeg"
+                alt="Vista previa del sitio web"
+                class="lightbox-trigger"
+              />
+            </div>
+            <div class="browser-base"></div>
+            <div class="browser-foot"></div>
+          </div>
+          <div class="phone-float">
+            <div class="phone-screen">
+              <img
+                src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3677.PNG"
+                alt="Vista móvil del sitio web"
+                class="lightbox-trigger"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<div class="hero-transition-band fi">
+  <div class="container">
+    <p class="hero-transition-text"><strong data-key="hero_transition">Así es como cambia tu negocio cuando tu web funciona</strong></p>
+  </div>
+</div>
+
+<div class="divider"></div>
+
+<!-- ─── SCREENSHOT SHOWCASE ─── -->
+<section class="section shots-section" id="capturas">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="shots_eyebrow">Ejemplos visuales</span>
+      <h2 class="section-title" data-key="shots_title">Así puede verse una web premium para tu negocio</h2>
+      <p class="section-sub" data-key="shots_sub">Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.</p>
+    </div>
+    <div class="shots-grid">
+      <figure class="shot-card fi d1">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
+          alt="Vista de sitio web premium en escritorio"
+          class="lightbox-trigger"
+          loading="lazy"
+        />
+      </figure>
+      <figure class="shot-card fi d2">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
+          alt="Detalle de interfaz web moderna"
+          class="lightbox-trigger"
+          loading="lazy"
+        />
+      </figure>
+      <figure class="shot-card fi d3">
+        <img
+          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
+          alt="Composición visual de web profesional"
+          class="lightbox-trigger"
+          loading="lazy"
+        />
+      </figure>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── VISION: WHAT YOUR BUSINESS COULD LOOK LIKE ─── -->
+<section class="section vision-section" id="beneficios">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="vis_eyebrow">Tu negocio online</span>
+      <h2 class="section-title" data-key="vis_title">Así podría verse tu negocio en internet</h2>
+      <p class="section-sub" data-key="vis_sub">Una web bien hecha no es un gasto. Es la diferencia entre un cliente que te contacta y uno que se va con la competencia.</p>
+    </div>
+    <div class="vision-grid">
+      <ul class="vision-list">
+        <li class="vision-item fi d1">
+          <div class="vision-check">
+            <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+          </div>
+          <div>
+            <div class="vision-item-title" data-key="vis_i1_t">Una imagen de marca profesional</div>
+            <div class="vision-item-desc"  data-key="vis_i1_d">Tu negocio se ve serio y confiable desde el primer segundo. No hay segunda oportunidad para una primera impresión.</div>
+          </div>
+        </li>
+        <li class="vision-item fi d2">
+          <div class="vision-check">
+            <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+          </div>
+          <div>
+            <div class="vision-item-title" data-key="vis_i2_t">Clientes que confían desde el primer clic</div>
+            <div class="vision-item-desc"  data-key="vis_i2_d">Un diseño claro y bien estructurado genera confianza antes de que el cliente diga una sola palabra.</div>
+          </div>
+        </li>
+        <li class="vision-item fi d3">
+          <div class="vision-check">
+            <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+          </div>
+          <div>
+            <div class="vision-item-title" data-key="vis_i3_t">Contacto directo por WhatsApp</div>
+            <div class="vision-item-desc"  data-key="vis_i3_d">Con un solo toque, el cliente te escribe. Sin formularios complicados, sin fricciones.</div>
+          </div>
+        </li>
+        <li class="vision-item fi d4">
+          <div class="vision-check">
+            <svg viewBox="0 0 12 12"><polyline points="2,6 5,9 10,3"/></svg>
+          </div>
+          <div>
+            <div class="vision-item-title" data-key="vis_i4_t">Una presencia que compite con empresas más grandes</div>
+            <div class="vision-item-desc"  data-key="vis_i4_d">Tu web puede verse tan profesional como la de cualquier empresa del sector, sin importar el tamaño de tu negocio.</div>
+          </div>
+        </li>
+      </ul>
+      <div class="vision-right fi d2">
+        <div class="device-comp-wrap">
+          <!-- Laptop mockup -->
+          <div class="laptop-mockup">
+            <div class="laptop-lid">
+              <div class="laptop-cam"></div>
+              <div class="laptop-screen">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
+                  alt="Diseño web en escritorio"
+                  class="lightbox-trigger"
+                  loading="lazy"
+                />
+              </div>
+            </div>
+            <div class="laptop-base"></div>
+            <div class="laptop-foot"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── MOBILE PREVIEW ─── -->
+<section class="section-sm mobile-preview-section" id="movil">
+  <div class="container">
+    <div class="mobile-preview-grid">
+      <div class="mobile-preview-copy">
+        <h2 class="section-title fi" data-key="mob_prev_title">Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y facilitar el contacto en segundos.</h2>
+        <p class="section-sub mobile-preview-sub fi d1" data-key="mob_prev_sub">Ahí la importancia de tener una página mobile friendly.</p>
+        <ul class="mobile-preview-benefits fi d3">
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b1">Diseño adaptado a pantallas pequeñas</span>
+          </li>
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b2">Botones claros para contacto por WhatsApp</span>
+          </li>
+          <li class="mobile-preview-benefit">
+            <span class="mobile-preview-benefit-dot"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></span>
+            <span data-key="mob_prev_b3">Navegación simple y rápida</span>
+          </li>
+        </ul>
+        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary mobile-preview-cta fi d4" data-key="mob_prev_cta">Quiero una web lista para celular</a>
+      </div>
+      <div class="mobile-preview-visual fi d2">
+        <div class="mobile-preview-stage">
+          <div class="mobile-preview-phone">
+            <div class="mobile-preview-notch"></div>
+            <div class="mobile-preview-screen">
+              <img
+                src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
+                alt="Vista móvil real del sitio"
+                class="lightbox-trigger"
+                loading="lazy"
+              />
+            </div>
+            <div class="mobile-preview-home"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── BEFORE / AFTER ─── -->
+<section class="section ba-section" id="cambio">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" style="color:rgba(255,255,255,.36)" data-key="ba_eyebrow">El cambio real</span>
+      <h2 class="ba-section-title" data-key="ba_title">Esto es lo que cambia cuando tienes una web que funciona</h2>
+    </div>
+    <div class="ba-grid">
+      <div class="ba-col ba-col-before fi d1">
+        <div class="ba-col-label ba-before-label" data-key="ba_before_label">Sin web profesional</div>
+        <div class="ba-metrics">
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_l1_t">Clientes que encuentran tu negocio</div>
+            <div class="ba-metric-value" data-key="ba_l1_v">-73%</div>
+            <div class="ba-metric-note" data-key="ba_l1_n">vs. competencia con web</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_l2_t">Duración promedio de consulta</div>
+            <div class="ba-metric-value" data-key="ba_l2_v">2-3 min</div>
+            <div class="ba-metric-note" data-key="ba_l2_n">sin información disponible</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_l3_t">Probabilidad de conversión</div>
+            <div class="ba-metric-value" data-key="ba_l3_v">8%</div>
+            <div class="ba-metric-note" data-key="ba_l3_n">BrightEdge, 2023</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_l4_t">Costo de adquisición de cliente</div>
+            <div class="ba-metric-value" data-key="ba_l4_v">+240%</div>
+            <div class="ba-metric-note" data-key="ba_l4_n">HubSpot, 2024</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_l5_t">Confianza del cliente en negocio</div>
+            <div class="ba-metric-value" data-key="ba_l5_v">48%</div>
+            <div class="ba-metric-note" data-key="ba_l5_n">GWI, 2024</div>
+          </div>
+        </div>
+      </div>
+      <div class="ba-col ba-col-after fi d2">
+        <div class="ba-col-label ba-after-label" data-key="ba_after_label">Con web profesional</div>
+        <div class="ba-metrics">
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_r1_t">Clientes que encuentran tu negocio</div>
+            <div class="ba-metric-value" data-key="ba_r1_v">+276%</div>
+            <div class="ba-metric-note" data-key="ba_r1_n">Statista, 2024</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_r2_t">Tiempo en sitio promedio</div>
+            <div class="ba-metric-value" data-key="ba_r2_v">8-12 min</div>
+            <div class="ba-metric-note" data-key="ba_r2_n">con contenido relevante</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_r3_t">Probabilidad de conversión</div>
+            <div class="ba-metric-value" data-key="ba_r3_v">31%</div>
+            <div class="ba-metric-note" data-key="ba_r3_n">BrightEdge, 2023</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_r4_t">Retorno en inversión (ROI)</div>
+            <div class="ba-metric-value" data-key="ba_r4_v">300-400%</div>
+            <div class="ba-metric-note" data-key="ba_r4_n">en 3-5 años</div>
+          </div>
+          <div class="ba-metric">
+            <div class="ba-metric-title" data-key="ba_r5_t">Confianza del cliente en negocio</div>
+            <div class="ba-metric-value" data-key="ba_r5_v">84%</div>
+            <div class="ba-metric-note" data-key="ba_r5_n">GWI, 2024</div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="ba-cta-wrap fi d3">
+      <p class="ba-cta-text" data-key="ba_cta_text">Tu web no es un gasto. Es tu mejor vendedor.</p>
+      <a href="https://wa.me/593969349833?text=Hola%2C%20quiero%20una%20web%20que%20venda" target="_blank" class="btn btn-primary" data-key="ba_cta_btn">Quiero una web que venda</a>
+    </div>
+  </div>
+</section>
+
+<!-- ─── PROBLEM / SOLUTION ─── -->
+<section class="section ps-section" id="situacion">
+  <div class="container">
+    <div class="ps-inner">
+      <div class="fi">
+        <span class="ps-side-label" data-key="ps_eyebrow">Tu situacion actual</span>
+        <h2 class="ps-side-title" data-key="ps_title">Reconoces alguna de estas situaciones</h2>
+        <ul class="prob-list">
+          <li class="prob-item">
+            <div class="prob-num">1</div>
+            <span data-key="prob1">No tienes una presencia online profesional</span>
+          </li>
+          <li class="prob-item">
+            <div class="prob-num">2</div>
+            <span data-key="prob2">Tu web actual se ve anticuada o no representa bien tu negocio</span>
+          </li>
+          <li class="prob-item">
+            <div class="prob-num">3</div>
+            <span data-key="prob3">Tu web no te está trayendo clientes ni consultas</span>
+          </li>
+          <li class="prob-item">
+            <div class="prob-num">4</div>
+            <span data-key="prob4">No sabes por dónde empezar y el tema técnico te frena</span>
+          </li>
+        </ul>
+      </div>
+      <div class="fi d2">
+        <div class="sol-card" id="solucion">
+          <span class="sol-overline" data-key="sol_label">La solución</span>
+          <h3 class="sol-title" data-key="sol_title">Te guiamos paso a paso hasta tener una web que trabaja para tu negocio.</h3>
+          <div class="sol-feat">
+            <div class="sol-check"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></div>
+            <span data-key="sol_f1">Sin tecnicismos. Tú solo apruebas y decides.</span>
+          </div>
+          <div class="sol-feat">
+            <div class="sol-check"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></div>
+            <span data-key="sol_f2">Proceso claro con etapas definidas</span>
+          </div>
+          <div class="sol-feat">
+            <div class="sol-check"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></div>
+            <span data-key="sol_f3">Resultado en semanas, no meses</span>
+          </div>
+          <div class="sol-feat">
+            <div class="sol-check"><svg viewBox="0 0 10 10"><polyline points="2,5 4,8 9,2"/></svg></div>
+            <span data-key="sol_f4">Diseño orientado a generar confianza y contacto</span>
+          </div>
+          <div class="sol-cta">
+            <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary" data-key="sol_cta">Mejorar mi web</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── PROCESS ─── -->
+<section class="section process-section" id="proceso">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="proc_eyebrow">Como trabajamos</span>
+      <h2 class="section-title" data-key="proc_title">Un proceso simple, claro y guiado</h2>
+      <p class="section-sub" data-key="proc_sub">Cuatro pasos para llevarte de donde estás hoy a una web que representa bien tu negocio. Sin complicaciones.</p>
+    </div>
+    <div class="process-steps">
+      <div class="step fi d1">
+        <div class="step-num">1</div>
+        <div class="step-name" data-key="s1_n">Diagnóstico</div>
+        <div class="step-desc" data-key="s1_d">Analizamos tu negocio y lo que realmente necesita tu web.</div>
+      </div>
+      <div class="step fi d2">
+        <div class="step-num">2</div>
+        <div class="step-name" data-key="s3_n">Desarrollo</div>
+        <div class="step-desc" data-key="s3_d">Creamos una web moderna, rápida y optimizada.</div>
+      </div>
+      <div class="step fi d3">
+        <div class="step-num">3</div>
+        <div class="step-name" data-key="s4_n">Revisión contigo</div>
+        <div class="step-desc" data-key="s4_d">Ajustamos juntos hasta que estés completamente satisfecho.</div>
+      </div>
+      <div class="step fi d4">
+        <div class="step-num">4</div>
+        <div class="step-name" data-key="s5_n">Lanzamiento</div>
+        <div class="step-desc" data-key="s5_d">Publicamos tu web y te dejamos listo para empezar a usarla.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── WHAT YOU GET ─── -->
+<section class="section get-section" id="incluye">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="get_eyebrow">Lo que incluye</span>
+      <h2 class="section-title" data-key="get_title">Todo lo que incluye tu web</h2>
+      <p class="section-sub" data-key="get_sub">No vendemos páginas. Entregamos resultados concretos para tu negocio.</p>
+    </div>
+    <div class="get-grid">
+      <div class="get-item fi d1">
+        <span class="get-num">01</span>
+        <div class="get-title" data-key="get1_t">Una web que representa bien tu negocio</div>
+        <div class="get-desc"  data-key="get1_d">Diseñada para reflejar quién eres y generar confianza desde el primer momento en que alguien la visita.</div>
+      </div>
+      <div class="get-item fi d2">
+        <span class="get-num">02</span>
+        <div class="get-title" data-key="get2_t">Un diseño que genera confianza</div>
+        <div class="get-desc"  data-key="get2_d">Visual limpio, profesional y coherente con tu marca. La confianza se construye antes de que el cliente diga hola.</div>
+      </div>
+      <div class="get-item fi d3">
+        <span class="get-num">03</span>
+        <div class="get-title" data-key="get3_t">Estructura pensada para convertir visitas en consultas</div>
+        <div class="get-desc"  data-key="get3_d">Cada sección tiene un propósito: guiar al visitante hacia el contacto de forma natural y sin fricción.</div>
+      </div>
+      <div class="get-item fi d4">
+        <span class="get-num">04</span>
+        <div class="get-title" data-key="get4_t">Un canal directo para que te contacten</div>
+        <div class="get-desc"  data-key="get4_d">Integración con WhatsApp para que los interesados puedan escribirte con un solo toque, desde cualquier dispositivo.</div>
+      </div>
+      <div class="get-item fi d5">
+        <span class="get-num">05</span>
+        <div class="get-title" data-key="get5_t">Una base sólida para crecer online</div>
+        <div class="get-desc"  data-key="get5_d">Dominio, publicación y soporte inicial incluidos. Tu web queda lista para funcionar y evolucionar con tu negocio.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="divider"></div>
+
+<!-- ─── FOR WHOM ─── -->
+<section class="section whom-section" id="para-quien">
+  <div class="container">
+    <div class="tc fi">
+      <span class="eyebrow" data-key="whom_eyebrow">Para quien es esto</span>
+      <h2 class="section-title" data-key="whom_title">Para quien es NextWebEC</h2>
+      <p class="section-sub" data-key="whom_sub">Si te identificas con alguna de estas situaciones, estamos aquí para ayudarte.</p>
+    </div>
+    <div class="whom-grid">
+      <div class="whom-card fi d1">
+        <div class="whom-indicator"></div>
+        <div class="whom-title" data-key="wh1_t">Negocios sin página web</div>
+        <div class="whom-desc"  data-key="wh1_d">Empezamos desde cero y te acompañamos en cada paso del proceso, sin asumir que sabes nada de tecnología.</div>
+      </div>
+      <div class="whom-card fi d2">
+        <div class="whom-indicator"></div>
+        <div class="whom-title" data-key="wh2_t">Negocios con una web antigua</div>
+        <div class="whom-desc"  data-key="wh2_d">Rediseñamos tu web actual para que se vea moderna, funcione bien en celular y represente mejor lo que ofreces.</div>
+      </div>
+      <div class="whom-card fi d3">
+        <div class="whom-indicator"></div>
+        <div class="whom-title" data-key="wh3_t">Negocios que quieren verse más profesionales</div>
+        <div class="whom-desc"  data-key="wh3_d">Tu negocio merece una imagen que compita con los mejores del sector, sin importar su tamaño.</div>
+      </div>
+      <div class="whom-card fi d4">
+        <div class="whom-indicator"></div>
+        <div class="whom-title" data-key="wh4_t">Negocios que no están generando clientes online</div>
+        <div class="whom-desc"  data-key="wh4_d">Diseñamos con un objetivo claro: que los visitantes de tu web se conviertan en personas que te contactan.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FINAL CTA ─── -->
+<section class="section final-cta-section" id="contacto">
+  <div class="container">
+    <div class="final-cta-inner fi">
+      <span class="eyebrow" data-key="fcta_eyebrow">Empieza hoy</span>
+      <h2 class="final-cta-title" data-key="fcta_title">Tu web no necesita ser perfecta. Solo necesita <em>empezar a funcionar.</em></h2>
+      <p class="final-cta-sub" data-key="fcta_sub">Un mensaje es suficiente para comenzar. Te explicamos todo sin tecnicismos y sin compromiso.</p>
+      <div class="cta-row">
+        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-wa">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+          <span data-key="fcta_btn">Mejorar mi web</span>
+        </a>
+        <a href="#proceso" class="btn btn-ghost" data-key="fcta_secondary">Ver el proceso</a>
+      </div>
+      <div class="cta-reassure">
+        <span data-key="fcta_r1">Sin compromiso</span>
+        <div class="cr-dot"></div>
+        <span data-key="fcta_r2">Consulta gratuita</span>
+        <div class="cr-dot"></div>
+        <span data-key="fcta_r3">Respuesta rapida</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ─── -->
+<footer>
+  <div class="footer-logo">Next<span>Web</span> Ecuador</div>
+  <p class="footer-copy" data-key="footer">© 2025 The Next Web Ecuador</p>
+</footer>
+
+<!-- ─── FLOATING WA ─── -->
+<a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="wa-float" aria-label="WhatsApp">
+  <div class="wa-tip" data-key="wa_tip">Hablemos</div>
+  <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
+  <div class="lightbox-stage" id="lightboxStage">
+    <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar vista">&times;</button>
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Vista ampliada" />
+  </div>
+</div>
+
+<script>
+/* ─── TRANSLATIONS ─── */
+const T = {
+  es: {
+    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_clients:"Clientes", nav_cta:"Mejorar mi web",
+    hero_badge:"NextWebEC",
+    hero_t1:"Tu página web puede verse mejor,", hero_t2:"generar confianza", hero_t3:"y traerte clientes",
+    hero_sub:"Creamos o rediseñamos tu web con un proceso guiado y claro. Sin conocimientos técnicos de tu parte.",
+    hero_remote:"100% remoto",
+    hero_cta:"Quiero mejorar mi web", hero_cta2:"Ver cómo funciona",
+    hero_trust:"Webs diseñadas para generar contactos reales",
+    hero_transition:"Así es como cambia tu negocio cuando tu web funciona",
+    hero_proof:"Proyectos diseñados para negocios reales en Ecuador",
+    shots_eyebrow:"Ejemplos visuales",
+    shots_title:"Así puede verse una web premium para tu negocio",
+    shots_sub:"Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.",
+    vis_eyebrow:"Tu negocio online",
+    vis_title:"Así podría verse tu negocio en internet",
+    vis_sub:"Una web bien hecha no es un gasto. Es la diferencia entre un cliente que te contacta y uno que se va con la competencia.",
+    vis_i1_t:"Una imagen de marca profesional", vis_i1_d:"Tu negocio se ve serio y confiable desde el primer segundo. No hay segunda oportunidad para una primera impresión.",
+    vis_i2_t:"Clientes que confían desde el primer clic", vis_i2_d:"Un diseño claro y bien estructurado genera confianza antes de que el cliente diga una sola palabra.",
+    vis_i3_t:"Contacto directo por WhatsApp", vis_i3_d:"Con un solo toque, el cliente te escribe. Sin formularios complicados, sin fricciones.",
+    vis_i4_t:"Una presencia que compite con empresas más grandes", vis_i4_d:"Tu web puede verse tan profesional como la de cualquier empresa del sector, sin importar el tamaño de tu negocio.",
+    vis_img_label:"Ejemplo real",
+    vis_card_label:"Lo que obtienes",
+    vis_card_title:"Un activo digital que <span>trabaja por tu negocio</span> todos los dias.",
+    vis_f1:"Imagen profesional desde el primer vistazo", vis_f2:"Estructura pensada para convertir visitas en consultas",
+    vis_f3:"Optimizada para celulares", vis_f4:"Canal directo de contacto por WhatsApp", vis_f5:"Base sólida para crecer online",
+    ba_eyebrow:"El cambio real",
+    ba_title:"Esto es lo que cambia cuando tienes una web que funciona",
+    ba_before_label:"Sin web profesional", ba_after_label:"Con web profesional",
+    ba_l1_t:"Clientes que encuentran tu negocio", ba_l1_v:"-73%", ba_l1_n:"vs. competencia con web",
+    ba_l2_t:"Duración promedio de consulta", ba_l2_v:"2-3 min", ba_l2_n:"sin información disponible",
+    ba_l3_t:"Probabilidad de conversión", ba_l3_v:"8%", ba_l3_n:"BrightEdge, 2023",
+    ba_l4_t:"Costo de adquisición de cliente", ba_l4_v:"+240%", ba_l4_n:"HubSpot, 2024",
+    ba_l5_t:"Confianza del cliente en negocio", ba_l5_v:"48%", ba_l5_n:"GWI, 2024",
+    ba_r1_t:"Clientes que encuentran tu negocio", ba_r1_v:"+276%", ba_r1_n:"Statista, 2024",
+    ba_r2_t:"Tiempo en sitio promedio", ba_r2_v:"8-12 min", ba_r2_n:"con contenido relevante",
+    ba_r3_t:"Probabilidad de conversión", ba_r3_v:"31%", ba_r3_n:"BrightEdge, 2023",
+    ba_r4_t:"Retorno en inversión (ROI)", ba_r4_v:"300-400%", ba_r4_n:"en 3-5 años",
+    ba_r5_t:"Confianza del cliente en negocio", ba_r5_v:"84%", ba_r5_n:"GWI, 2024",
+    ba_cta_text:"Tu web no es un gasto. Es tu mejor vendedor.",
+    ba_cta_btn:"Quiero una web que venda",
+    ps_eyebrow:"Tu situación actual",
+    ps_title:"¿Reconoces alguna de estas situaciones?",
+    prob1:"No tienes una presencia online profesional",
+    prob2:"Tu web actual se ve anticuada o no representa bien tu negocio",
+    prob3:"Tu web no te está trayendo clientes ni consultas",
+    prob4:"No sabes por dónde empezar y el tema técnico te frena",
+    sol_label:"La solución",
+    sol_title:"Te guiamos paso a paso hasta tener una web que trabaja para tu negocio.",
+    sol_f1:"Sin tecnicismos. Tú solo apruebas y decides.",
+    sol_f2:"Proceso claro con etapas definidas",
+    sol_f3:"Resultado en semanas, no meses",
+    sol_f4:"Diseño orientado a generar confianza y contacto",
+    sol_cta:"Mejorar mi web",
+    proc_eyebrow:"Cómo trabajamos",
+    proc_title:"Un proceso simple, claro y guiado",
+    proc_sub:"Cuatro pasos para llevarte de donde estás hoy a una web que representa bien tu negocio. Sin complicaciones.",
+    s1_n:"Diagnóstico",       s1_d:"Analizamos tu negocio y lo que realmente necesita tu web.",
+    s2_n:"Propuesta de diseño",s2_d:"Te mostramos una propuesta clara antes de construir nada. Tú apruebas.",
+    s3_n:"Desarrollo",         s3_d:"Creamos una web moderna, rápida y optimizada.",
+    s4_n:"Revisión contigo",   s4_d:"Ajustamos juntos hasta que estés completamente satisfecho.",
+    s5_n:"Lanzamiento",        s5_d:"Publicamos tu web y te dejamos listo para empezar a usarla.",
+    get_eyebrow:"Lo que incluye",
+    get_title:"Todo lo que incluye tu web",
+    get_sub:"No vendemos páginas. Entregamos resultados concretos para tu negocio.",
+    hero_cta3:"Ver lo que incluye",
+    get1_t:"Una web que representa bien tu negocio", get1_d:"Diseñada para reflejar quién eres y generar confianza desde el primer momento en que alguien la visita.",
+    get2_t:"Un diseño que genera confianza", get2_d:"Visual limpio, profesional y coherente con tu marca. La confianza se construye antes de que el cliente diga hola.",
+    get3_t:"Estructura pensada para convertir visitas en consultas", get3_d:"Cada sección tiene un propósito: guiar al visitante hacia el contacto de forma natural y sin fricción.",
+    get4_t:"Un canal directo para que te contacten", get4_d:"Integración con WhatsApp para que los interesados puedan escribirte con un solo toque, desde cualquier dispositivo.",
+    get5_t:"Una base sólida para crecer online", get5_d:"Dominio, publicación y soporte inicial incluidos. Tu web queda lista para funcionar y evolucionar con tu negocio.",
+    ex_eyebrow:"Lo que podemos crear contigo",
+    ex_title:"Resultados posibles para tu negocio",
+    ex_sub:"Cada negocio es distinto. Esto es lo que puede lograrse cuando el diseño tiene un propósito claro.",
+    ex1_industry:"Lujo & Moda", ex1_type:"Proyecto real", ex1_cat:"JDC Watches",
+    ex1_t:"Una tienda digital que vende confianza antes de vender un producto",
+    ex1_d:"Así puede verse tu negocio online: diseño premium, navegación clara y contacto directo por WhatsApp para cerrar ventas sin intermediarios.",
+    ex1_cta:"Ver sitio", ex1_note:"jdcwatches.com",
+    mob_prev_title:"Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y facilitar el contacto en segundos.",
+    mob_prev_sub:"Ahí la importancia de tener una página mobile friendly.",
+    mob_prev_b1:"Diseño adaptado a pantallas pequeñas",
+    mob_prev_b2:"Botones claros para contacto por WhatsApp",
+    mob_prev_b3:"Navegación simple y rápida",
+    mob_prev_cta:"Quiero una web lista para celular",
+    ex2_type:"Resultado posible", ex2_cat:"Cualquier negocio",
+    ex2_t:"Tu negocio, con una imagen que genera confianza desde el primer momento",
+    ex2_d:"Con el diseño correcto, tu web puede comunicar exactamente lo que tu negocio vale. Claro, directo y pensado para convertir visitas en clientes.",
+    ex2_cta:"Hablemos de tu negocio",
+    whom_eyebrow:"Para quién es esto",
+    whom_title:"Para quién es NextWebEC",
+    whom_sub:"Si te identificas con alguna de estas situaciones, estamos aquí para ayudarte.",
+    wh1_t:"Negocios sin página web", wh1_d:"Empezamos desde cero y te acompañamos en cada paso del proceso, sin asumir que sabes nada de tecnología.",
+    wh2_t:"Negocios con una web antigua", wh2_d:"Rediseñamos tu web actual para que se vea moderna, funcione bien en celular y represente mejor lo que ofreces.",
+    wh3_t:"Negocios que quieren verse más profesionales", wh3_d:"Tu negocio merece una imagen que compita con los mejores del sector, sin importar su tamaño.",
+    wh4_t:"Negocios que no están generando clientes online", wh4_d:"Diseñamos con un objetivo claro: que los visitantes de tu web se conviertan en personas que te contactan.",
+    fcta_eyebrow:"Empieza hoy",
+    fcta_title:"Tu web no necesita ser perfecta. Solo necesita <em>empezar a funcionar.</em>",
+    fcta_sub:"Un mensaje es suficiente para comenzar. Te explicamos todo sin tecnicismos y sin compromiso.",
+    fcta_btn:"Mejorar mi web", fcta_secondary:"Ver el proceso",
+    fcta_r1:"Sin compromiso", fcta_r2:"Consulta gratuita", fcta_r3:"Respuesta rápida",
+    footer:"© 2025 The Next Web Ecuador",
+    wa_tip:"Hablemos",
+  },
+  en: {
+    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_clients:"Clients", nav_cta:"Improve my website",
+    hero_badge:"NextWebEC",
+    hero_t1:"Your website can look better,", hero_t2:"build trust", hero_t3:"and bring you clients",
+    hero_sub:"We create or redesign your website with a clear, guided process. No technical knowledge needed.",
+    hero_remote:"100% remote",
+    hero_cta:"I want to improve my website", hero_cta2:"See how it works",
+    hero_trust:"Websites designed to generate real inquiries",
+    hero_transition:"This is how your business changes when your website works",
+    hero_proof:"Projects designed for real businesses in Ecuador",
+    shots_eyebrow:"Visual examples",
+    shots_title:"This is how a premium website can look for your business",
+    shots_sub:"Three real views integrated with a focus on visual clarity, trust, and conversion.",
+    vis_eyebrow:"Your business online",
+    vis_title:"This is what your business could look like online",
+    vis_sub:"A well-built website is not an expense. It is the difference between a client who contacts you and one who goes to the competition.",
+    vis_i1_t:"A professional brand image", vis_i1_d:"Your business looks serious and trustworthy from the very first second. There is no second chance for a first impression.",
+    vis_i2_t:"Clients who trust you from the first click", vis_i2_d:"A clear, well-structured design builds trust before the client says a single word.",
+    vis_i3_t:"Direct contact through WhatsApp", vis_i3_d:"With one tap, the client writes to you. No complicated forms, no friction.",
+    vis_i4_t:"A presence that competes with bigger companies", vis_i4_d:"Your website can look as professional as any company in the industry, regardless of your business size.",
+    vis_img_label:"Real example",
+    vis_card_label:"What you get",
+    vis_card_title:"A digital asset that <span>works for your business</span> every day.",
+    vis_f1:"Professional image from the first glance", vis_f2:"Structure built to convert visits into inquiries",
+    vis_f3:"Optimized for mobile devices", vis_f4:"Direct WhatsApp contact channel", vis_f5:"A solid foundation to grow online",
+    ba_eyebrow:"The real change",
+    ba_title:"This is what changes when you have a website that works",
+    ba_before_label:"Without a professional website", ba_after_label:"With a professional website",
+    ba_l1_t:"Customers who find your business", ba_l1_v:"-73%", ba_l1_n:"vs. competitors with a website",
+    ba_l2_t:"Average inquiry duration", ba_l2_v:"2-3 min", ba_l2_n:"without enough information available",
+    ba_l3_t:"Conversion probability", ba_l3_v:"8%", ba_l3_n:"BrightEdge, 2023",
+    ba_l4_t:"Customer acquisition cost", ba_l4_v:"+240%", ba_l4_n:"HubSpot, 2024",
+    ba_l5_t:"Customer trust in business", ba_l5_v:"48%", ba_l5_n:"GWI, 2024",
+    ba_r1_t:"Customers who find your business", ba_r1_v:"+276%", ba_r1_n:"Statista, 2024",
+    ba_r2_t:"Average time on site", ba_r2_v:"8-12 min", ba_r2_n:"with relevant content",
+    ba_r3_t:"Conversion probability", ba_r3_v:"31%", ba_r3_n:"BrightEdge, 2023",
+    ba_r4_t:"Return on investment (ROI)", ba_r4_v:"300-400%", ba_r4_n:"within 3-5 years",
+    ba_r5_t:"Customer trust in business", ba_r5_v:"84%", ba_r5_n:"GWI, 2024",
+    ba_cta_text:"Your website is not an expense. It's your best salesperson.",
+    ba_cta_btn:"I want a website that sells",
+    ps_eyebrow:"Your current situation",
+    ps_title:"Do you recognize any of these situations?",
+    prob1:"You don't have a professional online presence",
+    prob2:"Your current website looks outdated or doesn't represent your business well",
+    prob3:"Your website is not bringing you clients or inquiries",
+    prob4:"You don't know where to start and technical topics hold you back",
+    sol_label:"The solution",
+    sol_title:"We guide you step by step until you have a website that works for your business.",
+    sol_f1:"No technical jargon. You just approve and decide.",
+    sol_f2:"Clear process with defined stages",
+    sol_f3:"Results in weeks, not months",
+    sol_f4:"Design focused on building trust and driving contact",
+    sol_cta:"Improve my website",
+    proc_eyebrow:"How we work",
+    proc_title:"A simple, clear, and guided process",
+    proc_sub:"Four steps to take you from where you are today to a website that represents your business well. No complications.",
+    s1_n:"Discovery",           s1_d:"We analyze your business and what your website really needs.",
+    s2_n:"Design proposal",     s2_d:"We show you a clear proposal before building anything. You approve.",
+    s3_n:"Development",         s3_d:"We create a modern, fast, and optimized website.",
+    s4_n:"Review together",     s4_d:"We adjust together until you are completely satisfied.",
+    s5_n:"Launch",              s5_d:"We publish your website and leave you ready to start using it.",
+    get_eyebrow:"What's included",
+    get_title:"Everything included with your website",
+    get_sub:"We don't sell pages. We deliver concrete results for your business.",
+    get1_t:"A website that represents your business properly", get1_d:"Designed to reflect who you are and build trust from the moment someone visits it.",
+    get2_t:"A design that builds trust", get2_d:"Clean, professional, and consistent with your brand. Trust is built before the client says hello.",
+    get3_t:"A structure built to convert visitors into clients", get3_d:"Each section has a purpose: to guide the visitor toward contact naturally and without friction.",
+    get4_t:"A direct channel for people to contact you", get4_d:"WhatsApp integration so interested clients can write to you with a single tap, from any device.",
+    get5_t:"A solid foundation to grow online", get5_d:"Domain, publishing, and initial support included. Your website is ready to function and grow with your business.",
+    ex_eyebrow:"What we can build with you",
+    ex_title:"Possible results for your business",
+    ex_sub:"Every business is different. This is what can be achieved when design has a clear purpose.",
+    ex1_industry:"Luxury & Fashion", ex1_type:"Real project", ex1_cat:"JDC Watches",
+    ex1_t:"A digital store that sells trust before selling a product",
+    ex1_d:"This is how your business could look online: premium design, clear navigation, and direct WhatsApp contact to close sales without intermediaries.",
+    ex1_cta:"View site", ex1_note:"jdcwatches.com",
+    mob_prev_title:"Today your clients look for you on their phones. Your website must look great, load fast, and make contact easy in seconds.",
+    mob_prev_sub:"That's why having a mobile-friendly website matters.",
+    mob_prev_b1:"Design adapted for small screens",
+    mob_prev_b2:"Clear buttons for WhatsApp contact",
+    mob_prev_b3:"Simple and fast navigation",
+    mob_prev_cta:"I want a mobile-ready website",
+    ex2_type:"Possible result", ex2_cat:"Any business",
+    ex2_t:"Your business, with an image that builds trust from the very first moment",
+    ex2_d:"With the right design, your website can communicate exactly what your business is worth. Clear, direct, and built to convert visits into clients.",
+    ex2_cta:"Let's talk about your business",
+    whom_eyebrow:"Who this is for",
+    whom_title:"Who NextWebEC is for",
+    whom_sub:"If you identify with any of these situations, we are here to help you.",
+    wh1_t:"Businesses without a website", wh1_d:"We start from scratch and guide you through every step of the process, without assuming you know anything about technology.",
+    wh2_t:"Businesses with an outdated website", wh2_d:"We redesign your current website so it looks modern, works well on mobile, and better represents what you offer.",
+    wh3_t:"Businesses that want to look more professional", wh3_d:"Your business deserves an image that competes with the best in your industry, regardless of its size.",
+    wh4_t:"Businesses not generating clients online", wh4_d:"We design with a clear objective: turning your website visitors into people who contact you.",
+    fcta_eyebrow:"Start today",
+    fcta_title:"Your website doesn't need to be perfect. It just needs to <em>start working.</em>",
+    fcta_sub:"One message is enough to get started. We explain everything without technical jargon and without commitment.",
+    fcta_btn:"Improve my website", fcta_secondary:"See the process",
+    fcta_r1:"No commitment", fcta_r2:"Free consultation", fcta_r3:"Fast response",
+    footer:"© 2025 The Next Web Ecuador",
+    wa_tip:"Let's talk",
+  }
+};
+
+let lang = 'es';
+
+function setLang(l) {
+  lang = l;
+  const t = T[l];
+  document.querySelectorAll('[data-key]').forEach(el => {
+    const k = el.getAttribute('data-key');
+    if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  ['btnES','btnES2'].forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('active', l==='es'); });
+  ['btnEN','btnEN2'].forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('active', l==='en'); });
+  document.documentElement.lang = l;
+}
+
+/* Scroll → sticky shadow */
+window.addEventListener('scroll', () => {
+  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 20);
+});
+
+/* Mobile menu */
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+document.addEventListener('click', e => {
+  const m = document.getElementById('mobileMenu');
+  const h = document.getElementById('hamburger');
+  if (m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) m.classList.remove('open');
+});
+
+/* Scroll spy for active nav links */
+const navLinks = Array.from(document.querySelectorAll('.nav-main-link, .mobile-nav-link'));
+const sectionIds = ['inicio', 'beneficios', 'cambio', 'proceso', 'para-quien'];
+
+function setActiveNav(targetId) {
+  navLinks.forEach(link => {
+    const active = link.getAttribute('href') === `#${targetId}`;
+    link.classList.toggle('active', active);
+  });
+}
+
+function updateActiveOnScroll() {
+  let current = sectionIds[0];
+  const trigger = window.scrollY + 120;
+  sectionIds.forEach(id => {
+    const el = document.getElementById(id);
+    if (el && el.offsetTop <= trigger) current = id;
+  });
+  setActiveNav(current);
+}
+
+navLinks.forEach(link => {
+  link.addEventListener('click', () => {
+    const targetId = link.getAttribute('href').replace('#', '');
+    setActiveNav(targetId);
+  });
+});
+
+window.addEventListener('scroll', updateActiveOnScroll);
+updateActiveOnScroll();
+
+/* Fade-in on scroll */
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.10 });
+document.querySelectorAll('.fi, .fi-slide').forEach(el => obs.observe(el));
+
+/* Lightbox */
+const lightboxOverlay = document.getElementById('lightboxOverlay');
+const lightboxImg = document.getElementById('lightboxImg');
+const lightboxClose = document.getElementById('lightboxClose');
+const lightboxTriggers = Array.from(document.querySelectorAll('.lightbox-trigger'));
+let lastOrigin = { x: 0, y: 0, scale: .95 };
+
+function setLightboxStartFromElement(el) {
+  const r = el.getBoundingClientRect();
+  const vw = window.innerWidth;
+  const vh = window.innerHeight;
+  const cx = r.left + (r.width / 2);
+  const cy = r.top + (r.height / 2);
+  const dx = cx - (vw / 2);
+  const dy = cy - (vh / 2);
+  const scale = Math.max(0.2, Math.min(0.95, Math.min(r.width / vw, r.height / vh)));
+  lastOrigin = { x: dx, y: dy, scale };
+  lightboxImg.style.setProperty('--lb-x', `${dx}px`);
+  lightboxImg.style.setProperty('--lb-y', `${dy}px`);
+  lightboxImg.style.setProperty('--lb-scale', `${scale}`);
+}
+
+function openLightbox(imgEl) {
+  if (!imgEl) return;
+  setLightboxStartFromElement(imgEl);
+  lightboxImg.src = imgEl.currentSrc || imgEl.src;
+  lightboxImg.alt = imgEl.alt || 'Vista ampliada';
+  document.body.classList.add('lb-open');
+  lightboxOverlay.classList.add('open');
+  lightboxOverlay.setAttribute('aria-hidden', 'false');
+}
+
+function closeLightbox() {
+  lightboxImg.style.setProperty('--lb-x', `${lastOrigin.x}px`);
+  lightboxImg.style.setProperty('--lb-y', `${lastOrigin.y}px`);
+  lightboxImg.style.setProperty('--lb-scale', `${lastOrigin.scale}`);
+  lightboxOverlay.classList.remove('open');
+  lightboxOverlay.setAttribute('aria-hidden', 'true');
+  document.body.classList.remove('lb-open');
+  window.setTimeout(() => {
+    if (!lightboxOverlay.classList.contains('open')) {
+      lightboxImg.src = '';
+    }
+  }, 260);
+}
+
+lightboxTriggers.forEach(imgEl => {
+  imgEl.addEventListener('click', () => openLightbox(imgEl));
+});
+
+lightboxClose.addEventListener('click', closeLightbox);
+
+lightboxOverlay.addEventListener('click', (e) => {
+  if (e.target === lightboxOverlay) closeLightbox();
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape' && lightboxOverlay.classList.contains('open')) {
+    closeLightbox();
+  }
+});
+
+/* Hero mockup scroll animation (desktop only) */
+const heroSection = document.getElementById('inicio');
+const heroMockupWrap = document.querySelector('.mockup-wrap');
+const desktopMQ = window.matchMedia('(min-width: 901px)');
+const reducedMotionMQ = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+let heroAnimFrame = null;
+let heroAnimEnabled = false;
+
+function setHeroMockupStyle(y = 0, scale = 1, opacity = 1) {
+  if (!heroMockupWrap) return;
+  heroMockupWrap.style.setProperty('--hero-device-y', `${y.toFixed(2)}px`);
+  heroMockupWrap.style.setProperty('--hero-device-scale', `${scale.toFixed(4)}`);
+  heroMockupWrap.style.setProperty('--hero-device-opacity', `${opacity.toFixed(4)}`);
+}
+
+function updateHeroMockupOnScroll() {
+  heroAnimFrame = null;
+  if (!heroAnimEnabled || !heroSection || !heroMockupWrap) return;
+
+  const rect = heroSection.getBoundingClientRect();
+  const vh = window.innerHeight || 1;
+  const rawProgress = Math.min(Math.max((-rect.top) / (vh * 0.95), 0), 1);
+  const eased = 1 - Math.pow(1 - rawProgress, 3);
+
+  const y = eased * 34;
+  const scale = 1 - (eased * 0.03);
+  const opacity = 1 - (eased * 0.08);
+
+  setHeroMockupStyle(y, scale, opacity);
+}
+
+function requestHeroMockupUpdate() {
+  if (!heroAnimEnabled) return;
+  if (heroAnimFrame !== null) return;
+  heroAnimFrame = window.requestAnimationFrame(updateHeroMockupOnScroll);
+}
+
+function resetHeroMockupAnimation() {
+  if (heroAnimFrame !== null) {
+    window.cancelAnimationFrame(heroAnimFrame);
+    heroAnimFrame = null;
+  }
+  setHeroMockupStyle(0, 1, 1);
+}
+
+function setupHeroMockupAnimation() {
+  heroAnimEnabled = !!heroMockupWrap && !!heroSection && desktopMQ.matches && !reducedMotionMQ.matches;
+
+  if (!heroAnimEnabled) {
+    resetHeroMockupAnimation();
+    return;
+  }
+
+  requestHeroMockupUpdate();
+}
+
+window.addEventListener('scroll', requestHeroMockupUpdate, { passive: true });
+window.addEventListener('resize', setupHeroMockupAnimation);
+desktopMQ.addEventListener('change', setupHeroMockupAnimation);
+reducedMotionMQ.addEventListener('change', setupHeroMockupAnimation);
+setupHeroMockupAnimation();
+</script>
+</body>
+</html>
