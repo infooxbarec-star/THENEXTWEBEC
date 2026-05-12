@@ -2058,8 +2058,7 @@
       position: absolute;
       inset: 0;
       overflow: hidden;
-      opacity: 0;
-      will-change: opacity;
+      opacity: 1;
       z-index: 1;
     }
 
@@ -2343,7 +2342,7 @@
       /* lid starts closed — JS will animate it */
       .lp-lid { transform: rotateX(-90deg); }
       /* screen and caption start hidden — JS will drive opacity */
-      .lp-screen-inner { opacity: 0; }
+      .lp-screen-inner { opacity: 1; }
       .lp-screen-glow  { opacity: 0; }
       .lp-caption {
         opacity: 0;
@@ -3704,10 +3703,8 @@ setupHeroMockupAnimation();
       : easeOutQuart(remap(rawP, 0.02, 0.22));
     lid.style.transform = `rotateX(${(-90 + lidP * 90).toFixed(2)}deg)`;
 
-    /* Screen & glow opacity */
-    const screenP = easeOutCubic(remap(rawP, mob ? 0.52 : 0.14, mob ? 0.90 : 0.32));
-    screen.style.opacity = screenP.toFixed(3);
-    glow.style.opacity   = (screenP * 0.75).toFixed(3);
+    /* Glow opacity — tied to lid open progress */
+    glow.style.opacity = (lidP * 0.55).toFixed(3);
 
     /* Caption fade in */
     const capP = easeOutCubic(remap(rawP, mob ? 0.86 : 0.28, mob ? 0.99 : 0.52));
