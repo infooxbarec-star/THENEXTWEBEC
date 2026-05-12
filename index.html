@@ -4,6 +4,10 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NextWebEC — Diseño Web Profesional</title>
+  <meta name="description" content="Diseño y rediseño de páginas web profesionales en Ecuador. Webs rápidas, claras y pensadas para generar confianza y clientes." />
+  <meta name="robots" content="index,follow,max-image-preview:large" />
+  <meta name="theme-color" content="#0B1F3A" />
+  <link rel="canonical" href="https://thenextwebec.com/" />
   <meta property="og:type" content="website" />
   <meta property="og:url" content="https://thenextwebec.com/" />
   <meta property="og:title" content="NextWebEC | Páginas web profesionales" />
@@ -17,6 +21,9 @@
   <meta name="twitter:title" content="NextWebEC | Páginas web profesionales" />
   <meta name="twitter:description" content="Landing pages premium que inspiran confianza y convierten." />
   <meta name="twitter:image" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/fixed_image_v2%20(1).png?v=6" />
+  <link rel="preconnect" href="https://raw.githubusercontent.com" crossorigin />
+  <link rel="dns-prefetch" href="//raw.githubusercontent.com" />
+  <link rel="preload" as="image" href="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/main/Screenshot%202026-05-04%20at%2013.05.40.jpeg" fetchpriority="high" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
@@ -53,6 +60,15 @@
       line-height: 1.6;
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
     }
 
     /* ─── UTILITIES ─── */
@@ -1905,12 +1921,65 @@
       border-radius: 2px; opacity: .65;
     }
 
-    /* ─── MOBILE: disable heavy effects ─── */
+    /* ─── MOBILE/TABLET: ultra-smooth performance overrides ─── */
+    @media (max-width: 900px) {
+      .hero-actions .btn-primary,
+      .final-cta-inner .btn-primary,
+      .eyebrow-accent,
+      .footer-logo span {
+        animation: none;
+      }
+
+      nav,
+      .mobile-menu,
+      .lightbox-overlay,
+      .lightbox-close {
+        backdrop-filter: none;
+        -webkit-backdrop-filter: none;
+      }
+
+      .hero-orb,
+      .lp-orb {
+        filter: blur(56px);
+      }
+    }
+
     @media (max-width: 768px) {
       .hero-orb { display: none; }
       #hero-canvas { display: none; }
       #cursor-dot, #cursor-ring { display: none; }
       .marquee-strip { display: none; }
+      .wa-float::before { animation: none; }
+
+      .shot-card,
+      .outcome-card,
+      .get-item,
+      .step,
+      .whom-card,
+      .vision-headline-card,
+      .vision-feats-card,
+      .sol-card,
+      .lp-caption-cta,
+      .btn,
+      .nav-cta,
+      .wa-float {
+        transition: opacity .18s ease, background-color .18s ease, color .18s ease, border-color .18s ease;
+      }
+
+      .shot-card:hover,
+      .outcome-card:hover,
+      .get-item:hover,
+      .step:hover,
+      .whom-card:hover,
+      .vision-headline-card:hover,
+      .vision-feats-card:hover,
+      .lp-caption-cta:hover,
+      .btn:hover,
+      .wa-float:hover {
+        transform: none;
+        filter: none;
+        box-shadow: var(--shadow-xs);
+      }
     }
 
     /* ════════════════════════════════════════════════════════
@@ -2394,7 +2463,7 @@
       <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
     </ul>
     <div class="nav-right">
-      <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="nav-cta" data-key="nav_cta">Mejorar mi web</a>
+      <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="nav-cta" data-key="nav_cta">Mejorar mi web</a>
       <div class="lang-toggle">
         <button class="lang-btn active" id="btnES" onclick="setLang('es')">ES</button>
         <button class="lang-btn"        id="btnEN" onclick="setLang('en')">EN</button>
@@ -2412,7 +2481,7 @@
   <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
   <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
   <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
-  <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" data-key="nav_cta">Mejorar mi web</a>
+  <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" data-key="nav_cta">Mejorar mi web</a>
   <div class="mobile-lang">
     <div class="lang-toggle">
       <button class="lang-btn active" id="btnES2" onclick="setLang('es');toggleMenu()">ES</button>
@@ -2441,7 +2510,7 @@
         <p class="hero-remote fi d2" data-key="hero_remote"><strong>100%</strong> <span>remoto</span></p>
         <p class="hero-trust fi d3" data-key="hero_trust">Webs diseñadas para generar contactos reales</p>
         <div class="hero-actions fi d4">
-          <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary">
+          <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-primary">
             <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
             <span data-key="hero_cta">Quiero mejorar mi web</span>
           </a>
@@ -2467,6 +2536,11 @@
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/main/Screenshot%202026-05-04%20at%2013.05.40.jpeg"
                 alt="Vista previa del sitio web"
                 class="lightbox-trigger"
+                width="1600"
+                height="1000"
+                loading="eager"
+                decoding="async"
+                fetchpriority="high"
               />
             </div>
             <div class="browser-base"></div>
@@ -2478,6 +2552,10 @@
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3677.PNG"
                 alt="Vista móvil del sitio web"
                 class="lightbox-trigger"
+                width="1170"
+                height="2532"
+                loading="lazy"
+                decoding="async"
               />
             </div>
           </div>
@@ -2553,6 +2631,8 @@
                   src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-11%20at%2022.50.39.png"
                   alt="NextWebEC — diseño web profesional"
                   style="width:100%;height:100%;object-fit:contain;object-position:center;background:#fff;display:block;"
+                  width="2530"
+                  height="1370"
                   loading="eager"
                   decoding="async"
                 />
@@ -2617,6 +2697,8 @@
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
           alt="Vista de sitio web premium en escritorio"
           class="lightbox-trigger"
+          width="2530"
+          height="1370"
           loading="lazy"
         />
       </figure>
@@ -2625,6 +2707,8 @@
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
           alt="Detalle de interfaz web moderna"
           class="lightbox-trigger"
+          width="2530"
+          height="1370"
           loading="lazy"
         />
       </figure>
@@ -2633,6 +2717,8 @@
           src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
           alt="Composición visual de web profesional"
           class="lightbox-trigger"
+          width="2530"
+          height="1370"
           loading="lazy"
         />
       </figure>
@@ -2700,6 +2786,8 @@
                   src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2013.37.31.png"
                   alt="Diseño web en escritorio"
                   class="lightbox-trigger"
+                  width="1600"
+                  height="1000"
                   loading="lazy"
                 />
               </div>
@@ -2736,7 +2824,7 @@
             <span data-key="mob_prev_b3">Navegación simple y rápida</span>
           </li>
         </ul>
-        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary mobile-preview-cta fi d4" data-key="mob_prev_cta">Quiero una web lista para celular</a>
+        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-primary mobile-preview-cta fi d4" data-key="mob_prev_cta">Quiero una web lista para celular</a>
       </div>
       <div class="mobile-preview-visual fi d2">
         <div class="mobile-preview-stage">
@@ -2747,6 +2835,8 @@
                 src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/IMG_3679.jpg"
                 alt="Vista móvil real del sitio"
                 class="lightbox-trigger"
+                width="1170"
+                height="2532"
                 loading="lazy"
               />
             </div>
@@ -2831,7 +2921,7 @@
     </div>
     <div class="ba-cta-wrap fi d3">
       <p class="ba-cta-text" data-key="ba_cta_text">Tu web no es un gasto. Es tu mejor vendedor.</p>
-      <a href="https://wa.me/593969349833?text=Hola%2C%20quiero%20una%20web%20que%20venda" target="_blank" class="btn btn-primary" data-key="ba_cta_btn">Quiero una web que venda</a>
+      <a href="https://wa.me/593969349833?text=Hola%2C%20quiero%20una%20web%20que%20venda" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-key="ba_cta_btn">Quiero una web que venda</a>
     </div>
   </div>
 </section>
@@ -2883,7 +2973,7 @@
             <span data-key="sol_f4">Diseño orientado a generar confianza y contacto</span>
           </div>
           <div class="sol-cta">
-            <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-primary" data-key="sol_cta">Mejorar mi web</a>
+            <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-key="sol_cta">Mejorar mi web</a>
           </div>
         </div>
       </div>
@@ -3009,7 +3099,7 @@
       <h2 class="final-cta-title" data-key="fcta_title">Tu web no necesita ser perfecta. Solo necesita <em>empezar a funcionar.</em></h2>
       <p class="final-cta-sub" data-key="fcta_sub">Un mensaje es suficiente para comenzar. Te explicamos todo sin tecnicismos y sin compromiso.</p>
       <div class="cta-row">
-        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="btn btn-wa">
+        <a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="btn btn-wa">
           <svg viewBox="0 0 24 24" width="18" height="18" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
           <span data-key="fcta_btn">Mejorar mi web</span>
         </a>
@@ -3033,7 +3123,7 @@
 </footer>
 
 <!-- ─── FLOATING WA ─── -->
-<a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" class="wa-float" aria-label="WhatsApp">
+<a href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" class="wa-float" aria-label="WhatsApp">
   <div class="wa-tip" data-key="wa_tip">Hablemos</div>
   <svg viewBox="0 0 24 24" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
 </a>
@@ -3041,7 +3131,7 @@
 <div class="lightbox-overlay" id="lightboxOverlay" aria-hidden="true">
   <div class="lightbox-stage" id="lightboxStage">
     <button class="lightbox-close" id="lightboxClose" aria-label="Cerrar vista">&times;</button>
-    <img id="lightboxImg" class="lightbox-img" src="" alt="Vista ampliada" />
+    <img id="lightboxImg" class="lightbox-img" src="" alt="Vista ampliada" width="1600" height="1000" />
   </div>
 </div>
 
@@ -3254,6 +3344,7 @@ const T = {
 };
 
 let lang = 'es';
+const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
 function setLang(l) {
   lang = l;
@@ -3267,10 +3358,23 @@ function setLang(l) {
   document.documentElement.lang = l;
 }
 
-/* Scroll → sticky shadow */
-window.addEventListener('scroll', () => {
-  document.getElementById('navbar').classList.toggle('scrolled', scrollY > 20);
-});
+/* Scroll → sticky shadow (throttled) */
+const navbar = document.getElementById('navbar');
+let navRaf = null;
+
+function updateNavShadow() {
+  navRaf = null;
+  if (!navbar) return;
+  navbar.classList.toggle('scrolled', window.scrollY > 20);
+}
+
+function requestNavShadowUpdate() {
+  if (navRaf !== null) return;
+  navRaf = window.requestAnimationFrame(updateNavShadow);
+}
+
+window.addEventListener('scroll', requestNavShadowUpdate, { passive: true });
+requestNavShadowUpdate();
 
 /* Mobile menu */
 function toggleMenu() {
@@ -3294,13 +3398,34 @@ function setActiveNav(targetId) {
 }
 
 function updateActiveOnScroll() {
+  activeNavRaf = null;
   let current = sectionIds[0];
   const trigger = window.scrollY + 120;
-  sectionIds.forEach(id => {
-    const el = document.getElementById(id);
-    if (el && el.offsetTop <= trigger) current = id;
+  sectionOffsets.forEach(item => {
+    if (item.top <= trigger) current = item.id;
   });
   setActiveNav(current);
+}
+
+let sectionOffsets = [];
+let activeNavRaf = null;
+
+function rebuildSectionOffsets() {
+  sectionOffsets = sectionIds
+    .map(id => {
+      const el = document.getElementById(id);
+      if (!el) return null;
+      return {
+        id,
+        top: Math.round(window.scrollY + el.getBoundingClientRect().top)
+      };
+    })
+    .filter(Boolean);
+}
+
+function requestActiveOnScrollUpdate() {
+  if (activeNavRaf !== null) return;
+  activeNavRaf = window.requestAnimationFrame(updateActiveOnScroll);
 }
 
 navLinks.forEach(link => {
@@ -3310,8 +3435,13 @@ navLinks.forEach(link => {
   });
 });
 
-window.addEventListener('scroll', updateActiveOnScroll);
-updateActiveOnScroll();
+window.addEventListener('scroll', requestActiveOnScrollUpdate, { passive: true });
+window.addEventListener('resize', () => {
+  rebuildSectionOffsets();
+  requestActiveOnScrollUpdate();
+}, { passive: true });
+rebuildSectionOffsets();
+requestActiveOnScrollUpdate();
 
 /* Fade-in on scroll */
 const obs = new IntersectionObserver(entries => {
@@ -3452,17 +3582,28 @@ setupHeroMockupAnimation();
 (function () {
   const bar = document.getElementById('scroll-progress');
   if (!bar) return;
+
+  let progressRafId = null;
+
   function update() {
+    progressRafId = null;
     const sh = document.documentElement.scrollHeight - window.innerHeight;
-    bar.style.setProperty('--pct', sh > 0 ? ((scrollY / sh) * 100).toFixed(2) + '%' : '0%');
+    bar.style.setProperty('--pct', sh > 0 ? ((window.scrollY / sh) * 100).toFixed(2) + '%' : '0%');
   }
-  window.addEventListener('scroll', update, { passive: true });
+
+  function requestUpdate() {
+    if (progressRafId !== null) return;
+    progressRafId = window.requestAnimationFrame(update);
+  }
+
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate, { passive: true });
   update();
 })();
 
 /* ── Custom cursor ── */
 (function () {
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
   if (!dot || !ring) return;
@@ -3497,7 +3638,7 @@ setupHeroMockupAnimation();
 
 /* ── Magnetic buttons ── */
 (function () {
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
   document.querySelectorAll('.btn').forEach(btn => {
     btn.addEventListener('mousemove', e => {
       const r  = btn.getBoundingClientRect();
@@ -3511,20 +3652,22 @@ setupHeroMockupAnimation();
 
 /* ── Hero canvas particles ── */
 (function () {
-  if (window.innerWidth < 769) return;
+  if (window.innerWidth < 769 || prefersReducedMotion) return;
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
   let W, H;
+  let rafId = null;
 
   function resize() {
     W = canvas.width  = canvas.offsetWidth;
     H = canvas.height = canvas.offsetHeight;
   }
-  window.addEventListener('resize', resize);
+  window.addEventListener('resize', resize, { passive: true });
   resize();
 
-  const P = Array.from({ length: 48 }, () => ({
+  const particleCount = window.innerWidth > 1400 ? 42 : 30;
+  const P = Array.from({ length: particleCount }, () => ({
     x:  Math.random(),
     y:  Math.random(),
     r:  0.7 + Math.random() * 1.7,
@@ -3534,7 +3677,7 @@ setupHeroMockupAnimation();
     c:  Math.random() > 0.55 ? '99,102,241' : '26,110,250'
   }));
 
-  (function tick() {
+  function tick() {
     ctx.clearRect(0, 0, W, H);
     P.forEach(p => {
       p.x += p.vx;
@@ -3547,8 +3690,19 @@ setupHeroMockupAnimation();
       ctx.fillStyle = `rgba(${p.c},${p.a})`;
       ctx.fill();
     });
-    requestAnimationFrame(tick);
-  })();
+    rafId = requestAnimationFrame(tick);
+  }
+
+  document.addEventListener('visibilitychange', () => {
+    if (document.hidden && rafId !== null) {
+      cancelAnimationFrame(rafId);
+      rafId = null;
+      return;
+    }
+    if (!document.hidden && rafId === null) tick();
+  });
+
+  tick();
 })();
 
 /* ── Number counters on Before/After stats ── */
@@ -3581,7 +3735,7 @@ setupHeroMockupAnimation();
 
 /* ── 3D card tilt ── */
 (function () {
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
   const MAX = 8;
   document.querySelectorAll('.get-item, .step, .whom-card, .shot-card, .vision-headline-card, .vision-feats-card').forEach(el => {
     el.addEventListener('mousemove', e => {
@@ -3596,7 +3750,7 @@ setupHeroMockupAnimation();
 
 /* ── Card beam (mouse-follow glow) ── */
 (function () {
-  if (window.matchMedia('(hover: none)').matches) return;
+  if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
   document.querySelectorAll('.get-item, .step, .whom-card, .vision-headline-card, .vision-feats-card, .sol-card').forEach(card => {
     card.addEventListener('mousemove', e => {
       const r = card.getBoundingClientRect();
@@ -3641,8 +3795,11 @@ setupHeroMockupAnimation();
     const rect = scene.getBoundingClientRect();
     const vh   = window.innerHeight;
     if (isMobile()) {
-      /* Non-sticky: smoother curve for mobile — enters at scene top, completes beyond bottom */
-      return Math.min(Math.max(1 - (rect.top / vh), 0), 1);
+      /* Non-sticky mobile: start near 0 on section entry, then progress smoothly */
+      const progressed = vh - rect.top;
+      const start = vh * 0.92;
+      const end = vh + (scene.offsetHeight * 0.55);
+      return Math.min(Math.max((progressed - start) / (end - start), 0), 1);
     }
     /* Desktop sticky: scrolled distance within scene */
     const sceneTopY = window.scrollY + rect.top;
@@ -3668,13 +3825,13 @@ setupHeroMockupAnimation();
 
     /* ── Laptop: subtle scale-down + fade at the very end ── */
     if (laptop) {
-      const endP  = easeInCubic(remap(rawP, mob ? 0.72 : 0.78, 1.0));
+      const endP  = easeInOutCubic(remap(rawP, mob ? 0.55 : 0.60, 1.0));
       laptop.style.transform = `scale(${(1 - endP * 0.09).toFixed(4)})`;
       laptop.style.opacity   = (1 - endP).toFixed(3);
     }
 
     /* ── Caption: visible at start, fades with laptop at the end ── */
-    const capEndP = easeInCubic(remap(rawP, mob ? 0.72 : 0.78, 1.0));
+    const capEndP = easeInOutCubic(remap(rawP, mob ? 0.55 : 0.60, 1.0));
     caption.style.opacity = (1 - capEndP).toFixed(3);
     caption.classList.toggle('lp-visible', capEndP < 0.95);
 
