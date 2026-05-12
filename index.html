@@ -1920,7 +1920,7 @@
     /* ── Scene container (sets scroll height) ── */
     .lp-scene {
       position: relative;
-      height: 110vh; /* scroll travel = 10vh (110 - 100vh sticky) */
+      height: 100vh; /* minimal scroll travel — scene = viewport height */
       max-width: 100%;
       width: 100%;
       background: #060b14; /* prevent white flash when sticky detaches */
@@ -1938,7 +1938,7 @@
       align-items: center;
       justify-content: center;
       perspective: 1400px;
-      padding: 64px 24px;
+      padding: 48px 24px;
       width: 100%;
     }
 
