@@ -1676,9 +1676,250 @@
       .lightbox-img      { max-width: 96vw; max-height: 86vh; border-radius: 8px; }
       .lightbox-close    { top: 12px; right: 12px; }
     }
+
+    /* ═══════════════════════════════════════════════
+       PREMIUM ANIMATION SYSTEM
+       ═══════════════════════════════════════════════ */
+
+    /* ─── SCROLL PROGRESS BAR ─── */
+    #scroll-progress {
+      position: fixed; top: 0; left: 0; right: 0;
+      height: 2.5px; z-index: 2000; pointer-events: none;
+      background: linear-gradient(90deg, var(--accent) var(--pct,0%), rgba(26,110,250,.10) var(--pct,0%));
+      transition: none;
+    }
+
+    /* ─── CUSTOM CURSOR ─── */
+    @media (hover: hover) and (pointer: fine) {
+      html { cursor: none; }
+      a, button, .btn, [role="button"] { cursor: none; }
+    }
+    #cursor-dot {
+      position: fixed; pointer-events: none; z-index: 9999;
+      width: 6px; height: 6px; border-radius: 50%;
+      background: var(--accent);
+      transform: translate(-50%,-50%);
+      transition: width .18s ease, height .18s ease, background .18s ease, opacity .28s ease;
+    }
+    #cursor-ring {
+      position: fixed; pointer-events: none; z-index: 9998;
+      width: 36px; height: 36px; border-radius: 50%;
+      border: 1.5px solid rgba(26,110,250,.44);
+      transform: translate(-50%,-50%);
+      transition: width .25s ease, height .25s ease, border-color .25s ease, background .25s ease, opacity .28s ease;
+    }
+    .cursor-hover #cursor-ring {
+      width: 54px; height: 54px;
+      border-color: rgba(26,110,250,.24);
+      background: rgba(26,110,250,.05);
+    }
+    .cursor-click #cursor-dot {
+      width: 10px; height: 10px;
+      background: var(--primary);
+    }
+    .cursor-hidden #cursor-dot,
+    .cursor-hidden #cursor-ring { opacity: 0; }
+
+    /* ─── HERO CANVAS + ANIMATED ORBS ─── */
+    #hero-canvas {
+      position: absolute; inset: 0;
+      width: 100%; height: 100%;
+      pointer-events: none; z-index: 0;
+    }
+    .hero > .container { position: relative; z-index: 1; }
+    .hero::before, .hero::after { content: none; }
+    .hero-orb {
+      position: absolute; border-radius: 50%;
+      pointer-events: none; z-index: 0;
+      filter: blur(80px);
+      animation: orb-drift 14s ease-in-out infinite;
+    }
+    .orb-1 {
+      width: 520px; height: 520px; top: -130px; right: -130px;
+      background: radial-gradient(circle at 40% 40%, rgba(26,110,250,.15), transparent 65%);
+      animation-duration: 11s;
+    }
+    .orb-2 {
+      width: 380px; height: 380px; bottom: -70px; left: -90px;
+      background: radial-gradient(circle at 60% 60%, rgba(99,102,241,.11), transparent 65%);
+      animation-duration: 15s; animation-delay: -5s;
+    }
+    .orb-3 {
+      width: 250px; height: 250px; top: 36%; left: 38%;
+      background: radial-gradient(circle at 50% 50%, rgba(26,110,250,.07), transparent 65%);
+      animation-duration: 18s; animation-delay: -9s;
+    }
+    @keyframes orb-drift {
+      0%,100% { transform: translate(0,0) scale(1); }
+      25%     { transform: translate(22px,-28px) scale(1.04); }
+      50%     { transform: translate(-14px,18px) scale(.97); }
+      75%     { transform: translate(24px,12px) scale(1.02); }
+    }
+
+    /* ─── MARQUEE TRUST STRIP ─── */
+    .marquee-strip {
+      overflow: hidden;
+      background: var(--white);
+      border-top: 1px solid var(--muted-border);
+      border-bottom: 1px solid var(--muted-border);
+      padding: 13px 0;
+      white-space: nowrap;
+      -webkit-user-select: none; user-select: none;
+    }
+    .marquee-track {
+      display: inline-flex;
+      animation: marquee-run 30s linear infinite;
+    }
+    .marquee-track:hover { animation-play-state: paused; }
+    .marquee-item {
+      display: inline-flex; align-items: center; gap: 9px;
+      padding: 0 30px;
+      font-size: 12.5px; font-weight: 600;
+      color: var(--primary); opacity: .46;
+      letter-spacing: .3px;
+    }
+    .marquee-dot {
+      width: 4px; height: 4px; border-radius: 50%;
+      background: var(--accent); flex-shrink: 0;
+    }
+    @keyframes marquee-run {
+      from { transform: translateX(0); }
+      to   { transform: translateX(-50%); }
+    }
+
+    /* ─── ANIMATED GRADIENT HERO + FINAL CTA TITLE ─── */
+    @keyframes grad-pan {
+      0%,100% { background-position: 0% 50%; }
+      50%     { background-position: 100% 50%; }
+    }
+    .hero-title em,
+    .final-cta-title em {
+      background: linear-gradient(105deg, var(--accent) 15%, #818cf8 55%, var(--accent) 80%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: grad-pan 5s ease infinite;
+    }
+
+    /* ─── GLOWING PRIMARY BUTTONS (hero + final CTA) ─── */
+    @keyframes btn-glow {
+      0%,100% { box-shadow: 0 4px 22px rgba(11,31,58,.22); }
+      50%     { box-shadow: 0 4px 22px rgba(11,31,58,.16), 0 0 32px rgba(26,110,250,.22); }
+    }
+    .hero-actions .btn-primary,
+    .final-cta-inner .btn-primary { animation: btn-glow 3.8s ease infinite; }
+
+    /* ─── SHIMMER BADGE ─── */
+    @keyframes badge-shimmer {
+      0%   { background-position: -220% center; }
+      100% { background-position:  220% center; }
+    }
+    .eyebrow-accent {
+      background: linear-gradient(
+        90deg,
+        rgba(26,110,250,.09) 25%,
+        rgba(26,110,250,.24) 50%,
+        rgba(26,110,250,.09) 75%
+      );
+      background-size: 200% 100%;
+      animation: badge-shimmer 3.2s linear infinite;
+    }
+
+    /* ─── CARD BEAM MOUSE GLOW ─── */
+    .get-item, .step, .whom-card,
+    .vision-headline-card, .vision-feats-card, .sol-card {
+      background-image: radial-gradient(
+        360px circle at var(--bx,50%) var(--by,-60%),
+        rgba(26,110,250,.055), transparent 55%
+      );
+    }
+
+    /* ─── SHOT CARD enhanced hover ─── */
+    .shot-card {
+      transition: transform .45s cubic-bezier(.22,.61,.36,1), box-shadow .45s ease, filter .3s ease;
+    }
+    .shot-card:hover {
+      transform: translateY(-9px) scale(1.018);
+      box-shadow: 0 26px 58px rgba(11,31,58,.18);
+      filter: brightness(1.04);
+    }
+
+    /* ─── WA FLOAT pulse ring ─── */
+    @keyframes wa-ring {
+      0%   { transform: scale(1);  opacity: .55; }
+      100% { transform: scale(2);  opacity: 0;   }
+    }
+    .wa-float::before {
+      content: ''; position: absolute; inset: 0;
+      border-radius: 50%; background: var(--green);
+      animation: wa-ring 2.5s ease-out infinite;
+      z-index: -1;
+    }
+
+    /* ─── VISION CHECK icon spin on hover ─── */
+    .vision-check { transition: transform .4s cubic-bezier(.34,1.56,.64,1); }
+    .vision-item:hover .vision-check { transform: rotate(360deg) scale(1.14); }
+
+    /* ─── STEP NUM pop-in when .in is added ─── */
+    @keyframes step-pop {
+      0%   { transform: scale(.5);  opacity: 0; }
+      70%  { transform: scale(1.18); opacity: 1; }
+      100% { transform: scale(1);   opacity: 1; }
+    }
+    .step.in .step-num { animation: step-pop .55s cubic-bezier(.34,1.56,.64,1) both; }
+
+    /* ─── NUMBER COUNTER ─── */
+    .ba-metric-value { font-variant-numeric: tabular-nums; }
+
+    /* ─── OUTCOME CARD enhanced ─── */
+    .outcome-card {
+      transition: transform .35s cubic-bezier(.22,.61,.36,1), box-shadow .35s, border-color .35s;
+    }
+    .outcome-card:hover {
+      transform: translateY(-8px) scale(1.007);
+      box-shadow: 0 24px 56px rgba(11,31,58,.14);
+    }
+
+    /* ─── FOOTER LOGO gradient ─── */
+    .footer-logo span {
+      background: linear-gradient(105deg, #93C5FD 20%, #c4b5fd 55%, #93C5FD 80%);
+      background-size: 220% 100%;
+      -webkit-background-clip: text; background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: grad-pan 7s ease infinite;
+    }
+
+    /* ─── NAV LOGO accent glow on hover ─── */
+    .nav-logo span { transition: text-shadow .3s ease; }
+    .nav-logo:hover span { text-shadow: 0 0 20px rgba(26,110,250,.45); }
+
+    /* ─── SECTION EYEBROW decorative line ─── */
+    .section .eyebrow::before,
+    .tc .eyebrow::before {
+      content: '';
+      display: inline-block;
+      width: 14px; height: 1.5px;
+      background: currentColor;
+      margin-right: 8px; margin-bottom: 2px;
+      vertical-align: middle;
+      border-radius: 2px; opacity: .65;
+    }
+
+    /* ─── MOBILE: disable heavy effects ─── */
+    @media (max-width: 768px) {
+      .hero-orb { display: none; }
+      #hero-canvas { display: none; }
+      #cursor-dot, #cursor-ring { display: none; }
+      .marquee-strip { display: none; }
+    }
   </style>
 </head>
 <body>
+
+<!-- ─── PREMIUM SYSTEM ELEMENTS ─── -->
+<div id="scroll-progress"></div>
+<div id="cursor-dot"></div>
+<div id="cursor-ring"></div>
 
 <!-- ─── NAV ─── -->
 <nav id="navbar">
@@ -1721,6 +1962,10 @@
 
 <!-- ─── HERO ─── -->
 <section class="hero" id="inicio">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-orb orb-1"></div>
+  <div class="hero-orb orb-2"></div>
+  <div class="hero-orb orb-3"></div>
   <div class="container">
     <div class="hero-inner">
 
@@ -1785,6 +2030,32 @@
 <div class="hero-transition-band fi">
   <div class="container">
     <p class="hero-transition-text"><strong data-key="hero_transition">Así es como cambia tu negocio cuando tu web funciona</strong></p>
+  </div>
+</div>
+
+<!-- ─── TRUST MARQUEE ─── -->
+<div class="marquee-strip" aria-hidden="true">
+  <div class="marquee-track">
+    <span class="marquee-item"><span class="marquee-dot"></span>Diseño profesional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>100% remoto</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mobile ready</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Integración WhatsApp</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Resultados reales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Carga ultrarrápida</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>SEO optimizado</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Confianza desde el primer clic</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Proceso guiado</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Sin tecnicismos</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Diseño profesional</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>100% remoto</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Mobile ready</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Integración WhatsApp</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Resultados reales</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Carga ultrarrápida</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>SEO optimizado</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Confianza desde el primer clic</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Proceso guiado</span>
+    <span class="marquee-item"><span class="marquee-dot"></span>Sin tecnicismos</span>
   </div>
 </div>
 
@@ -2630,6 +2901,172 @@ window.addEventListener('resize', setupHeroMockupAnimation);
 desktopMQ.addEventListener('change', setupHeroMockupAnimation);
 reducedMotionMQ.addEventListener('change', setupHeroMockupAnimation);
 setupHeroMockupAnimation();
+
+/* ═══════════════════════════════════════════════
+   PREMIUM ANIMATION SYSTEM
+   ═══════════════════════════════════════════════ */
+
+/* ── Scroll progress bar ── */
+(function () {
+  const bar = document.getElementById('scroll-progress');
+  if (!bar) return;
+  function update() {
+    const sh = document.documentElement.scrollHeight - window.innerHeight;
+    bar.style.setProperty('--pct', sh > 0 ? ((scrollY / sh) * 100).toFixed(2) + '%' : '0%');
+  }
+  window.addEventListener('scroll', update, { passive: true });
+  update();
+})();
+
+/* ── Custom cursor ── */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const dot  = document.getElementById('cursor-dot');
+  const ring = document.getElementById('cursor-ring');
+  if (!dot || !ring) return;
+
+  let mx = -200, my = -200, rx = -200, ry = -200;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    dot.style.left = mx + 'px';
+    dot.style.top  = my + 'px';
+    document.body.classList.remove('cursor-hidden');
+  });
+
+  (function lerpRing() {
+    rx += (mx - rx) * 0.13;
+    ry += (my - ry) * 0.13;
+    ring.style.left = rx.toFixed(2) + 'px';
+    ring.style.top  = ry.toFixed(2) + 'px';
+    requestAnimationFrame(lerpRing);
+  })();
+
+  document.querySelectorAll('a, button, .btn, .shot-card, .get-item, .step, .whom-card, .outcome-card, .lightbox-trigger, .sol-card').forEach(el => {
+    el.addEventListener('mouseenter', () => document.body.classList.add('cursor-hover'));
+    el.addEventListener('mouseleave', () => document.body.classList.remove('cursor-hover'));
+  });
+
+  document.addEventListener('mousedown', () => document.body.classList.add('cursor-click'));
+  document.addEventListener('mouseup',   () => document.body.classList.remove('cursor-click'));
+  document.addEventListener('mouseleave', () => document.body.classList.add('cursor-hidden'));
+  document.addEventListener('mouseenter', () => document.body.classList.remove('cursor-hidden'));
+})();
+
+/* ── Magnetic buttons ── */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.btn').forEach(btn => {
+    btn.addEventListener('mousemove', e => {
+      const r  = btn.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) * 0.30;
+      const dy = (e.clientY - (r.top  + r.height / 2)) * 0.30;
+      btn.style.transform = `translate(${dx}px,${dy}px) translateY(-2px)`;
+    });
+    btn.addEventListener('mouseleave', () => { btn.style.transform = ''; });
+  });
+})();
+
+/* ── Hero canvas particles ── */
+(function () {
+  if (window.innerWidth < 769) return;
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+  let W, H;
+
+  function resize() {
+    W = canvas.width  = canvas.offsetWidth;
+    H = canvas.height = canvas.offsetHeight;
+  }
+  window.addEventListener('resize', resize);
+  resize();
+
+  const P = Array.from({ length: 48 }, () => ({
+    x:  Math.random(),
+    y:  Math.random(),
+    r:  0.7 + Math.random() * 1.7,
+    vx: (Math.random() - 0.5) * 0.00035,
+    vy: -(0.00018 + Math.random() * 0.00032),
+    a:  0.10 + Math.random() * 0.35,
+    c:  Math.random() > 0.55 ? '99,102,241' : '26,110,250'
+  }));
+
+  (function tick() {
+    ctx.clearRect(0, 0, W, H);
+    P.forEach(p => {
+      p.x += p.vx;
+      p.y += p.vy;
+      if (p.y < -0.04) { p.y = 1.04; p.x = Math.random(); }
+      if (p.x < -0.04)  p.x = 1.04;
+      if (p.x >  1.04)  p.x = -0.04;
+      ctx.beginPath();
+      ctx.arc(p.x * W, p.y * H, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(${p.c},${p.a})`;
+      ctx.fill();
+    });
+    requestAnimationFrame(tick);
+  })();
+})();
+
+/* ── Number counters on Before/After stats ── */
+(function () {
+  const re = /^([+\-]?)(\d+)(%?)$/;
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      const el  = e.target;
+      obs.unobserve(el);
+      const raw = el.dataset.counterRaw || el.textContent.trim();
+      el.dataset.counterRaw = raw;
+      const m = raw.match(re);
+      if (!m) return;
+      const sign = m[1], end = parseInt(m[2], 10), suf = m[3];
+      const dur  = 1700;
+      const t0   = performance.now();
+      (function frame(now) {
+        const p  = Math.min((now - t0) / dur, 1);
+        const ep = 1 - Math.pow(1 - p, 4);
+        el.textContent = sign + Math.round(end * ep) + suf;
+        if (p < 1) requestAnimationFrame(frame);
+        else el.textContent = raw;
+      })(t0);
+    });
+  }, { threshold: 0.5 });
+
+  document.querySelectorAll('.ba-metric-value').forEach(el => obs.observe(el));
+})();
+
+/* ── 3D card tilt ── */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  const MAX = 8;
+  document.querySelectorAll('.get-item, .step, .whom-card, .shot-card, .vision-headline-card, .vision-feats-card').forEach(el => {
+    el.addEventListener('mousemove', e => {
+      const r  = el.getBoundingClientRect();
+      const dx = (e.clientX - (r.left + r.width  / 2)) / (r.width  / 2);
+      const dy = (e.clientY - (r.top  + r.height / 2)) / (r.height / 2);
+      el.style.transform = `perspective(700px) rotateX(${(-dy * MAX).toFixed(2)}deg) rotateY(${(dx * MAX).toFixed(2)}deg) translateY(-4px)`;
+    });
+    el.addEventListener('mouseleave', () => { el.style.transform = ''; });
+  });
+})();
+
+/* ── Card beam (mouse-follow glow) ── */
+(function () {
+  if (window.matchMedia('(hover: none)').matches) return;
+  document.querySelectorAll('.get-item, .step, .whom-card, .vision-headline-card, .vision-feats-card, .sol-card').forEach(card => {
+    card.addEventListener('mousemove', e => {
+      const r = card.getBoundingClientRect();
+      card.style.setProperty('--bx', ((e.clientX - r.left) / r.width  * 100).toFixed(1) + '%');
+      card.style.setProperty('--by', ((e.clientY - r.top)  / r.height * 100).toFixed(1) + '%');
+    });
+    card.addEventListener('mouseleave', () => {
+      card.style.removeProperty('--bx');
+      card.style.removeProperty('--by');
+    });
+  });
+})();
 </script>
 </body>
 </html>
