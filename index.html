@@ -2479,7 +2479,7 @@
       pointer-events: none;
       border-radius: 50%;
     }
-    .analytics-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 60px; align-items: center; position: relative; z-index: 2; }
+    .analytics-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 60px; align-items: start; position: relative; z-index: 2; }
     .analytics-left { max-width: none; min-width: 0; }
     .analytics-eyebrow {
       font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
@@ -2518,9 +2518,9 @@
     .analytics-feature-desc {
       font-size: 14px; color: rgba(255, 255, 255, 0.7); line-height: 1.55;
     }
-    .analytics-right { position: relative; display: flex; justify-content: flex-end; align-items: center; min-width: 0; }
+    .analytics-right { position: relative; display: flex; justify-content: flex-end; align-items: flex-start; min-width: 0; }
     .analytics-mockup {
-      width: 100%; max-width: 520px;
+      width: 100%; max-width: 480px;
       display: block;
       margin-left: auto;
     }
@@ -2529,11 +2529,23 @@
       border-radius: var(--r-lg);
       box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
     }
-    @media (min-width: 1025px) {
-      .analytics-inner { grid-template-columns: minmax(0, 1fr) minmax(420px, 520px); gap: 48px; }
+    @media (min-width: 901px) {
+      .analytics-inner {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 40px;
+      }
+      .analytics-left {
+        flex: 1 1 0;
+      }
+      .analytics-right {
+        flex: 0 0 480px;
+        padding-top: 536px;
+      }
     }
-    @media (max-width: 1024px) {
-      .analytics-inner { grid-template-columns: 1fr; gap: 40px; }
+    @media (max-width: 900px) {
+      .analytics-inner { display: grid; grid-template-columns: 1fr; gap: 40px; }
       .analytics-right { margin-top: 20px; justify-content: center; }
     }
     @media (max-width: 640px) {
@@ -3750,7 +3762,7 @@ document.addEventListener('click', e => {
 
 /* Scroll spy for active nav links */
 const navLinks = Array.from(document.querySelectorAll('.nav-main-link, .mobile-nav-link'));
-const sectionIds = ['inicio', 'beneficios', 'cambio', 'proceso', 'para-quien'];
+const sectionIds = ['inicio', 'beneficios', 'cambio', 'analytics', 'proceso', 'para-quien'];
 
 function setActiveNav(targetId) {
   navLinks.forEach(link => {
