@@ -408,7 +408,7 @@
       flex-shrink: 0;
     }
     .hero-transition-band {
-      padding: 0 0 40px;
+      padding: 0 0 16px;
       text-align: center;
     }
     .hero-transition-text {
@@ -1762,7 +1762,7 @@
       background: var(--white);
       border-top: 1px solid var(--muted-border);
       border-bottom: 1px solid var(--muted-border);
-      padding: 13px 0;
+      padding: 10px 0;
       white-space: nowrap;
       -webkit-user-select: none; user-select: none;
     }
@@ -1920,8 +1920,7 @@
     /* ── Scene container (sets scroll height) ── */
     .lp-scene {
       position: relative;
-      height: 380vh; /* scroll distance = pinned travel */
-      overflow-x: hidden;
+      height: 160vh; /* desktop scroll distance */
       max-width: 100%;
       width: 100%;
     }
@@ -1939,6 +1938,7 @@
       justify-content: center;
       perspective: 1400px;
       padding: 64px 24px;
+      width: 100%;
     }
 
     /* ── Ambient grid ── */
@@ -3650,6 +3650,9 @@ setupHeroMockupAnimation();
   /* ── Easing helpers ── */
   function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
   function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
+  function easeInOutCubic(t) {
+    return t < 0.5 ? 4 * t * t * t : 1 - Math.pow(-2 * t + 2, 3) / 2;
+  }
 
   /* Remap value from [inLo, inHi] → clamped [0, 1] */
   function remap(val, inLo, inHi) {
@@ -3666,24 +3669,27 @@ setupHeroMockupAnimation();
     if (isMobile()) {
       /* Non-sticky: map scene's entry into viewport to 0→1.
          0 when scene bottom first enters (rect.top = vh)
-         1 when scene top has scrolled 60% up the viewport  */
-      return Math.min(Math.max((vh - rect.top) / (vh * 0.75), 0), 1);
+        1 when scene top has scrolled farther up the viewport
+        so opening lasts longer on mobile. */
+      return Math.min(Math.max((vh - rect.top) / (vh * 1.2), 0), 1);
     } else {
-      /* Sticky: progress through the tall scroll container */
+      /* Sticky desktop: use scrollY + rect for robust Safari behavior */
+      const sceneTopY = window.scrollY + rect.top;
       const travelMax = Math.max(scene.offsetHeight - vh, 1);
-      return Math.min(Math.max(-rect.top / travelMax, 0), 1);
+      const scrolled  = window.scrollY - sceneTopY;
+      return Math.min(Math.max(scrolled / travelMax, 0), 1);
     }
   }
 
   /* ── Animation phases ──────────────────────────────────────
-     Desktop  (progress 0→1 inside 380vh sticky container)
-       lid open:    0.18 – 0.68
-       screen:      0.38 – 0.72
-       caption:     0.74 – 0.94
+     Desktop  (progress 0→1 inside 160vh sticky container)
+       lid open:    0.08 – 0.55
+       screen:      0.30 – 0.72
+       caption:     0.70 – 0.95
      Mobile   (progress 0→1 as scene scrolls into view)
-       lid open:    0.05 – 0.60
-       screen:      0.25 – 0.70
-       caption:     0.62 – 0.88
+       lid open:    0.03 – 0.78
+       screen:      0.52 – 0.90
+       caption:     0.86 – 0.99
   ─────────────────────────────────────────────────────────── */
   let rafId = null;
 
@@ -3693,16 +3699,18 @@ setupHeroMockupAnimation();
     const mob  = isMobile();
 
     /* Lid rotation: -90deg (closed) → 0deg (open) */
-    const lidP  = easeOutQuart(remap(rawP, mob ? 0.05 : 0.18, mob ? 0.60 : 0.68));
+    const lidP  = mob
+      ? easeInOutCubic(remap(rawP, 0.03, 0.78))
+      : easeOutQuart(remap(rawP, 0.08, 0.55));
     lid.style.transform = `rotateX(${(-90 + lidP * 90).toFixed(2)}deg)`;
 
     /* Screen & glow opacity */
-    const screenP = easeOutCubic(remap(rawP, mob ? 0.25 : 0.38, mob ? 0.70 : 0.72));
+    const screenP = easeOutCubic(remap(rawP, mob ? 0.52 : 0.30, mob ? 0.90 : 0.72));
     screen.style.opacity = screenP.toFixed(3);
     glow.style.opacity   = (screenP * 0.75).toFixed(3);
 
     /* Caption fade in */
-    const capP = easeOutCubic(remap(rawP, mob ? 0.62 : 0.74, mob ? 0.88 : 0.94));
+    const capP = easeOutCubic(remap(rawP, mob ? 0.86 : 0.70, mob ? 0.99 : 0.95));
     caption.style.opacity   = capP.toFixed(3);
     caption.style.transform = `translateY(${((1 - capP) * 16).toFixed(1)}px)`;
     if (capP > 0.05) caption.classList.add('lp-visible');
@@ -3726,6 +3734,7 @@ setupHeroMockupAnimation();
 
   /* passive:true is required for scroll performance on iOS Safari */
   window.addEventListener('scroll', onScroll, { passive: true });
+  window.addEventListener('resize', onScroll, { passive: true });
   /* Run once immediately to set the correct initial state */
   animate();
 })();
