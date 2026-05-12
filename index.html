@@ -1979,27 +1979,6 @@
       padding-bottom: 80px;
     }
 
-    /* ── Hand SVGs ── */
-    .lp-hand {
-      position: absolute;
-      bottom: 38px;
-      width: clamp(140px, 18vw, 240px);
-      height: auto;
-      transition: none;
-      will-change: transform, opacity;
-      z-index: 3;
-      pointer-events: none;
-      filter: drop-shadow(0 -8px 28px rgba(26,110,250,.08));
-    }
-    .lp-hand-l {
-      left: calc(50% - clamp(340px, 44vw, 600px) / 2 - clamp(80px, 10vw, 130px));
-      transform-origin: bottom right;
-    }
-    .lp-hand-r {
-      right: calc(50% - clamp(340px, 44vw, 600px) / 2 - clamp(80px, 10vw, 130px));
-      transform-origin: bottom left;
-    }
-
     /* ── Laptop wrapper ── */
     .lp-laptop {
       position: relative;
@@ -2339,7 +2318,6 @@
         align-items: center;
         padding-bottom: 0;
       }
-      .lp-hand { display: none; }
       .lp-laptop { width: min(88vw, 360px); }
       .lp-lid { transform: rotateX(-14deg); }
       .lp-screen-inner { opacity: 1; }
@@ -2517,63 +2495,8 @@
     <div class="lp-orb lp-orb-l" aria-hidden="true"></div>
     <div class="lp-orb lp-orb-r" aria-hidden="true"></div>
 
-    <!-- Stage: hands + laptop -->
+    <!-- Stage: laptop -->
     <div class="lp-stage">
-
-      <!-- LEFT HAND silhouette -->
-      <svg class="lp-hand lp-hand-l" viewBox="0 0 220 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <!-- Palm -->
-        <path d="M110 200 C60 200 30 175 25 145 L18 90 C16 78 24 68 36 68 C40 68 44 70 47 73
-                 L50 50 C50 37 60 28 72 28 C84 28 94 37 94 50 L94 40
-                 C94 27 104 18 116 18 C128 18 138 27 138 40 L138 50
-                 C138 37 148 28 160 28 C172 28 182 37 182 50 L182 90
-                 C185 85 191 82 198 84 C208 87 214 97 212 108 L205 145
-                 C200 175 170 200 120 200 Z"
-              fill="url(#handGradL)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <!-- Fingers top rounding detail -->
-        <ellipse cx="72" cy="30" rx="14" ry="15" fill="url(#handGradL)"/>
-        <ellipse cx="116" cy="20" rx="14" ry="15" fill="url(#handGradL)"/>
-        <ellipse cx="160" cy="30" rx="14" ry="15" fill="url(#handGradL)"/>
-        <ellipse cx="36" cy="72" rx="13" ry="13" fill="url(#handGradL)"/>
-        <!-- Knuckle lines -->
-        <line x1="72" y1="60" x2="72" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="116" y1="55" x2="116" y2="75" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="160" y1="60" x2="160" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <!-- Wrist / arm base -->
-        <rect x="45" y="195" width="130" height="145" rx="20" fill="url(#handGradL)"/>
-        <defs>
-          <linearGradient id="handGradL" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#2a2a30"/>
-            <stop offset="100%" stop-color="#1a1a20"/>
-          </linearGradient>
-        </defs>
-      </svg>
-
-      <!-- RIGHT HAND silhouette (mirrored) -->
-      <svg class="lp-hand lp-hand-r" viewBox="0 0 220 340" fill="none" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-        <path d="M110 200 C160 200 190 175 195 145 L202 90 C204 78 196 68 184 68 C180 68 176 70 173 73
-                 L170 50 C170 37 160 28 148 28 C136 28 126 37 126 50 L126 40
-                 C126 27 116 18 104 18 C92 18 82 27 82 40 L82 50
-                 C82 37 72 28 60 28 C48 28 38 37 38 50 L38 90
-                 C35 85 29 82 22 84 C12 87 6 97 8 108 L15 145
-                 C20 175 50 200 100 200 Z"
-              fill="url(#handGradR)" stroke="rgba(255,255,255,0.06)" stroke-width="1"/>
-        <ellipse cx="148" cy="30" rx="14" ry="15" fill="url(#handGradR)"/>
-        <ellipse cx="104" cy="20" rx="14" ry="15" fill="url(#handGradR)"/>
-        <ellipse cx="60" cy="30" rx="14" ry="15" fill="url(#handGradR)"/>
-        <ellipse cx="184" cy="72" rx="13" ry="13" fill="url(#handGradR)"/>
-        <line x1="148" y1="60" x2="148" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="104" y1="55" x2="104" y2="75" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <line x1="60" y1="60" x2="60" y2="80" stroke="rgba(255,255,255,0.05)" stroke-width="1.5" stroke-linecap="round"/>
-        <rect x="45" y="195" width="130" height="145" rx="20" fill="url(#handGradR)"/>
-        <defs>
-          <linearGradient id="handGradR" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%"   stop-color="#2a2a30"/>
-            <stop offset="100%" stop-color="#1a1a20"/>
-          </linearGradient>
-        </defs>
-      </svg>
-
       <!-- LAPTOP ASSEMBLY -->
       <div class="lp-laptop" id="lpLaptop">
 
@@ -3686,8 +3609,6 @@ setupHeroMockupAnimation();
   const glow       = document.getElementById('lpGlow');
   const caption    = document.getElementById('lpCaption');
   const scrollHint = document.getElementById('lpScrollHint');
-  const handL      = document.querySelector('.lp-hand-l');
-  const handR      = document.querySelector('.lp-hand-r');
 
   if (!scene || !lid || !screen || !glow || !caption) return;
 
@@ -3701,13 +3622,10 @@ setupHeroMockupAnimation();
     return Math.min(Math.max((val - inLo) / (inHi - inLo), 0), 1);
   }
 
-  /* Animation phases (in terms of global scroll progress 0→1):
+    /* Animation phases (in terms of global scroll progress 0→1):
      0.00 – 0.10  scene enters, laptop materialises
-     0.05 – 0.18  hands slide inward from sides
-     0.15 – 0.22  hands reach lid edge (brief pause feel)
      0.20 – 0.65  lid opens (rotateX -90 → 0)
      0.35 – 0.70  screen + glow fade in as lid opens
-     0.65 – 0.85  hands retreat downward
      0.72 – 1.00  caption fades in
      0.00 – 0.30  scroll hint visible, then fades
   */
@@ -3734,22 +3652,6 @@ setupHeroMockupAnimation();
     const screenP = easeOutCubic(remap(rawP, 0.38, 0.72));
     screen.style.opacity = screenP.toFixed(3);
     glow.style.opacity   = (screenP * 0.75).toFixed(3);
-
-    /* ── Hands slide in from sides ── */
-    if (handL && handR) {
-      const handInP  = easeOutCubic(remap(rawP, 0.04, 0.22));
-      const handOutP = easeOutCubic(remap(rawP, 0.62, 0.80));
-      /* Slide in: translate from outer edge → resting position */
-      const handInX  = (1 - handInP) * 100;    /* px offset outward */
-      const handOutY = handOutP * 120;           /* px drop when retreating */
-      const handOpacity = Math.max(0, Math.min(1,
-        handInP - handOutP           /* fade in with slide, fade out when retreating */
-      ));
-      handL.style.transform = `translateX(-${handInX.toFixed(1)}px) translateY(${handOutY.toFixed(1)}px)`;
-      handR.style.transform = `translateX(${handInX.toFixed(1)}px) translateY(${handOutY.toFixed(1)}px)`;
-      handL.style.opacity   = handOpacity.toFixed(3);
-      handR.style.opacity   = handOpacity.toFixed(3);
-    }
 
     /* ── Caption fade in ── */
     const capP = easeOutCubic(remap(rawP, 0.74, 0.94));
