@@ -3948,7 +3948,7 @@ setupHeroMockupAnimation();
     }
 
     /* ── Caption: fades out smoothly before laptop fully closes ── */
-    const capFadeP = easeInOutCubic(remap(rawP, mob ? 0.35 : 0.40, mob ? 0.85 : 0.90));
+    const capFadeP = easeInOutCubic(remap(rawP, mob ? 0.45 : 0.82, mob ? 0.90 : 1.0));
     caption.style.opacity   = (1 - capFadeP).toFixed(3);
     caption.style.transform = `translateY(${(-30 * capFadeP).toFixed(2)}px)`;
     caption.style.pointerEvents = capFadeP > 0.95 ? 'none' : 'auto';
