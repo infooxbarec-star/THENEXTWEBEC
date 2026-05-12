@@ -1920,7 +1920,7 @@
     /* ── Scene container (sets scroll height) ── */
     .lp-scene {
       position: relative;
-      height: 160vh; /* scroll travel = 60vh (160 - 100vh sticky) */
+      height: 110vh; /* scroll travel = 10vh (110 - 100vh sticky) */
       max-width: 100%;
       width: 100%;
       background: #060b14; /* prevent white flash when sticky detaches */
@@ -3641,8 +3641,8 @@ setupHeroMockupAnimation();
     const rect = scene.getBoundingClientRect();
     const vh   = window.innerHeight;
     if (isMobile()) {
-      /* Non-sticky: 0 when scene top enters viewport, 1 after full scene height */
-      return Math.min(Math.max(-rect.top / (scene.offsetHeight - vh * 0.6), 0), 1);
+      /* Non-sticky: smoother curve for mobile — enters at scene top, completes beyond bottom */
+      return Math.min(Math.max(1 - (rect.top / vh), 0), 1);
     }
     /* Desktop sticky: scrolled distance within scene */
     const sceneTopY = window.scrollY + rect.top;
