@@ -10,6 +10,13 @@
 
     gtag('config', 'G-EQCRPX8RQS');
   </script>
+  <script type="text/javascript">
+      (function(c,l,a,r,i,t,y){
+          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, "clarity", "script", "wq1vez3c5m");
+  </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>NextWebEC — Diseño Web Profesional</title>
@@ -1998,17 +2005,19 @@
     /* ── Scene container (sets scroll height) ── */
     .lp-scene {
       position: relative;
-      height: 100vh; /* minimal scroll travel — scene = viewport height */
+      min-height: 100vh;
+      height: auto;
       max-width: 100%;
       width: 100%;
-      background: #060b14; /* prevent white flash when sticky detaches */
+      background: #060b14;
     }
 
-    /* ── Sticky viewport ── */
+    /* ── Scene viewport (static on desktop) ── */
     .lp-sticky {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+      position: relative;
+      top: auto;
+      min-height: 100vh;
+      height: auto;
       overflow: hidden;
       background: #060b14;
       display: flex;
@@ -3891,94 +3900,36 @@ setupHeroMockupAnimation();
 })();
 
 /* ════════════════════════════════════════════════════════════
-   LAPTOP CLOSING ANIMATION — JavaScript
-   REVERSED: laptop starts fully OPEN, closes as user scrolls.
-   Desktop: sticky-pinned (60vh travel). Mobile: scroll-triggered.
-   progress 0 = open  |  progress 1 = closed + faded
+   LAPTOP SECTION — STATIC STATE (no scroll animation)
+   Keeps mockup and caption stable to avoid abrupt/frozen behavior.
    ════════════════════════════════════════════════════════════ */
 (function () {
-  const scene      = document.getElementById('laptop-scene');
   const laptop     = document.getElementById('lpLaptop');
   const lid        = document.getElementById('lpLid');
   const glow       = document.getElementById('lpGlow');
   const caption    = document.getElementById('lpCaption');
   const scrollHint = document.getElementById('lpScrollHint');
 
-  if (!scene || !lid || !glow || !caption) return;
-
-  /* ── Easing ── */
-  function easeInOutCubic(t) {
-    return t < 0.5 ? 4*t*t*t : 1 - Math.pow(-2*t+2,3)/2;
+  if (lid) {
+    lid.style.transform = 'rotateX(0deg)';
   }
-  function easeInCubic(t)  { return t * t * t; }
-  function easeOutCubic(t) { return 1 - Math.pow(1-t,3); }
-  function remap(v, lo, hi) { return Math.min(Math.max((v-lo)/(hi-lo),0),1); }
-
-  function isMobile() { return window.innerWidth <= 768; }
-
-  /* ── Progress: 0 when laptop first visible, 1 when animation done ── */
-  function getProgress() {
-    const rect = scene.getBoundingClientRect();
-    const vh   = window.innerHeight;
-    if (isMobile()) {
-      /* Non-sticky mobile: start near 0 on section entry, then progress smoothly */
-      const progressed = vh - rect.top;
-      const start = vh * 0.92;
-      const end = vh + (scene.offsetHeight * 0.55);
-      return Math.min(Math.max((progressed - start) / (end - start), 0), 1);
-    }
-    /* Desktop sticky: scrolled distance within scene */
-    const sceneTopY = window.scrollY + rect.top;
-    const travelMax = Math.max(scene.offsetHeight - vh, 1);
-    return Math.min(Math.max((window.scrollY - sceneTopY) / travelMax, 0), 1);
+  if (glow) {
+    glow.style.opacity = '0.45';
   }
-
-  let rafId = null;
-
-  function animate() {
-    rafId = null;
-    const rawP = getProgress();
-    const mob  = isMobile();
-
-    /* ── Lid: 0deg (open) → -76deg (nearly closed) ── */
-    /* Slow start, smooth mid-close, gentle ease-out at end */
-    const lidCloseP = easeInOutCubic(remap(rawP, mob ? 0.05 : 0.02, mob ? 0.88 : 0.90));
-    lid.style.transform = `rotateX(${(-76 * lidCloseP).toFixed(2)}deg)`;
-
-    /* ── Glow: full → off as lid closes over the screen ── */
-    const glowP = 1 - easeInOutCubic(remap(rawP, mob ? 0.10 : 0.05, mob ? 0.82 : 0.85));
-    glow.style.opacity = (glowP * 0.5).toFixed(3);
-
-    /* ── Laptop: subtle scale-down + fade at the very end ── */
-    if (laptop) {
-      const endP  = easeInOutCubic(remap(rawP, mob ? 0.55 : 0.60, 1.0));
-      laptop.style.transform = `scale(${(1 - endP * 0.09).toFixed(4)})`;
-      laptop.style.opacity   = (1 - endP).toFixed(3);
-    }
-
-    /* ── Caption: fades out smoothly before laptop fully closes ── */
-    const capFadeP = easeInOutCubic(remap(rawP, mob ? 0.45 : 0.82, mob ? 0.90 : 1.0));
-    caption.style.opacity   = (1 - capFadeP).toFixed(3);
-    caption.style.transform = `translateY(${(-30 * capFadeP).toFixed(2)}px)`;
-    caption.style.pointerEvents = capFadeP > 0.95 ? 'none' : 'auto';
-    caption.classList.toggle('lp-visible', capFadeP < 0.95);
-
-    /* ── Scroll hint: fades immediately on first scroll ── */
-    if (scrollHint && !mob) {
-      scrollHint.style.opacity = (1 - easeOutCubic(remap(rawP, 0.0, 0.12))).toFixed(3);
-    }
+  if (laptop) {
+    laptop.style.transform = 'scale(1)';
+    laptop.style.opacity = '1';
   }
-
-  function onScroll() {
-    if (rafId !== null) return;
-    const rect = scene.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight * 1.5) return;
-    rafId = requestAnimationFrame(animate);
+  if (caption) {
+    caption.style.opacity = '1';
+    caption.style.transform = 'translateY(0px)';
+    caption.style.pointerEvents = 'auto';
+    caption.classList.add('lp-visible');
   }
-
-  window.addEventListener('scroll', onScroll, { passive: true });
-  window.addEventListener('resize', onScroll, { passive: true });
-  animate(); /* set correct state on load */
+  if (scrollHint) {
+    scrollHint.style.opacity = '0';
+    scrollHint.style.display = 'none';
+  }
 })();
 </script>
 </body>
