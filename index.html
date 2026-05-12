@@ -9,6 +9,7 @@
     gtag('js', new Date());
 
     gtag('config', 'G-EQCRPX8RQS');
+    gtag('config', 'G-9DK5S7Y0S1');
   </script>
   <script type="text/javascript">
       (function(c,l,a,r,i,t,y){
@@ -2764,8 +2765,12 @@
                     if (!wrap) return;
                     function scaleVet() {
                       var parent = wrap.parentElement;
-                      var s = Math.min(parent.offsetWidth / 900, parent.offsetHeight / 580);
+                      var s = Math.max(parent.offsetWidth / 900, parent.offsetHeight / 580);
+                      wrap.style.position = 'absolute';
+                      wrap.style.transformOrigin = 'top left';
                       wrap.style.transform = 'scale(' + s + ')';
+                      wrap.style.left = Math.round((parent.offsetWidth  - 900 * s) / 2) + 'px';
+                      wrap.style.top  = Math.round((parent.offsetHeight - 580 * s) / 2) + 'px';
                     }
                     scaleVet();
                     window.addEventListener('resize', scaleVet);
