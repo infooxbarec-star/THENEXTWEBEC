@@ -45,7 +45,7 @@
       --r-lg:  22px;
     }
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; }
+    html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: 'Inter', sans-serif;
       background: var(--bg);
@@ -1921,6 +1921,9 @@
     .lp-scene {
       position: relative;
       height: 380vh; /* scroll distance = pinned travel */
+      overflow-x: hidden;
+      max-width: 100%;
+      width: 100%;
     }
 
     /* ── Sticky viewport ── */
@@ -1931,9 +1934,11 @@
       overflow: hidden;
       background: #060b14;
       display: flex;
+      flex-direction: column;
       align-items: center;
       justify-content: center;
       perspective: 1400px;
+      padding: 64px 24px;
     }
 
     /* ── Ambient grid ── */
@@ -1972,11 +1977,12 @@
       position: relative;
       z-index: 1;
       display: flex;
-      align-items: flex-end;
+      flex-direction: column;
+      align-items: center;
       justify-content: center;
       width: 100%;
-      height: 100%;
-      padding-bottom: 80px;
+      height: auto;
+      padding-bottom: 0;
     }
 
     /* ── Laptop wrapper ── */
@@ -2222,10 +2228,8 @@
 
     /* ── Caption (headline + CTA) ── */
     .lp-caption {
-      position: absolute;
-      bottom: 38px;
-      left: 0;
-      right: 0;
+      position: relative;
+      width: 100%;
       text-align: center;
       z-index: 10;
       opacity: 0;
@@ -2233,12 +2237,14 @@
       will-change: opacity, transform;
       pointer-events: none;
       transition: none;
+      margin-top: 48px;
+      max-width: min(920px, 100%);
     }
     .lp-caption.lp-visible {
       pointer-events: auto;
     }
     .lp-caption-title {
-      font-size: clamp(18px, 2.6vw, 34px);
+      font-size: clamp(32px, 4vw, 56px);
       font-weight: 700;
       color: #fff;
       letter-spacing: -0.5px;
@@ -2304,35 +2310,68 @@
       60%     { transform: translateY(5px); opacity: .3; }
     }
 
-    /* ── Mobile: simplified, no 3D pinning ── */
+    /* ── Mobile: scroll-triggered animation, no sticky pinning ── */
     @media (max-width: 768px) {
-      .lp-scene { height: auto; }
+      .lp-scene {
+        height: auto;
+        overflow-x: hidden;
+      }
       .lp-sticky {
         position: relative;
         height: auto;
-        min-height: 88vh;
-        padding: 80px 20px 60px;
+        min-height: auto;
+        overflow: hidden;
+        overflow-x: hidden;
+        padding: 72px 16px 64px;
+        perspective: none;
       }
       .lp-stage {
         flex-direction: column;
         align-items: center;
+        justify-content: flex-start;
+        width: 100%;
+        max-width: 100%;
+        overflow: hidden;
         padding-bottom: 0;
       }
-      .lp-laptop { width: min(88vw, 360px); }
-      .lp-lid { transform: rotateX(-14deg); }
-      .lp-screen-inner { opacity: 1; }
-      .lp-screen-glow  { opacity: .4; }
+      .lp-laptop {
+        width: min(92vw, 430px);
+        max-width: 92vw;
+        transform-origin: center bottom;
+        transform-style: preserve-3d;
+      }
+      /* lid starts closed — JS will animate it */
+      .lp-lid { transform: rotateX(-90deg); }
+      /* screen and caption start hidden — JS will drive opacity */
+      .lp-screen-inner { opacity: 0; }
+      .lp-screen-glow  { opacity: 0; }
       .lp-caption {
-        position: relative;
-        bottom: auto;
-        opacity: 1;
-        transform: none;
-        pointer-events: auto;
+        opacity: 0;
+        transform: translateY(18px);
         margin-top: 28px;
-        padding: 0 8px;
+        padding: 0;
+        width: 100%;
+        max-width: 100%;
+      }
+      .lp-caption-title {
+        font-size: clamp(26px, 8vw, 38px);
+        line-height: 1.05;
+        text-align: center;
+        max-width: 90vw;
+        margin-left: auto;
+        margin-right: auto;
+      }
+      .lp-caption-cta {
+        width: auto;
+        max-width: 90vw;
+        white-space: normal;
+        text-align: center;
+        justify-content: center;
       }
       .lp-scroll-hint { display: none; }
-      .lp-caption-title { font-size: clamp(17px, 5vw, 24px); }
+      /* shrink decorative orbs so they don't overflow */
+      .lp-orb-l { width: 260px; height: 260px; left: -60px; }
+      .lp-orb-r { width: 220px; height: 220px; right: -40px; }
     }
   </style>
 </head>
@@ -2561,16 +2600,16 @@
 
       </div><!-- /lp-laptop -->
 
-    </div><!-- /lp-stage -->
+      <!-- Headline + CTA (fades in at end) -->
+      <div class="lp-caption" id="lpCaption">
+        <h2 class="lp-caption-title">Tu web cobra vida cuando está bien construida.</h2>
+        <a href="#proceso" class="lp-caption-cta btn btn-primary">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          Ver cómo trabajamos
+        </a>
+      </div>
 
-    <!-- Headline + CTA (fades in at end) -->
-    <div class="lp-caption" id="lpCaption">
-      <h2 class="lp-caption-title">Tu web cobra vida cuando está bien construida.</h2>
-      <a href="#proceso" class="lp-caption-cta btn btn-primary">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-        Ver cómo trabajamos
-      </a>
-    </div>
+    </div><!-- /lp-stage -->
 
     <!-- Scroll indicator -->
     <div class="lp-scroll-hint" id="lpScrollHint">
@@ -3595,14 +3634,10 @@ setupHeroMockupAnimation();
 
 /* ════════════════════════════════════════════════════════════
    LAPTOP OPENING ANIMATION — JavaScript
-   Scroll-driven, pinned via CSS `position: sticky`.
-   Reads scroll progress within the tall .lp-scene container
-   and maps it to animation phases.
+   Unified scroll driver for desktop (sticky pinned) and
+   mobile (scroll-triggered, no pinning). Works on iOS Safari.
    ════════════════════════════════════════════════════════════ */
 (function () {
-  /* — Skip on mobile where we show a static version — */
-  if (window.matchMedia('(max-width: 768px)').matches) return;
-
   const scene      = document.getElementById('laptop-scene');
   const lid        = document.getElementById('lpLid');
   const screen     = document.getElementById('lpScreen');
@@ -3612,71 +3647,86 @@ setupHeroMockupAnimation();
 
   if (!scene || !lid || !screen || !glow || !caption) return;
 
-  /* Easing helpers */
-  function easeOutCubic(t)  { return 1 - Math.pow(1 - t, 3); }
-  function easeOutQuart(t)  { return 1 - Math.pow(1 - t, 4); }
-  function easeInOutQuad(t) { return t < .5 ? 2*t*t : 1 - Math.pow(-2*t+2,2)/2; }
+  /* ── Easing helpers ── */
+  function easeOutCubic(t) { return 1 - Math.pow(1 - t, 3); }
+  function easeOutQuart(t) { return 1 - Math.pow(1 - t, 4); }
 
-  /* Remap [inLo, inHi] → [0, 1], clamped */
+  /* Remap value from [inLo, inHi] → clamped [0, 1] */
   function remap(val, inLo, inHi) {
     return Math.min(Math.max((val - inLo) / (inHi - inLo), 0), 1);
   }
 
-    /* Animation phases (in terms of global scroll progress 0→1):
-     0.00 – 0.10  scene enters, laptop materialises
-     0.20 – 0.65  lid opens (rotateX -90 → 0)
-     0.35 – 0.70  screen + glow fade in as lid opens
-     0.72 – 1.00  caption fades in
-     0.00 – 0.30  scroll hint visible, then fades
-  */
+  function isMobile() { return window.innerWidth <= 768; }
 
+  /* ── Progress calculation ── */
+  function getProgress() {
+    const rect = scene.getBoundingClientRect();
+    const vh   = window.innerHeight;
+
+    if (isMobile()) {
+      /* Non-sticky: map scene's entry into viewport to 0→1.
+         0 when scene bottom first enters (rect.top = vh)
+         1 when scene top has scrolled 60% up the viewport  */
+      return Math.min(Math.max((vh - rect.top) / (vh * 0.75), 0), 1);
+    } else {
+      /* Sticky: progress through the tall scroll container */
+      const travelMax = Math.max(scene.offsetHeight - vh, 1);
+      return Math.min(Math.max(-rect.top / travelMax, 0), 1);
+    }
+  }
+
+  /* ── Animation phases ──────────────────────────────────────
+     Desktop  (progress 0→1 inside 380vh sticky container)
+       lid open:    0.18 – 0.68
+       screen:      0.38 – 0.72
+       caption:     0.74 – 0.94
+     Mobile   (progress 0→1 as scene scrolls into view)
+       lid open:    0.05 – 0.60
+       screen:      0.25 – 0.70
+       caption:     0.62 – 0.88
+  ─────────────────────────────────────────────────────────── */
   let rafId = null;
 
   function animate() {
     rafId = null;
-    const rect    = scene.getBoundingClientRect();
-    const sceneH  = scene.offsetHeight;
-    const vh      = window.innerHeight;
-    /* scrolled = how far the scene has been scrolled past its top */
-    const scrolled = -rect.top;
-    /* progress = 0 when scene top hits viewport top; 1 when scene bottom hits viewport bottom */
-    const travelMax = sceneH - vh;
-    const rawP      = Math.min(Math.max(scrolled / travelMax, 0), 1);
+    const rawP = getProgress();
+    const mob  = isMobile();
 
-    /* ── Lid rotation: -90deg (closed) → 0deg (fully open) ── */
-    const lidP    = easeOutQuart(remap(rawP, 0.18, 0.68));
-    const lidDeg  = -90 + lidP * 90;
-    lid.style.transform = `rotateX(${lidDeg.toFixed(2)}deg)`;
+    /* Lid rotation: -90deg (closed) → 0deg (open) */
+    const lidP  = easeOutQuart(remap(rawP, mob ? 0.05 : 0.18, mob ? 0.60 : 0.68));
+    lid.style.transform = `rotateX(${(-90 + lidP * 90).toFixed(2)}deg)`;
 
-    /* ── Screen & glow opacity ── */
-    const screenP = easeOutCubic(remap(rawP, 0.38, 0.72));
+    /* Screen & glow opacity */
+    const screenP = easeOutCubic(remap(rawP, mob ? 0.25 : 0.38, mob ? 0.70 : 0.72));
     screen.style.opacity = screenP.toFixed(3);
     glow.style.opacity   = (screenP * 0.75).toFixed(3);
 
-    /* ── Caption fade in ── */
-    const capP = easeOutCubic(remap(rawP, 0.74, 0.94));
+    /* Caption fade in */
+    const capP = easeOutCubic(remap(rawP, mob ? 0.62 : 0.74, mob ? 0.88 : 0.94));
     caption.style.opacity   = capP.toFixed(3);
     caption.style.transform = `translateY(${((1 - capP) * 16).toFixed(1)}px)`;
     if (capP > 0.05) caption.classList.add('lp-visible');
-    else caption.classList.remove('lp-visible');
+    else             caption.classList.remove('lp-visible');
 
-    /* ── Scroll hint fade out ── */
+    /* Scroll hint fade out (desktop only) */
     if (scrollHint) {
-      const hintP = 1 - easeOutCubic(remap(rawP, 0.0, 0.18));
-      scrollHint.style.opacity = hintP.toFixed(3);
+      scrollHint.style.opacity = mob
+        ? '0'
+        : (1 - easeOutCubic(remap(rawP, 0.0, 0.18))).toFixed(3);
     }
   }
 
   function onScroll() {
     if (rafId !== null) return;
-    /* Only animate while scene is near the viewport */
     const rect = scene.getBoundingClientRect();
-    if (rect.bottom < 0 || rect.top > window.innerHeight * 1.2) return;
+    /* Skip frames when scene is far outside viewport */
+    if (rect.bottom < 0 || rect.top > window.innerHeight * 1.5) return;
     rafId = requestAnimationFrame(animate);
   }
 
+  /* passive:true is required for scroll performance on iOS Safari */
   window.addEventListener('scroll', onScroll, { passive: true });
-  /* Run once on load to set initial state */
+  /* Run once immediately to set the correct initial state */
   animate();
 })();
 </script>
