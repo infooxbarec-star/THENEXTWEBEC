@@ -3681,13 +3681,11 @@ setupHeroMockupAnimation();
   }
 
   /* ── Animation phases ──────────────────────────────────────
-     Desktop  (progress 0→1 inside 160vh sticky container)
-       lid open:    0.04 – 0.36
-       screen:      0.18 – 0.46
-       caption:     0.42 – 0.70
+     Desktop  (progress 0→1 inside sticky container)
+       lid open:   -0.20 – 0.02 (nearly fully open on entry)
+       caption:     0.02 – 0.22
      Mobile   (progress 0→1 as scene scrolls into view)
        lid open:    0.03 – 0.78
-       screen:      0.52 – 0.90
        caption:     0.86 – 0.99
   ─────────────────────────────────────────────────────────── */
   let rafId = null;
@@ -3700,14 +3698,14 @@ setupHeroMockupAnimation();
     /* Lid rotation: -90deg (closed) → 0deg (open) */
     const lidP  = mob
       ? easeInOutCubic(remap(rawP, 0.03, 0.78))
-      : easeOutQuart(remap(rawP, 0.02, 0.22));
+      : easeOutQuart(remap(rawP, -0.20, 0.02));
     lid.style.transform = `rotateX(${(-90 + lidP * 90).toFixed(2)}deg)`;
 
     /* Glow opacity — tied to lid open progress */
     glow.style.opacity = (lidP * 0.55).toFixed(3);
 
     /* Caption fade in */
-    const capP = easeOutCubic(remap(rawP, mob ? 0.86 : 0.28, mob ? 0.99 : 0.52));
+    const capP = easeOutCubic(remap(rawP, mob ? 0.86 : 0.02, mob ? 0.99 : 0.22));
     caption.style.opacity   = capP.toFixed(3);
     caption.style.transform = `translateY(${((1 - capP) * 16).toFixed(1)}px)`;
     if (capP > 0.05) caption.classList.add('lp-visible');
