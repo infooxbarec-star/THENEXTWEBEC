@@ -2479,8 +2479,8 @@
       pointer-events: none;
       border-radius: 50%;
     }
-    .analytics-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 60px; align-items: center; position: relative; z-index: 2; }
-    .analytics-left { max-width: 520px; }
+    .analytics-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 60px; align-items: center; position: relative; z-index: 2; }
+    .analytics-left { max-width: none; min-width: 0; }
     .analytics-eyebrow {
       font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
       color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
@@ -2511,7 +2511,6 @@
       border-radius: 10px; display: flex; align-items: center; justify-content: center;
     }
     .analytics-feature-icon svg { width: 24px; height: 24px; stroke: var(--accent); }
-    .analytics-feature-body {}
     .analytics-feature-title {
       font-size: 15px; font-weight: 700; color: var(--white);
       margin-bottom: 6px; letter-spacing: -0.2px;
@@ -2519,63 +2518,29 @@
     .analytics-feature-desc {
       font-size: 14px; color: rgba(255, 255, 255, 0.7); line-height: 1.55;
     }
-    .analytics-right { position: relative; display: flex; justify-content: center; align-items: center; }
+    .analytics-right { position: relative; display: flex; justify-content: flex-end; align-items: center; min-width: 0; }
     .analytics-mockup {
-      width: 100%; max-width: 420px; aspect-ratio: 1;
-      background: rgba(255, 255, 255, 0.05); border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: var(--r-lg); padding: 24px; overflow: hidden;
-      display: flex; flex-direction: column; gap: 16px;
+      width: 100%; max-width: 520px;
+      display: block;
+      margin-left: auto;
     }
-    .analytics-mockup-header {
-      display: flex; gap: 8px; align-items: center; margin-bottom: 4px;
+    .analytics-mockup-image {
+      width: 100%; height: auto; display: block;
+      border-radius: var(--r-lg);
+      box-shadow: 0 28px 60px rgba(0, 0, 0, 0.28);
     }
-    .analytics-mockup-dot {
-      width: 8px; height: 8px; border-radius: 50%; background: rgba(255, 255, 255, 0.3);
-    }
-    .analytics-mockup-dot:nth-child(2) { background: var(--accent); }
-    .analytics-mockup-title {
-      font-size: 13px; font-weight: 700; color: rgba(255, 255, 255, 0.8);
-      margin-bottom: 14px; letter-spacing: -0.2px;
-    }
-    .analytics-mockup-kpis {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 16px;
-    }
-    .analytics-mockup-kpi {
-      background: rgba(255, 255, 255, 0.03); border-radius: 8px; padding: 12px 14px;
-    }
-    .analytics-mockup-kpi-label {
-      font-size: 11px; color: rgba(255, 255, 255, 0.55); margin-bottom: 6px; text-transform: uppercase; letter-spacing: 0.4px;
-    }
-    .analytics-mockup-kpi-value {
-      font-size: 18px; font-weight: 700; color: var(--accent); line-height: 1;
-    }
-    .analytics-mockup-chart {
-      height: 80px; background: rgba(255, 255, 255, 0.02); border-radius: 8px;
-      display: flex; align-items: flex-end; justify-content: space-around; padding: 8px;
-      gap: 4px;
-    }
-    .analytics-mockup-bar {
-      width: 100%; max-width: 8px; background: linear-gradient(180deg, var(--accent) 0%, rgba(26, 110, 250, 0.5) 100%);
-      border-radius: 2px; min-height: 4px;
-    }
-    .analytics-mockup-bar:nth-child(1) { height: 35%; }
-    .analytics-mockup-bar:nth-child(2) { height: 60%; }
-    .analytics-mockup-bar:nth-child(3) { height: 48%; }
-    .analytics-mockup-bar:nth-child(4) { height: 72%; }
-    .analytics-mockup-bar:nth-child(5) { height: 55%; }
-    .analytics-mockup-bar:nth-child(6) { height: 68%; }
-    .analytics-mockup-footer {
-      font-size: 11px; color: rgba(255, 255, 255, 0.55); text-align: center; margin-top: auto; padding-top: 12px; border-top: 1px solid rgba(255, 255, 255, 0.08);
+    @media (min-width: 1025px) {
+      .analytics-inner { grid-template-columns: minmax(0, 1fr) minmax(420px, 520px); gap: 48px; }
     }
     @media (max-width: 1024px) {
       .analytics-inner { grid-template-columns: 1fr; gap: 40px; }
-      .analytics-right { margin-top: 20px; }
+      .analytics-right { margin-top: 20px; justify-content: center; }
     }
     @media (max-width: 640px) {
       .analytics-title { font-size: 28px; }
       .analytics-subtitle { font-size: 15px; }
       .analytics-feature { padding: 16px; gap: 12px; }
-      .analytics-mockup { max-width: 100%; padding: 16px; }
+      .analytics-mockup { max-width: 100%; }
     }
   </style>
 
@@ -2666,6 +2631,7 @@
       <li><a class="nav-main-link" href="#inicio" data-key="nav_home">Inicio</a></li>
       <li><a class="nav-main-link" href="#beneficios" data-key="nav_benefits">Beneficios</a></li>
       <li><a class="nav-main-link" href="#cambio" data-key="nav_results">Resultados</a></li>
+      <li><a class="nav-main-link" href="#analytics" data-key="nav_analytics">Analítica</a></li>
       <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
       <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
     </ul>
@@ -2686,6 +2652,7 @@
   <a class="mobile-nav-link" href="#inicio" onclick="toggleMenu()" data-key="nav_home">Inicio</a>
   <a class="mobile-nav-link" href="#beneficios" onclick="toggleMenu()" data-key="nav_benefits">Beneficios</a>
   <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
+  <a class="mobile-nav-link" href="#analytics" onclick="toggleMenu()" data-key="nav_analytics">Analítica</a>
   <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
   <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
   <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%2C%20quisiera%20m%C3%A1s%20informaci%C3%B3n" target="_blank" rel="noopener noreferrer" data-key="nav_cta">Mejorar mi web</a>
@@ -3364,39 +3331,12 @@
       <!-- Right Column: Mockup -->
       <div class="analytics-right">
         <div class="analytics-mockup">
-          <div class="analytics-mockup-header">
-            <div class="analytics-mockup-dot"></div>
-            <div class="analytics-mockup-dot"></div>
-            <div class="analytics-mockup-dot"></div>
-          </div>
-          <div class="analytics-mockup-title" data-key="analytics_mockup_title">Resumen general</div>
-          <div class="analytics-mockup-kpis">
-            <div class="analytics-mockup-kpi">
-              <div class="analytics-mockup-kpi-label" data-key="analytics_kpi1_label">Usuarios</div>
-              <div class="analytics-mockup-kpi-value">28.6k</div>
-            </div>
-            <div class="analytics-mockup-kpi">
-              <div class="analytics-mockup-kpi-label" data-key="analytics_kpi2_label">Sesiones</div>
-              <div class="analytics-mockup-kpi-value">42.7k</div>
-            </div>
-            <div class="analytics-mockup-kpi">
-              <div class="analytics-mockup-kpi-label" data-key="analytics_kpi3_label">Conversiones</div>
-              <div class="analytics-mockup-kpi-value">3.2k</div>
-            </div>
-            <div class="analytics-mockup-kpi">
-              <div class="analytics-mockup-kpi-label" data-key="analytics_kpi4_label">Tasa</div>
-              <div class="analytics-mockup-kpi-value">7.5%</div>
-            </div>
-          </div>
-          <div class="analytics-mockup-chart">
-            <div class="analytics-mockup-bar"></div>
-            <div class="analytics-mockup-bar"></div>
-            <div class="analytics-mockup-bar"></div>
-            <div class="analytics-mockup-bar"></div>
-            <div class="analytics-mockup-bar"></div>
-            <div class="analytics-mockup-bar"></div>
-          </div>
-          <div class="analytics-mockup-footer" data-key="analytics_mockup_footer">Últimos 30 días</div>
+          <img
+            class="analytics-mockup-image"
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2012%2C%202026%20at%2003_38_55%20PM.png"
+            alt="Vista de analitica"
+            loading="lazy"
+          >
         </div>
       </div>
     </div>
