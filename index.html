@@ -2479,8 +2479,19 @@
       pointer-events: none;
       border-radius: 50%;
     }
-    .analytics-inner { display: grid; grid-template-columns: minmax(0, 1.08fr) minmax(0, 0.92fr); gap: 60px; align-items: start; position: relative; z-index: 2; }
-    .analytics-left { max-width: none; min-width: 0; }
+    .analytics-inner {
+      display: grid;
+      grid-template-columns: 1fr;
+      grid-template-areas:
+        'copy'
+        'features'
+        'image';
+      gap: 40px;
+      align-items: start;
+      position: relative;
+      z-index: 2;
+    }
+    .analytics-copy { grid-area: copy; max-width: 760px; min-width: 0; }
     .analytics-eyebrow {
       font-size: 13px; font-weight: 600; letter-spacing: 0.8px; text-transform: uppercase;
       color: var(--accent); margin-bottom: 18px; display: flex; align-items: center; gap: 8px;
@@ -2494,7 +2505,7 @@
       font-size: 16px; line-height: 1.7; color: rgba(255, 255, 255, 0.85);
       margin-bottom: 48px; max-width: 100%;
     }
-    .analytics-features { display: flex; flex-direction: column; gap: 20px; }
+    .analytics-features { grid-area: features; display: flex; flex-direction: column; gap: 20px; }
     .analytics-feature {
       display: flex; gap: 18px; align-items: flex-start;
       padding: 20px; border-radius: var(--r-md);
@@ -2518,7 +2529,14 @@
     .analytics-feature-desc {
       font-size: 14px; color: rgba(255, 255, 255, 0.7); line-height: 1.55;
     }
-    .analytics-right { position: relative; display: flex; justify-content: flex-end; align-items: flex-start; min-width: 0; }
+    .analytics-right {
+      grid-area: image;
+      position: relative;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-width: 0;
+    }
     .analytics-mockup {
       width: 100%; max-width: 480px;
       display: block;
@@ -2531,22 +2549,18 @@
     }
     @media (min-width: 901px) {
       .analytics-inner {
-        display: flex;
-        align-items: flex-start;
-        justify-content: space-between;
-        gap: 40px;
+        grid-template-columns: minmax(0, 1fr) 480px;
+        grid-template-areas:
+          'copy copy'
+          'features image';
+        column-gap: 40px;
+        row-gap: 40px;
+        align-items: center;
       }
-      .analytics-left {
-        flex: 1 1 0;
-      }
-      .analytics-right {
-        flex: 0 0 480px;
-        padding-top: 458px;
-      }
+      .analytics-right { justify-content: flex-end; }
     }
     @media (max-width: 900px) {
-      .analytics-inner { display: grid; grid-template-columns: 1fr; gap: 40px; }
-      .analytics-right { margin-top: 20px; justify-content: center; }
+      .analytics-right { margin-top: 0; justify-content: center; }
     }
     @media (max-width: 640px) {
       .analytics-title { font-size: 28px; }
@@ -3292,51 +3306,50 @@
 <section class="section analytics-section" id="analytics">
   <div class="container">
     <div class="analytics-inner">
-      <!-- Left Column -->
-      <div class="analytics-left">
+      <div class="analytics-copy">
         <span class="analytics-eyebrow">Medición & Insights</span>
         <h2 class="analytics-title" data-key="analytics_title">Tu web no solo se ve mejor. También empieza a darte datos.</h2>
         <p class="analytics-subtitle" data-key="analytics_subtitle">
           Integramos Google Analytics en cada web que creamos o modernizamos. Medición en tiempo real, reportes claros y recomendaciones accionables para que entiendas qué está pasando en tu página y puedas tomar mejores decisiones comerciales.
         </p>
-        <div class="analytics-features">
-          <div class="analytics-feature">
-            <div class="analytics-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="12" width="4" height="9" rx="1"/>
-                <rect x="10" y="7" width="4" height="14" rx="1"/>
-                <rect x="17" y="3" width="4" height="18" rx="1"/>
-              </svg>
-            </div>
-            <div class="analytics-feature-body">
-              <p class="analytics-feature-title" data-key="analytics_f1_title">Visibilidad en tiempo real</p>
-              <p class="analytics-feature-desc" data-key="analytics_f1_desc">Mide visitas, fuentes de tráfico, páginas más vistas y comportamiento de usuarios.</p>
-            </div>
+      </div>
+      <div class="analytics-features">
+        <div class="analytics-feature">
+          <div class="analytics-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="12" width="4" height="9" rx="1"/>
+              <rect x="10" y="7" width="4" height="14" rx="1"/>
+              <rect x="17" y="3" width="4" height="18" rx="1"/>
+            </svg>
           </div>
-          <div class="analytics-feature">
-            <div class="analytics-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
-              </svg>
-            </div>
-            <div class="analytics-feature-body">
-              <p class="analytics-feature-title" data-key="analytics_f2_title">Insights estratégicos</p>
-              <p class="analytics-feature-desc" data-key="analytics_f2_desc">Convertimos los datos en acciones concretas para mejorar rendimiento y generar más oportunidades.</p>
-            </div>
+          <div class="analytics-feature-body">
+            <p class="analytics-feature-title" data-key="analytics_f1_title">Visibilidad en tiempo real</p>
+            <p class="analytics-feature-desc" data-key="analytics_f1_desc">Mide visitas, fuentes de tráfico, páginas más vistas y comportamiento de usuarios.</p>
           </div>
-          <div class="analytics-feature">
-            <div class="analytics-feature-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
-                <polyline points="14 2 14 8 20 8"/>
-                <line x1="8" y1="13" x2="16" y2="13"/>
-                <line x1="8" y1="17" x2="16" y2="17"/>
-              </svg>
-            </div>
-            <div class="analytics-feature-body">
-              <p class="analytics-feature-title" data-key="analytics_f3_title">Reportes mensuales</p>
-              <p class="analytics-feature-desc" data-key="analytics_f3_desc">Recibe reportes fáciles de entender con hallazgos, métricas clave y recomendaciones.</p>
-            </div>
+        </div>
+        <div class="analytics-feature">
+          <div class="analytics-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>
+            </svg>
+          </div>
+          <div class="analytics-feature-body">
+            <p class="analytics-feature-title" data-key="analytics_f2_title">Insights estratégicos</p>
+            <p class="analytics-feature-desc" data-key="analytics_f2_desc">Convertimos los datos en acciones concretas para mejorar rendimiento y generar más oportunidades.</p>
+          </div>
+        </div>
+        <div class="analytics-feature">
+          <div class="analytics-feature-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"/>
+              <polyline points="14 2 14 8 20 8"/>
+              <line x1="8" y1="13" x2="16" y2="13"/>
+              <line x1="8" y1="17" x2="16" y2="17"/>
+            </svg>
+          </div>
+          <div class="analytics-feature-body">
+            <p class="analytics-feature-title" data-key="analytics_f3_title">Reportes mensuales</p>
+            <p class="analytics-feature-desc" data-key="analytics_f3_desc">Recibe reportes fáciles de entender con hallazgos, métricas clave y recomendaciones.</p>
           </div>
         </div>
       </div>
