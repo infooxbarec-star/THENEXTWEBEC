@@ -2304,7 +2304,7 @@
       z-index: 10;
       opacity: 1; /* visible from the start — closes with laptop */
       transform: translateY(0);
-      will-change: opacity;
+      will-change: opacity, transform;
       pointer-events: auto;
       transition: none;
       margin-top: 36px;
@@ -3830,10 +3830,12 @@ setupHeroMockupAnimation();
       laptop.style.opacity   = (1 - endP).toFixed(3);
     }
 
-    /* ── Caption: visible at start, fades with laptop at the end ── */
-    const capEndP = easeInOutCubic(remap(rawP, mob ? 0.55 : 0.60, 1.0));
-    caption.style.opacity = (1 - capEndP).toFixed(3);
-    caption.classList.toggle('lp-visible', capEndP < 0.95);
+    /* ── Caption: fades out smoothly before laptop fully closes ── */
+    const capFadeP = easeInOutCubic(remap(rawP, mob ? 0.35 : 0.40, mob ? 0.85 : 0.90));
+    caption.style.opacity   = (1 - capFadeP).toFixed(3);
+    caption.style.transform = `translateY(${(-30 * capFadeP).toFixed(2)}px)`;
+    caption.style.pointerEvents = capFadeP > 0.95 ? 'none' : 'auto';
+    caption.classList.toggle('lp-visible', capFadeP < 0.95);
 
     /* ── Scroll hint: fades immediately on first scroll ── */
     if (scrollHint && !mob) {
