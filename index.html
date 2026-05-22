@@ -2460,21 +2460,15 @@
     }
 
     .jdc-live-experience {
-      --jdc-live-progress: 0;
-      --jdc-live-scale: 0.72;
-      --jdc-live-y: 80px;
-      --jdc-live-opacity: 0.2;
+      --jdc-frame-scale: 0.94;
+      --jdc-frame-y: 8px;
+      --jdc-frame-opacity: 0.7;
       --jdc-live-radius: 28px;
-      --jdc-live-copy-opacity: 1;
-      --jdc-live-copy-y: 0px;
-      --jdc-live-copy-scale: 1;
-      --jdc-live-hint-opacity: 0;
-      --jdc-live-hint-y: 18px;
-      --jdc-live-stage-glow: 0.18;
+      --jdc-live-stage-glow: 0.28;
       --jdc-live-bg-shift: 0%;
       position: relative;
-      height: 320vh;
-      overflow: clip;
+      height: 190vh;
+      overflow: visible;
       background: #071422;
       color: var(--white);
       isolation: isolate;
@@ -2507,6 +2501,7 @@
       position: sticky;
       top: 0;
       height: 100vh;
+      min-height: 100svh;
       overflow: hidden;
       display: grid;
       place-items: center;
@@ -2528,9 +2523,10 @@
       left: clamp(24px, 6vw, 88px);
       z-index: 3;
       width: min(460px, calc(100vw - 48px));
-      opacity: var(--jdc-live-copy-opacity);
-      transform: translate3d(0, var(--jdc-live-copy-y), 0) scale(var(--jdc-live-copy-scale));
+      opacity: 1;
+      transform: translate3d(0, 0, 0);
       will-change: transform, opacity;
+      transition: opacity .18s linear, transform .18s linear;
     }
     .jdc-live-eyebrow {
       display: inline-flex;
@@ -2604,10 +2600,12 @@
         0 40px 120px rgba(0,0,0,.45),
         0 0 0 1px rgba(255,255,255,.08),
         inset 0 1px 0 rgba(255,255,255,.06);
+      opacity: var(--jdc-frame-opacity, 0.5);
+      transform:
+        translate3d(0, var(--jdc-frame-y, 20px), 0)
+        scale(var(--jdc-frame-scale, 0.9));
       transform-origin: center center;
       will-change: transform, opacity, border-radius;
-      transform: translate3d(0, var(--jdc-live-y), 0) scale(var(--jdc-live-scale));
-      opacity: var(--jdc-live-opacity);
     }
     .jdc-live-browser-bar {
       position: absolute;
@@ -2694,14 +2692,15 @@
       font-size: 12px;
       font-weight: 600;
       letter-spacing: .5px;
-      transform: translate(-50%, var(--jdc-live-hint-y));
-      opacity: var(--jdc-live-hint-opacity);
+      transform: translate3d(-50%, 10px, 0);
+      opacity: 0;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
       box-shadow: 0 18px 46px rgba(0,0,0,.22);
       pointer-events: none;
       white-space: nowrap;
       will-change: transform, opacity;
+      transition: opacity .18s linear, transform .18s linear;
     }
     .jdc-live-hint::before {
       content: '';
@@ -2738,9 +2737,10 @@
 
     @media (max-width: 768px) {
       .jdc-live-experience {
-        height: 260vh;
-        --jdc-live-scale: 0.86;
-        --jdc-live-y: 52px;
+        height: 170vh;
+        --jdc-frame-scale: 0.98;
+        --jdc-frame-y: 4px;
+        --jdc-frame-opacity: 0.75;
         --jdc-live-radius: 22px;
       }
       .jdc-live-pin {
@@ -2766,6 +2766,10 @@
         height: 74vh;
         max-height: 76vh;
         border-radius: 22px;
+        opacity: var(--jdc-frame-opacity, 0.6);
+        transform:
+          translate3d(0, var(--jdc-frame-y, 12px), 0)
+          scale(var(--jdc-frame-scale, 0.96));
       }
       .jdc-live-browser-bar {
         min-height: 56px;
@@ -2816,10 +2820,10 @@
         width: 100%;
       }
       .jdc-live-frame {
+        opacity: 1 !important;
         width: min(94vw, 1420px);
         height: min(82vh, 820px);
         transform: none !important;
-        opacity: 1 !important;
       }
       .jdc-live-frame iframe {
         pointer-events: auto;
@@ -3137,7 +3141,6 @@
 
     <div class="jdc-live-copy">
       <span class="jdc-live-eyebrow">Proyecto real · JDC Watches</span>
-      <h2>Una web premium que se siente como una experiencia.</h2>
       <p>Desliza para entrar en un proyecto real diseñado para vender confianza antes de vender un producto.</p>
     </div>
 
@@ -4544,114 +4547,143 @@ setupHeroMockupAnimation();
 })();
 
 (function () {
-  const section = document.getElementById('jdc-live-experience');
-  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
-
+  const section = document.querySelector('#jdc-live-experience');
   if (!section) return;
 
-  const varsToReset = [
-    '--jdc-live-progress',
-    '--jdc-live-scale',
-    '--jdc-live-y',
-    '--jdc-live-opacity',
-    '--jdc-live-radius',
-    '--jdc-live-copy-opacity',
-    '--jdc-live-copy-y',
-    '--jdc-live-copy-scale',
-    '--jdc-live-hint-opacity',
-    '--jdc-live-hint-y',
-    '--jdc-live-stage-glow',
-    '--jdc-live-bg-shift'
-  ];
+  const frame = section.querySelector('.jdc-live-frame');
+  const copy = section.querySelector('.jdc-live-copy');
+  const hint = section.querySelector('.jdc-live-hint');
+  const bg = section.querySelector('.jdc-live-bg');
+  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
 
-  let frameId = null;
+  if (!frame) return;
 
-  function clamp(value, min, max) {
-    return Math.min(Math.max(value, min), max);
+  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
+
+  const lerp = (start, end, progress) => {
+    return start + (end - start) * progress;
+  };
+
+  const smoothstep = (edge0, edge1, x) => {
+    const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
+    return t * t * (3 - 2 * t);
+  };
+
+  let ticking = false;
+
+  function resetReducedMotionState() {
+    section.classList.add('is-interactive');
+    section.style.removeProperty('--jdc-frame-scale');
+    section.style.removeProperty('--jdc-frame-y');
+    section.style.removeProperty('--jdc-frame-opacity');
+
+    if (copy) {
+      copy.style.opacity = '1';
+      copy.style.transform = window.innerWidth <= 1024 ? 'translate3d(-50%, 0, 0)' : 'translate3d(0, 0, 0)';
+    }
+
+    if (hint) {
+      hint.style.opacity = '1';
+      hint.style.transform = 'translate3d(-50%, 0, 0)';
+    }
+
+    if (bg) {
+      bg.style.transform = 'translate3d(0, 0, 0) scale(1.08)';
+    }
   }
 
-  function mix(start, end, amount) {
-    return start + (end - start) * amount;
-  }
-
-  function progressBetween(start, end, value) {
-    return clamp((value - start) / (end - start), 0, 1);
-  }
-
-  function resetStyles() {
-    varsToReset.forEach(variable => section.style.removeProperty(variable));
-  }
-
-  function updateSectionState() {
-    frameId = null;
+  function updateJdcExperience() {
+    ticking = false;
 
     if (reducedMotionQuery.matches) {
-      resetStyles();
-      section.classList.add('is-interactive');
+      resetReducedMotionState();
       return;
     }
 
     const rect = section.getBoundingClientRect();
     const total = Math.max(section.offsetHeight - window.innerHeight, 1);
     const progress = clamp(-rect.top / total, 0, 1);
-    const isMobile = window.innerWidth <= 768;
 
-    const enterProgress = progressBetween(0.02, 0.38, progress);
-    const exitProgress = progressBetween(0.72, 1, progress);
-    const frameProgress = progressBetween(0.04, 0.52, progress);
-    const copyProgress = progressBetween(0.16, 0.44, progress);
-    const hintInProgress = progressBetween(0.34, 0.44, progress);
-    const hintOutProgress = 1 - progressBetween(0.64, 0.74, progress);
+    const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const isTabletDown = window.matchMedia('(max-width: 1024px)').matches;
 
-    const frameOpacity = progress < 0.72
-      ? mix(0.2, 1, enterProgress)
-      : mix(1, 0, exitProgress);
-    const frameScale = progress < 0.72
-      ? mix(isMobile ? 0.86 : 0.72, 1, enterProgress)
-      : mix(1, isMobile ? 0.94 : 0.92, exitProgress);
-    const frameY = progress < 0.72
-      ? mix(isMobile ? 52 : 80, 0, enterProgress)
-      : mix(0, isMobile ? -44 : -60, exitProgress);
-    const frameRadius = progress < 0.72
-      ? mix(isMobile ? 22 : 28, isMobile ? 18 : 16, frameProgress)
-      : mix(isMobile ? 18 : 16, isMobile ? 22 : 28, exitProgress);
-    const copyOpacity = 1 - copyProgress;
-    const copyY = mix(0, -36, copyProgress);
-    const copyScale = mix(1, 0.96, copyProgress);
-    const hintOpacity = clamp(hintInProgress * hintOutProgress, 0, 1);
-    const hintY = mix(18, 0, hintInProgress);
-    const interactive = progress > 0.32 && progress < 0.72;
+    const initialScale = isMobile ? 0.98 : 0.94;
+    const initialY = isMobile ? 4 : 8;
+    const initialOpacity = isMobile ? 0.75 : 0.70;
 
-    section.classList.toggle('is-interactive', interactive);
-    section.style.setProperty('--jdc-live-progress', progress.toFixed(4));
-    section.style.setProperty('--jdc-live-scale', frameScale.toFixed(4));
-    section.style.setProperty('--jdc-live-y', `${frameY.toFixed(2)}px`);
-    section.style.setProperty('--jdc-live-opacity', frameOpacity.toFixed(4));
-    section.style.setProperty('--jdc-live-radius', `${frameRadius.toFixed(2)}px`);
-    section.style.setProperty('--jdc-live-copy-opacity', copyOpacity.toFixed(4));
-    section.style.setProperty('--jdc-live-copy-y', `${copyY.toFixed(2)}px`);
-    section.style.setProperty('--jdc-live-copy-scale', copyScale.toFixed(4));
-    section.style.setProperty('--jdc-live-hint-opacity', hintOpacity.toFixed(4));
-    section.style.setProperty('--jdc-live-hint-y', `${hintY.toFixed(2)}px`);
-    section.style.setProperty('--jdc-live-stage-glow', mix(0.16, 0.58, progressBetween(0.12, 0.58, progress)).toFixed(4));
-    section.style.setProperty('--jdc-live-bg-shift', `${mix(0, -4, progress).toFixed(2)}%`);
+    const fullAt = isMobile ? 0.07 : 0.08;
+    const interactiveStart = isMobile ? 0.09 : 0.10;
+    const interactiveEnd = isMobile ? 0.70 : 0.72;
+    const exitStart = 0.76;
+
+    const enterT = smoothstep(0.00, fullAt, progress);
+    const exitT = smoothstep(exitStart, 1.00, progress);
+
+    let scale = lerp(initialScale, 1, enterT);
+    let y = lerp(initialY, 0, enterT);
+    let opacity = lerp(initialOpacity, 1, enterT);
+    let radius = lerp(isMobile ? 22 : 28, isMobile ? 18 : 16, enterT);
+
+    if (progress >= exitStart) {
+      scale = lerp(1, 0.94, exitT);
+      y = lerp(0, -42, exitT);
+      opacity = lerp(1, 0, exitT);
+      radius = lerp(isMobile ? 18 : 16, isMobile ? 22 : 24, exitT);
+    }
+
+    section.style.setProperty('--jdc-frame-scale', scale.toFixed(4));
+    section.style.setProperty('--jdc-frame-y', `${y.toFixed(2)}px`);
+    section.style.setProperty('--jdc-frame-opacity', opacity.toFixed(4));
+    section.style.setProperty('--jdc-live-radius', `${radius.toFixed(2)}px`);
+    section.style.setProperty('--jdc-live-stage-glow', lerp(0.24, 0.54, smoothstep(0.00, interactiveStart, progress)).toFixed(4));
+
+    if (bg) {
+      bg.style.transform = `translate3d(0, ${lerp(0, -3.5, progress).toFixed(2)}%, 0) scale(1.08)`;
+    }
+
+    if (copy) {
+      const copyOpacity = 1 - smoothstep(0.02, 0.18, progress);
+      const copyY = lerp(0, -24, smoothstep(0.02, 0.18, progress));
+      copy.style.opacity = copyOpacity.toFixed(4);
+      copy.style.transform = isTabletDown
+        ? `translate3d(-50%, ${copyY.toFixed(2)}px, 0)`
+        : `translate3d(0, ${copyY.toFixed(2)}px, 0)`;
+    }
+
+    if (progress > interactiveStart && progress < interactiveEnd) {
+      section.classList.add('is-interactive');
+    } else {
+      section.classList.remove('is-interactive');
+    }
+
+    if (hint) {
+      const hintVisible =
+        progress > interactiveStart && progress < interactiveEnd ? 1 : 0;
+      hint.style.opacity = String(hintVisible);
+      hint.style.transform = hintVisible
+        ? 'translate3d(-50%, 0, 0)'
+        : 'translate3d(-50%, 10px, 0)';
+    }
   }
 
-  function requestSectionUpdate() {
-    if (frameId !== null) return;
-    frameId = window.requestAnimationFrame(updateSectionState);
+  function requestUpdate() {
+    if (!ticking) {
+      ticking = true;
+      requestAnimationFrame(updateJdcExperience);
+    }
   }
 
-  window.addEventListener('scroll', requestSectionUpdate, { passive: true });
-  window.addEventListener('resize', requestSectionUpdate, { passive: true });
+  window.addEventListener('scroll', requestUpdate, { passive: true });
+  window.addEventListener('resize', requestUpdate);
+  window.addEventListener('load', requestUpdate);
 
   if (typeof reducedMotionQuery.addEventListener === 'function') {
-    reducedMotionQuery.addEventListener('change', requestSectionUpdate);
+    reducedMotionQuery.addEventListener('change', requestUpdate);
   } else if (typeof reducedMotionQuery.addListener === 'function') {
-    reducedMotionQuery.addListener(requestSectionUpdate);
+    reducedMotionQuery.addListener(requestUpdate);
   }
 
-  requestSectionUpdate();
+  updateJdcExperience();
 })();
 
 /* ════════════════════════════════════════════════════════════
