@@ -2460,381 +2460,155 @@
     }
 
     .jdc-live-experience {
-      --jdc-frame-scale: 0.94;
-      --jdc-frame-y: 8px;
-      --jdc-frame-opacity: 0.7;
-      --jdc-live-radius: 28px;
-      --jdc-live-stage-glow: 0.28;
-      --jdc-live-bg-shift: 0%;
       position: relative;
-      height: 190vh;
-      overflow: visible;
+      height: 145vh;
       background: #071422;
-      color: var(--white);
+      overflow: visible;
       isolation: isolate;
     }
-    .jdc-live-experience::before,
-    .jdc-live-experience::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      pointer-events: none;
-    }
-    .jdc-live-experience::before {
-      background:
-        radial-gradient(circle at 18% 24%, rgba(26,110,250,.22) 0%, rgba(26,110,250,0) 42%),
-        radial-gradient(circle at 82% 78%, rgba(123,167,255,.14) 0%, rgba(123,167,255,0) 38%),
-        linear-gradient(180deg, rgba(3,10,20,.18) 0%, rgba(3,10,20,0) 18%, rgba(3,10,20,.34) 100%);
-      opacity: .96;
-      z-index: 0;
-    }
-    .jdc-live-experience::after {
-      background-image:
-        linear-gradient(rgba(255,255,255,.03) 1px, transparent 1px),
-        linear-gradient(90deg, rgba(255,255,255,.03) 1px, transparent 1px);
-      background-size: 120px 120px;
-      mask-image: linear-gradient(180deg, transparent 0%, black 20%, black 80%, transparent 100%);
-      opacity: .22;
-      z-index: 0;
-    }
+
     .jdc-live-pin {
       position: sticky;
-      top: 0;
-      height: 100vh;
-      min-height: 100svh;
+      top: 72px;
+      width: 100%;
+      height: calc(100vh - 72px);
+      min-height: calc(100svh - 72px);
       overflow: hidden;
       display: grid;
       place-items: center;
-      padding: clamp(28px, 4vw, 52px) 24px;
-    }
-    .jdc-live-bg {
-      position: absolute;
-      inset: -14%;
       background:
-        radial-gradient(circle at 50% 48%, rgba(9,27,49,.12) 0%, rgba(9,27,49,.82) 45%, rgba(7,20,34,0) 78%),
-        radial-gradient(circle at 50% 64%, rgba(26,110,250,.16) 0%, rgba(26,110,250,0) 46%);
-      transform: translate3d(0, var(--jdc-live-bg-shift), 0) scale(1.08);
-      z-index: 0;
-      pointer-events: none;
+        radial-gradient(circle at 50% 12%, rgba(26, 110, 250, 0.14), transparent 34%),
+        linear-gradient(180deg, #071422 0%, #06111f 100%);
     }
-    .jdc-live-copy {
-      position: absolute;
-      top: clamp(84px, 12vh, 128px);
-      left: clamp(24px, 6vw, 88px);
-      z-index: 3;
-      width: min(460px, calc(100vw - 48px));
-      opacity: 1;
-      transform: translate3d(0, 0, 0);
-      will-change: transform, opacity;
-      transition: opacity .18s linear, transform .18s linear;
-    }
-    .jdc-live-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 16px;
-      border-radius: 999px;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2.2px;
-      text-transform: uppercase;
-      color: rgba(255,255,255,.82);
-      background: rgba(255,255,255,.06);
-      border: 1px solid rgba(255,255,255,.12);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 20px 40px rgba(0,0,0,.15);
-      margin-bottom: 22px;
-    }
-    .jdc-live-eyebrow::before {
-      content: '';
-      width: 7px;
-      height: 7px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 22px rgba(26,110,250,.85);
-      flex-shrink: 0;
-    }
-    .jdc-live-copy h2 {
-      font-size: clamp(38px, 5.4vw, 72px);
-      line-height: .98;
-      letter-spacing: -2px;
-      font-weight: 800;
-      color: #f8fbff;
-      margin-bottom: 18px;
-      text-wrap: balance;
-    }
-    .jdc-live-copy p {
-      max-width: 36ch;
-      font-size: clamp(16px, 1.5vw, 18px);
-      line-height: 1.8;
-      color: rgba(231,239,249,.72);
-    }
+
     .jdc-live-stage {
-      position: relative;
-      z-index: 2;
-      width: 100%;
+      position: absolute;
+      inset: 0;
       display: grid;
       place-items: center;
+      padding: clamp(14px, 2.4vw, 34px);
+      z-index: 2;
     }
-    .jdc-live-stage::before {
-      content: '';
-      position: absolute;
-      width: min(84vw, 1120px);
-      height: min(72vh, 760px);
-      border-radius: 50%;
-      background: radial-gradient(circle, rgba(26,110,250,.28) 0%, rgba(26,110,250,0) 70%);
-      filter: blur(34px);
-      opacity: var(--jdc-live-stage-glow);
-      transform: translateY(40px);
-      pointer-events: none;
-    }
+
     .jdc-live-frame {
-      position: relative;
-      width: min(94vw, 1420px);
-      height: min(82vh, 820px);
-      border-radius: var(--jdc-live-radius);
+      width: min(96vw, 1460px);
+      height: min(78vh, 780px);
+      border-radius: var(--jdc-radius, 24px);
       overflow: hidden;
       background: #000;
-      box-shadow:
-        0 40px 120px rgba(0,0,0,.45),
-        0 0 0 1px rgba(255,255,255,.08),
-        inset 0 1px 0 rgba(255,255,255,.06);
-      opacity: var(--jdc-frame-opacity, 0.5);
+      opacity: var(--jdc-frame-opacity, 1);
       transform:
-        translate3d(0, var(--jdc-frame-y, 20px), 0)
-        scale(var(--jdc-frame-scale, 0.9));
+        translate3d(0, var(--jdc-frame-y, 0px), 0)
+        scale(var(--jdc-frame-scale, 1));
       transform-origin: center center;
-      will-change: transform, opacity, border-radius;
+      will-change: transform, opacity;
+      box-shadow:
+        0 42px 130px rgba(0, 0, 0, 0.50),
+        0 0 0 1px rgba(255, 255, 255, 0.10),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
     }
-    .jdc-live-browser-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      z-index: 2;
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      min-height: 64px;
-      padding: 16px 20px;
-      background: linear-gradient(180deg, rgba(7,20,34,.74) 0%, rgba(7,20,34,.18) 100%);
-      backdrop-filter: blur(18px);
-      -webkit-backdrop-filter: blur(18px);
-      pointer-events: none;
-    }
-    .jdc-live-browser-dots {
-      display: inline-flex;
-      gap: 8px;
-      align-items: center;
-      flex-shrink: 0;
-    }
-    .jdc-live-browser-dots span {
-      width: 9px;
-      height: 9px;
-      border-radius: 50%;
-      background: rgba(255,255,255,.34);
-    }
-    .jdc-live-browser-dots span:first-child { background: rgba(255,255,255,.62); }
-    .jdc-live-browser-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-height: 34px;
-      padding: 0 16px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.1);
-      color: rgba(255,255,255,.84);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .4px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-    }
-    .jdc-live-browser-pill-accent {
-      margin-left: auto;
-      background: rgba(26,110,250,.16);
-      border-color: rgba(26,110,250,.28);
-      color: #dce9ff;
-    }
+
     .jdc-live-frame iframe {
       width: 100%;
       height: 100%;
-      border: 0;
       display: block;
+      border: 0;
       background: #000;
-      pointer-events: none;
-    }
-    .jdc-live-frame::after {
-      content: '';
-      position: absolute;
-      inset: 0;
-      border-radius: inherit;
-      box-shadow: inset 0 0 0 1px rgba(255,255,255,.08);
-      background: linear-gradient(135deg, rgba(255,255,255,.07), transparent 26%, transparent 72%, rgba(255,255,255,.04));
-      pointer-events: none;
-      z-index: 2;
-    }
-    .jdc-live-hint {
-      position: absolute;
-      left: 50%;
-      bottom: clamp(22px, 4vh, 38px);
-      z-index: 3;
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 12px 18px;
-      border-radius: 999px;
-      background: rgba(255,255,255,.08);
-      border: 1px solid rgba(255,255,255,.12);
-      color: rgba(255,255,255,.88);
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: .5px;
-      transform: translate3d(-50%, 10px, 0);
-      opacity: 0;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 18px 46px rgba(0,0,0,.22);
-      pointer-events: none;
-      white-space: nowrap;
-      will-change: transform, opacity;
-      transition: opacity .18s linear, transform .18s linear;
-    }
-    .jdc-live-hint::before {
-      content: '';
-      width: 8px;
-      height: 8px;
-      border-radius: 50%;
-      background: var(--accent);
-      box-shadow: 0 0 24px rgba(26,110,250,.9);
-      flex-shrink: 0;
-    }
-    .jdc-live-experience.is-interactive .jdc-live-frame {
-      box-shadow:
-        0 44px 130px rgba(0,0,0,.48),
-        0 0 0 1px rgba(139,181,255,.2),
-        0 0 42px rgba(26,110,250,.2);
-    }
-    .jdc-live-experience.is-interactive .jdc-live-frame iframe {
       pointer-events: auto;
     }
 
-    @media (max-width: 1024px) {
-      .jdc-live-copy {
-        left: 50%;
-        top: 84px;
-        width: min(660px, calc(100vw - 48px));
-        text-align: center;
-        transform: translate3d(-50%, var(--jdc-live-copy-y), 0) scale(var(--jdc-live-copy-scale));
-      }
-      .jdc-live-copy p {
-        margin-left: auto;
-        margin-right: auto;
-      }
+    .jdc-live-copy {
+      position: absolute;
+      left: clamp(20px, 4vw, 64px);
+      top: clamp(84px, 13vh, 136px);
+      max-width: 500px;
+      z-index: 4;
+      pointer-events: none;
+      opacity: var(--jdc-copy-opacity, 0);
+      transform: translate3d(0, var(--jdc-copy-y, -10px), 0);
+    }
+
+    .jdc-live-hint {
+      position: absolute;
+      left: 50%;
+      bottom: clamp(14px, 4vh, 34px);
+      z-index: 5;
+      transform: translate3d(-50%, var(--jdc-hint-y, 0px), 0);
+      opacity: var(--jdc-hint-opacity, 1);
+      pointer-events: none;
+      background: rgba(255,255,255,0.10);
+      color: #fff;
+      border: 1px solid rgba(255,255,255,0.14);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-size: 13px;
+      font-weight: 600;
     }
 
     @media (max-width: 768px) {
       .jdc-live-experience {
-        height: 170vh;
-        --jdc-frame-scale: 0.98;
-        --jdc-frame-y: 4px;
-        --jdc-frame-opacity: 0.75;
-        --jdc-live-radius: 22px;
+        height: 130vh;
       }
+
       .jdc-live-pin {
-        padding: 24px 16px 32px;
+        top: 0;
+        height: 100svh;
+        min-height: 100svh;
       }
-      .jdc-live-bg {
-        inset: -24%;
+
+      .jdc-live-stage {
+        padding: 10px;
+        place-items: center;
       }
-      .jdc-live-copy {
-        top: calc(84px + env(safe-area-inset-top, 0px));
-        width: min(420px, calc(100vw - 32px));
-      }
-      .jdc-live-copy h2 {
-        font-size: clamp(30px, 9vw, 40px);
-        letter-spacing: -1.3px;
-      }
-      .jdc-live-copy p {
-        font-size: 14px;
-        line-height: 1.7;
-      }
+
       .jdc-live-frame {
-        width: min(92vw, 430px);
-        height: 74vh;
-        max-height: 76vh;
-        border-radius: 22px;
-        opacity: var(--jdc-frame-opacity, 0.6);
+        width: 96vw;
+        height: 78svh;
+        border-radius: var(--jdc-radius, 20px);
+        opacity: var(--jdc-frame-opacity, 1);
         transform:
-          translate3d(0, var(--jdc-frame-y, 12px), 0)
-          scale(var(--jdc-frame-scale, 0.96));
+          translate3d(0, var(--jdc-frame-y, 0px), 0)
+          scale(var(--jdc-frame-scale, 1));
       }
-      .jdc-live-browser-bar {
-        min-height: 56px;
-        padding: 14px 16px;
-        gap: 10px;
-      }
-      .jdc-live-browser-pill {
-        min-height: 30px;
-        padding: 0 12px;
-        font-size: 11px;
-      }
-      .jdc-live-browser-pill-accent {
+
+      .jdc-live-copy {
         display: none;
       }
+
       .jdc-live-hint {
-        bottom: 18px;
-        padding: 10px 14px;
-        font-size: 11px;
+        bottom: 14px;
+        font-size: 12px;
+        padding: 9px 14px;
       }
     }
 
     @media (prefers-reduced-motion: reduce) {
       .jdc-live-experience {
         height: auto;
-        padding: 90px 0;
+        padding: 60px 0;
       }
+
       .jdc-live-pin {
         position: relative;
+        top: auto;
         height: auto;
         min-height: auto;
-        padding: 0 18px;
       }
-      .jdc-live-copy {
-        position: relative;
-        top: auto;
-        left: auto;
-        width: min(700px, 100%);
-        text-align: left;
-        margin: 0 auto 28px;
-        transform: none !important;
-        opacity: 1 !important;
-      }
-      .jdc-live-copy p {
-        margin-left: 0;
-        margin-right: 0;
-      }
+
       .jdc-live-stage {
-        width: 100%;
+        position: relative;
+        min-height: auto;
       }
+
       .jdc-live-frame {
         opacity: 1 !important;
-        width: min(94vw, 1420px);
-        height: min(82vh, 820px);
         transform: none !important;
       }
+
       .jdc-live-frame iframe {
-        pointer-events: auto;
-      }
-      .jdc-live-hint {
-        position: relative;
-        left: auto;
-        bottom: auto;
-        margin: 18px auto 0;
-        transform: none !important;
-        opacity: 1 !important;
+        pointer-events: auto !important;
       }
     }
 
@@ -3158,7 +2932,7 @@
         <iframe
           src="https://jdcwatches.com/"
           title="JDC Watches live website"
-          loading="lazy"
+          loading="eager"
           allow="fullscreen">
         </iframe>
       </div>
@@ -4553,10 +4327,14 @@ setupHeroMockupAnimation();
   const frame = section.querySelector('.jdc-live-frame');
   const copy = section.querySelector('.jdc-live-copy');
   const hint = section.querySelector('.jdc-live-hint');
-  const bg = section.querySelector('.jdc-live-bg');
-  const reducedMotionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+  const iframe = section.querySelector('iframe');
 
   if (!frame) return;
+
+  if (iframe) {
+    iframe.setAttribute('loading', 'eager');
+    iframe.style.pointerEvents = 'auto';
+  }
 
   const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
 
@@ -4565,104 +4343,59 @@ setupHeroMockupAnimation();
   };
 
   const smoothstep = (edge0, edge1, x) => {
+    if (edge0 === edge1) return x >= edge1 ? 1 : 0;
     const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
     return t * t * (3 - 2 * t);
   };
 
   let ticking = false;
 
-  function resetReducedMotionState() {
-    section.classList.add('is-interactive');
-    section.style.removeProperty('--jdc-frame-scale');
-    section.style.removeProperty('--jdc-frame-y');
-    section.style.removeProperty('--jdc-frame-opacity');
-
-    if (copy) {
-      copy.style.opacity = '1';
-      copy.style.transform = window.innerWidth <= 1024 ? 'translate3d(-50%, 0, 0)' : 'translate3d(0, 0, 0)';
-    }
-
-    if (hint) {
-      hint.style.opacity = '1';
-      hint.style.transform = 'translate3d(-50%, 0, 0)';
-    }
-
-    if (bg) {
-      bg.style.transform = 'translate3d(0, 0, 0) scale(1.08)';
-    }
-  }
-
   function updateJdcExperience() {
     ticking = false;
-
-    if (reducedMotionQuery.matches) {
-      resetReducedMotionState();
-      return;
-    }
 
     const rect = section.getBoundingClientRect();
     const total = Math.max(section.offsetHeight - window.innerHeight, 1);
     const progress = clamp(-rect.top / total, 0, 1);
 
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const isTabletDown = window.matchMedia('(max-width: 1024px)').matches;
 
-    const initialScale = isMobile ? 0.98 : 0.94;
-    const initialY = isMobile ? 4 : 8;
-    const initialOpacity = isMobile ? 0.75 : 0.70;
+    const exitStart = isMobile ? 0.88 : 0.86;
+    const exitT = smoothstep(exitStart, 1, progress);
 
-    const fullAt = isMobile ? 0.07 : 0.08;
-    const interactiveStart = isMobile ? 0.09 : 0.10;
-    const interactiveEnd = isMobile ? 0.70 : 0.72;
-    const exitStart = 0.76;
+    const baseScale = 1;
+    const endScale = isMobile ? 0.965 : 0.955;
+    const endY = isMobile ? -18 : -34;
+    const endOpacity = 0;
 
-    const enterT = smoothstep(0.00, fullAt, progress);
-    const exitT = smoothstep(exitStart, 1.00, progress);
-
-    let scale = lerp(initialScale, 1, enterT);
-    let y = lerp(initialY, 0, enterT);
-    let opacity = lerp(initialOpacity, 1, enterT);
-    let radius = lerp(isMobile ? 22 : 28, isMobile ? 18 : 16, enterT);
-
-    if (progress >= exitStart) {
-      scale = lerp(1, 0.94, exitT);
-      y = lerp(0, -42, exitT);
-      opacity = lerp(1, 0, exitT);
-      radius = lerp(isMobile ? 18 : 16, isMobile ? 22 : 24, exitT);
-    }
+    const scale = lerp(baseScale, endScale, exitT);
+    const y = lerp(0, endY, exitT);
+    const opacity = lerp(1, endOpacity, exitT);
+    const radius = lerp(isMobile ? 20 : 24, isMobile ? 18 : 20, exitT);
 
     section.style.setProperty('--jdc-frame-scale', scale.toFixed(4));
     section.style.setProperty('--jdc-frame-y', `${y.toFixed(2)}px`);
     section.style.setProperty('--jdc-frame-opacity', opacity.toFixed(4));
-    section.style.setProperty('--jdc-live-radius', `${radius.toFixed(2)}px`);
-    section.style.setProperty('--jdc-live-stage-glow', lerp(0.24, 0.54, smoothstep(0.00, interactiveStart, progress)).toFixed(4));
+    section.style.setProperty('--jdc-radius', `${radius.toFixed(2)}px`);
 
-    if (bg) {
-      bg.style.transform = `translate3d(0, ${lerp(0, -3.5, progress).toFixed(2)}%, 0) scale(1.08)`;
-    }
+    section.classList.add('is-interactive');
 
     if (copy) {
-      const copyOpacity = 1 - smoothstep(0.02, 0.18, progress);
-      const copyY = lerp(0, -24, smoothstep(0.02, 0.18, progress));
-      copy.style.opacity = copyOpacity.toFixed(4);
-      copy.style.transform = isTabletDown
-        ? `translate3d(-50%, ${copyY.toFixed(2)}px, 0)`
-        : `translate3d(0, ${copyY.toFixed(2)}px, 0)`;
-    }
+      const copyIn = smoothstep(0.00, 0.03, progress);
+      const copyOut = smoothstep(0.06, 0.16, progress);
+      const copyOpacity = clamp(copyIn * (1 - copyOut), 0, 1);
+      const copyY = lerp(-10, 0, copyIn) - lerp(0, 20, copyOut);
 
-    if (progress > interactiveStart && progress < interactiveEnd) {
-      section.classList.add('is-interactive');
-    } else {
-      section.classList.remove('is-interactive');
+      section.style.setProperty('--jdc-copy-opacity', copyOpacity.toFixed(4));
+      section.style.setProperty('--jdc-copy-y', `${copyY.toFixed(2)}px`);
     }
 
     if (hint) {
-      const hintVisible =
-        progress > interactiveStart && progress < interactiveEnd ? 1 : 0;
-      hint.style.opacity = String(hintVisible);
-      hint.style.transform = hintVisible
-        ? 'translate3d(-50%, 0, 0)'
-        : 'translate3d(-50%, 10px, 0)';
+      const hintOut = smoothstep(0.20, 0.34, progress);
+      const hintOpacity = lerp(1, 0, hintOut);
+      const hintY = lerp(0, 10, hintOut);
+
+      section.style.setProperty('--jdc-hint-opacity', hintOpacity.toFixed(4));
+      section.style.setProperty('--jdc-hint-y', `${hintY.toFixed(2)}px`);
     }
   }
 
@@ -4676,12 +4409,6 @@ setupHeroMockupAnimation();
   window.addEventListener('scroll', requestUpdate, { passive: true });
   window.addEventListener('resize', requestUpdate);
   window.addEventListener('load', requestUpdate);
-
-  if (typeof reducedMotionQuery.addEventListener === 'function') {
-    reducedMotionQuery.addEventListener('change', requestUpdate);
-  } else if (typeof reducedMotionQuery.addListener === 'function') {
-    reducedMotionQuery.addListener(requestUpdate);
-  }
 
   updateJdcExperience();
 })();
