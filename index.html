@@ -2461,7 +2461,11 @@
 
     .jdc-live-experience {
       position: relative;
-      height: 145vh;
+      min-height: clamp(720px, 122vh, 980px);
+      height: clamp(720px, 122vh, 980px);
+      margin-bottom: 0 !important;
+      padding: 0;
+      box-sizing: border-box;
       background: #071422;
       overflow: visible;
       isolation: isolate;
@@ -2549,7 +2553,11 @@
 
     @media (max-width: 768px) {
       .jdc-live-experience {
-        height: 130vh;
+        min-height: clamp(620px, 112vh, 820px);
+        height: clamp(620px, 112vh, 820px);
+        margin-bottom: 0 !important;
+        padding-top: 0;
+        padding-bottom: 0;
       }
 
       .jdc-live-pin {
@@ -2869,16 +2877,22 @@
           <div class="mockup-glow"></div>
           <div class="browser">
             <div class="browser-screen">
-              <img
-                src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2021%2C%202026%20at%2012_15_03%20PM.png"
-                alt="Vista previa del sitio web"
-                class="lightbox-trigger"
-                width="1600"
-                height="1000"
-                loading="eager"
-                decoding="async"
-                fetchpriority="high"
-              />
+              <picture>
+                <source
+                  media="(max-width: 768px)"
+                  srcset="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2022%2C%202026%20at%2002_41_52%20PM.png"
+                />
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2021%2C%202026%20at%2012_15_03%20PM.png"
+                  alt="Vista previa del sitio web"
+                  class="lightbox-trigger"
+                  width="1600"
+                  height="1000"
+                  loading="eager"
+                  decoding="async"
+                  fetchpriority="high"
+                />
+              </picture>
             </div>
             <div class="browser-base"></div>
             <div class="browser-foot"></div>
@@ -4354,12 +4368,14 @@ setupHeroMockupAnimation();
     ticking = false;
 
     const rect = section.getBoundingClientRect();
-    const total = Math.max(section.offsetHeight - window.innerHeight, 1);
-    const progress = clamp(-rect.top / total, 0, 1);
-
     const isMobile = window.matchMedia('(max-width: 768px)').matches;
+    const vh = Math.max(window.innerHeight, 1);
+    const start = vh * 0.85;
+    const end = isMobile ? -vh * 0.04 : -vh * 0.06;
+    const raw = (start - rect.top) / (start - end);
+    const progress = clamp(raw, 0, 1);
 
-    const exitStart = isMobile ? 0.88 : 0.86;
+    const exitStart = isMobile ? 0.78 : 0.8;
     const exitT = smoothstep(exitStart, 1, progress);
 
     const baseScale = 1;
