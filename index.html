@@ -548,19 +548,42 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
+    .shots-note {
+      max-width: 760px;
+      margin: 22px auto 0;
+      color: var(--muted-text);
+      font-size: 16px;
+      line-height: 1.75;
+    }
     .shot-card {
       position: relative;
+      display: flex;
+      flex-direction: column;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid rgba(11,31,58,.10);
-      background: #0B1F3A;
+      background: linear-gradient(180deg, #f6f3eb 0%, #ffffff 100%);
       box-shadow: 0 10px 30px rgba(11,31,58,.10);
       transition: transform .2s ease, box-shadow .2s ease;
-      aspect-ratio: 16 / 9;
+      aspect-ratio: auto;
     }
     .shot-card:hover {
       transform: translateY(-2px) scale(1.012);
       box-shadow: 0 16px 36px rgba(11,31,58,.14);
+    }
+    .shot-card-media {
+      position: relative;
+      aspect-ratio: 16 / 10;
+      overflow: hidden;
+      background: #0B1F3A;
+    }
+    .shot-card-media::after {
+      content: '';
+      position: absolute;
+      inset: auto 0 0;
+      height: 44%;
+      background: linear-gradient(180deg, rgba(11,31,58,0) 0%, rgba(11,31,58,.28) 100%);
+      pointer-events: none;
     }
     .shot-card img {
       width: 100%;
@@ -568,7 +591,67 @@
       object-fit: cover;
       object-position: center;
       display: block;
-      border-radius: inherit;
+    }
+    .shot-card-copy {
+      padding: 20px 20px 22px;
+      display: grid;
+      gap: 14px;
+      color: var(--primary);
+    }
+    .shot-card-meta {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+    .shot-card-brand {
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: -.03em;
+    }
+    .shot-card-sector {
+      display: inline-flex;
+      align-items: center;
+      min-height: 30px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(11,31,58,.06);
+      border: 1px solid rgba(11,31,58,.08);
+      color: rgba(11,31,58,.72);
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .16em;
+      text-transform: uppercase;
+    }
+    .shot-card-title {
+      font-size: 22px;
+      line-height: 1.18;
+      letter-spacing: -.04em;
+      font-weight: 700;
+      color: #132033;
+    }
+    .shot-card-desc {
+      color: var(--muted-text);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+    .shot-card-tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .shot-card-tag {
+      display: inline-flex;
+      align-items: center;
+      min-height: 32px;
+      padding: 0 12px;
+      border-radius: 999px;
+      background: rgba(26,110,250,.08);
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .01em;
     }
 
     /* ─── LIGHTBOX ─── */
@@ -1539,6 +1622,9 @@
       .shots-section     { padding-top: 88px; padding-bottom: 88px; }
       .shots-section .container { padding-left: 20px; padding-right: 20px; }
       .shots-grid        { grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; }
+      .shot-card         { grid-column: span 1; }
+      .shot-card:first-child { grid-column: 1 / -1; }
+      .shot-card-title   { font-size: 24px; }
 
       /* Vision */
       .vision-grid       { grid-template-columns:1fr; gap:44px; margin-top:44px; }
@@ -1626,8 +1712,14 @@
       /* Screenshots section */
       .shots-section     { padding-top: 68px; padding-bottom: 68px; }
       .shots-section .container { padding-left: 14px; padding-right: 14px; }
+      .shots-note        { font-size: 14px; margin-top: 16px; }
       .shots-grid        { grid-template-columns:1fr; gap:14px; margin-top: 36px; }
-      .shot-card         { aspect-ratio: 16 / 10; }
+      .shot-card:first-child { grid-column: auto; }
+      .shot-card-copy    { padding: 16px 16px 18px; gap: 12px; }
+      .shot-card-title   { font-size: 20px; }
+      .shot-card-brand   { font-size: 17px; }
+      .shot-card-sector,
+      .shot-card-tag     { font-size: 10.5px; }
 
       /* Vision section */
       .vision-section    { padding-bottom: 0; }
@@ -3197,37 +3289,83 @@
       <span class="eyebrow" data-key="shots_eyebrow">Ejemplos visuales</span>
       <h2 class="section-title" data-key="shots_title">Así puede verse una web premium para tu negocio</h2>
       <p class="section-sub" data-key="shots_sub">Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.</p>
+      <p class="shots-note" data-key="shots_note">Tres direcciones visuales para sectores distintos: producto exportable, interiorismo y servicios premium. La idea es la misma en todos los casos: hacer que tu negocio se vea sólido, actual y listo para vender.</p>
     </div>
     <div class="shots-grid">
       <figure class="shot-card fi d1">
-        <img
-          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
-          alt="Vista de sitio web premium en escritorio"
-          class="lightbox-trigger"
-          width="2530"
-          height="1370"
-          loading="lazy"
-        />
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
+            alt="Vista de sitio web premium para exportación agrícola"
+            class="lightbox-trigger"
+            width="2530"
+            height="1370"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="shot-card-copy">
+          <div class="shot-card-meta">
+            <span class="shot-card-brand">OroEcuador</span>
+            <span class="shot-card-sector" data-key="shot1_sector">Exportación agrícola</span>
+          </div>
+          <h3 class="shot-card-title" data-key="shot1_title">Una presentación premium para vender origen, calidad y confianza internacional.</h3>
+          <p class="shot-card-desc" data-key="shot1_desc">Jerarquía visual limpia, fotografía protagonista y llamadas a la acción claras para que el producto se vea serio desde el primer vistazo.</p>
+          <div class="shot-card-tags">
+            <span class="shot-card-tag" data-key="shot1_tag1">Trazabilidad</span>
+            <span class="shot-card-tag" data-key="shot1_tag2">Exportación</span>
+            <span class="shot-card-tag" data-key="shot1_tag3">Cotización directa</span>
+          </div>
+        </figcaption>
       </figure>
       <figure class="shot-card fi d2">
-        <img
-          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
-          alt="Detalle de interfaz web moderna"
-          class="lightbox-trigger"
-          width="2530"
-          height="1370"
-          loading="lazy"
-        />
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
+            alt="Vista de sitio web premium para interiorismo y decoracion"
+            class="lightbox-trigger"
+            width="2530"
+            height="1370"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="shot-card-copy">
+          <div class="shot-card-meta">
+            <span class="shot-card-brand">Casave</span>
+            <span class="shot-card-sector" data-key="shot2_sector">Interiorismo y decoracion</span>
+          </div>
+          <h3 class="shot-card-title" data-key="shot2_title">Una web editorial para piezas exclusivas y clientes que compran por percepcion.</h3>
+          <p class="shot-card-desc" data-key="shot2_desc">Tipografia sobria, aire visual y foco en la ambientacion para transmitir curaduria, gusto y valor antes del primer mensaje.</p>
+          <div class="shot-card-tags">
+            <span class="shot-card-tag" data-key="shot2_tag1">Colecciones</span>
+            <span class="shot-card-tag" data-key="shot2_tag2">Visitas privadas</span>
+            <span class="shot-card-tag" data-key="shot2_tag3">Imagen de marca</span>
+          </div>
+        </figcaption>
       </figure>
       <figure class="shot-card fi d3">
-        <img
-          src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
-          alt="Composición visual de web profesional"
-          class="lightbox-trigger"
-          width="2530"
-          height="1370"
-          loading="lazy"
-        />
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
+            alt="Vista de sitio web premium para taller automotriz"
+            class="lightbox-trigger"
+            width="2530"
+            height="1370"
+            loading="lazy"
+          />
+        </div>
+        <figcaption class="shot-card-copy">
+          <div class="shot-card-meta">
+            <span class="shot-card-brand">AutoStudio</span>
+            <span class="shot-card-sector" data-key="shot3_sector">Servicio automotriz premium</span>
+          </div>
+          <h3 class="shot-card-title" data-key="shot3_title">Una presencia potente para talleres que venden precision, exclusividad y confianza tecnica.</h3>
+          <p class="shot-card-desc" data-key="shot3_desc">Contraste alto, mensaje directo y CTA fuerte para que el visitante entienda rapido el nivel del servicio y agende sin friccion.</p>
+          <div class="shot-card-tags">
+            <span class="shot-card-tag" data-key="shot3_tag1">Agenda rapida</span>
+            <span class="shot-card-tag" data-key="shot3_tag2">Alto rendimiento</span>
+            <span class="shot-card-tag" data-key="shot3_tag3">Confianza tecnica</span>
+          </div>
+        </figcaption>
       </figure>
     </div>
   </div>
@@ -3725,6 +3863,19 @@ const T = {
     shots_eyebrow:"Ejemplos visuales",
     shots_title:"Así puede verse una web premium para tu negocio",
     shots_sub:"Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.",
+    shots_note:"Tres direcciones visuales para sectores distintos: producto exportable, interiorismo y servicios premium. La idea es la misma en todos los casos: hacer que tu negocio se vea sólido, actual y listo para vender.",
+    shot1_sector:"Exportación agrícola",
+    shot1_title:"Una presentación premium para vender origen, calidad y confianza internacional.",
+    shot1_desc:"Jerarquía visual limpia, fotografía protagonista y llamadas a la acción claras para que el producto se vea serio desde el primer vistazo.",
+    shot1_tag1:"Trazabilidad", shot1_tag2:"Exportación", shot1_tag3:"Cotización directa",
+    shot2_sector:"Interiorismo y decoracion",
+    shot2_title:"Una web editorial para piezas exclusivas y clientes que compran por percepcion.",
+    shot2_desc:"Tipografia sobria, aire visual y foco en la ambientacion para transmitir curaduria, gusto y valor antes del primer mensaje.",
+    shot2_tag1:"Colecciones", shot2_tag2:"Visitas privadas", shot2_tag3:"Imagen de marca",
+    shot3_sector:"Servicio automotriz premium",
+    shot3_title:"Una presencia potente para talleres que venden precision, exclusividad y confianza tecnica.",
+    shot3_desc:"Contraste alto, mensaje directo y CTA fuerte para que el visitante entienda rapido el nivel del servicio y agende sin friccion.",
+    shot3_tag1:"Agenda rapida", shot3_tag2:"Alto rendimiento", shot3_tag3:"Confianza tecnica",
     vis_eyebrow:"Tu negocio online",
     vis_title:"Así podría verse tu negocio en internet",
     vis_sub:"Una web bien hecha no es un gasto. Es la diferencia entre un cliente que te contacta y uno que se va con la competencia.",
@@ -3828,6 +3979,19 @@ const T = {
     shots_eyebrow:"Visual examples",
     shots_title:"This is how a premium website can look for your business",
     shots_sub:"Three real views integrated with a focus on visual clarity, trust, and conversion.",
+    shots_note:"Three visual directions for different sectors: export products, interior design, and premium services. The goal is the same in every case: make your business look solid, current, and ready to sell.",
+    shot1_sector:"Agricultural exports",
+    shot1_title:"A premium presentation built to sell origin, quality, and international trust.",
+    shot1_desc:"Clean visual hierarchy, product-led photography, and clear calls to action so the offer feels credible from the very first glance.",
+    shot1_tag1:"Traceability", shot1_tag2:"Exports", shot1_tag3:"Direct quote",
+    shot2_sector:"Interior design and decor",
+    shot2_title:"An editorial website for exclusive pieces and clients who buy based on perception.",
+    shot2_desc:"Restrained typography, visual breathing room, and immersive staging to communicate curation, taste, and value before the first message.",
+    shot2_tag1:"Collections", shot2_tag2:"Private visits", shot2_tag3:"Brand image",
+    shot3_sector:"Premium auto service",
+    shot3_title:"A bold presence for workshops that sell precision, exclusivity, and technical trust.",
+    shot3_desc:"High contrast, direct messaging, and a strong CTA so visitors quickly understand the service level and book without friction.",
+    shot3_tag1:"Fast booking", shot3_tag2:"High performance", shot3_tag3:"Technical trust",
     vis_eyebrow:"Your business online",
     vis_title:"This is what your business could look like online",
     vis_sub:"A well-built website is not an expense. It is the difference between a client who contacts you and one who goes to the competition.",
