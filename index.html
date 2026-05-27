@@ -18,11 +18,12 @@
       gtag('config', window.__gaMeasurementId, { anonymize_ip: true });
     };
   </script>
-      (function(c,l,a,r,i,t,y){
-          c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-          t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-          y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-      })(window, document, "clarity", "script", "wq1vez3c5m");
+  <script>
+    (function(c,l,a,r,i,t,y){
+      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
+      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+    })(window, document, "clarity", "script", "wq1vez3c5m");
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -50,171 +51,17 @@
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
-  <style>
-    /* ─── TOKENS ─── */
-    :root {
-      --bg:            #F7F7F5;
-      --primary:       #0B1F3A;
-      --primary-h:     #142d54;
-      --text:          #111111;
-      --muted-text:    #6B7280;
-      --muted-border:  #E5E5E3;
-      --muted-fill:    #EBEBEA;
-      --white:         #FFFFFF;
-      --accent:        #1A6EFA;
-      --accent-soft:   rgba(26,110,250,0.09);
-      --accent-border: rgba(26,110,250,0.18);
-      --green:         #25D366;
-      --green-h:       #1fbc59;
-      --shadow-xs:  0 1px 4px  rgba(11,31,58,0.06);
-      --shadow-sm:  0 2px 14px rgba(11,31,58,0.08);
-      --shadow-md:  0 8px 32px rgba(11,31,58,0.11);
-      --shadow-lg:  0 20px 64px rgba(11,31,58,0.13);
-      --r-sm:  10px;
-      --r-md:  16px;
-      --r-lg:  22px;
-    }
-    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; overflow-x: hidden; }
-    body {
-      font-family: 'Inter', sans-serif;
-      background: var(--bg);
-      color: var(--text);
-      line-height: 1.6;
-      overflow-x: hidden;
-      -webkit-font-smoothing: antialiased;
-    }
+                </div>
+              </div>
+              <div class="laptop-base"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
-    @media (prefers-reduced-motion: reduce) {
-      html { scroll-behavior: auto; }
-      *, *::before, *::after {
-        animation-duration: 0.01ms !important;
-        animation-iteration-count: 1 !important;
-        transition-duration: 0.01ms !important;
-      }
-    }
-
-    /* ─── UTILITIES ─── */
-    .container { max-width: 1100px; margin: 0 auto; padding: 0 28px; }
-    .section    { padding: clamp(72px, 8vw, 104px) 0; }
-    .section-sm { padding: clamp(56px, 6vw, 76px) 0; }
-    .tc  { text-align: center; }
-    .tc .section-sub { margin-left: auto; margin-right: auto; }
-    #inicio,
-    #beneficios,
-    #cambio,
-    #proceso,
-    #para-quien { scroll-margin-top: 90px; }
-
-    .eyebrow {
-      display: inline-block;
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: 2.5px;
-      text-transform: uppercase;
-      color: var(--primary);
-      opacity: 0.4;
-      margin-bottom: 18px;
-    }
-    .eyebrow-accent {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      font-size: 12px;
-      font-weight: 600;
-      letter-spacing: 0.5px;
-      color: var(--accent);
-      background: var(--accent-soft);
-      border: 1px solid var(--accent-border);
-      padding: 6px 16px;
-      border-radius: 100px;
-      margin-bottom: 26px;
-    }
-    .eyebrow-accent::before {
-      content: '';
-      width: 6px; height: 6px;
-      border-radius: 50%;
-      background: var(--accent);
-      animation: blink 2s ease infinite;
-    }
-    @keyframes blink {
-      0%,100%{ opacity:1; transform:scale(1);   }
-      50%    { opacity:.4; transform:scale(.75); }
-    }
-
-    .section-title {
-      font-size: clamp(28px, 3.8vw, 44px);
-      font-weight: 700;
-      color: var(--primary);
-      line-height: 1.18;
-      letter-spacing: -0.6px;
-    }
-    .section-sub {
-      font-size: 18px;
-      color: var(--muted-text);
-      margin-top: 16px;
-      max-width: 580px;
-      line-height: 1.75;
-    }
-    .divider {
-      height: 1px;
-      background: linear-gradient(90deg, transparent, var(--muted-border), transparent);
-    }
-
-    /* ─── FADE-IN ─── */
-    .fi {
-      opacity: 0;
-      transform: translateY(26px);
-      transition: opacity .72s ease, transform .72s ease;
-    }
-    .fi.in { opacity:1; transform:translateY(0); }
-    .d1{ transition-delay:.08s; }
-    .d2{ transition-delay:.16s; }
-    .d3{ transition-delay:.24s; }
-    .d4{ transition-delay:.32s; }
-    .d5{ transition-delay:.40s; }
-    .fi-slide {
-      opacity: 0;
-      transform: translateX(40px);
-      transition: opacity .9s ease, transform .9s cubic-bezier(.22,.68,0,1.2);
-    }
-    .fi-slide.in { opacity:1; transform:translateX(0); }
-
-    /* ─── BUTTONS ─── */
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 9px;
-      font-family: 'Inter', sans-serif;
-      font-size: 15px;
-      font-weight: 600;
-      text-decoration: none;
-      border: none;
-      cursor: pointer;
-      border-radius: 12px;
-      transition: background .22s, transform .18s, box-shadow .22s, color .22s;
-      letter-spacing: -.1px;
-    }
-    .btn-primary {
-      background: var(--primary);
-      color: var(--white);
-      padding: 17px 34px;
-      box-shadow: 0 4px 22px rgba(11,31,58,.22);
-    }
-    .btn-primary:hover {
-      background: var(--primary-h);
-      transform: translateY(-2px);
-      box-shadow: 0 8px 32px rgba(11,31,58,.28);
-    }
-    .btn-ghost {
-      background: transparent;
-      color: var(--primary);
-      padding: 16px 30px;
-      border: 1.5px solid rgba(11,31,58,.2);
-    }
-    .btn-ghost:hover {
-      background: var(--primary);
-      color: var(--white);
+  <!-- ─── MOBILE PREVIEW ─── -->
       border-color: var(--primary);
       transform: translateY(-2px);
     }
@@ -548,24 +395,15 @@
       grid-template-columns: repeat(3, minmax(0, 1fr));
       gap: 24px;
     }
-    .shots-note {
-      max-width: 760px;
-      margin: 22px auto 0;
-      color: var(--muted-text);
-      font-size: 16px;
-      line-height: 1.75;
-    }
     .shot-card {
       position: relative;
-      display: flex;
-      flex-direction: column;
       border-radius: 12px;
       overflow: hidden;
       border: 1px solid rgba(11,31,58,.10);
       background: linear-gradient(180deg, #f6f3eb 0%, #ffffff 100%);
       box-shadow: 0 10px 30px rgba(11,31,58,.10);
       transition: transform .2s ease, box-shadow .2s ease;
-      aspect-ratio: auto;
+      aspect-ratio: 16 / 10;
     }
     .shot-card:hover {
       transform: translateY(-2px) scale(1.012);
@@ -591,67 +429,6 @@
       object-fit: cover;
       object-position: center;
       display: block;
-    }
-    .shot-card-copy {
-      padding: 20px 20px 22px;
-      display: grid;
-      gap: 14px;
-      color: var(--primary);
-    }
-    .shot-card-meta {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 10px;
-      flex-wrap: wrap;
-    }
-    .shot-card-brand {
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: -.03em;
-    }
-    .shot-card-sector {
-      display: inline-flex;
-      align-items: center;
-      min-height: 30px;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: rgba(11,31,58,.06);
-      border: 1px solid rgba(11,31,58,.08);
-      color: rgba(11,31,58,.72);
-      font-size: 11px;
-      font-weight: 700;
-      letter-spacing: .16em;
-      text-transform: uppercase;
-    }
-    .shot-card-title {
-      font-size: 22px;
-      line-height: 1.18;
-      letter-spacing: -.04em;
-      font-weight: 700;
-      color: #132033;
-    }
-    .shot-card-desc {
-      color: var(--muted-text);
-      font-size: 14px;
-      line-height: 1.75;
-    }
-    .shot-card-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .shot-card-tag {
-      display: inline-flex;
-      align-items: center;
-      min-height: 32px;
-      padding: 0 12px;
-      border-radius: 999px;
-      background: rgba(26,110,250,.08);
-      color: var(--accent);
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: .01em;
     }
 
     /* ─── LIGHTBOX ─── */
@@ -1622,9 +1399,6 @@
       .shots-section     { padding-top: 88px; padding-bottom: 88px; }
       .shots-section .container { padding-left: 20px; padding-right: 20px; }
       .shots-grid        { grid-template-columns:1fr 1fr; gap:18px; margin-top:48px; }
-      .shot-card         { grid-column: span 1; }
-      .shot-card:first-child { grid-column: 1 / -1; }
-      .shot-card-title   { font-size: 24px; }
 
       /* Vision */
       .vision-grid       { grid-template-columns:1fr; gap:44px; margin-top:44px; }
@@ -1712,14 +1486,7 @@
       /* Screenshots section */
       .shots-section     { padding-top: 68px; padding-bottom: 68px; }
       .shots-section .container { padding-left: 14px; padding-right: 14px; }
-      .shots-note        { font-size: 14px; margin-top: 16px; }
       .shots-grid        { grid-template-columns:1fr; gap:14px; margin-top: 36px; }
-      .shot-card:first-child { grid-column: auto; }
-      .shot-card-copy    { padding: 16px 16px 18px; gap: 12px; }
-      .shot-card-title   { font-size: 20px; }
-      .shot-card-brand   { font-size: 17px; }
-      .shot-card-sector,
-      .shot-card-tag     { font-size: 10.5px; }
 
       /* Vision section */
       .vision-section    { padding-bottom: 0; }
@@ -3288,8 +3055,7 @@
     <div class="tc fi">
       <span class="eyebrow" data-key="shots_eyebrow">Ejemplos visuales</span>
       <h2 class="section-title" data-key="shots_title">Así puede verse una web premium para tu negocio</h2>
-      <p class="section-sub" data-key="shots_sub">Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.</p>
-      <p class="shots-note" data-key="shots_note">Tres direcciones visuales para sectores distintos: producto exportable, interiorismo y servicios premium. La idea es la misma en todos los casos: hacer que tu negocio se vea sólido, actual y listo para vender.</p>
+      <p class="section-sub" data-key="shots_sub">Seis mockups reales con una misma línea visual: limpia, premium y enfocada en conversión.</p>
     </div>
     <div class="shots-grid">
       <figure class="shot-card fi d1">
@@ -3303,19 +3069,6 @@
             loading="lazy"
           />
         </div>
-        <figcaption class="shot-card-copy">
-          <div class="shot-card-meta">
-            <span class="shot-card-brand">OroEcuador</span>
-            <span class="shot-card-sector" data-key="shot1_sector">Exportación agrícola</span>
-          </div>
-          <h3 class="shot-card-title" data-key="shot1_title">Una presentación premium para vender origen, calidad y confianza internacional.</h3>
-          <p class="shot-card-desc" data-key="shot1_desc">Jerarquía visual limpia, fotografía protagonista y llamadas a la acción claras para que el producto se vea serio desde el primer vistazo.</p>
-          <div class="shot-card-tags">
-            <span class="shot-card-tag" data-key="shot1_tag1">Trazabilidad</span>
-            <span class="shot-card-tag" data-key="shot1_tag2">Exportación</span>
-            <span class="shot-card-tag" data-key="shot1_tag3">Cotización directa</span>
-          </div>
-        </figcaption>
       </figure>
       <figure class="shot-card fi d2">
         <div class="shot-card-media">
@@ -3328,19 +3081,6 @@
             loading="lazy"
           />
         </div>
-        <figcaption class="shot-card-copy">
-          <div class="shot-card-meta">
-            <span class="shot-card-brand">Casave</span>
-            <span class="shot-card-sector" data-key="shot2_sector">Interiorismo y decoracion</span>
-          </div>
-          <h3 class="shot-card-title" data-key="shot2_title">Una web editorial para piezas exclusivas y clientes que compran por percepcion.</h3>
-          <p class="shot-card-desc" data-key="shot2_desc">Tipografia sobria, aire visual y foco en la ambientacion para transmitir curaduria, gusto y valor antes del primer mensaje.</p>
-          <div class="shot-card-tags">
-            <span class="shot-card-tag" data-key="shot2_tag1">Colecciones</span>
-            <span class="shot-card-tag" data-key="shot2_tag2">Visitas privadas</span>
-            <span class="shot-card-tag" data-key="shot2_tag3">Imagen de marca</span>
-          </div>
-        </figcaption>
       </figure>
       <figure class="shot-card fi d3">
         <div class="shot-card-media">
@@ -3353,19 +3093,42 @@
             loading="lazy"
           />
         </div>
-        <figcaption class="shot-card-copy">
-          <div class="shot-card-meta">
-            <span class="shot-card-brand">AutoStudio</span>
-            <span class="shot-card-sector" data-key="shot3_sector">Servicio automotriz premium</span>
-          </div>
-          <h3 class="shot-card-title" data-key="shot3_title">Una presencia potente para talleres que venden precision, exclusividad y confianza tecnica.</h3>
-          <p class="shot-card-desc" data-key="shot3_desc">Contraste alto, mensaje directo y CTA fuerte para que el visitante entienda rapido el nivel del servicio y agende sin friccion.</p>
-          <div class="shot-card-tags">
-            <span class="shot-card-tag" data-key="shot3_tag1">Agenda rapida</span>
-            <span class="shot-card-tag" data-key="shot3_tag2">Alto rendimiento</span>
-            <span class="shot-card-tag" data-key="shot3_tag3">Confianza tecnica</span>
-          </div>
-        </figcaption>
+      </figure>
+      <figure class="shot-card fi d4">
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/auto-studio.png"
+            alt="Mockup premium adicional de AutoStudio"
+            class="lightbox-trigger"
+            width="2688"
+            height="1550"
+            loading="lazy"
+          />
+        </div>
+      </figure>
+      <figure class="shot-card fi d5">
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-27%20at%2011.53.57.png"
+            alt="Mockup premium de sitio web moderno"
+            class="lightbox-trigger"
+            width="2688"
+            height="1550"
+            loading="lazy"
+          />
+        </div>
+      </figure>
+      <figure class="shot-card fi d1">
+        <div class="shot-card-media">
+          <img
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/casave.png"
+            alt="Mockup premium adicional de Casave"
+            class="lightbox-trigger"
+            width="2688"
+            height="1550"
+            loading="lazy"
+          />
+        </div>
       </figure>
     </div>
   </div>
@@ -3436,18 +3199,41 @@
                   loading="lazy"
                 />
               </div>
-            </div>
-            <div class="laptop-base"></div>
-            <div class="laptop-foot"></div>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="divider"></div>
-
+            </figure>
+            <figure class="shot-card fi d4">
+              <div class="shot-card-media">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/auto-studio.png"
+                  alt="Mockup premium de AutoStudio"
+                  class="lightbox-trigger"
+                  width="2688"
+                  height="1550"
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+            <figure class="shot-card fi d5">
+              <div class="shot-card-media">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-27%20at%2011.53.57.png"
+                  alt="Mockup premium adicional para sitio web moderno"
+                  class="lightbox-trigger"
+                  width="2688"
+                  height="1550"
+                  loading="lazy"
+                />
+              </div>
+            </figure>
+            <figure class="shot-card fi d1">
+              <div class="shot-card-media">
+                <img
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/casave.png"
+                  alt="Mockup premium de Casave"
+                  class="lightbox-trigger"
+                  width="2688"
+                  height="1550"
+                  loading="lazy"
+                />
 <!-- ─── MOBILE PREVIEW ─── -->
 <section class="section-sm mobile-preview-section" id="movil">
   <div class="container">
@@ -3862,20 +3648,7 @@ const T = {
     hero_proof:"Proyectos diseñados para negocios reales en Ecuador",
     shots_eyebrow:"Ejemplos visuales",
     shots_title:"Así puede verse una web premium para tu negocio",
-    shots_sub:"Tres vistas reales, integradas con enfoque en claridad visual, confianza y conversión.",
-    shots_note:"Tres direcciones visuales para sectores distintos: producto exportable, interiorismo y servicios premium. La idea es la misma en todos los casos: hacer que tu negocio se vea sólido, actual y listo para vender.",
-    shot1_sector:"Exportación agrícola",
-    shot1_title:"Una presentación premium para vender origen, calidad y confianza internacional.",
-    shot1_desc:"Jerarquía visual limpia, fotografía protagonista y llamadas a la acción claras para que el producto se vea serio desde el primer vistazo.",
-    shot1_tag1:"Trazabilidad", shot1_tag2:"Exportación", shot1_tag3:"Cotización directa",
-    shot2_sector:"Interiorismo y decoracion",
-    shot2_title:"Una web editorial para piezas exclusivas y clientes que compran por percepcion.",
-    shot2_desc:"Tipografia sobria, aire visual y foco en la ambientacion para transmitir curaduria, gusto y valor antes del primer mensaje.",
-    shot2_tag1:"Colecciones", shot2_tag2:"Visitas privadas", shot2_tag3:"Imagen de marca",
-    shot3_sector:"Servicio automotriz premium",
-    shot3_title:"Una presencia potente para talleres que venden precision, exclusividad y confianza tecnica.",
-    shot3_desc:"Contraste alto, mensaje directo y CTA fuerte para que el visitante entienda rapido el nivel del servicio y agende sin friccion.",
-    shot3_tag1:"Agenda rapida", shot3_tag2:"Alto rendimiento", shot3_tag3:"Confianza tecnica",
+    shots_sub:"Seis mockups reales con una misma línea visual: limpia, premium y enfocada en conversión.",
     vis_eyebrow:"Tu negocio online",
     vis_title:"Así podría verse tu negocio en internet",
     vis_sub:"Una web bien hecha no es un gasto. Es la diferencia entre un cliente que te contacta y uno que se va con la competencia.",
@@ -3978,20 +3751,7 @@ const T = {
     hero_proof:"Projects designed for real businesses in Ecuador",
     shots_eyebrow:"Visual examples",
     shots_title:"This is how a premium website can look for your business",
-    shots_sub:"Three real views integrated with a focus on visual clarity, trust, and conversion.",
-    shots_note:"Three visual directions for different sectors: export products, interior design, and premium services. The goal is the same in every case: make your business look solid, current, and ready to sell.",
-    shot1_sector:"Agricultural exports",
-    shot1_title:"A premium presentation built to sell origin, quality, and international trust.",
-    shot1_desc:"Clean visual hierarchy, product-led photography, and clear calls to action so the offer feels credible from the very first glance.",
-    shot1_tag1:"Traceability", shot1_tag2:"Exports", shot1_tag3:"Direct quote",
-    shot2_sector:"Interior design and decor",
-    shot2_title:"An editorial website for exclusive pieces and clients who buy based on perception.",
-    shot2_desc:"Restrained typography, visual breathing room, and immersive staging to communicate curation, taste, and value before the first message.",
-    shot2_tag1:"Collections", shot2_tag2:"Private visits", shot2_tag3:"Brand image",
-    shot3_sector:"Premium auto service",
-    shot3_title:"A bold presence for workshops that sell precision, exclusivity, and technical trust.",
-    shot3_desc:"High contrast, direct messaging, and a strong CTA so visitors quickly understand the service level and book without friction.",
-    shot3_tag1:"Fast booking", shot3_tag2:"High performance", shot3_tag3:"Technical trust",
+    shots_sub:"Six real mockups with the same visual direction: clean, premium, and conversion-focused.",
     vis_eyebrow:"Your business online",
     vis_title:"This is what your business could look like online",
     vis_sub:"A well-built website is not an expense. It is the difference between a client who contacts you and one who goes to the competition.",
