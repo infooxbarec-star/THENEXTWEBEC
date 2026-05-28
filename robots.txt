@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://thenextwebec.com/sitemap.xml
