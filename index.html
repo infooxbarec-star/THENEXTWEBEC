@@ -1987,6 +1987,9 @@
       color: var(--muted-text);
       letter-spacing: -.1px;
     }
+    .founder-body p.founder-body-black {
+      color: #000;
+    }
     .founder-body strong {
       color: var(--primary);
       font-weight: 700;
@@ -4877,10 +4880,10 @@
         <div class="founder-body">
           <p data-key="founder_p1">Mi nombre es Jose Ignacio Guerrero.</p>
           <p data-key="founder_p2">Trabajando con distintos negocios, me di cuenta de algo: muchas empresas hacen un trabajo excelente, pero su presencia digital no refleja realmente el nivel de lo que ofrecen.</p>
-          <p data-key="founder_p3">Por eso nació NextWebEC.</p>
-          <p data-key="founder_p4">No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.</p>
-          <p data-key="founder_p5">Mi enfoque no es simplemente crear páginas web. Busco construir experiencias digitales modernas, rápidas y claras que ayuden a transmitir confianza, diferenciar una marca y convertir visitantes en clientes.</p>
-          <p data-key="founder_p6">Trabajo con empresas que entienden que hoy la primera impresión suele ocurrir antes de una llamada, una visita o una reunión.</p>
+          <p class="founder-body-black" data-key="founder_p3">Por eso nació NextWebEC.</p>
+          <p class="founder-body-black" data-key="founder_p4">No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.</p>
+          <p class="founder-body-black" data-key="founder_p5">Mi enfoque no es simplemente crear páginas web. Busco construir experiencias digitales modernas, rápidas y claras que ayuden a transmitir confianza, diferenciar una marca y convertir visitantes en clientes.</p>
+          <p class="founder-body-black" data-key="founder_p6">Trabajo con empresas que entienden que hoy la primera impresión suele ocurrir antes de una llamada, una visita o una reunión.</p>
           <p><strong data-key="founder_p7">Y esa primera impresión ocurre en internet.</strong></p>
         </div>
 
@@ -5380,7 +5383,8 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
-  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bhvfoo/';
+  // Endpoint del Worker que recibe el checklist y reenvia la solicitud al destino final.
+  const webhookUrl = 'https://checklist-audit.thenextwebec.workers.dev';
   const nameInput = document.getElementById('checklistName');
   const emailInput = document.getElementById('checklistEmail');
   const phoneInput = document.getElementById('checklistPhone');
