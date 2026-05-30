@@ -1689,6 +1689,235 @@
       opacity:.25;
     }
 
+    /* ─── CHECKLIST ─── */
+    .checklist-section {
+      position: relative;
+      overflow: hidden;
+      background:
+        radial-gradient(circle at top right, rgba(26,110,250,.12), transparent 32%),
+        linear-gradient(180deg, rgba(255,255,255,.86) 0%, rgba(247,247,245,1) 100%);
+    }
+    .checklist-shell {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(320px, .92fr);
+      gap: 32px;
+      align-items: start;
+      padding: 40px;
+      border-radius: 32px;
+      background: rgba(255,255,255,.84);
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 28px 80px rgba(11,31,58,.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+    .checklist-shell::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(26,110,250,.06), transparent 44%, rgba(11,31,58,.04));
+      pointer-events: none;
+    }
+    .checklist-content,
+    .checklist-form-card {
+      position: relative;
+      z-index: 1;
+    }
+    .checklist-copy {
+      max-width: 620px;
+    }
+    .checklist-title {
+      margin-bottom: 18px;
+    }
+    .checklist-sub {
+      margin-top: 0;
+      max-width: 560px;
+      font-size: 18px;
+      line-height: 1.75;
+      color: var(--muted-text);
+    }
+    .checklist-benefits {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 16px;
+      margin-top: 34px;
+    }
+    .checklist-benefit {
+      position: relative;
+      min-height: 138px;
+      padding: 22px 20px 20px;
+      border-radius: 22px;
+      background: linear-gradient(180deg, rgba(255,255,255,.98), rgba(244,247,252,.95));
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 16px 38px rgba(11,31,58,.07);
+    }
+    .checklist-benefit-icon {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      margin-bottom: 16px;
+      background: linear-gradient(180deg, rgba(26,110,250,.16), rgba(26,110,250,.08));
+      color: var(--accent);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.8);
+    }
+    .checklist-benefit-title {
+      font-size: 16px;
+      font-weight: 700;
+      letter-spacing: -.2px;
+      color: var(--primary);
+      line-height: 1.45;
+    }
+    .checklist-form-card {
+      padding: 28px;
+      border-radius: 26px;
+      background: linear-gradient(180deg, rgba(11,31,58,.98), rgba(17,40,72,.96));
+      color: var(--white);
+      box-shadow: 0 24px 64px rgba(11,31,58,.26);
+    }
+    .checklist-form-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.72);
+    }
+    .checklist-form-eyebrow::before {
+      content: '';
+      width: 26px;
+      height: 1px;
+      background: rgba(147,197,253,.62);
+    }
+    .checklist-form-title {
+      font-size: 28px;
+      font-weight: 800;
+      line-height: 1.16;
+      letter-spacing: -.7px;
+      color: var(--white);
+      margin-bottom: 12px;
+    }
+    .checklist-form-text {
+      margin-bottom: 24px;
+      font-size: 15px;
+      line-height: 1.75;
+      color: rgba(255,255,255,.74);
+    }
+    .checklist-form {
+      display: grid;
+      gap: 14px;
+    }
+    .checklist-field {
+      display: grid;
+      gap: 8px;
+    }
+    .checklist-label {
+      font-size: 13px;
+      font-weight: 600;
+      color: rgba(255,255,255,.88);
+    }
+    .checklist-input {
+      width: 100%;
+      min-width: 0;
+      appearance: none;
+      border: 1px solid rgba(255,255,255,.14);
+      border-radius: 14px;
+      background: rgba(255,255,255,.08);
+      color: var(--white);
+      padding: 15px 16px;
+      font: inherit;
+      transition: border-color .22s ease, background .22s ease, box-shadow .22s ease;
+    }
+    .checklist-input::placeholder {
+      color: rgba(255,255,255,.42);
+    }
+    .checklist-input:focus {
+      outline: none;
+      border-color: rgba(147,197,253,.78);
+      background: rgba(255,255,255,.11);
+      box-shadow: 0 0 0 4px rgba(59,130,246,.18);
+    }
+    .checklist-actions {
+      display: grid;
+      gap: 12px;
+      margin-top: 6px;
+    }
+    .checklist-submit,
+    .checklist-whatsapp {
+      width: 100%;
+      justify-content: center;
+    }
+    .checklist-submit {
+      padding-left: 24px;
+      padding-right: 24px;
+    }
+    .checklist-whatsapp {
+      border-color: rgba(255,255,255,.18);
+      color: var(--white);
+      background: rgba(255,255,255,.04);
+    }
+    .checklist-whatsapp:hover {
+      background: rgba(255,255,255,.12);
+      border-color: rgba(255,255,255,.28);
+    }
+    .checklist-note {
+      margin-top: 6px;
+      font-size: 12px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.56);
+    }
+    .checklist-status {
+      display: none;
+      margin-top: 16px;
+      padding: 14px 16px;
+      border-radius: 16px;
+      font-size: 14px;
+      line-height: 1.7;
+      border: 1px solid transparent;
+    }
+    .checklist-status.is-visible {
+      display: block;
+    }
+    .checklist-status.is-success {
+      background: rgba(37,211,102,.12);
+      border-color: rgba(37,211,102,.22);
+      color: #CFF7DB;
+    }
+    .checklist-status.is-error {
+      background: rgba(248,113,113,.12);
+      border-color: rgba(248,113,113,.2);
+      color: #FFD7D7;
+    }
+    .checklist-trust {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .checklist-trust-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 9px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.07);
+      font-size: 12px;
+      color: rgba(255,255,255,.76);
+    }
+    .checklist-trust-item::before {
+      content: '';
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #93C5FD;
+      box-shadow: 0 0 0 4px rgba(147,197,253,.12);
+    }
+
     /* ─── FINAL CTA ─── */
     .final-cta-section { background:var(--bg); }
     .final-cta-inner {
@@ -1827,6 +2056,11 @@
       .get-grid          { grid-template-columns:1fr; gap:16px; margin-top:48px; }
       .whom-grid         { grid-template-columns:1fr; gap:16px; margin-top:48px; }
 
+      /* Checklist */
+      .checklist-shell   { grid-template-columns: 1fr; gap: 24px; padding: 34px; }
+      .checklist-copy    { max-width: none; }
+      .checklist-benefits { margin-top: 28px; }
+
       /* Soften perspective on tablet */
       .laptop-mockup     { transform: rotateX(1deg) rotateY(-2deg); }
       .device-comp-wrap:hover .laptop-mockup { transform: rotateX(1deg) rotateY(-1deg) translateY(-4px); }
@@ -1858,6 +2092,11 @@
 
       /* Final CTA */
       .final-cta-sub     { font-size: 17px; margin-bottom: 36px; }
+
+      /* Checklist */
+      .checklist-shell   { padding: 28px; border-radius: 28px; }
+      .checklist-form-card { padding: 24px; }
+      .checklist-form-title { font-size: 25px; }
     }
 
     /* ── Mobile (≤600px) ── */
@@ -1961,6 +2200,24 @@
       .whom-card         { padding: 26px 22px; }
       .whom-title        { font-size: 16px; }
       .whom-desc         { font-size: 13.5px; }
+
+      /* Checklist */
+      .checklist-shell   { padding: 22px 18px; border-radius: 24px; }
+      .checklist-title   { font-size: 30px; }
+      .checklist-sub     { font-size: 15px; }
+      .checklist-benefits { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
+      .checklist-benefit { min-height: 0; padding: 18px 16px; border-radius: 18px; }
+      .checklist-benefit-icon { width: 38px; height: 38px; border-radius: 12px; margin-bottom: 14px; }
+      .checklist-benefit-title { font-size: 15px; }
+      .checklist-form-card { padding: 22px 18px; border-radius: 22px; }
+      .checklist-form-title { font-size: 22px; }
+      .checklist-form-text { font-size: 14px; margin-bottom: 20px; }
+      .checklist-input { padding: 14px 14px; }
+      .checklist-actions { gap: 10px; }
+      .checklist-submit,
+      .checklist-whatsapp { width: 100%; }
+      .checklist-trust { gap: 8px; }
+      .checklist-trust-item { width: 100%; justify-content: center; }
 
       /* Final CTA section */
       .final-cta-sub     { font-size: 16px; margin-bottom: 30px; }
@@ -3353,6 +3610,7 @@
       <li><a class="nav-main-link" href="#cambio" data-key="nav_results">Resultados</a></li>
       <li><a class="nav-main-link" href="#analytics" data-key="nav_analytics">Analítica</a></li>
       <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
+      <li><a class="nav-main-link" href="#checklist" data-key="nav_checklist">Checklist</a></li>
       <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
     </ul>
     <div class="nav-right">
@@ -3374,6 +3632,7 @@
   <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
   <a class="mobile-nav-link" href="#analytics" onclick="toggleMenu()" data-key="nav_analytics">Analítica</a>
   <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
+  <a class="mobile-nav-link" href="#checklist" onclick="toggleMenu()" data-key="nav_checklist">Checklist</a>
   <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
   <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20tu%20web%20de%20NextWebEC%20y%20me%20interesa%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" data-key="nav_cta">Hablemos por WhatsApp</a>
   <div class="mobile-lang">
@@ -4377,6 +4636,88 @@
   </div>
 </section>
 
+<section class="section checklist-section" id="checklist">
+  <div class="container">
+    <div class="checklist-shell fi">
+      <div class="checklist-content">
+        <span class="eyebrow" data-key="checklist_eyebrow">Checklist gratuito</span>
+        <div class="checklist-copy">
+          <h2 class="section-title checklist-title" data-key="checklist_title">¿Tu sitio web está realmente funcionando?</h2>
+          <p class="section-sub checklist-sub" data-key="checklist_sub">Descubre qué le falta a tu web para convertir visitantes en clientes.</p>
+        </div>
+
+        <div class="checklist-benefits">
+          <article class="checklist-benefit fi d1">
+            <div class="checklist-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M9 11l3 3L22 4"/><path d="M21 12v7a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11"/></svg>
+            </div>
+            <div class="checklist-benefit-title" data-key="checklist_b1">15 puntos clave que revisar en tu sitio</div>
+          </article>
+          <article class="checklist-benefit fi d2">
+            <div class="checklist-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 5h18"/><path d="M3 12h18"/><path d="M3 19h18"/><path d="M8 3v18"/></svg>
+            </div>
+            <div class="checklist-benefit-title" data-key="checklist_b2">Checklist visual fácil de entender</div>
+          </article>
+          <article class="checklist-benefit fi d3">
+            <div class="checklist-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20V10"/><path d="M18 20V4"/><path d="M6 20v-4"/></svg>
+            </div>
+            <div class="checklist-benefit-title" data-key="checklist_b3">Identifica exactamente qué mejorar</div>
+          </article>
+          <article class="checklist-benefit fi d4">
+            <div class="checklist-benefit-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24" width="20" height="20" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 1v22"/><path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14.5a3.5 3.5 0 0 1 0 7H6"/></svg>
+            </div>
+            <div class="checklist-benefit-title" data-key="checklist_b4">Gratis y sin compromiso</div>
+          </article>
+        </div>
+      </div>
+
+      <aside class="checklist-form-card fi d2">
+        <div class="checklist-form-eyebrow" data-key="checklist_form_eyebrow">Auditoría web gratuita</div>
+        <h3 class="checklist-form-title" data-key="checklist_form_title">Solicita el checklist y revisa tu web con más claridad.</h3>
+        <p class="checklist-form-text" data-key="checklist_form_text">Déjame tus datos y te contactaré o te enviaré el recurso pronto. El formulario queda listo para conectarlo luego con Zapier, Formspree o Netlify Forms.</p>
+
+        <form class="checklist-form" id="checklistForm" name="website-audit-checklist" method="POST" data-netlify="true" netlify-honeypot="bot-field" novalidate>
+          <input type="hidden" name="form-name" value="website-audit-checklist" />
+          <input type="hidden" name="bot-field" tabindex="-1" autocomplete="off" />
+
+          <div class="checklist-field">
+            <label class="checklist-label" for="checklistName" data-key="checklist_name_label">Nombre</label>
+            <input class="checklist-input" id="checklistName" name="name" type="text" autocomplete="name" data-placeholder-key="checklist_name_placeholder" placeholder="Tu nombre" />
+          </div>
+
+          <div class="checklist-field">
+            <label class="checklist-label" for="checklistEmail" data-key="checklist_email_label">Email</label>
+            <input class="checklist-input" id="checklistEmail" name="email" type="email" autocomplete="email" data-placeholder-key="checklist_email_placeholder" placeholder="tuemail@negocio.com" />
+          </div>
+
+          <div class="checklist-field">
+            <label class="checklist-label" for="checklistPhone" data-key="checklist_phone_label">Teléfono opcional</label>
+            <input class="checklist-input" id="checklistPhone" name="phone" type="tel" autocomplete="tel" data-placeholder-key="checklist_phone_placeholder" placeholder="Tu número de contacto" />
+          </div>
+
+          <div class="checklist-actions">
+            <button type="submit" class="btn btn-primary checklist-submit" data-key="checklist_submit">Descargar checklist</button>
+            <a href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20quiero%20una%20auditor%C3%ADa%20gratuita%20de%20mi%20web." target="_blank" rel="noopener noreferrer" class="btn btn-ghost checklist-whatsapp" data-key="checklist_whatsapp">Pedir auditoría por WhatsApp</a>
+          </div>
+
+          <div class="checklist-status" id="checklistStatus" aria-live="polite"></div>
+
+          <p class="checklist-note" data-key="checklist_note">No comparto tus datos con terceros. Solo los usaré para responderte sobre el checklist o la auditoría.</p>
+        </form>
+
+        <div class="checklist-trust" aria-hidden="true">
+          <div class="checklist-trust-item" data-key="checklist_trust_1">Sin alertas invasivas</div>
+          <div class="checklist-trust-item" data-key="checklist_trust_2">Respuesta personal</div>
+          <div class="checklist-trust-item" data-key="checklist_trust_3">Optimizado para móvil</div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>
+
 <!-- ─── FINAL CTA ─── -->
 <section class="section final-cta-section" id="contacto">
   <div class="container">
@@ -4427,7 +4768,7 @@
 /* ─── TRANSLATIONS ─── */
 const T = {
   es: {
-    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_clients:"Clientes", nav_cta:"Hablemos por WhatsApp",
+    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_checklist:"Checklist", nav_clients:"Clientes", nav_cta:"Hablemos por WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"Diseño y rediseño de webs", hero_t2:"para negocios que no", hero_t3:"generan contactos",
     hero_sub:"Transformo páginas desactualizadas en sitios modernos, rápidos y enfocados en generar confianza, más visitas y más consultas.",
@@ -4533,6 +4874,30 @@ const T = {
     wh2_t:"Negocios con una web antigua", wh2_d:"Rediseñamos tu web actual para que se vea moderna, funcione bien en celular y represente mejor lo que ofreces.",
     wh3_t:"Negocios que quieren verse más profesionales", wh3_d:"Tu negocio merece una imagen que compita con los mejores del sector, sin importar su tamaño.",
     wh4_t:"Negocios que no están generando clientes online", wh4_d:"Diseñamos con un objetivo claro: que los visitantes de tu web se conviertan en personas que te contactan.",
+    checklist_eyebrow:"Checklist gratuito",
+    checklist_title:"¿Tu sitio web está realmente funcionando?",
+    checklist_sub:"Descubre qué le falta a tu web para convertir visitantes en clientes.",
+    checklist_b1:"15 puntos clave que revisar en tu sitio",
+    checklist_b2:"Checklist visual fácil de entender",
+    checklist_b3:"Identifica exactamente qué mejorar",
+    checklist_b4:"Gratis y sin compromiso",
+    checklist_form_eyebrow:"Auditoría web gratuita",
+    checklist_form_title:"Solicita el checklist y revisa tu web con más claridad.",
+    checklist_form_text:"Déjame tus datos y te contactaré o te enviaré el recurso pronto. El formulario queda listo para conectarlo luego con Zapier, Formspree o Netlify Forms.",
+    checklist_name_label:"Nombre",
+    checklist_name_placeholder:"Tu nombre",
+    checklist_email_label:"Email",
+    checklist_email_placeholder:"tuemail@negocio.com",
+    checklist_phone_label:"Teléfono opcional",
+    checklist_phone_placeholder:"Tu número de contacto",
+    checklist_submit:"Descargar checklist",
+    checklist_whatsapp:"Pedir auditoría por WhatsApp",
+    checklist_note:"No comparto tus datos con terceros. Solo los usaré para responderte sobre el checklist o la auditoría.",
+    checklist_trust_1:"Sin alertas invasivas",
+    checklist_trust_2:"Respuesta personal",
+    checklist_trust_3:"Optimizado para móvil",
+    checklist_success:"Checklist solicitado. Te contactaré o enviaré el recurso pronto.",
+    checklist_error_required:"Completa tu nombre y un email válido para solicitar el checklist.",
     fcta_eyebrow:"Empieza hoy",
     fcta_title:"Si tu web no está generando contactos, hay algo que corregir.",
     fcta_sub:"Escríbeme por WhatsApp y revisamos cómo volverla más clara, más confiable y más útil para vender.",
@@ -4544,7 +4909,7 @@ const T = {
     wa_tip:"Hablemos",
   },
   en: {
-    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_clients:"Clients", nav_cta:"Let's talk on WhatsApp",
+    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_checklist:"Checklist", nav_clients:"Clients", nav_cta:"Let's talk on WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"I redesign websites", hero_t2:"for businesses that", hero_t3:"don't generate inquiries",
     hero_sub:"I turn outdated websites into modern, fast, trust-building pages focused on more visits and more inquiries.",
@@ -4651,6 +5016,30 @@ const T = {
     wh2_t:"Businesses with an outdated website", wh2_d:"We redesign your current website so it looks modern, works well on mobile, and better represents what you offer.",
     wh3_t:"Businesses that want to look more professional", wh3_d:"Your business deserves an image that competes with the best in your industry, regardless of its size.",
     wh4_t:"Businesses not generating clients online", wh4_d:"We design with a clear objective: turning your website visitors into people who contact you.",
+    checklist_eyebrow:"Free checklist",
+    checklist_title:"Is your website really doing its job?",
+    checklist_sub:"Discover what your site is missing to turn visitors into clients.",
+    checklist_b1:"15 key points to review on your site",
+    checklist_b2:"Visual checklist that is easy to understand",
+    checklist_b3:"Identify exactly what to improve",
+    checklist_b4:"Free and with no commitment",
+    checklist_form_eyebrow:"Free website audit",
+    checklist_form_title:"Request the checklist and review your website with more clarity.",
+    checklist_form_text:"Leave your details and I will contact you or send the resource soon. The form is ready to connect later with Zapier, Formspree, or Netlify Forms.",
+    checklist_name_label:"Name",
+    checklist_name_placeholder:"Your name",
+    checklist_email_label:"Email",
+    checklist_email_placeholder:"you@business.com",
+    checklist_phone_label:"Optional phone",
+    checklist_phone_placeholder:"Your contact number",
+    checklist_submit:"Download checklist",
+    checklist_whatsapp:"Request audit on WhatsApp",
+    checklist_note:"I do not share your information with third parties. I only use it to reply about the checklist or the audit.",
+    checklist_trust_1:"No intrusive alerts",
+    checklist_trust_2:"Personal response",
+    checklist_trust_3:"Optimized for mobile",
+    checklist_success:"Checklist requested. I will contact you or send the resource soon.",
+    checklist_error_required:"Enter your name and a valid email to request the checklist.",
     fcta_eyebrow:"Start today",
     fcta_title:"If your website is not generating inquiries, something needs to be fixed.",
     fcta_sub:"Send me a WhatsApp message and we will review how to make it clearer, more trustworthy, and more useful for selling.",
@@ -4670,6 +5059,10 @@ function setLang(l) {
   document.querySelectorAll('[data-key]').forEach(el => {
     const k = el.getAttribute('data-key');
     if (t[k] !== undefined) el.innerHTML = t[k];
+  });
+  document.querySelectorAll('[data-placeholder-key]').forEach(el => {
+    const k = el.getAttribute('data-placeholder-key');
+    if (t[k] !== undefined) el.setAttribute('placeholder', t[k]);
   });
   ['btnES','btnES2'].forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('active', l==='es'); });
   ['btnEN','btnEN2'].forEach(id => { const el=document.getElementById(id); if(el) el.classList.toggle('active', l==='en'); });
@@ -4706,7 +5099,7 @@ document.addEventListener('click', e => {
 
 /* Scroll spy for active nav links */
 const navLinks = Array.from(document.querySelectorAll('.nav-main-link, .mobile-nav-link'));
-const sectionIds = ['inicio', 'beneficios', 'cambio', 'analytics', 'proceso', 'para-quien'];
+const sectionIds = ['inicio', 'beneficios', 'cambio', 'analytics', 'proceso', 'checklist', 'para-quien'];
 
 function setActiveNav(targetId) {
   navLinks.forEach(link => {
@@ -4760,6 +5153,45 @@ window.addEventListener('resize', () => {
 }, { passive: true });
 rebuildSectionOffsets();
 requestActiveOnScrollUpdate();
+
+/* Checklist form */
+(function () {
+  const form = document.getElementById('checklistForm');
+  const status = document.getElementById('checklistStatus');
+  if (!form || !status) return;
+
+  const nameInput = document.getElementById('checklistName');
+  const emailInput = document.getElementById('checklistEmail');
+
+  function showChecklistStatus(type, message) {
+    status.textContent = message;
+    status.className = `checklist-status is-visible ${type === 'success' ? 'is-success' : 'is-error'}`;
+  }
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+    const copy = T[lang] || T.es;
+
+    if (!name || !emailOk) {
+      showChecklistStatus('error', copy.checklist_error_required);
+      return;
+    }
+
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'checklist_submit', {
+        event_category: 'lead',
+        event_label: 'website_audit_checklist'
+      });
+    }
+
+    form.reset();
+    showChecklistStatus('success', copy.checklist_success);
+  });
+})();
 
 /* Fade-in on scroll */
 const obs = new IntersectionObserver(entries => {
