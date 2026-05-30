@@ -1918,6 +1918,119 @@
       box-shadow: 0 0 0 4px rgba(147,197,253,.12);
     }
 
+    /* ─── FOUNDER ─── */
+    .founder-section {
+      background: var(--bg);
+    }
+    .founder-grid {
+      max-width: 1200px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(0, 1.08fr) minmax(0, .92fr);
+      gap: 48px;
+      align-items: center;
+    }
+    .founder-figure {
+      position: relative;
+      margin: 0;
+      transform: translateX(-8px);
+    }
+    .founder-figure::before {
+      content: '';
+      position: absolute;
+      inset: 6% 4% -6% 10%;
+      background: linear-gradient(180deg, rgba(26,110,250,.06), rgba(11,31,58,.03));
+      border-radius: 32px;
+      z-index: 0;
+      filter: blur(20px);
+    }
+    .founder-image-wrap {
+      position: relative;
+      z-index: 1;
+      overflow: hidden;
+      border-radius: 28px;
+      background: linear-gradient(180deg, rgba(255,255,255,.96), rgba(247,247,245,.98));
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 18px 44px rgba(11,31,58,.08);
+    }
+    .founder-image {
+      display: block;
+      width: 108%;
+      max-width: none;
+      height: auto;
+      object-fit: contain;
+      object-position: center top;
+      margin-left: -4%;
+      transform: scale(1.01);
+      transition: transform .55s cubic-bezier(.22,.61,.36,1);
+    }
+    .founder-image-wrap:hover .founder-image {
+      transform: scale(1.028);
+    }
+    .founder-copy {
+      max-width: 590px;
+    }
+    .founder-eyebrow {
+      margin-bottom: 18px;
+    }
+    .founder-title {
+      margin-bottom: 22px;
+    }
+    .founder-body {
+      display: grid;
+      gap: 18px;
+    }
+    .founder-body p {
+      margin: 0;
+      font-size: 17px;
+      line-height: 1.9;
+      color: var(--muted-text);
+      letter-spacing: -.1px;
+    }
+    .founder-body strong {
+      color: var(--primary);
+      font-weight: 700;
+    }
+    .founder-trust {
+      display: grid;
+      gap: 12px;
+      margin-top: 32px;
+    }
+    .founder-trust-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      min-width: 0;
+      padding: 16px 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.72);
+      border: 1px solid rgba(11,31,58,.07);
+      box-shadow: 0 10px 28px rgba(11,31,58,.04);
+      color: var(--primary);
+      font-size: 15px;
+      font-weight: 600;
+      line-height: 1.5;
+    }
+    .founder-trust-icon {
+      flex-shrink: 0;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 24px;
+      height: 24px;
+      border-radius: 50%;
+      background: var(--accent-soft);
+      color: var(--accent);
+      font-size: 14px;
+      font-weight: 800;
+    }
+    .founder-actions {
+      margin-top: 32px;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+    }
+
     /* ─── FINAL CTA ─── */
     .final-cta-section { background:var(--bg); }
     .final-cta-inner {
@@ -2061,6 +2174,12 @@
       .checklist-copy    { max-width: none; }
       .checklist-benefits { margin-top: 28px; }
 
+      /* Founder */
+      .founder-grid      { grid-template-columns: 1fr; gap: 36px; }
+      .founder-copy      { max-width: none; }
+      .founder-figure    { max-width: 720px; transform: none; }
+      .founder-image     { width: 104%; margin-left: -2%; }
+
       /* Soften perspective on tablet */
       .laptop-mockup     { transform: rotateX(1deg) rotateY(-2deg); }
       .device-comp-wrap:hover .laptop-mockup { transform: rotateX(1deg) rotateY(-1deg) translateY(-4px); }
@@ -2097,6 +2216,11 @@
       .checklist-shell   { padding: 28px; border-radius: 28px; }
       .checklist-form-card { padding: 24px; }
       .checklist-form-title { font-size: 25px; }
+
+      /* Founder */
+      .founder-grid      { gap: 32px; }
+      .founder-image     { width: 102%; margin-left: -1%; }
+      .founder-body p    { font-size: 16px; line-height: 1.82; }
     }
 
     /* ── Mobile (≤600px) ── */
@@ -2218,6 +2342,19 @@
       .checklist-whatsapp { width: 100%; }
       .checklist-trust { gap: 8px; }
       .checklist-trust-item { width: 100%; justify-content: center; }
+
+      /* Founder */
+      .founder-grid      { gap: 26px; }
+      .founder-figure    { max-width: none; }
+      .founder-image-wrap { border-radius: 22px; }
+      .founder-image     { width: 100%; margin-left: 0; }
+      .founder-title     { margin-bottom: 18px; }
+      .founder-body      { gap: 16px; }
+      .founder-body p    { font-size: 15px; line-height: 1.78; }
+      .founder-trust     { margin-top: 24px; gap: 10px; }
+      .founder-trust-item { padding: 14px 14px; font-size: 14px; border-radius: 16px; }
+      .founder-actions   { margin-top: 26px; }
+      .founder-actions .btn { width: 100%; justify-content: center; }
 
       /* Final CTA section */
       .final-cta-sub     { font-size: 16px; margin-bottom: 30px; }
@@ -4718,6 +4855,61 @@
   </div>
 </section>
 
+<section class="section founder-section" id="detras-nextwebec">
+  <div class="container">
+    <div class="founder-grid">
+      <figure class="founder-figure fi">
+        <div class="founder-image-wrap">
+          <img
+            class="founder-image"
+            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2030%2C%202026%20at%2012_43_36%20PM.png"
+            alt="Jose Ignacio Guerrero, fundador de NextWebEC"
+            loading="lazy"
+            decoding="async"
+          />
+        </div>
+      </figure>
+
+      <div class="founder-copy fi d1">
+        <span class="eyebrow founder-eyebrow" data-key="founder_eyebrow">Fundador · NextWebEC</span>
+        <h2 class="section-title founder-title" data-key="founder_title">Detrás de NextWebEC</h2>
+
+        <div class="founder-body">
+          <p data-key="founder_p1">Mi nombre es Jose Ignacio Guerrero.</p>
+          <p data-key="founder_p2">Trabajando con distintos negocios, me di cuenta de algo: muchas empresas hacen un trabajo excelente, pero su presencia digital no refleja realmente el nivel de lo que ofrecen.</p>
+          <p data-key="founder_p3">Por eso nació NextWebEC.</p>
+          <p data-key="founder_p4">No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.</p>
+          <p data-key="founder_p5">Mi enfoque no es simplemente crear páginas web. Busco construir experiencias digitales modernas, rápidas y claras que ayuden a transmitir confianza, diferenciar una marca y convertir visitantes en clientes.</p>
+          <p data-key="founder_p6">Trabajo con empresas que entienden que hoy la primera impresión suele ocurrir antes de una llamada, una visita o una reunión.</p>
+          <p><strong data-key="founder_p7">Y esa primera impresión ocurre en internet.</strong></p>
+        </div>
+
+        <div class="founder-trust">
+          <div class="founder-trust-item fi d1">
+            <span class="founder-trust-icon" aria-hidden="true">✓</span>
+            <span data-key="founder_t1">Trabajo directamente contigo</span>
+          </div>
+          <div class="founder-trust-item fi d2">
+            <span class="founder-trust-icon" aria-hidden="true">✓</span>
+            <span data-key="founder_t2">Sin agencias ni intermediarios</span>
+          </div>
+          <div class="founder-trust-item fi d3">
+            <span class="founder-trust-icon" aria-hidden="true">✓</span>
+            <span data-key="founder_t3">Cambios y ajustes hasta que estés satisfecho con el resultado</span>
+          </div>
+        </div>
+
+        <div class="founder-actions fi d4">
+          <a href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20tu%20web%20de%20NextWebEC%20y%20me%20interesa%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" class="btn btn-primary" aria-label="Hablar con José por WhatsApp sobre el rediseño de mi web">
+            <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+            <span data-key="founder_cta">Hablemos por WhatsApp</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
 <!-- ─── FINAL CTA ─── -->
 <section class="section final-cta-section" id="contacto">
   <div class="container">
@@ -4898,6 +5090,20 @@ const T = {
     checklist_trust_3:"Optimizado para móvil",
     checklist_success:"Checklist solicitado. Te contactaré o enviaré el recurso pronto.",
     checklist_error_required:"Completa tu nombre y un email válido para solicitar el checklist.",
+    checklist_error_submit:"No pude enviar tu solicitud en este momento. Escríbeme por WhatsApp y lo reviso contigo.",
+    founder_eyebrow:"Fundador · NextWebEC",
+    founder_title:"Detrás de NextWebEC",
+    founder_p1:"Mi nombre es Jose Ignacio Guerrero.",
+    founder_p2:"Trabajando con distintos negocios, me di cuenta de algo: muchas empresas hacen un trabajo excelente, pero su presencia digital no refleja realmente el nivel de lo que ofrecen.",
+    founder_p3:"Por eso nació NextWebEC.",
+    founder_p4:"No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.",
+    founder_p5:"Mi enfoque no es simplemente crear páginas web. Busco construir experiencias digitales modernas, rápidas y claras que ayuden a transmitir confianza, diferenciar una marca y convertir visitantes en clientes.",
+    founder_p6:"Trabajo con empresas que entienden que hoy la primera impresión suele ocurrir antes de una llamada, una visita o una reunión.",
+    founder_p7:"Y esa primera impresión ocurre en internet.",
+    founder_t1:"Trabajo directamente contigo",
+    founder_t2:"Sin agencias ni intermediarios",
+    founder_t3:"Cambios y ajustes hasta que estés satisfecho con el resultado",
+    founder_cta:"Hablemos por WhatsApp",
     fcta_eyebrow:"Empieza hoy",
     fcta_title:"Si tu web no está generando contactos, hay algo que corregir.",
     fcta_sub:"Escríbeme por WhatsApp y revisamos cómo volverla más clara, más confiable y más útil para vender.",
@@ -5040,6 +5246,20 @@ const T = {
     checklist_trust_3:"Optimized for mobile",
     checklist_success:"Checklist requested. I will contact you or send the resource soon.",
     checklist_error_required:"Enter your name and a valid email to request the checklist.",
+    checklist_error_submit:"I could not send your request right now. Message me on WhatsApp and I will review it with you.",
+    founder_eyebrow:"Founder · NextWebEC",
+    founder_title:"Behind NextWebEC",
+    founder_p1:"My name is Jose Ignacio Guerrero.",
+    founder_p2:"Working with different businesses, I noticed something: many companies do excellent work, but their digital presence does not really reflect the level of what they offer.",
+    founder_p3:"That is why NextWebEC was created.",
+    founder_p4:"I do not work as an agency or outsource projects. I design each website personally, collaborating directly with the client and making every adjustment needed until the result reflects the exact vision of the business.",
+    founder_p5:"My focus is not simply to create websites. I aim to build modern, fast, and clear digital experiences that help communicate trust, differentiate a brand, and turn visitors into clients.",
+    founder_p6:"I work with companies that understand that today the first impression often happens before a call, a visit, or a meeting.",
+    founder_p7:"And that first impression happens online.",
+    founder_t1:"I work directly with you",
+    founder_t2:"No agencies or intermediaries",
+    founder_t3:"Changes and refinements until you are satisfied with the result",
+    founder_cta:"Let's talk on WhatsApp",
     fcta_eyebrow:"Start today",
     fcta_title:"If your website is not generating inquiries, something needs to be fixed.",
     fcta_sub:"Send me a WhatsApp message and we will review how to make it clearer, more trustworthy, and more useful for selling.",
@@ -5160,19 +5380,23 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
+  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bhvfoo/';
   const nameInput = document.getElementById('checklistName');
   const emailInput = document.getElementById('checklistEmail');
+  const phoneInput = document.getElementById('checklistPhone');
+  const submitButton = form.querySelector('button[type="submit"]');
 
   function showChecklistStatus(type, message) {
     status.textContent = message;
     status.className = `checklist-status is-visible ${type === 'success' ? 'is-success' : 'is-error'}`;
   }
 
-  form.addEventListener('submit', function (event) {
+  form.addEventListener('submit', async function (event) {
     event.preventDefault();
 
     const name = nameInput ? nameInput.value.trim() : '';
     const email = emailInput ? emailInput.value.trim() : '';
+    const phone = phoneInput ? phoneInput.value.trim() : '';
     const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
     const copy = T[lang] || T.es;
 
@@ -5181,15 +5405,44 @@ requestActiveOnScrollUpdate();
       return;
     }
 
-    if (typeof window.gtag === 'function') {
-      window.gtag('event', 'checklist_submit', {
-        event_category: 'lead',
-        event_label: 'website_audit_checklist'
-      });
-    }
+    if (submitButton) submitButton.disabled = true;
 
-    form.reset();
-    showChecklistStatus('success', copy.checklist_success);
+    try {
+      const response = await fetch(webhookUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          formName: 'website-audit-checklist',
+          name,
+          email,
+          phone,
+          page: window.location.href,
+          language: lang,
+          source: 'nextwebec_checklist',
+          submittedAt: new Date().toISOString()
+        })
+      });
+
+      if (!response.ok) {
+        throw new Error('Zapier webhook request failed');
+      }
+
+      if (typeof window.gtag === 'function') {
+        window.gtag('event', 'checklist_submit', {
+          event_category: 'lead',
+          event_label: 'website_audit_checklist'
+        });
+      }
+
+      form.reset();
+      showChecklistStatus('success', copy.checklist_success);
+    } catch (error) {
+      showChecklistStatus('error', copy.checklist_error_submit);
+    } finally {
+      if (submitButton) submitButton.disabled = false;
+    }
   });
 })();
 
