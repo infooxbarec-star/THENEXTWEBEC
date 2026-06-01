@@ -1727,7 +1727,7 @@
       max-width: 620px;
     }
     .checklist-title {
-      margin-bottom: 18px;
+      margin-bottom: 14px;
     }
     .checklist-sub {
       margin-top: 0;
@@ -1735,6 +1735,35 @@
       font-size: 18px;
       line-height: 1.75;
       color: var(--muted-text);
+    }
+    .checklist-microcopy {
+      max-width: 560px;
+      margin-top: 18px;
+      font-size: 17px;
+      line-height: 1.75;
+      color: rgba(11,31,58,.74);
+    }
+    .checklist-microcopy-time {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-top: 14px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(26,110,250,.08);
+      border: 1px solid rgba(26,110,250,.12);
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: -.1px;
+      color: var(--accent);
+    }
+    .checklist-microcopy-time::before {
+      content: '';
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: currentColor;
+      box-shadow: 0 0 0 5px rgba(26,110,250,.12);
     }
     .checklist-benefits {
       display: grid;
@@ -1809,9 +1838,25 @@
       color: rgba(255,255,255,.74);
     }
     .checklist-progress {
+      position: sticky;
+      top: 88px;
+      z-index: 6;
       display: grid;
       gap: 10px;
       margin-bottom: 24px;
+      padding: 16px;
+      border-radius: 20px;
+      background: rgba(7,17,31,.78);
+      border: 1px solid rgba(147,197,253,.14);
+      box-shadow: 0 14px 34px rgba(2,10,23,.28);
+      backdrop-filter: blur(18px);
+      -webkit-backdrop-filter: blur(18px);
+    }
+    .checklist-progress-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
     }
     .checklist-step-label {
       font-size: 11px;
@@ -1819,6 +1864,18 @@
       letter-spacing: .14em;
       text-transform: uppercase;
       color: rgba(255,255,255,.72);
+    }
+    .checklist-progress-value {
+      flex-shrink: 0;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: -.2px;
+      color: var(--white);
+    }
+    .checklist-progress-context {
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.7);
     }
     .checklist-progress-track {
       width: 100%;
@@ -1830,12 +1887,12 @@
     }
     .checklist-progress-bar {
       display: block;
-      width: 33.333%;
+      width: 0%;
       height: 100%;
       border-radius: inherit;
       background: linear-gradient(90deg, #93C5FD 0%, #25D366 100%);
       box-shadow: 0 6px 18px rgba(37,211,102,.22);
-      transition: width .24s ease;
+      transition: width .4s ease;
     }
     .checklist-form {
       display: grid;
@@ -1889,12 +1946,59 @@
       display: grid;
       gap: 14px;
     }
+    .checklist-section-break {
+      padding: 18px 18px 16px;
+      border-radius: 20px;
+      background: linear-gradient(180deg, rgba(147,197,253,.14), rgba(147,197,253,.05));
+      border: 1px solid rgba(147,197,253,.16);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.06);
+    }
+    .checklist-section-break-eyebrow {
+      display: inline-flex;
+      margin-bottom: 8px;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .14em;
+      text-transform: uppercase;
+      color: #93C5FD;
+    }
+    .checklist-section-break-title {
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.2;
+      letter-spacing: -.4px;
+      color: var(--white);
+    }
+    .checklist-section-break-range {
+      margin-top: 6px;
+      font-size: 13px;
+      line-height: 1.6;
+      color: rgba(255,255,255,.7);
+    }
+    .checklist-inline-feedback {
+      min-height: 18px;
+      margin-bottom: 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: -.1px;
+      color: #8AF0AE;
+      opacity: 0;
+      transform: translateY(-4px);
+      transition: opacity .22s ease, transform .22s ease;
+      pointer-events: none;
+    }
+    .checklist-inline-feedback.is-visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
     .checklist-question {
+      scroll-margin-top: 140px;
       padding: 18px;
       border-radius: 18px;
       background: rgba(255,255,255,.05);
       border: 1px solid rgba(255,255,255,.08);
-      transition: border-color .2s ease, background .2s ease, transform .2s ease;
+      opacity: .7;
+      transition: opacity .2s ease, border-color .2s ease, background .2s ease, transform .2s ease, box-shadow .2s ease;
     }
     .checklist-question:hover {
       transform: translateY(-1px);
@@ -1903,6 +2007,31 @@
     .checklist-question.is-missing {
       border-color: rgba(248,113,113,.34);
       background: rgba(248,113,113,.07);
+    }
+    .checklist-question.is-answered {
+      opacity: .5;
+    }
+    .checklist-question.is-upcoming {
+      opacity: .7;
+    }
+    .checklist-question.is-active {
+      opacity: 1;
+      transform: translateY(-2px);
+      border-color: rgba(147,197,253,.58);
+      background: rgba(255,255,255,.08);
+      box-shadow: 0 0 0 1px rgba(147,197,253,.22), 0 16px 34px rgba(2,10,23,.18);
+    }
+    .checklist-question-meta {
+      display: inline-flex;
+      margin-bottom: 10px;
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,.68);
     }
     .checklist-question-title {
       font-size: 15px;
@@ -1930,22 +2059,49 @@
       font-weight: 700;
       letter-spacing: -.1px;
       cursor: pointer;
-      transition: transform .18s ease, border-color .18s ease, background .18s ease, box-shadow .18s ease;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, box-shadow .2s ease;
     }
     .checklist-question-option:hover {
+      transform: scale(1.03);
       border-color: rgba(147,197,253,.44);
       background: rgba(147,197,253,.09);
+      box-shadow: 0 0 20px rgba(59,130,246,.25);
     }
     .checklist-question-option.is-selected {
+      transform: scale(1.03);
       border-color: rgba(147,197,253,.72);
       background: rgba(147,197,253,.18);
       color: var(--white);
-      box-shadow: 0 10px 22px rgba(14,42,78,.24);
+      box-shadow: 0 0 20px rgba(59,130,246,.25);
     }
     .checklist-question-option input {
       position: absolute;
       opacity: 0;
       pointer-events: none;
+    }
+    .checklist-step-pane[data-step-pane="result"] .checklist-form-title,
+    .checklist-step-pane[data-step-pane="result"] .checklist-form-text,
+    .checklist-step-pane[data-step-pane="result"] .checklist-result-card,
+    .checklist-step-pane[data-step-pane="result"] .checklist-actions {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity .4s ease, transform .4s ease;
+    }
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-form-title,
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-form-text,
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-result-card,
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-actions {
+      opacity: 1;
+      transform: translateY(0);
+    }
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-form-text {
+      transition-delay: .06s;
+    }
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-result-card {
+      transition-delay: .12s;
+    }
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-actions {
+      transition-delay: .18s;
     }
     .checklist-result-card {
       padding: 22px;
@@ -1953,6 +2109,35 @@
       background: linear-gradient(180deg, rgba(255,255,255,.08), rgba(255,255,255,.04));
       border: 1px solid rgba(147,197,253,.22);
       box-shadow: inset 0 1px 0 rgba(255,255,255,.08);
+    }
+    .checklist-result-hero {
+      display: grid;
+      gap: 18px;
+      margin-bottom: 18px;
+    }
+    .checklist-score-orb {
+      width: 132px;
+      height: 132px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, rgba(147,197,253,.52), rgba(26,110,250,.92));
+      box-shadow: 0 22px 48px rgba(26,110,250,.28), inset 0 1px 0 rgba(255,255,255,.24);
+    }
+    .checklist-score-orb-value {
+      display: grid;
+      justify-items: center;
+      font-weight: 800;
+      line-height: .95;
+      letter-spacing: -.06em;
+      color: var(--white);
+    }
+    .checklist-score-orb-value strong {
+      font-size: 52px;
+    }
+    .checklist-score-orb-value span {
+      font-size: 18px;
+      letter-spacing: -.04em;
     }
     .checklist-result-score-label {
       font-size: 11px;
@@ -1962,12 +2147,18 @@
       color: rgba(255,255,255,.64);
     }
     .checklist-result-score {
-      margin: 10px 0 16px;
-      font-size: 42px;
+      margin: 6px 0 0;
+      font-size: 22px;
       font-weight: 800;
-      letter-spacing: -.04em;
-      line-height: 1;
+      letter-spacing: -.03em;
+      line-height: 1.2;
       color: var(--white);
+    }
+    .checklist-result-personal {
+      font-size: 18px;
+      line-height: 1.5;
+      font-weight: 700;
+      color: #DCEBFF;
     }
     .checklist-result-diagnosis {
       font-size: 24px;
@@ -2017,6 +2208,22 @@
       font-size: 14px;
       line-height: 1.65;
       color: rgba(255,255,255,.8);
+      opacity: 0;
+      transform: translateY(18px);
+    }
+    .checklist-step-pane[data-step-pane="result"].is-visible .checklist-result-item {
+      animation: checklist-result-item-in .45s ease forwards;
+      animation-delay: var(--item-delay, 0ms);
+    }
+    @keyframes checklist-result-item-in {
+      from {
+        opacity: 0;
+        transform: translateY(18px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
     }
     .checklist-actions {
       display: grid;
@@ -2032,10 +2239,19 @@
       padding-left: 24px;
       padding-right: 24px;
     }
+    .checklist-submit.is-ready {
+      box-shadow: 0 0 26px rgba(59,130,246,.24);
+    }
     .checklist-submit:disabled {
-      opacity: .72;
-      cursor: wait;
+      opacity: .66;
+      cursor: not-allowed;
       transform: none;
+      box-shadow: none;
+    }
+    .checklist-submit-link {
+      display: grid;
+      gap: 4px;
+      text-align: center;
     }
     .checklist-whatsapp {
       border-color: rgba(255,255,255,.18);
@@ -2045,6 +2261,12 @@
     .checklist-whatsapp:hover {
       background: rgba(255,255,255,.12);
       border-color: rgba(255,255,255,.28);
+    }
+    .checklist-cta-sub {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .01em;
+      color: rgba(255,255,255,.78);
     }
     .checklist-note {
       margin-top: 6px;
@@ -2362,6 +2584,7 @@
       .checklist-shell   { grid-template-columns: 1fr; gap: 24px; padding: 34px; }
       .checklist-copy    { max-width: none; }
       .checklist-benefits { margin-top: 28px; }
+      .checklist-progress { top: 84px; }
 
       /* Founder */
       .founder-grid      { grid-template-columns: 1fr; gap: 36px; }
@@ -2405,8 +2628,10 @@
       .checklist-shell   { padding: 28px; border-radius: 28px; }
       .checklist-form-card { padding: 24px; }
       .checklist-form-title { font-size: 25px; }
-      .checklist-result-score { font-size: 38px; }
+      .checklist-result-score { font-size: 20px; }
       .checklist-result-diagnosis { font-size: 22px; }
+      .checklist-score-orb { width: 120px; height: 120px; }
+      .checklist-score-orb-value strong { font-size: 46px; }
 
       /* Founder */
       .founder-grid      { gap: 32px; }
@@ -2520,6 +2745,8 @@
       .checklist-shell   { padding: 22px 18px; border-radius: 24px; }
       .checklist-title   { font-size: 30px; }
       .checklist-sub     { font-size: 15px; }
+      .checklist-microcopy { font-size: 15px; margin-top: 14px; }
+      .checklist-microcopy-time { margin-top: 12px; }
       .checklist-benefits { grid-template-columns: 1fr; gap: 12px; margin-top: 24px; }
       .checklist-benefit { min-height: 0; padding: 18px 16px; border-radius: 18px; }
       .checklist-benefit-icon { width: 38px; height: 38px; border-radius: 12px; margin-bottom: 14px; }
@@ -2528,13 +2755,23 @@
       .checklist-form-title { font-size: 22px; }
       .checklist-form-text { font-size: 14px; margin-bottom: 20px; }
       .checklist-progress { margin-bottom: 20px; }
+      .checklist-progress { top: 76px; padding: 14px; }
+      .checklist-progress-head { align-items: flex-start; }
+      .checklist-progress-value { font-size: 12px; }
+      .checklist-progress-context { font-size: 12px; }
       .checklist-input { padding: 14px 14px; }
       .checklist-field-error { min-height: 16px; }
+      .checklist-section-break { padding: 16px; border-radius: 18px; }
+      .checklist-section-break-title { font-size: 18px; }
       .checklist-question { padding: 16px; }
       .checklist-question-title { font-size: 14px; }
       .checklist-question-options { gap: 8px; }
       .checklist-result-card { padding: 18px; border-radius: 18px; }
-      .checklist-result-score { font-size: 34px; margin-bottom: 14px; }
+      .checklist-result-score { font-size: 18px; margin-bottom: 0; }
+      .checklist-score-orb { width: 108px; height: 108px; }
+      .checklist-score-orb-value strong { font-size: 42px; }
+      .checklist-score-orb-value span { font-size: 16px; }
+      .checklist-result-personal { font-size: 16px; }
       .checklist-result-diagnosis { font-size: 20px; }
       .checklist-actions { gap: 10px; }
       .checklist-submit,
@@ -3953,7 +4190,7 @@
       <li><a class="nav-main-link" href="#cambio" data-key="nav_results">Resultados</a></li>
       <li><a class="nav-main-link" href="#analytics" data-key="nav_analytics">Analítica</a></li>
       <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
-      <li><a class="nav-main-link" href="#checklist" data-key="nav_checklist">Checklist</a></li>
+      <li><a class="nav-main-link" href="#checklist" data-key="nav_checklist">Diagnóstico</a></li>
       <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
     </ul>
     <div class="nav-right">
@@ -3975,7 +4212,7 @@
   <a class="mobile-nav-link" href="#cambio" onclick="toggleMenu()" data-key="nav_results">Resultados</a>
   <a class="mobile-nav-link" href="#analytics" onclick="toggleMenu()" data-key="nav_analytics">Analítica</a>
   <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
-  <a class="mobile-nav-link" href="#checklist" onclick="toggleMenu()" data-key="nav_checklist">Checklist</a>
+  <a class="mobile-nav-link" href="#checklist" onclick="toggleMenu()" data-key="nav_checklist">Diagnóstico</a>
   <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
   <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20tu%20web%20de%20NextWebEC%20y%20me%20interesa%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" data-key="nav_cta">Hablemos por WhatsApp</a>
   <div class="mobile-lang">
@@ -4986,7 +5223,9 @@
         <span class="eyebrow" data-key="checklist_eyebrow">Checklist gratuito</span>
         <div class="checklist-copy">
           <h2 class="section-title checklist-title" data-key="checklist_title">¿Tu web te está ayudando a vender o te está frenando?</h2>
-          <p class="section-sub checklist-sub" data-key="checklist_sub">En menos de 2 minutos sabrás si tu sitio está perdiendo contactos y qué tan urgente es corregirlo.</p>
+          <p class="section-sub checklist-sub" data-key="checklist_sub">Responde 15 preguntas rápidas y descubre si tu sitio web está generando confianza o alejando clientes.</p>
+          <p class="checklist-microcopy" data-key="checklist_microcopy_intro">Cada respuesta te acerca a un diagnóstico claro para saber si tu sitio acompaña tu negocio o lo está frenando.</p>
+          <p class="checklist-microcopy-time" data-key="checklist_microcopy_time">Toma menos de 2 minutos.</p>
         </div>
 
         <div class="checklist-benefits">
@@ -5021,7 +5260,11 @@
         <div class="checklist-form-eyebrow" data-key="checklist_form_eyebrow">Diagnóstico web NextWebEC</div>
 
         <div class="checklist-progress" aria-hidden="true">
-          <div class="checklist-step-label" id="checklistStepLabel">Paso 1 de 3</div>
+          <div class="checklist-progress-head">
+            <div class="checklist-step-label" id="checklistStepLabel">Completa tus datos</div>
+            <div class="checklist-progress-value" id="checklistProgressValue">0%</div>
+          </div>
+          <div class="checklist-progress-context" id="checklistProgressContext">Toma menos de 2 minutos.</div>
           <div class="checklist-progress-track">
             <span class="checklist-progress-bar" id="checklistProgressBar"></span>
           </div>
@@ -5059,10 +5302,14 @@
             <h3 class="checklist-form-title" data-key="checklist_questions_title">Responde el test de 15 preguntas.</h3>
             <p class="checklist-form-text" data-key="checklist_questions_text">Cada respuesta “No” marca un punto débil que puede estar costándote contactos. Responde todo para ver qué tan serio es el problema.</p>
 
+            <div class="checklist-inline-feedback" id="checklistSavedFeedback" data-key="checklist_saved">✓ Respuesta guardada</div>
+
             <div class="checklist-questions" id="checklistQuestions"></div>
 
             <div class="checklist-actions">
-              <button type="submit" class="btn btn-primary checklist-submit" id="checklistFinishButton" data-key="checklist_finish">Ver mi diagnóstico</button>
+              <button type="submit" class="btn btn-primary checklist-submit" id="checklistFinishButton" data-key="checklist_finish" disabled>
+                <span data-finish-label>Completa las 15 preguntas</span>
+              </button>
             </div>
           </div>
 
@@ -5071,8 +5318,19 @@
             <p class="checklist-form-text" data-key="checklist_result_text">Este resultado resume cuánto podría estar frenando tu web la confianza, los contactos y las oportunidades de venta.</p>
 
             <div class="checklist-result-card">
-              <div class="checklist-result-score-label" data-key="checklist_score_label">Resultado</div>
-              <div class="checklist-result-score" id="checklistScoreValue">Resultado: 0/15 puntos críticos</div>
+              <div class="checklist-result-hero">
+                <div class="checklist-score-orb" aria-hidden="true">
+                  <div class="checklist-score-orb-value">
+                    <strong id="checklistScoreNumber">0</strong>
+                    <span>/15</span>
+                  </div>
+                </div>
+                <div>
+                  <div class="checklist-result-score-label" data-key="checklist_score_label">Resultado</div>
+                  <div class="checklist-result-score" id="checklistScoreValue">Resultado: 0/15</div>
+                </div>
+              </div>
+              <p class="checklist-result-personal" id="checklistPersonalMessage"></p>
               <h4 class="checklist-result-diagnosis" id="checklistDiagnosisTitle"></h4>
               <p class="checklist-result-subtitle" id="checklistDiagnosisSubtitle"></p>
               <p class="checklist-result-copy" id="checklistDiagnosisText"></p>
@@ -5089,7 +5347,10 @@
             </div>
 
             <div class="checklist-actions">
-              <a href="https://wa.me/593969349833" target="_blank" rel="noopener noreferrer" class="btn btn-primary checklist-submit" id="checklistWhatsappLink" data-key="checklist_result_whatsapp">Contactar por WhatsApp</a>
+              <a href="https://wa.me/593969349833" target="_blank" rel="noopener noreferrer" class="btn btn-primary checklist-submit checklist-submit-link" id="checklistWhatsappLink" data-key="checklist_result_whatsapp">
+                <span data-whatsapp-label>Hablar con José sobre mi diagnóstico</span>
+                <span class="checklist-cta-sub" data-key="checklist_result_whatsapp_note">Sin compromiso</span>
+              </a>
               <button type="button" class="btn btn-ghost checklist-whatsapp" id="checklistCloseButton" data-key="checklist_result_close">Cerrar diagnóstico</button>
             </div>
           </div>
@@ -5214,7 +5475,7 @@
 /* ─── TRANSLATIONS ─── */
 const T = {
   es: {
-    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_checklist:"Checklist", nav_clients:"Clientes", nav_cta:"Hablemos por WhatsApp",
+    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_checklist:"Diagnóstico", nav_clients:"Clientes", nav_cta:"Hablemos por WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"Diseño y rediseño de webs", hero_t2:"para negocios que no", hero_t3:"generan contactos",
     hero_sub:"Transformo páginas desactualizadas en sitios modernos, rápidos y enfocados en generar confianza, más visitas y más consultas.",
@@ -5322,7 +5583,9 @@ const T = {
     wh4_t:"Negocios que no están generando clientes online", wh4_d:"Diseñamos con un objetivo claro: que los visitantes de tu web se conviertan en personas que te contactan.",
     checklist_eyebrow:"Checklist gratuito",
     checklist_title:"¿Tu web te está ayudando a vender o te está frenando?",
-    checklist_sub:"En menos de 2 minutos sabrás si tu sitio está perdiendo contactos y qué tan urgente es corregirlo.",
+    checklist_sub:"Responde 15 preguntas rápidas y descubre si tu sitio web está generando confianza o alejando clientes.",
+    checklist_microcopy_intro:"Cada respuesta te acerca a un diagnóstico claro para saber si tu sitio acompaña tu negocio o lo está frenando.",
+    checklist_microcopy_time:"Toma menos de 2 minutos.",
     checklist_b1:"15 puntos clave que revisar en tu sitio",
     checklist_b2:"15 respuestas para detectar dónde se escapan consultas",
     checklist_b3:"Diagnóstico claro para decidir tu siguiente paso",
@@ -5339,15 +5602,18 @@ const T = {
     checklist_start:"Quiero evaluar mi web",
     checklist_questions_title:"Responde el test de 15 preguntas.",
     checklist_questions_text:"Cada respuesta “No” marca un punto débil que puede estar costándote contactos. Responde todo para ver qué tan serio es el problema.",
+    checklist_saved:"✓ Respuesta guardada",
     checklist_finish:"Ver mi diagnóstico",
+    checklist_finish_locked:"Completa las 15 preguntas",
     checklist_result_title:"Test finalizado",
     checklist_result_text:"Este resultado resume cuánto podría estar frenando tu web la confianza, los contactos y las oportunidades de venta.",
-    checklist_result_whatsapp:"Contactar por WhatsApp",
+    checklist_result_whatsapp:"Hablar con José sobre mi diagnóstico",
+    checklist_result_whatsapp_note:"Sin compromiso",
     checklist_result_close:"Cerrar diagnóstico",
     checklist_score_label:"Resultado",
     checklist_score_unit:"puntos críticos",
     checklist_recommendation_label:"Recomendación",
-    checklist_issues_label:"Puntos que están frenando tu web",
+    checklist_issues_label:"Puntos detectados en tu web",
     checklist_note:"Tus datos se usan solo para generar tu diagnóstico y, si lo decides, ayudarte a corregir lo que hoy está frenando tu web.",
     checklist_trust_1:"Tu diagnóstico queda asociado a un lead real",
     checklist_trust_2:"Lectura accionable en menos de 2 minutos",
@@ -5383,7 +5649,7 @@ const T = {
     wa_tip:"Hablemos",
   },
   en: {
-    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_checklist:"Checklist", nav_clients:"Clients", nav_cta:"Let's talk on WhatsApp",
+    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_checklist:"Diagnosis", nav_clients:"Clients", nav_cta:"Let's talk on WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"I redesign websites", hero_t2:"for businesses that", hero_t3:"don't generate inquiries",
     hero_sub:"I turn outdated websites into modern, fast, trust-building pages focused on more visits and more inquiries.",
@@ -5492,7 +5758,9 @@ const T = {
     wh4_t:"Businesses not generating clients online", wh4_d:"We design with a clear objective: turning your website visitors into people who contact you.",
     checklist_eyebrow:"Free checklist",
     checklist_title:"Is your website helping you sell or holding you back?",
-    checklist_sub:"In under 2 minutes you will see whether your site is losing leads and how urgent it is to fix it.",
+    checklist_sub:"Answer 15 quick questions and discover whether your website is helping your business or slowing it down.",
+    checklist_microcopy_intro:"Each answer gets you closer to a clear diagnosis of whether your site is supporting your business or holding it back.",
+    checklist_microcopy_time:"It takes less than 2 minutes.",
     checklist_b1:"15 key points to review on your site",
     checklist_b2:"15 answers to detect where inquiries are slipping away",
     checklist_b3:"Clear diagnosis to decide your next step",
@@ -5509,15 +5777,18 @@ const T = {
     checklist_start:"Evaluate my website",
     checklist_questions_title:"Answer the 15-question test.",
     checklist_questions_text:"Each “No” marks a weak point that may be costing you leads. Answer everything to see how serious the issue is.",
+    checklist_saved:"✓ Answer saved",
     checklist_finish:"See my diagnosis",
+    checklist_finish_locked:"Complete all 15 questions",
     checklist_result_title:"Test completed",
     checklist_result_text:"This result summarizes how much your website may be slowing down trust, inquiries, and sales opportunities.",
-    checklist_result_whatsapp:"Contact on WhatsApp",
+    checklist_result_whatsapp:"Talk to José about my diagnosis",
+    checklist_result_whatsapp_note:"No commitment",
     checklist_result_close:"Close diagnosis",
     checklist_score_label:"Result",
     checklist_score_unit:"critical points",
     checklist_recommendation_label:"Recommendation",
-    checklist_issues_label:"Points holding your website back",
+    checklist_issues_label:"Points detected on your website",
     checklist_note:"Your details are only used to generate your diagnosis and, if you want, help fix what is currently holding your website back.",
     checklist_trust_1:"Your diagnosis is tied to a real lead",
     checklist_trust_2:"Actionable read in under 2 minutes",
@@ -5663,6 +5934,7 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
+  const CHECKLIST_TOTAL = 15;
   const checklistLeadEndpoint = '/api/checklist-lead';
   const whatsappPhone = '593969349833';
   const panes = {
@@ -5671,6 +5943,8 @@ requestActiveOnScrollUpdate();
     result: form.querySelector('[data-step-pane="result"]')
   };
   const stepLabel = document.getElementById('checklistStepLabel');
+  const progressValue = document.getElementById('checklistProgressValue');
+  const progressContext = document.getElementById('checklistProgressContext');
   const progressBar = document.getElementById('checklistProgressBar');
   const nameInput = document.getElementById('checklistName');
   const whatsappInput = document.getElementById('checklistWhatsapp');
@@ -5684,12 +5958,15 @@ requestActiveOnScrollUpdate();
   const closeButton = document.getElementById('checklistCloseButton');
   const whatsappLink = document.getElementById('checklistWhatsappLink');
   const scoreValue = document.getElementById('checklistScoreValue');
+  const scoreNumber = document.getElementById('checklistScoreNumber');
+  const personalMessage = document.getElementById('checklistPersonalMessage');
   const diagnosisTitle = document.getElementById('checklistDiagnosisTitle');
   const diagnosisSubtitle = document.getElementById('checklistDiagnosisSubtitle');
   const diagnosisText = document.getElementById('checklistDiagnosisText');
   const recommendationText = document.getElementById('checklistRecommendationText');
   const issuesSection = document.getElementById('checklistIssuesSection');
   const issuesList = document.getElementById('checklistIssuesList');
+  const savedFeedback = document.getElementById('checklistSavedFeedback');
 
   const questionBank = {
     es: [
@@ -5849,9 +6126,37 @@ requestActiveOnScrollUpdate();
     en: { yes: 'Yes', no: 'No' }
   };
 
+  const questionSectionBank = {
+    es: [
+      { eyebrow: 'SECCIÓN 1', title: 'Fundamentos', range: 'Preguntas 1-5', start: 0, end: 4 },
+      { eyebrow: 'SECCIÓN 2', title: 'Experiencia del usuario', range: 'Preguntas 6-10', start: 5, end: 9 },
+      { eyebrow: 'SECCIÓN 3', title: 'Conversión y resultados', range: 'Preguntas 11-15', start: 10, end: 14 }
+    ],
+    en: [
+      { eyebrow: 'SECTION 1', title: 'Foundations', range: 'Questions 1-5', start: 0, end: 4 },
+      { eyebrow: 'SECTION 2', title: 'User experience', range: 'Questions 6-10', start: 5, end: 9 },
+      { eyebrow: 'SECTION 3', title: 'Conversion and outcomes', range: 'Questions 11-15', start: 10, end: 14 }
+    ]
+  };
+
+  const personalMessageBank = {
+    es: [
+      { min: 0, max: 3, message: 'Tu web tiene una base sólida.' },
+      { min: 4, max: 7, message: 'Hay varias oportunidades de mejora.' },
+      { min: 8, max: 11, message: 'Tu web probablemente está perdiendo oportunidades de negocio.' },
+      { min: 12, max: 15, message: 'Es momento de actuar. Tu presencia digital necesita atención.' }
+    ],
+    en: [
+      { min: 0, max: 3, message: 'Your website has a solid foundation.' },
+      { min: 4, max: 7, message: 'There are several opportunities to improve it.' },
+      { min: 8, max: 11, message: 'Your website is probably losing business opportunities.' },
+      { min: 12, max: 15, message: 'It is time to act. Your digital presence needs attention.' }
+    ]
+  };
+
   const state = {
     step: 'lead',
-    answers: Array(15).fill(''),
+    answers: Array(CHECKLIST_TOTAL).fill(''),
     lead: {
       name: '',
       whatsapp: '',
@@ -5859,8 +6164,15 @@ requestActiveOnScrollUpdate();
     },
     result: null,
     statusType: '',
-    statusKey: ''
+    statusKey: '',
+    activeQuestionIndex: 0,
+    pendingQuestionIndex: null
   };
+
+  let questionElements = [];
+  let questionObserver = null;
+  let savedFeedbackRafId = 0;
+  let resultRevealRafId = 0;
 
   function t(key) {
     const currentCopy = T[lang] || T.es;
@@ -5894,6 +6206,73 @@ requestActiveOnScrollUpdate();
 
   function sanitizeWhatsapp(value) {
     return value.replace(/\D/g, '');
+  }
+
+  function getQuestions() {
+    return questionBank[lang] || questionBank.es;
+  }
+
+  function getAnswerLabels() {
+    return answerLabels[lang] || answerLabels.es;
+  }
+
+  function getQuestionSections() {
+    return questionSectionBank[lang] || questionSectionBank.es;
+  }
+
+  function getQuestionSection(index) {
+    return getQuestionSections().find(function (section) {
+      return index >= section.start && index <= section.end;
+    }) || null;
+  }
+
+  function getPersonalMessage(score) {
+    const messages = personalMessageBank[lang] || personalMessageBank.es;
+    return (messages.find(function (item) {
+      return score >= item.min && score <= item.max;
+    }) || messages[0]).message;
+  }
+
+  function getAnsweredCount() {
+    return state.answers.filter(Boolean).length;
+  }
+
+  function getFirstUnansweredIndex() {
+    const unansweredIndex = state.answers.findIndex(function (answer) {
+      return !answer;
+    });
+
+    return unansweredIndex === -1 ? CHECKLIST_TOTAL - 1 : unansweredIndex;
+  }
+
+  function getNextUnansweredIndex(currentIndex) {
+    for (let index = currentIndex + 1; index < CHECKLIST_TOTAL; index += 1) {
+      if (!state.answers[index]) return index;
+    }
+
+    return currentIndex;
+  }
+
+  function scheduleAfterDelay(duration, callback) {
+    if (prefersReducedMotion) {
+      callback();
+      return 0;
+    }
+
+    let startTime = null;
+    let rafId = 0;
+
+    function frame(timestamp) {
+      if (startTime === null) startTime = timestamp;
+      if (timestamp - startTime >= duration) {
+        callback();
+        return;
+      }
+      rafId = window.requestAnimationFrame(frame);
+    }
+
+    rafId = window.requestAnimationFrame(frame);
+    return rafId;
   }
 
   function normalizeWebsite(value) {
@@ -5943,46 +6322,211 @@ requestActiveOnScrollUpdate();
     };
   }
 
-  function getProgress(step) {
-    if (step === 'questions') return '66.666%';
-    if (step === 'result') return '100%';
-    return '33.333%';
+  function getProgressMeta(step) {
+    if (step === 'questions') {
+      const section = getQuestionSection(state.activeQuestionIndex);
+      return {
+        label: lang === 'en'
+          ? `Question ${state.activeQuestionIndex + 1} of ${CHECKLIST_TOTAL}`
+          : `Pregunta ${state.activeQuestionIndex + 1} de ${CHECKLIST_TOTAL}`,
+        context: section ? `${section.eyebrow} · ${section.title}` : '',
+        percent: Math.round((getAnsweredCount() / CHECKLIST_TOTAL) * 100)
+      };
+    }
+
+    if (step === 'result') {
+      return {
+        label: lang === 'en' ? 'Diagnosis ready' : 'Diagnóstico listo',
+        context: lang === 'en'
+          ? 'Your result is based on the 15 questions you answered.'
+          : 'Tu resultado se calculó con las 15 preguntas respondidas.',
+        percent: 100
+      };
+    }
+
+    return {
+      label: lang === 'en' ? 'Complete your details' : 'Completa tus datos',
+      context: t('checklist_microcopy_time'),
+      percent: 0
+    };
   }
 
-  function getStepLabel(step) {
-    if (step === 'questions') return lang === 'en' ? 'Step 2 of 3' : 'Paso 2 de 3';
-    if (step === 'result') return lang === 'en' ? 'Step 3 of 3' : 'Paso 3 de 3';
-    return lang === 'en' ? 'Step 1 of 3' : 'Paso 1 de 3';
+  function updateProgress() {
+    const meta = getProgressMeta(state.step);
+    if (stepLabel) stepLabel.textContent = meta.label;
+    if (progressValue) progressValue.textContent = `${meta.percent}%`;
+    if (progressContext) progressContext.textContent = meta.context;
+    if (progressBar) progressBar.style.width = `${meta.percent}%`;
+  }
+
+  function updateFinishButton() {
+    if (!finishButton) return;
+
+    const isComplete = getAnsweredCount() === CHECKLIST_TOTAL;
+    finishButton.disabled = !isComplete;
+    finishButton.classList.toggle('is-ready', isComplete);
+    finishButton.setAttribute('aria-disabled', isComplete ? 'false' : 'true');
+
+    const labelNode = finishButton.querySelector('[data-finish-label]');
+    if (labelNode) {
+      labelNode.textContent = isComplete ? t('checklist_finish') : t('checklist_finish_locked');
+    }
+  }
+
+  function flashSavedFeedback() {
+    if (!savedFeedback) return;
+    if (savedFeedbackRafId) {
+      window.cancelAnimationFrame(savedFeedbackRafId);
+      savedFeedbackRafId = 0;
+    }
+
+    savedFeedback.classList.add('is-visible');
+    const hideAt = performance.now() + 1000;
+
+    function step(now) {
+      if (now >= hideAt) {
+        savedFeedback.classList.remove('is-visible');
+        savedFeedbackRafId = 0;
+        return;
+      }
+
+      savedFeedbackRafId = window.requestAnimationFrame(step);
+    }
+
+    savedFeedbackRafId = window.requestAnimationFrame(step);
+  }
+
+  function setActiveQuestionIndex(index) {
+    if (Number.isNaN(index) || index < 0 || index >= CHECKLIST_TOTAL) return;
+    state.activeQuestionIndex = index;
+    syncQuestionStates();
+    updateProgress();
+  }
+
+  function syncQuestionStates() {
+    questionElements.forEach(function (card, index) {
+      const isAnswered = Boolean(state.answers[index]);
+      const isActive = index === state.activeQuestionIndex;
+      card.classList.toggle('is-active', isActive);
+      card.classList.toggle('is-answered', isAnswered && !isActive);
+      card.classList.toggle('is-upcoming', !isAnswered && !isActive);
+    });
+  }
+
+  function observeQuestions() {
+    if (questionObserver) {
+      questionObserver.disconnect();
+      questionObserver = null;
+    }
+
+    if (typeof IntersectionObserver !== 'function' || !questionElements.length) return;
+
+    questionObserver = new IntersectionObserver(function (entries) {
+      if (state.step !== 'questions') return;
+
+      let bestEntry = null;
+      entries.forEach(function (entry) {
+        if (!entry.isIntersecting) return;
+        if (!bestEntry || entry.intersectionRatio > bestEntry.intersectionRatio) {
+          bestEntry = entry;
+        }
+      });
+
+      if (!bestEntry) return;
+
+      const nextIndex = Number(bestEntry.target.getAttribute('data-question-index'));
+      if (Number.isNaN(nextIndex)) return;
+
+      if (state.pendingQuestionIndex !== null) {
+        if (nextIndex !== state.pendingQuestionIndex) return;
+        state.pendingQuestionIndex = null;
+      }
+
+      setActiveQuestionIndex(nextIndex);
+    }, {
+      threshold: [0.35, 0.6, 0.85],
+      rootMargin: '-34% 0px -34% 0px'
+    });
+
+    questionElements.forEach(function (card) {
+      questionObserver.observe(card);
+    });
+  }
+
+  function scrollToQuestion(index) {
+    const question = questionElements[index];
+    if (!question) return;
+
+    question.scrollIntoView({
+      behavior: prefersReducedMotion ? 'auto' : 'smooth',
+      block: 'center'
+    });
+  }
+
+  function revealResultPane() {
+    if (!panes.result) return;
+    if (resultRevealRafId) {
+      window.cancelAnimationFrame(resultRevealRafId);
+      resultRevealRafId = 0;
+    }
+
+    panes.result.classList.remove('is-visible');
+    resultRevealRafId = window.requestAnimationFrame(function () {
+      panes.result.classList.add('is-visible');
+      resultRevealRafId = 0;
+    });
   }
 
   function setStep(step) {
     state.step = step;
+    if (step !== 'questions') state.pendingQuestionIndex = null;
     Object.keys(panes).forEach(function (key) {
       if (!panes[key]) return;
       panes[key].hidden = key !== step;
+      if (key !== 'result') panes[key].classList.remove('is-visible');
     });
-    if (stepLabel) stepLabel.textContent = getStepLabel(step);
-    if (progressBar) progressBar.style.width = getProgress(step);
-  }
 
-  function getQuestions() {
-    return questionBank[lang] || questionBank.es;
-  }
-
-  function getAnswerLabels() {
-    return answerLabels[lang] || answerLabels.es;
+    if (step === 'questions') {
+      setActiveQuestionIndex(getFirstUnansweredIndex());
+    } else if (step === 'result') {
+      state.activeQuestionIndex = CHECKLIST_TOTAL - 1;
+      updateProgress();
+      revealResultPane();
+      const resultCard = panes.result ? panes.result.querySelector('.checklist-result-card') : null;
+      if (resultCard) {
+        resultCard.scrollIntoView({
+          block: 'center',
+          behavior: prefersReducedMotion ? 'auto' : 'smooth'
+        });
+      }
+    } else {
+      state.activeQuestionIndex = 0;
+      updateProgress();
+    }
   }
 
   function renderQuestions() {
     if (!questionsContainer) return;
     const questions = getQuestions();
     const labels = getAnswerLabels();
+    const sections = getQuestionSections();
 
     questionsContainer.innerHTML = questions.map(function (question, index) {
       const answer = state.answers[index] || '';
-      return `
+      const section = sections.find(function (item) {
+        return item.start === index;
+      });
+
+      return `${section ? `
+        <div class="checklist-section-break">
+          <div class="checklist-section-break-eyebrow">${section.eyebrow}</div>
+          <div class="checklist-section-break-title">${section.title}</div>
+          <p class="checklist-section-break-range">${section.range}</p>
+        </div>
+      ` : ''}
         <fieldset class="checklist-question" data-question-index="${index}">
-          <legend class="checklist-question-title">${index + 1}. ${question}</legend>
+          <div class="checklist-question-meta">${lang === 'en' ? 'Question' : 'Pregunta'} ${index + 1}</div>
+          <legend class="checklist-question-title">${question}</legend>
           <div class="checklist-question-options">
             <label class="checklist-question-option${answer === 'yes' ? ' is-selected' : ''}">
               <input type="radio" name="checklistQuestion${index}" value="yes" ${answer === 'yes' ? 'checked' : ''} />
@@ -5993,9 +6537,14 @@ requestActiveOnScrollUpdate();
               <span>${labels.no}</span>
             </label>
           </div>
-        </fieldset>
-      `;
+        </fieldset>`;
     }).join('');
+
+    questionElements = Array.from(questionsContainer.querySelectorAll('.checklist-question'));
+    observeQuestions();
+    syncQuestionStates();
+    updateFinishButton();
+    updateProgress();
   }
 
   function validateAnswers() {
@@ -6010,6 +6559,7 @@ requestActiveOnScrollUpdate();
 
     if (unansweredIndexes.length) {
       showChecklistStatus('error', 'checklist_error_questions');
+      setActiveQuestionIndex(unansweredIndexes[0]);
       const firstMissing = questionsContainer ? questionsContainer.querySelector(`[data-question-index="${unansweredIndexes[0]}"]`) : null;
       if (firstMissing) {
         firstMissing.scrollIntoView({
@@ -6041,8 +6591,8 @@ requestActiveOnScrollUpdate();
 
   function getScoreText(score) {
     return lang === 'en'
-      ? `Result: ${score}/15 critical points`
-      : `Resultado: ${score}/15 puntos críticos`;
+      ? `Result: ${score}/${CHECKLIST_TOTAL}`
+      : `Resultado: ${score}/${CHECKLIST_TOTAL}`;
   }
 
   function getWhatsappMessage() {
@@ -6054,7 +6604,7 @@ requestActiveOnScrollUpdate();
           'Hi José, I just completed the free website diagnosis on NextWebEC.',
           '',
           `My result was: ${state.result.diagnosis.title}`,
-          `Score: ${state.result.score}/15 critical points`,
+          `Score: ${state.result.score}/${CHECKLIST_TOTAL}`,
           `My current website is: ${website}`,
           '',
           'I would like your help reviewing what I can improve.'
@@ -6063,7 +6613,7 @@ requestActiveOnScrollUpdate();
           'Hola José, acabo de hacer el diagnóstico gratuito de mi web en NextWebEC.',
           '',
           `Mi resultado fue: ${state.result.diagnosis.title}`,
-          `Puntaje: ${state.result.score}/15 puntos críticos`,
+          `Puntaje: ${state.result.score}/${CHECKLIST_TOTAL}`,
           `Mi web actual es: ${website}`,
           '',
           'Quisiera que me ayudes a revisar qué puedo mejorar.'
@@ -6108,6 +6658,8 @@ requestActiveOnScrollUpdate();
       origen: 'Checklist web NextWebEC'
     };
 
+    console.log('NEXTWEBEC CHECKLIST PAYLOAD:', payload);
+
     const response = await fetch(checklistLeadEndpoint, {
       method: 'POST',
       headers: {
@@ -6125,6 +6677,8 @@ requestActiveOnScrollUpdate();
     if (!state.result) return;
 
     if (scoreValue) scoreValue.textContent = getScoreText(state.result.score);
+    if (scoreNumber) scoreNumber.textContent = String(state.result.score);
+    if (personalMessage) personalMessage.textContent = getPersonalMessage(state.result.score);
     if (diagnosisTitle) diagnosisTitle.textContent = state.result.diagnosis.title;
     if (diagnosisSubtitle) diagnosisSubtitle.textContent = state.result.diagnosis.subtitle || '';
     if (diagnosisText) diagnosisText.textContent = state.result.diagnosis.text;
@@ -6132,21 +6686,25 @@ requestActiveOnScrollUpdate();
 
     if (issuesSection && issuesList) {
       issuesList.innerHTML = state.result.negativePoints.map(function (point) {
-        return `<li class="checklist-result-item">${point}</li>`;
+        return `<li class="checklist-result-item" style="--item-delay:${index * 150}ms">${point}</li>`;
       }).join('');
       issuesSection.hidden = !state.result.negativePoints.length;
     }
 
     if (whatsappLink) {
       whatsappLink.href = getWhatsappMessage();
+      const whatsappLabel = whatsappLink.querySelector('[data-whatsapp-label]');
+      if (whatsappLabel) whatsappLabel.textContent = t('checklist_result_whatsapp');
     }
   }
 
   function resetChecklist() {
     form.reset();
-    state.answers = Array(15).fill('');
+    state.answers = Array(CHECKLIST_TOTAL).fill('');
     state.lead = { name: '', whatsapp: '', website: '' };
     state.result = null;
+    state.activeQuestionIndex = 0;
+    state.pendingQuestionIndex = null;
     setFieldError(nameInput, nameError, '');
     setFieldError(whatsappInput, whatsappError, '');
     setFieldError(websiteInput, websiteError, '');
@@ -6154,7 +6712,9 @@ requestActiveOnScrollUpdate();
     renderQuestions();
     setStep('lead');
 
-    if (scoreValue) scoreValue.textContent = `0 ${t('checklist_score_unit')}`;
+    if (scoreValue) scoreValue.textContent = getScoreText(0);
+    if (scoreNumber) scoreNumber.textContent = '0';
+    if (personalMessage) personalMessage.textContent = '';
     if (diagnosisTitle) diagnosisTitle.textContent = '';
     if (diagnosisSubtitle) diagnosisSubtitle.textContent = '';
     if (diagnosisText) diagnosisText.textContent = '';
@@ -6194,7 +6754,21 @@ requestActiveOnScrollUpdate();
         });
       }
 
+      flashSavedFeedback();
+      updateFinishButton();
+      syncQuestionStates();
+      updateProgress();
+
       if (state.statusKey === 'checklist_error_questions') showChecklistStatus('', '');
+
+      const nextIndex = getNextUnansweredIndex(index);
+      if (nextIndex !== index) {
+        state.pendingQuestionIndex = nextIndex;
+        setActiveQuestionIndex(nextIndex);
+        scheduleAfterDelay(200, function () {
+          scrollToQuestion(nextIndex);
+        });
+      }
     });
   }
 
@@ -6204,8 +6778,8 @@ requestActiveOnScrollUpdate();
       if (!lead) return;
 
       state.lead = lead;
-      setStep('questions');
       renderQuestions();
+      setStep('questions');
     });
   }
 
@@ -6264,11 +6838,11 @@ requestActiveOnScrollUpdate();
 
   window.updateChecklistLocale = function () {
     renderQuestions();
-    setStep(state.step);
     if (state.result) {
-      state.result.diagnosis = getDiagnosis(state.result.score);
+      state.result = buildResult();
       updateResult();
     }
+    setStep(state.step);
     if (state.step === 'lead') validateLeadData();
     if (state.statusKey) showChecklistStatus(state.statusType, state.statusKey);
   };
