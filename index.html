@@ -1990,6 +1990,34 @@
       line-height: 1.75;
       color: rgba(255,255,255,.76);
     }
+    .checklist-result-section {
+      margin-top: 18px;
+      padding-top: 18px;
+      border-top: 1px solid rgba(147,197,253,.18);
+    }
+    .checklist-result-section-title {
+      margin-bottom: 10px;
+      font-size: 12px;
+      line-height: 1.4;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+      color: #93C5FD;
+    }
+    .checklist-result-list {
+      display: grid;
+      gap: 10px;
+      list-style: none;
+    }
+    .checklist-result-item {
+      padding: 12px 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(147,197,253,.16);
+      background: rgba(255,255,255,.04);
+      font-size: 14px;
+      line-height: 1.65;
+      color: rgba(255,255,255,.8);
+    }
     .checklist-actions {
       display: grid;
       gap: 12px;
@@ -5017,7 +5045,7 @@
             </div>
 
             <div class="checklist-field">
-              <label class="checklist-label" for="checklistWebsite" data-key="checklist_website_label">Web actual (opcional)</label>
+              <label class="checklist-label" for="checklistWebsite" data-key="checklist_website_label">Web actual</label>
               <input class="checklist-input" id="checklistWebsite" name="sitio_web" type="text" autocomplete="url" inputmode="url" data-placeholder-key="checklist_website_placeholder" placeholder="empresa.com" aria-describedby="checklistWebsiteError" />
               <p class="checklist-field-error" id="checklistWebsiteError" aria-live="polite"></p>
             </div>
@@ -5043,16 +5071,26 @@
             <p class="checklist-form-text" data-key="checklist_result_text">Este resultado resume cuánto podría estar frenando tu web la confianza, los contactos y las oportunidades de venta.</p>
 
             <div class="checklist-result-card">
-              <div class="checklist-result-score-label" data-key="checklist_score_label">Score obtenido</div>
-              <div class="checklist-result-score" id="checklistScoreValue">0 puntos</div>
+              <div class="checklist-result-score-label" data-key="checklist_score_label">Resultado</div>
+              <div class="checklist-result-score" id="checklistScoreValue">Resultado: 0/15 puntos críticos</div>
               <h4 class="checklist-result-diagnosis" id="checklistDiagnosisTitle"></h4>
               <p class="checklist-result-subtitle" id="checklistDiagnosisSubtitle"></p>
               <p class="checklist-result-copy" id="checklistDiagnosisText"></p>
+
+              <div class="checklist-result-section">
+                <div class="checklist-result-section-title" data-key="checklist_recommendation_label">Recomendación</div>
+                <p class="checklist-result-copy" id="checklistRecommendationText"></p>
+              </div>
+
+              <div class="checklist-result-section" id="checklistIssuesSection" hidden>
+                <div class="checklist-result-section-title" data-key="checklist_issues_label">Puntos que están frenando tu web</div>
+                <ul class="checklist-result-list" id="checklistIssuesList"></ul>
+              </div>
             </div>
 
             <div class="checklist-actions">
               <a href="https://wa.me/593969349833" target="_blank" rel="noopener noreferrer" class="btn btn-primary checklist-submit" id="checklistWhatsappLink" data-key="checklist_result_whatsapp">Contactar por WhatsApp</a>
-              <button type="button" class="btn btn-ghost checklist-whatsapp" id="checklistCloseButton" data-key="checklist_result_close">Cerrar</button>
+              <button type="button" class="btn btn-ghost checklist-whatsapp" id="checklistCloseButton" data-key="checklist_result_close">Cerrar diagnóstico</button>
             </div>
           </div>
 
@@ -5296,7 +5334,7 @@ const T = {
     checklist_name_placeholder:"Tu nombre",
     checklist_whatsapp_label:"Celular / WhatsApp",
     checklist_whatsapp_placeholder:"Tu número de WhatsApp",
-    checklist_website_label:"Web actual (opcional)",
+    checklist_website_label:"Web actual",
     checklist_website_placeholder:"empresa.com",
     checklist_start:"Quiero evaluar mi web",
     checklist_questions_title:"Responde el test de 15 preguntas.",
@@ -5305,18 +5343,20 @@ const T = {
     checklist_result_title:"Test finalizado",
     checklist_result_text:"Este resultado resume cuánto podría estar frenando tu web la confianza, los contactos y las oportunidades de venta.",
     checklist_result_whatsapp:"Contactar por WhatsApp",
-    checklist_result_close:"Cerrar",
-    checklist_score_label:"Score obtenido",
-    checklist_score_unit:"puntos",
+    checklist_result_close:"Cerrar diagnóstico",
+    checklist_score_label:"Resultado",
+    checklist_score_unit:"puntos críticos",
+    checklist_recommendation_label:"Recomendación",
+    checklist_issues_label:"Puntos que están frenando tu web",
     checklist_note:"Tus datos se usan solo para generar tu diagnóstico y, si lo decides, ayudarte a corregir lo que hoy está frenando tu web.",
     checklist_trust_1:"Tu diagnóstico queda asociado a un lead real",
     checklist_trust_2:"Lectura accionable en menos de 2 minutos",
     checklist_trust_3:"Optimizado para móvil",
     checklist_error_name:"Ingresa tu nombre.",
     checklist_error_whatsapp:"Ingresa un número válido con al menos 8 dígitos.",
-    checklist_error_website:"Ingresa una web válida, por ejemplo empresa.com o https://empresa.com.",
-    checklist_error_lead:"Revisa los campos marcados para continuar.",
-    checklist_error_questions:"Responde las 15 preguntas antes de ver tu diagnóstico.",
+    checklist_error_website:"Ingresa la web actual de tu negocio, por ejemplo empresa.com o https://empresa.com.",
+    checklist_error_lead:"Completa todos los campos para continuar.",
+    checklist_error_questions:"Completa todos los campos para continuar.",
     checklist_error_submit:"No pude enviar tu resultado en este momento. Inténtalo de nuevo o escríbeme por WhatsApp.",
     checklist_sending:"Enviando tu diagnóstico...",
     founder_eyebrow:"Fundador · NextWebEC",
@@ -5464,7 +5504,7 @@ const T = {
     checklist_name_placeholder:"Your name",
     checklist_whatsapp_label:"Phone / WhatsApp",
     checklist_whatsapp_placeholder:"Your WhatsApp number",
-    checklist_website_label:"Current website (optional)",
+    checklist_website_label:"Current website",
     checklist_website_placeholder:"business.com",
     checklist_start:"Evaluate my website",
     checklist_questions_title:"Answer the 15-question test.",
@@ -5473,18 +5513,20 @@ const T = {
     checklist_result_title:"Test completed",
     checklist_result_text:"This result summarizes how much your website may be slowing down trust, inquiries, and sales opportunities.",
     checklist_result_whatsapp:"Contact on WhatsApp",
-    checklist_result_close:"Close",
-    checklist_score_label:"Score obtained",
-    checklist_score_unit:"points",
+    checklist_result_close:"Close diagnosis",
+    checklist_score_label:"Result",
+    checklist_score_unit:"critical points",
+    checklist_recommendation_label:"Recommendation",
+    checklist_issues_label:"Points holding your website back",
     checklist_note:"Your details are only used to generate your diagnosis and, if you want, help fix what is currently holding your website back.",
     checklist_trust_1:"Your diagnosis is tied to a real lead",
     checklist_trust_2:"Actionable read in under 2 minutes",
     checklist_trust_3:"Optimized for mobile",
     checklist_error_name:"Enter your name.",
     checklist_error_whatsapp:"Enter a valid WhatsApp number with at least 8 digits.",
-    checklist_error_website:"Enter a valid website, for example business.com or https://business.com.",
-    checklist_error_lead:"Review the highlighted fields to continue.",
-    checklist_error_questions:"Answer all 15 questions before seeing your diagnosis.",
+    checklist_error_website:"Enter your current website, for example business.com or https://business.com.",
+    checklist_error_lead:"Complete all fields to continue.",
+    checklist_error_questions:"Complete all fields to continue.",
     checklist_error_submit:"I couldn't send your result right now. Try again or message me on WhatsApp.",
     checklist_sending:"Sending your diagnosis...",
     founder_eyebrow:"Founder · NextWebEC",
@@ -5621,7 +5663,7 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
-  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bhvfoo/';
+  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bm0xaj/';
   const whatsappPhone = '593969349833';
   const panes = {
     lead: form.querySelector('[data-step-pane="lead"]'),
@@ -5645,39 +5687,42 @@ requestActiveOnScrollUpdate();
   const diagnosisTitle = document.getElementById('checklistDiagnosisTitle');
   const diagnosisSubtitle = document.getElementById('checklistDiagnosisSubtitle');
   const diagnosisText = document.getElementById('checklistDiagnosisText');
+  const recommendationText = document.getElementById('checklistRecommendationText');
+  const issuesSection = document.getElementById('checklistIssuesSection');
+  const issuesList = document.getElementById('checklistIssuesList');
 
   const questionBank = {
     es: [
-      '¿Tu web se ve moderna comparada con la de tus principales competidores?',
-      '¿Tu web carga rápido en celular?',
-      '¿Es fácil contactarte desde tu web?',
-      '¿Tu web se adapta bien a celulares?',
-      '¿Tu web explica claramente qué haces?',
-      '¿Tu web te genera contactos o clientes?',
-      '¿Tu web transmite confianza al primer vistazo?',
-      '¿Tus servicios o productos se entienden fácilmente?',
-      '¿Un cliente encuentra rápido la información que busca?',
-      '¿Tu web aparece en Google cuando buscan tus servicios?',
-      '¿Tienes forma de medir visitas o resultados?',
-      '¿Tu web fue actualizada en los últimos 12 meses?',
-      '¿Tu web refleja el verdadero nivel de tu negocio?',
+      '¿Tu web se entiende en menos de 5 segundos?',
+      '¿Tu web se ve moderna y profesional?',
+      '¿Tu web funciona bien en celular?',
+      '¿Tu web carga rápido?',
+      '¿Tu web tiene botones claros para contactarte?',
+      '¿Tu web transmite confianza?',
+      '¿Tu web explica bien tus servicios?',
+      '¿Tu web tiene buenos textos?',
+      '¿Tu web tiene buena navegación?',
+      '¿Tu web genera contactos?',
+      '¿Tu web aparece bien en Google?',
+      '¿Tu web tiene imágenes de buena calidad?',
+      '¿Tu web muestra claramente qué te diferencia?',
       '¿Tu web tiene botones claros para pedir información o comprar?',
       '¿Estás satisfecho con el rendimiento actual de tu web?'
     ],
     en: [
-      'Does your website look modern compared to your main competitors?',
-      'Does your website load fast on mobile?',
-      'Is it easy to contact you through your website?',
-      'Does your website adapt well to mobile phones?',
-      'Does your website clearly explain what you do?',
-      'Does your website generate inquiries or clients?',
-      'Does your website build trust at first glance?',
-      'Are your services or products easy to understand?',
-      'Can a client quickly find the information they need?',
-      'Does your website show up on Google when people search for your services?',
-      'Do you have a way to measure visits or results?',
-      'Has your website been updated in the last 12 months?',
-      'Does your website reflect the real level of your business?',
+      'Can people understand your website in less than 5 seconds?',
+      'Does your website look modern and professional?',
+      'Does your website work well on mobile?',
+      'Does your website load fast?',
+      'Does your website have clear buttons to contact you?',
+      'Does your website build trust?',
+      'Does your website explain your services well?',
+      'Does your website have strong copy?',
+      'Does your website have good navigation?',
+      'Does your website generate leads?',
+      'Does your website appear well on Google?',
+      'Does your website have high-quality images?',
+      'Does your website clearly show what makes you different?',
       'Does your website have clear buttons to request information or buy?',
       'Are you satisfied with your website\'s current performance?'
     ]
@@ -5688,61 +5733,114 @@ requestActiveOnScrollUpdate();
       {
         min: 0,
         max: 3,
-        title: 'Tu web tiene una base sólida.',
-        subtitle: 'Con algunos ajustes bien enfocados, podrías convertir más visitas sin rehacer todo tu sitio.',
-        text: 'Tu web no parece necesitar una reconstrucción completa. Aun así, podrías mejorar detalles de velocidad, claridad o conversión para obtener mejores resultados.'
+        title: 'Tu web está funcionando bien',
+        subtitle: 'Nivel 1',
+        text: 'Tu sitio tiene una base sólida. No parece que necesites una web nueva en este momento. Aun así, podrías mejorar detalles puntuales para que tu presencia digital se vea más clara, moderna y confiable.',
+        recommendation: 'Te recomendaría una revisión ligera de diseño, velocidad, textos y llamadas a la acción para detectar oportunidades pequeñas de mejora.',
+        whatsappCta: 'Quiero una revisión rápida de mi web'
       },
       {
         min: 4,
         max: 7,
-        title: 'Tu web tiene oportunidades claras de mejora.',
-        subtitle: 'Aquí ya hay margen real para recuperar contactos que hoy podrían estar quedándose en el camino.',
-        text: 'Tu web funciona, pero hay varios puntos que pueden estar afectando la confianza, la navegación o la generación de contactos.'
+        title: 'Tu web puede estar perdiendo oportunidades',
+        subtitle: 'Nivel 2',
+        text: 'Tu sitio cumple parcialmente, pero hay señales de que podría estar frenando contactos o ventas. Es probable que algunos visitantes entren, revisen rápido y se vayan sin escribirte porque la información, el diseño o la experiencia no comunican suficiente confianza.',
+        recommendation: 'Te recomendaría una modernización visual y estructural: mejorar el orden, los textos, los botones, la versión móvil y la claridad de tu propuesta.',
+        whatsappCta: 'Quiero mejorar mi web'
       },
       {
         min: 8,
         max: 11,
-        title: 'Tu web probablemente está frenando resultados.',
-        subtitle: 'Si corriges esta base, tu web podría empezar a jugar mucho mejor a favor de tus ventas.',
-        text: 'Tu sitio puede estar limitando la cantidad de clientes que te contactan. Una modernización enfocada en claridad, diseño y conversión podría ayudarte bastante.'
+        title: 'Tu web necesita una actualización importante',
+        subtitle: 'Nivel 3',
+        text: 'Tu diagnóstico muestra varios puntos críticos. Es probable que tu web no esté reflejando el nivel real de tu negocio. Esto puede afectar la confianza, la conversión y la cantidad de personas que deciden contactarte.',
+        recommendation: 'Te recomendaría rediseñar la experiencia completa: estructura, diseño, textos, llamadas a la acción, velocidad, versión móvil y conexión con WhatsApp o formularios.',
+        whatsappCta: 'Quiero actualizar mi web'
       },
       {
         min: 12,
         max: 15,
         title: 'Tu web necesita atención urgente.',
-        subtitle: 'En este escenario, seguir igual probablemente significa seguir perdiendo confianza y oportunidades.',
-        text: 'Tu web probablemente no está representando bien el nivel real de tu negocio. En este caso, una modernización completa sería lo más recomendable.'
+        subtitle: 'Nivel 4',
+        text: 'Tu resultado indica que tu web probablemente está trabajando en contra de tu negocio. Si un cliente entra y no entiende rápido qué haces, por qué confiar en ti o cómo contactarte, estás perdiendo oportunidades todos los días.',
+        recommendation: 'Te recomendaría crear una web nueva o rehacer la actual desde la base, enfocada en confianza, claridad, velocidad y conversión.',
+        whatsappCta: 'Necesito una web mejor'
       }
     ],
     en: [
       {
         min: 0,
         max: 3,
-        title: 'Your website has a solid foundation.',
-        subtitle: 'With a few focused improvements, you could convert more visits without rebuilding the whole site.',
-        text: 'Your website probably does not need a full rebuild. Even so, improving speed, clarity, or conversion details could help you get better results.'
+        title: 'Your website is working well',
+        subtitle: 'Level 1',
+        text: 'Your site has a solid foundation. It does not seem like you need a brand new website right now. Even so, refining small details could make your digital presence clearer, more modern, and more trustworthy.',
+        recommendation: 'I would recommend a light review of design, speed, copy, and calls to action to spot small improvement opportunities.',
+        whatsappCta: 'I want a quick review of my website'
       },
       {
         min: 4,
         max: 7,
-        title: 'Your website has clear improvement opportunities.',
-        subtitle: 'There is real room here to recover leads that may currently be slipping away.',
-        text: 'Your website works, but several points may be affecting trust, navigation, or lead generation.'
+        title: 'Your website may be losing opportunities',
+        subtitle: 'Level 2',
+        text: 'Your site works partially, but there are signs it may be slowing down leads or sales. Some visitors may arrive, look briefly, and leave without contacting you because the information, design, or experience does not communicate enough trust.',
+        recommendation: 'I would recommend a visual and structural modernization: improve the order, copy, buttons, mobile version, and clarity of your offer.',
+        whatsappCta: 'I want to improve my website'
       },
       {
         min: 8,
         max: 11,
-        title: 'Your website is probably slowing down results.',
-        subtitle: 'If you fix this foundation, your website could start working far more in favor of your sales.',
-        text: 'Your site may be limiting how many clients contact you. A modernization focused on clarity, design, and conversion could help significantly.'
+        title: 'Your website needs an important update',
+        subtitle: 'Level 3',
+        text: 'Your diagnosis shows several critical points. Your website may not be reflecting the real level of your business. That can affect trust, conversion, and how many people decide to contact you.',
+        recommendation: 'I would recommend redesigning the full experience: structure, design, copy, calls to action, speed, mobile version, and connection with WhatsApp or forms.',
+        whatsappCta: 'I want to update my website'
       },
       {
         min: 12,
         max: 15,
-        title: 'Your website needs urgent attention.',
-        subtitle: 'At this level, staying as you are likely means continuing to lose trust and opportunities.',
-        text: 'Your website is probably not representing the real level of your business. In this case, a complete modernization would be the most advisable option.'
+        title: 'Your website needs urgent attention',
+        subtitle: 'Level 4',
+        text: 'Your result indicates that your website is probably working against your business. If a client lands on it and does not quickly understand what you do, why to trust you, or how to contact you, you are losing opportunities every day.',
+        recommendation: 'I would recommend creating a new website or rebuilding the current one from the ground up, focused on trust, clarity, speed, and conversion.',
+        whatsappCta: 'I need a better website'
       }
+    ]
+  };
+
+  const negativePointBank = {
+    es: [
+      'Tu mensaje principal no está suficientemente claro. Un visitante debería entender rápido qué haces, para quién y por qué debería contactarte.',
+      'La apariencia visual puede estar afectando la confianza. Una web desactualizada puede hacer que un buen negocio parezca menos sólido.',
+      'La experiencia móvil necesita revisión. La mayoría de usuarios entra desde el celular, así que esta parte es crítica.',
+      'La velocidad puede estar afectando la conversión. Si la página tarda demasiado, muchos usuarios se van antes de leer.',
+      'Faltan llamadas a la acción claras. El usuario debe saber exactamente dónde hacer clic para escribirte o pedir información.',
+      'La web no está comunicando suficiente credibilidad. Testimonios, casos, fotos reales, datos y estructura ayudan mucho.',
+      'La explicación de tus servicios puede estar incompleta o desordenada. Esto puede hacer que el cliente no entienda bien qué ofreces.',
+      'Los textos pueden estar debilitando el mensaje. No se trata de escribir mucho, sino de decir lo correcto de forma clara.',
+      'La navegación puede estar dificultando la experiencia. El usuario debe encontrar lo importante sin pensar demasiado.',
+      'La web no está cumpliendo su objetivo principal: generar oportunidades reales para tu negocio.',
+      'Hay oportunidad de mejorar SEO básico. Títulos, descripciones, estructura y contenido pueden ayudar a que te encuentren mejor.',
+      'Las imágenes pueden estar bajando la percepción del negocio. Buenas fotos o visuales correctos elevan mucho la confianza.',
+      'Tu diferencial no está claro. El visitante debe entender por qué elegirte a ti y no a otra opción.',
+      'El camino hacia la acción no está suficientemente claro. Esto puede hacer que personas interesadas no terminen contactándote.',
+      'Si tú mismo no estás satisfecho, probablemente la web ya no representa lo que tu negocio necesita hoy.'
+    ],
+    en: [
+      'Your main message is not clear enough. A visitor should quickly understand what you do, who you help, and why they should contact you.',
+      'The visual appearance may be affecting trust. An outdated website can make a good business look less solid.',
+      'The mobile experience needs review. Most users visit from their phones, so this part is critical.',
+      'Speed may be hurting conversion. If the page takes too long to load, many users leave before reading.',
+      'Clear calls to action are missing. People should know exactly where to click to message you or request information.',
+      'Your website is not communicating enough credibility. Testimonials, case studies, real photos, data, and structure help a lot.',
+      'Your services may be explained in an incomplete or disorganized way. That can make clients miss what you offer.',
+      'The copy may be weakening the message. It is not about writing more, but saying the right thing clearly.',
+      'Navigation may be making the experience harder. People should find the important information without thinking too much.',
+      'Your website is not meeting its main goal: generating real opportunities for your business.',
+      'There is room to improve basic SEO. Titles, descriptions, structure, and content can help people find you better.',
+      'The images may be lowering the perceived quality of the business. Better visuals can greatly increase trust.',
+      'Your differentiator is not clear. Visitors should understand why to choose you over another option.',
+      'The path toward action is not clear enough. Interested people may leave without contacting you.',
+      'If you are not satisfied yourself, the website probably no longer represents what your business needs today.'
     ]
   };
 
@@ -5820,7 +5918,7 @@ requestActiveOnScrollUpdate();
       website: websiteInput ? websiteInput.value.trim() : ''
     };
     const whatsappDigits = sanitizeWhatsapp(lead.whatsapp);
-    const normalizedWebsite = lead.website ? normalizeWebsite(lead.website) : '';
+    const normalizedWebsite = normalizeWebsite(lead.website);
     let isValid = true;
 
     setFieldError(nameInput, nameError, lead.name ? '' : 'checklist_error_name');
@@ -5829,8 +5927,8 @@ requestActiveOnScrollUpdate();
     setFieldError(whatsappInput, whatsappError, whatsappDigits.length >= 8 ? '' : 'checklist_error_whatsapp');
     if (whatsappDigits.length < 8) isValid = false;
 
-    setFieldError(websiteInput, websiteError, lead.website && !normalizedWebsite ? 'checklist_error_website' : '');
-    if (lead.website && !normalizedWebsite) isValid = false;
+    setFieldError(websiteInput, websiteError, normalizedWebsite ? '' : 'checklist_error_website');
+    if (!normalizedWebsite) isValid = false;
 
     if (!isValid) {
       showChecklistStatus('error', 'checklist_error_lead');
@@ -5933,19 +6031,122 @@ requestActiveOnScrollUpdate();
     }) || diagnosisList[0];
   }
 
+  function getNegativePoints() {
+    const points = negativePointBank[lang] || negativePointBank.es;
+    return state.answers.reduce(function (acc, answer, index) {
+      if (answer === 'no' && points[index]) acc.push(points[index]);
+      return acc;
+    }, []);
+  }
+
+  function getScoreText(score) {
+    return lang === 'en'
+      ? `Result: ${score}/15 critical points`
+      : `Resultado: ${score}/15 puntos críticos`;
+  }
+
+  function getWhatsappMessage() {
+    if (!state.result) return `https://wa.me/${whatsappPhone}`;
+
+    const website = state.lead.website || (lang === 'en' ? 'No website shared' : 'No comparti mi web');
+    const message = lang === 'en'
+      ? [
+          'Hi José, I just completed the free website diagnosis on NextWebEC.',
+          '',
+          `My result was: ${state.result.diagnosis.title}`,
+          `Score: ${state.result.score}/15 critical points`,
+          `My current website is: ${website}`,
+          '',
+          'I would like your help reviewing what I can improve.'
+        ].join('\n')
+      : [
+          'Hola José, acabo de hacer el diagnóstico gratuito de mi web en NextWebEC.',
+          '',
+          `Mi resultado fue: ${state.result.diagnosis.title}`,
+          `Puntaje: ${state.result.score}/15 puntos críticos`,
+          `Mi web actual es: ${website}`,
+          '',
+          'Quisiera que me ayudes a revisar qué puedo mejorar.'
+        ].join('\n');
+
+    return `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+  }
+
+  function buildResult() {
+    const score = state.answers.filter(function (answer) {
+      return answer === 'no';
+    }).length;
+
+    return {
+      score,
+      diagnosis: getDiagnosis(score),
+      negativePoints: getNegativePoints(),
+      answersDetailed: getQuestions().map(function (question, index) {
+        const answer = state.answers[index];
+        return {
+          question,
+          answer,
+          answer_label: answer === 'yes' ? getAnswerLabels().yes : getAnswerLabels().no,
+          critical_point: answer === 'no' ? 1 : 0
+        };
+      })
+    };
+  }
+
+  async function sendLeadToZapier() {
+    const payload = {
+      nombre: state.lead.name,
+      celular: state.lead.whatsapp,
+      whatsapp: state.lead.whatsapp,
+      web_actual: state.lead.website,
+      sitio_web: state.lead.website,
+      score_total: state.result.score,
+      score: state.result.score,
+      diagnostico_titulo: state.result.diagnosis.title,
+      diagnostico_mensaje: state.result.diagnosis.text,
+      diagnostico: state.result.diagnosis.title,
+      recomendacion: state.result.diagnosis.recommendation,
+      respuestas: state.result.answersDetailed,
+      respuestas_completas: state.result.answersDetailed,
+      puntos_negativos_detectados: state.result.negativePoints,
+      puntos_negativos: state.result.negativePoints,
+      fecha: new Date().toISOString(),
+      origen: 'Checklist web NextWebEC',
+      estado: 'Nuevo',
+      notas: ''
+    };
+
+    const response = await fetch(webhookUrl, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify(payload)
+    });
+
+    if (!response.ok) {
+      throw new Error('Zapier webhook request failed');
+    }
+  }
+
   function updateResult() {
     if (!state.result) return;
 
-    if (scoreValue) scoreValue.textContent = `${state.result.score} ${t('checklist_score_unit')}`;
+    if (scoreValue) scoreValue.textContent = getScoreText(state.result.score);
     if (diagnosisTitle) diagnosisTitle.textContent = state.result.diagnosis.title;
     if (diagnosisSubtitle) diagnosisSubtitle.textContent = state.result.diagnosis.subtitle || '';
     if (diagnosisText) diagnosisText.textContent = state.result.diagnosis.text;
+    if (recommendationText) recommendationText.textContent = state.result.diagnosis.recommendation || '';
+
+    if (issuesSection && issuesList) {
+      issuesList.innerHTML = state.result.negativePoints.map(function (point) {
+        return `<li class="checklist-result-item">${point}</li>`;
+      }).join('');
+      issuesSection.hidden = !state.result.negativePoints.length;
+    }
 
     if (whatsappLink) {
-      const message = lang === 'en'
-        ? `Hi Jose, I completed the NextWebEC test and scored ${state.result.score} points. My diagnosis was: ${state.result.diagnosis.title} My website is ${state.lead.website}. I want you to review it and tell me what we should fix first to generate more leads.`
-        : `Hola José, completé el test de NextWebEC y obtuve ${state.result.score} puntos. Mi diagnóstico fue: ${state.result.diagnosis.title} Mi web es ${state.lead.website}. Quiero que la revises y me digas qué deberíamos corregir primero para generar más contactos.`;
-      whatsappLink.href = `https://wa.me/${whatsappPhone}?text=${encodeURIComponent(message)}`;
+      whatsappLink.href = getWhatsappMessage();
     }
   }
 
@@ -5965,6 +6166,9 @@ requestActiveOnScrollUpdate();
     if (diagnosisTitle) diagnosisTitle.textContent = '';
     if (diagnosisSubtitle) diagnosisSubtitle.textContent = '';
     if (diagnosisText) diagnosisText.textContent = '';
+    if (recommendationText) recommendationText.textContent = '';
+    if (issuesList) issuesList.innerHTML = '';
+    if (issuesSection) issuesSection.hidden = true;
     if (whatsappLink) whatsappLink.href = `https://wa.me/${whatsappPhone}`;
     if (nameInput) nameInput.focus();
   }
@@ -6044,56 +6248,26 @@ requestActiveOnScrollUpdate();
     }
 
     state.lead = lead;
-    state.result = {
-      score: state.answers.filter(function (answer) {
-        return answer === 'no';
-      }).length,
-      diagnosis: getDiagnosis(state.answers.filter(function (answer) {
-        return answer === 'no';
-      }).length)
-    };
+    state.result = buildResult();
 
     if (finishButton) finishButton.disabled = true;
-    showChecklistStatus('info', 'checklist_sending');
+    updateResult();
+    showChecklistStatus('', '');
+    setStep('result');
 
-    try {
-      const response = await fetch(webhookUrl, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({
-          fecha: new Date().toISOString(),
-          nombre: state.lead.name,
-          whatsapp: state.lead.whatsapp,
-          sitio_web: state.lead.website,
-          score: state.result.score,
-          diagnostico: state.result.diagnosis.title,
-          estado: 'Nuevo',
-          notas: ''
-        })
+    if (typeof window.gtag === 'function') {
+      window.gtag('event', 'checklist_submit', {
+        event_category: 'lead',
+        event_label: 'nextwebec_checklist_test',
+        value: state.result.score
       });
-
-      if (!response.ok) {
-        throw new Error('Zapier webhook request failed');
-      }
-
-      if (typeof window.gtag === 'function') {
-        window.gtag('event', 'checklist_submit', {
-          event_category: 'lead',
-          event_label: 'nextwebec_checklist_test',
-          value: state.result.score
-        });
-      }
-
-      updateResult();
-      showChecklistStatus('', '');
-      setStep('result');
-    } catch (error) {
-      showChecklistStatus('error', 'checklist_error_submit');
-    } finally {
-      if (finishButton) finishButton.disabled = false;
     }
+
+    sendLeadToZapier().catch(function (error) {
+      console.error('NextWebEC checklist Zapier error:', error);
+    }).finally(function () {
+      if (finishButton) finishButton.disabled = false;
+    });
   });
 
   window.updateChecklistLocale = function () {
@@ -6109,7 +6283,7 @@ requestActiveOnScrollUpdate();
 
   renderQuestions();
   setStep('lead');
-  if (scoreValue) scoreValue.textContent = `0 ${t('checklist_score_unit')}`;
+  if (scoreValue) scoreValue.textContent = getScoreText(0);
 })();
 
 (function () {
