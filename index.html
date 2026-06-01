@@ -3091,8 +3091,11 @@
 
     /* ─── CUSTOM CURSOR ─── */
     @media (hover: hover) and (pointer: fine) {
-      html { cursor: none; }
-      a, button, .btn, [role="button"] { cursor: none; }
+      html.custom-cursor-ready { cursor: none; }
+      html.custom-cursor-ready a,
+      html.custom-cursor-ready button,
+      html.custom-cursor-ready .btn,
+      html.custom-cursor-ready [role="button"] { cursor: none; }
     }
     #cursor-dot {
       position: fixed; pointer-events: none; z-index: 9999;
@@ -8334,13 +8337,15 @@ setupHeroMockupAnimation();
   window.addEventListener('resize', requestUpdate, { passive: true });
   update();
 })();
- a
+
 /* ── Custom cursor ── */
 (function () {
   if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
   const dot  = document.getElementById('cursor-dot');
   const ring = document.getElementById('cursor-ring');
   if (!dot || !ring) return;
+
+  document.documentElement.classList.add('custom-cursor-ready');
 
   let mx = -200, my = -200, rx = -200, ry = -200;
 
