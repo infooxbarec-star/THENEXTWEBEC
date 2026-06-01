@@ -3866,14 +3866,18 @@
 
     .jdc-live-experience {
       position: relative;
-      min-height: clamp(720px, 122vh, 980px);
-      height: clamp(720px, 122vh, 980px);
+      min-height: clamp(760px, 126vh, 1080px);
+      height: clamp(760px, 126vh, 1080px);
       margin-bottom: 0 !important;
       padding: 0;
       box-sizing: border-box;
       background: #071422;
       overflow: visible;
       isolation: isolate;
+      --jdc-device-width: min(64vw, 920px);
+      --jdc-device-height: min(72vh, 720px);
+      --jdc-audit-opacity: 0;
+      --jdc-stage-shift: 0px;
     }
 
     .jdc-live-pin {
@@ -3884,37 +3888,303 @@
       min-height: calc(100svh - 72px);
       overflow: hidden;
       display: grid;
-      place-items: center;
+      align-items: center;
       background:
-        radial-gradient(circle at 50% 12%, rgba(26, 110, 250, 0.14), transparent 34%),
+        radial-gradient(circle at 18% 16%, rgba(48, 135, 255, 0.18), transparent 34%),
+        radial-gradient(circle at 82% 24%, rgba(107, 214, 255, 0.12), transparent 28%),
         linear-gradient(180deg, #071422 0%, #06111f 100%);
     }
 
-    .jdc-live-stage {
+    .jdc-live-bg {
       position: absolute;
       inset: 0;
-      display: grid;
-      place-items: center;
-      padding: clamp(14px, 2.4vw, 34px);
+      background:
+        linear-gradient(120deg, rgba(255,255,255,0.04), transparent 28%),
+        radial-gradient(circle at 50% 70%, rgba(9, 186, 255, 0.08), transparent 34%);
+      pointer-events: none;
+      z-index: 0;
+    }
+
+    .jdc-live-layout {
+      position: relative;
       z-index: 2;
+      width: min(1280px, calc(100% - 40px));
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+      gap: clamp(20px, 2.8vw, 36px);
+      align-items: center;
+      padding: clamp(26px, 3vw, 42px);
+    }
+
+    .jdc-live-copy {
+      position: relative;
+      z-index: 4;
+      opacity: var(--jdc-copy-opacity, 0);
+      transform: translate3d(0, var(--jdc-copy-y, -10px), 0);
+      color: rgba(255,255,255,0.92);
+      pointer-events: auto;
+    }
+
+    .jdc-live-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.14);
+      color: #d7ebff;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .jdc-live-title {
+      margin: 18px 0 12px;
+      font-size: clamp(34px, 4.4vw, 58px);
+      line-height: 0.96;
+      color: #fff;
+      letter-spacing: -0.04em;
+    }
+
+    .jdc-live-title span {
+      color: #84d7ff;
+    }
+
+    .jdc-live-copy p {
+      margin: 0;
+      color: rgba(223, 233, 248, 0.84);
+      font-size: 16px;
+      line-height: 1.72;
+      max-width: 42ch;
+    }
+
+    .jdc-live-metrics {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+
+    .jdc-live-metric {
+      padding: 16px 14px;
+      border-radius: 18px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
+    }
+
+    .jdc-live-metric-value {
+      display: block;
+      color: #fff;
+      font-size: clamp(24px, 2.3vw, 32px);
+      font-weight: 800;
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .jdc-live-metric-label {
+      display: block;
+      margin-top: 8px;
+      color: rgba(223,233,248,0.76);
+      font-size: 12px;
+      line-height: 1.45;
+    }
+
+    .jdc-live-modes {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+      margin-top: 26px;
+    }
+
+    .jdc-live-mode {
+      appearance: none;
+      border: 1px solid rgba(255,255,255,0.14);
+      background: rgba(255,255,255,0.05);
+      color: rgba(255,255,255,0.88);
+      border-radius: 999px;
+      padding: 11px 16px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.01em;
+      cursor: pointer;
+      transition: background .22s ease, border-color .22s ease, color .22s ease, transform .22s ease;
+    }
+
+    .jdc-live-mode:hover,
+    .jdc-live-mode[aria-pressed="true"] {
+      background: linear-gradient(135deg, rgba(76, 160, 255, 0.22), rgba(16, 209, 255, 0.18));
+      border-color: rgba(132,215,255,0.38);
+      color: #fff;
+      transform: translateY(-1px);
+    }
+
+    .jdc-live-panel {
+      margin-top: 18px;
+      padding: 20px;
+      border-radius: 24px;
+      background: rgba(6, 17, 31, 0.74);
+      border: 1px solid rgba(255,255,255,0.08);
+      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
+    }
+
+    .jdc-live-panel-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 12px;
+    }
+
+    .jdc-live-panel-label {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(132,215,255,0.72);
+    }
+
+    .jdc-live-panel-state {
+      font-size: 12px;
+      font-weight: 700;
+      color: rgba(255,255,255,0.72);
+    }
+
+    .jdc-live-panel-content {
+      display: none;
+    }
+
+    .jdc-live-panel-content.is-active {
+      display: block;
+    }
+
+    .jdc-live-panel-title {
+      margin: 0;
+      color: #fff;
+      font-size: 24px;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
+    }
+
+    .jdc-live-panel-copy {
+      margin: 12px 0 0;
+      color: rgba(223,233,248,0.8);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+
+    .jdc-live-panel-list {
+      list-style: none;
+      padding: 0;
+      margin: 14px 0 0;
+      display: grid;
+      gap: 10px;
+    }
+
+    .jdc-live-panel-list li {
+      position: relative;
+      padding-left: 18px;
+      color: rgba(245,248,255,0.88);
+      font-size: 14px;
+      line-height: 1.55;
+    }
+
+    .jdc-live-panel-list li::before {
+      content: '';
+      position: absolute;
+      left: 0;
+      top: 0.6em;
+      width: 8px;
+      height: 8px;
+      border-radius: 999px;
+      background: linear-gradient(135deg, #84d7ff, #1a6efa);
+      box-shadow: 0 0 0 4px rgba(132,215,255,0.12);
+    }
+
+    .jdc-live-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 20px;
+    }
+
+    .jdc-live-stage {
+      position: relative;
+      display: grid;
+      justify-items: center;
+      padding: 0 0 28px;
+      z-index: 2;
+      transform: translate3d(0, var(--jdc-stage-shift, 0px), 0);
+    }
+
+    .jdc-live-stage-topbar {
+      display: flex;
+      width: min(100%, 860px);
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 14px;
+      color: rgba(223,233,248,0.76);
+    }
+
+    .jdc-live-stage-title {
+      font-size: 13px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .jdc-live-stage-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      border: 1px solid rgba(255,255,255,0.12);
+      font-size: 12px;
+      font-weight: 700;
     }
 
     .jdc-live-frame {
-      width: min(96vw, 1460px);
-      height: min(78vh, 780px);
+      position: relative;
+      width: min(100%, 920px);
+      display: grid;
+      justify-items: center;
+      opacity: var(--jdc-frame-opacity, 1);
+      transform: translate3d(0, var(--jdc-frame-y, 0px), 0) scale(var(--jdc-frame-scale, 1));
+      transform-origin: center center;
+      will-change: transform, opacity;
+    }
+
+    .jdc-live-viewport {
+      position: relative;
+      width: var(--jdc-device-width);
+      height: var(--jdc-device-height);
       border-radius: var(--jdc-radius, 24px);
       overflow: hidden;
       background: #000;
-      opacity: var(--jdc-frame-opacity, 1);
-      transform:
-        translate3d(0, var(--jdc-frame-y, 0px), 0)
-        scale(var(--jdc-frame-scale, 1));
-      transform-origin: center center;
-      will-change: transform, opacity;
+      transition: width .35s ease, height .35s ease, border-radius .35s ease, filter .35s ease;
       box-shadow:
         0 42px 130px rgba(0, 0, 0, 0.50),
         0 0 0 1px rgba(255, 255, 255, 0.10),
         inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+    }
+
+    .jdc-live-experience[data-mode="mobile"] {
+      --jdc-device-width: min(30vw, 360px);
+      --jdc-device-height: min(70vh, 680px);
+      --jdc-stage-shift: 6px;
+    }
+
+    .jdc-live-experience[data-mode="audit"] {
+      --jdc-device-width: min(62vw, 880px);
+      --jdc-device-height: min(72vh, 700px);
+      --jdc-audit-opacity: 1;
     }
 
     .jdc-live-frame iframe {
@@ -3924,17 +4194,142 @@
       border: 0;
       background: #000;
       pointer-events: auto;
+      transition: filter .35s ease, transform .35s ease;
     }
 
-    .jdc-live-copy {
+    .jdc-live-experience[data-mode="audit"] .jdc-live-frame iframe {
+      filter: saturate(0.82) brightness(0.78);
+      transform: scale(1.02);
+    }
+
+    .jdc-live-browser-bar {
       position: absolute;
-      left: clamp(20px, 4vw, 64px);
-      top: clamp(84px, 13vh, 136px);
-      max-width: 500px;
+      top: 0;
+      left: 0;
+      right: 0;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 18px;
+      z-index: 3;
+      background: linear-gradient(180deg, rgba(5,10,19,0.94), rgba(5,10,19,0.68));
+      border-bottom: 1px solid rgba(255,255,255,0.08);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+    }
+
+    .jdc-live-browser-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .jdc-live-browser-dots span {
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.32);
+    }
+
+    .jdc-live-browser-dots span:nth-child(1) { background: #ff5f57; }
+    .jdc-live-browser-dots span:nth-child(2) { background: #febc2e; }
+    .jdc-live-browser-dots span:nth-child(3) { background: #28c840; }
+
+    .jdc-live-browser-pill {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(255,255,255,0.08);
+      color: rgba(255,255,255,0.74);
+      font-size: 12px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+
+    .jdc-live-browser-pill-accent {
+      background: rgba(132,215,255,0.14);
+      color: #dff3ff;
+      margin-left: auto;
+    }
+
+    .jdc-live-audit-layer {
+      position: absolute;
+      inset: 0;
       z-index: 4;
       pointer-events: none;
-      opacity: var(--jdc-copy-opacity, 0);
-      transform: translate3d(0, var(--jdc-copy-y, -10px), 0);
+      opacity: var(--jdc-audit-opacity, 0);
+      transition: opacity .28s ease;
+    }
+
+    .jdc-live-audit-card {
+      position: absolute;
+      max-width: min(240px, 42%);
+      padding: 14px 16px;
+      border-radius: 18px;
+      background: rgba(7,20,34,0.88);
+      border: 1px solid rgba(132,215,255,0.18);
+      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
+      color: #fff;
+    }
+
+    .jdc-live-audit-card::before {
+      content: '';
+      position: absolute;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #84d7ff;
+      box-shadow: 0 0 0 6px rgba(132,215,255,0.16);
+    }
+
+    .jdc-live-audit-card-1 {
+      top: 96px;
+      left: 24px;
+    }
+
+    .jdc-live-audit-card-1::before {
+      right: -24px;
+      top: 22px;
+    }
+
+    .jdc-live-audit-card-2 {
+      top: 180px;
+      right: 24px;
+    }
+
+    .jdc-live-audit-card-2::before {
+      left: -24px;
+      top: 22px;
+    }
+
+    .jdc-live-audit-card-3 {
+      bottom: 30px;
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+    }
+
+    .jdc-live-audit-card-3::before {
+      top: -24px;
+      left: calc(50% - 5px);
+    }
+
+    .jdc-live-audit-title {
+      display: block;
+      margin-bottom: 6px;
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 0.01em;
+      color: #fff;
+    }
+
+    .jdc-live-audit-copy {
+      display: block;
+      color: rgba(223,233,248,0.78);
+      font-size: 12px;
+      line-height: 1.55;
     }
 
     .jdc-live-hint {
@@ -3956,44 +4351,96 @@
       font-weight: 600;
     }
 
-    @media (max-width: 768px) {
-      .jdc-live-experience {
-        min-height: clamp(620px, 112vh, 820px);
-        height: clamp(620px, 112vh, 820px);
-        margin-bottom: 0 !important;
-        padding-top: 0;
-        padding-bottom: 0;
+    @media (max-width: 1080px) {
+      .jdc-live-layout {
+        grid-template-columns: 1fr;
+        gap: 20px;
       }
 
-      .jdc-live-pin {
-        top: 0;
-        height: 100svh;
-        min-height: 100svh;
+      .jdc-live-copy p {
+        max-width: 100%;
       }
 
       .jdc-live-stage {
-        padding: 10px;
-        place-items: center;
+        padding-bottom: 40px;
       }
 
-      .jdc-live-frame {
-        width: 96vw;
-        height: 78svh;
-        border-radius: var(--jdc-radius, 20px);
-        opacity: var(--jdc-frame-opacity, 1);
-        transform:
-          translate3d(0, var(--jdc-frame-y, 0px), 0)
-          scale(var(--jdc-frame-scale, 1));
+      .jdc-live-stage-topbar {
+        width: 100%;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .jdc-live-experience {
+        min-height: auto;
+        height: auto;
+        padding: 0;
+        --jdc-device-width: min(100%, 92vw);
+        --jdc-device-height: min(68svh, 560px);
       }
 
-      .jdc-live-copy {
+      .jdc-live-pin {
+        position: relative;
+        top: 0;
+        height: auto;
+        min-height: auto;
+        padding: 72px 0 28px;
+      }
+
+      .jdc-live-layout {
+        width: min(100%, calc(100% - 24px));
+        padding: 0;
+      }
+
+      .jdc-live-title {
+        font-size: clamp(30px, 9.5vw, 44px);
+      }
+
+      .jdc-live-metrics {
+        grid-template-columns: 1fr;
+      }
+
+      .jdc-live-panel {
+        padding: 18px;
+      }
+
+      .jdc-live-stage-topbar {
+        width: 100%;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .jdc-live-experience[data-mode="mobile"] {
+        --jdc-device-width: min(100%, 330px);
+        --jdc-device-height: min(72svh, 620px);
+      }
+
+      .jdc-live-audit-card {
+        max-width: calc(100% - 32px);
+      }
+
+      .jdc-live-audit-card-1,
+      .jdc-live-audit-card-2,
+      .jdc-live-audit-card-3 {
+        left: 16px;
+        right: 16px;
+        transform: none;
+      }
+
+      .jdc-live-audit-card-1 { top: 88px; }
+      .jdc-live-audit-card-2 { top: auto; bottom: 124px; }
+      .jdc-live-audit-card-3 { bottom: 18px; }
+
+      .jdc-live-audit-card-1::before,
+      .jdc-live-audit-card-2::before,
+      .jdc-live-audit-card-3::before {
         display: none;
       }
 
       .jdc-live-hint {
-        bottom: 14px;
-        font-size: 12px;
-        padding: 9px 14px;
+        position: static;
+        margin-top: 16px;
+        transform: none;
       }
     }
 
@@ -4010,14 +4457,14 @@
         min-height: auto;
       }
 
-      .jdc-live-stage {
-        position: relative;
-        min-height: auto;
-      }
-
-      .jdc-live-frame {
-        opacity: 1 !important;
+      .jdc-live-stage,
+      .jdc-live-frame,
+      .jdc-live-copy,
+      .jdc-live-viewport,
+      .jdc-live-frame iframe {
         transform: none !important;
+        transition: none !important;
+        opacity: 1 !important;
       }
 
       .jdc-live-frame iframe {
@@ -4062,17 +4509,185 @@
     }
     .trust-panel {
       display: grid;
-      gap: 14px;
+      gap: 16px;
+      align-content: start;
+      padding: 28px;
+      border-radius: 28px;
+      background:
+        linear-gradient(180deg, rgba(255,255,255,.96), rgba(244,248,255,.96)),
+        var(--white);
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 28px 70px rgba(11,31,58,.08);
     }
-    .trust-point {
-      background: var(--bg);
-      border: 1px solid rgba(11,31,58,.06);
-      border-radius: var(--r-md);
-      padding: 22px;
+    .trust-panel-head {
+      display: grid;
+      gap: 10px;
+    }
+    .trust-panel-kicker {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      width: fit-content;
+      padding: 8px 12px;
+      border-radius: 999px;
+      background: rgba(26,110,250,.08);
+      color: var(--accent-dark);
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .trust-panel-head h3 {
+      font-size: clamp(26px, 3vw, 36px);
+      line-height: 1.05;
+      color: var(--primary);
+      letter-spacing: -.04em;
+    }
+    .trust-panel-head p {
+      color: var(--muted-text);
+      font-size: 15px;
+      line-height: 1.7;
+      max-width: 48ch;
+    }
+    .trust-views {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .trust-view-btn {
+      appearance: none;
+      border: 1px solid rgba(11,31,58,.08);
+      background: rgba(244,248,255,.92);
+      color: var(--primary);
+      border-radius: 999px;
+      padding: 12px 16px;
+      font: inherit;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: transform .2s ease, border-color .2s ease, background .2s ease, color .2s ease, box-shadow .2s ease;
+    }
+    .trust-view-btn:hover,
+    .trust-view-btn[aria-pressed="true"] {
+      background: linear-gradient(135deg, rgba(26,110,250,.14), rgba(66,153,225,.08));
+      border-color: rgba(26,110,250,.18);
+      color: var(--accent-dark);
+      transform: translateY(-1px);
       box-shadow: var(--shadow-xs);
     }
-    .trust-point h3 {
-      font-size: 16px;
+    .trust-stage {
+      display: grid;
+      gap: 16px;
+      padding: 22px;
+      border-radius: 22px;
+      background: var(--bg);
+      border: 1px solid rgba(11,31,58,.06);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.6);
+    }
+    .trust-panel-view {
+      display: none;
+    }
+    .trust-panel-view.is-active {
+      display: block;
+    }
+    .trust-panel-view h4 {
+      font-size: 22px;
+      line-height: 1.1;
+      color: var(--primary);
+      letter-spacing: -.03em;
+    }
+    .trust-panel-view > p {
+      margin-top: 10px;
+      color: var(--muted-text);
+      font-size: 15px;
+      line-height: 1.7;
+    }
+    .trust-highlight-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 18px;
+    }
+    .trust-highlight {
+      padding: 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.78);
+      border: 1px solid rgba(11,31,58,.06);
+      box-shadow: var(--shadow-xs);
+    }
+    .trust-highlight strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--primary);
+      font-size: 14px;
+    }
+    .trust-highlight span {
+      color: var(--muted-text);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .trust-process {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .trust-step {
+      display: grid;
+      grid-template-columns: auto 1fr;
+      gap: 14px;
+      align-items: start;
+      padding: 14px 0;
+      border-top: 1px solid rgba(11,31,58,.08);
+    }
+    .trust-step:first-child {
+      border-top: 0;
+      padding-top: 0;
+    }
+    .trust-step-num {
+      display: grid;
+      place-items: center;
+      width: 34px;
+      height: 34px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--accent), #7cc4ff);
+      color: #fff;
+      font-size: 13px;
+      font-weight: 800;
+      box-shadow: 0 10px 24px rgba(26,110,250,.18);
+    }
+    .trust-step strong {
+      display: block;
+      color: var(--primary);
+      font-size: 15px;
+      margin-bottom: 4px;
+    }
+    .trust-step span {
+      color: var(--muted-text);
+      font-size: 14px;
+      line-height: 1.65;
+    }
+    .trust-proofbar {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px;
+    }
+    .trust-proof {
+      padding: 10px 12px;
+      border-radius: 999px;
+      background: rgba(26,110,250,.08);
+      color: var(--primary);
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .trust-point {
+      background: rgba(255,255,255,.8);
+      border: 1px solid rgba(11,31,58,.06);
+      border-radius: 18px;
+      padding: 18px;
+      box-shadow: var(--shadow-xs);
+    }
+    .trust-point h5 {
+      font-size: 15px;
       color: var(--primary);
       margin-bottom: 8px;
       letter-spacing: -0.2px;
@@ -4241,10 +4856,24 @@
       .local-seo-grid {
         grid-template-columns: 1fr;
       }
+      .trust-highlight-grid {
+        grid-template-columns: 1fr;
+      }
     }
     @media (max-width: 640px) {
       .services-grid {
         grid-template-columns: 1fr;
+      }
+      .trust-panel {
+        padding: 22px 18px;
+        border-radius: 24px;
+      }
+      .trust-stage {
+        padding: 18px;
+      }
+      .trust-view-btn {
+        width: 100%;
+        justify-content: center;
       }
       .faq-item summary {
         font-size: 16px;
@@ -4486,6 +5115,7 @@
       <li><a class="nav-main-link" href="#proceso" data-key="nav_process">Proceso</a></li>
       <li><a class="nav-main-link" href="#checklist" data-key="nav_checklist">Diagnóstico</a></li>
       <li><a class="nav-main-link" href="#para-quien" data-key="nav_clients">Clientes</a></li>
+      <li><a class="nav-main-link" href="#detras-nextwebec" data-key="nav_founder">Fundador</a></li>
     </ul>
     <div class="nav-right">
       <a href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20tu%20web%20de%20NextWebEC%20y%20me%20interesa%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" class="nav-cta" data-key="nav_cta">Hablemos por WhatsApp</a>
@@ -4508,6 +5138,7 @@
   <a class="mobile-nav-link" href="#proceso" onclick="toggleMenu()" data-key="nav_process">Proceso</a>
   <a class="mobile-nav-link" href="#checklist" onclick="toggleMenu()" data-key="nav_checklist">Diagnóstico</a>
   <a class="mobile-nav-link" href="#para-quien" onclick="toggleMenu()" data-key="nav_clients">Clientes</a>
+  <a class="mobile-nav-link" href="#detras-nextwebec" onclick="toggleMenu()" data-key="nav_founder">Fundador</a>
   <a class="mobile-cta" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20tu%20web%20de%20NextWebEC%20y%20me%20interesa%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" data-key="nav_cta">Hablemos por WhatsApp</a>
   <div class="mobile-lang">
     <div class="lang-toggle">
@@ -4646,9 +5277,9 @@
               <div class="checklist-preview-track"></div>
             </div>
             <ul class="checklist-preview-list">
-              <li>Confianza y propuesta clara <span>Si / No</span></li>
-              <li>Versión móvil y velocidad <span>Si / No</span></li>
-              <li>Facilidad de contacto y conversión <span>Si / No</span></li>
+              <li>Confianza y propuesta clara <span>Sí / No</span></li>
+              <li>Versión móvil y velocidad <span>Sí / No</span></li>
+              <li>Facilidad de contacto y conversión <span>Sí / No</span></li>
             </ul>
           </div>
         </div>
@@ -4657,34 +5288,122 @@
   </div>
 </section>
 
-<section id="jdc-live-experience" class="jdc-live-experience" aria-label="Experiencia en vivo de JDC Watches">
+<section id="jdc-live-experience" class="jdc-live-experience" aria-label="Experiencia en vivo de JDC Watches" data-mode="desktop">
   <div class="jdc-live-pin">
     <div class="jdc-live-bg"></div>
+    <div class="jdc-live-layout">
+      <div class="jdc-live-copy">
+        <span class="jdc-live-eyebrow" data-key="jdc_live_eyebrow">Caso real · JDC Watches</span>
+        <h2 class="jdc-live-title" data-key="jdc_live_title">Un proyecto real que convierte el diseño en <span>confianza inmediata</span></h2>
+        <p data-key="jdc_live_intro">Esta sección ya no solo muestra una web. Ahora deja explorar el proyecto en tres modos para entender cómo una buena estructura cambia percepción, navegación y contacto.</p>
 
-    <div class="jdc-live-copy">
-      <span class="jdc-live-eyebrow">Proyecto real · JDC Watches</span>
-      <p>Desliza para entrar en un proyecto real diseñado para vender confianza antes de vender un producto.</p>
-    </div>
-
-    <div class="jdc-live-stage">
-      <div class="jdc-live-frame">
-        <div class="jdc-live-browser-bar" aria-hidden="true">
-          <div class="jdc-live-browser-dots">
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
-          <div class="jdc-live-browser-pill">jdcwatches.com</div>
-          <div class="jdc-live-browser-pill jdc-live-browser-pill-accent">Live project</div>
+        <div class="jdc-live-metrics" aria-label="Datos clave del proyecto JDC Watches">
+          <article class="jdc-live-metric">
+            <span class="jdc-live-metric-value" data-key="jdc_live_metric_1_value">3</span>
+            <span class="jdc-live-metric-label" data-key="jdc_live_metric_1_label">modos para revisar el caso: desktop, mobile y auditoría visual</span>
+          </article>
+          <article class="jdc-live-metric">
+            <span class="jdc-live-metric-value" data-key="jdc_live_metric_2_value">1</span>
+            <span class="jdc-live-metric-label" data-key="jdc_live_metric_2_label">objetivo claro: elevar confianza antes del primer contacto</span>
+          </article>
+          <article class="jdc-live-metric">
+            <span class="jdc-live-metric-value" data-key="jdc_live_metric_3_value">24/7</span>
+            <span class="jdc-live-metric-label" data-key="jdc_live_metric_3_label">una experiencia de marca que sigue trabajando incluso cuando no respondes</span>
+          </article>
         </div>
-        <iframe
-          src="https://jdcwatches.com/"
-          title="JDC Watches live website"
-          loading="eager"
-          allow="fullscreen">
-        </iframe>
+
+        <div class="jdc-live-modes" role="tablist" aria-label="Modos del caso de estudio JDC Watches">
+          <button type="button" class="jdc-live-mode" data-jdc-mode="desktop" aria-pressed="true" data-key="jdc_live_mode_desktop">Vista desktop</button>
+          <button type="button" class="jdc-live-mode" data-jdc-mode="mobile" aria-pressed="false" data-key="jdc_live_mode_mobile">Vista mobile</button>
+          <button type="button" class="jdc-live-mode" data-jdc-mode="audit" aria-pressed="false" data-key="jdc_live_mode_audit">Auditoría visual</button>
+        </div>
+
+        <div class="jdc-live-panel">
+          <div class="jdc-live-panel-header">
+            <span class="jdc-live-panel-label" data-key="jdc_live_panel_label">Qué estás viendo</span>
+            <span class="jdc-live-panel-state" id="jdcLivePanelState" data-key="jdc_live_state_desktop">Modo desktop</span>
+          </div>
+
+          <div class="jdc-live-panel-content is-active" data-jdc-panel="desktop">
+            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_desktop_title">Jerarquía clara para vender valor antes del catálogo</h3>
+            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_desktop_copy">En escritorio importa la composición general: márgenes, ritmo visual, producto protagonista y una navegación que se siente premium sin volverse pesada.</p>
+            <ul class="jdc-live-panel-list">
+              <li data-key="jdc_live_panel_desktop_item_1">Mensaje de marca visible desde el primer pliegue</li>
+              <li data-key="jdc_live_panel_desktop_item_2">Fotografía protagonista con aire y contraste suficiente</li>
+              <li data-key="jdc_live_panel_desktop_item_3">Recorrido pensado para explorar y luego escribir por WhatsApp</li>
+            </ul>
+          </div>
+
+          <div class="jdc-live-panel-content" data-jdc-panel="mobile">
+            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_mobile_title">Versión mobile diseñada para decidir rápido y tocar menos</h3>
+            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_mobile_copy">En celular el reto es otro: menos espacio, menos paciencia y más intención. Por eso el proyecto también se deja evaluar como dispositivo vertical.</p>
+            <ul class="jdc-live-panel-list">
+              <li data-key="jdc_live_panel_mobile_item_1">Contenido concentrado en una columna limpia y cómoda</li>
+              <li data-key="jdc_live_panel_mobile_item_2">Acciones prioritarias visibles sin saturar la pantalla</li>
+              <li data-key="jdc_live_panel_mobile_item_3">Sensación premium sin sacrificar rapidez de lectura</li>
+            </ul>
+          </div>
+
+          <div class="jdc-live-panel-content" data-jdc-panel="audit">
+            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_audit_title">Una mini auditoría para entender por qué este diseño sí sostiene la venta</h3>
+            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_audit_copy">La función nueva de esta sección es mostrar los criterios detrás del resultado. No es solo “mira qué bonito”; es “mira por qué funciona”.</p>
+            <ul class="jdc-live-panel-list">
+              <li data-key="jdc_live_panel_audit_item_1">El encabezado explica posicionamiento antes de pedir acción</li>
+              <li data-key="jdc_live_panel_audit_item_2">La estructura guía a explorar sin perder orientación</li>
+              <li data-key="jdc_live_panel_audit_item_3">La experiencia empuja confianza, permanencia y contacto</li>
+            </ul>
+          </div>
+
+          <div class="jdc-live-actions">
+            <a href="https://jdcwatches.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-key="jdc_live_cta_primary">Abrir proyecto real</a>
+            <a href="#checklist" class="btn btn-ghost" onclick="document.querySelector('#checklist')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" data-key="jdc_live_cta_secondary">Quiero algo así para mi negocio</a>
+          </div>
+        </div>
       </div>
-      <div class="jdc-live-hint">Interactúa con el proyecto</div>
+
+      <div class="jdc-live-stage">
+        <div class="jdc-live-stage-topbar">
+          <span class="jdc-live-stage-title" data-key="jdc_live_stage_title">Caso interactivo</span>
+          <span class="jdc-live-stage-pill" id="jdcLiveStagePill" data-key="jdc_live_stage_pill_desktop">Desktop review</span>
+        </div>
+
+        <div class="jdc-live-frame">
+          <div class="jdc-live-viewport">
+            <div class="jdc-live-browser-bar" aria-hidden="true">
+              <div class="jdc-live-browser-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+              </div>
+              <div class="jdc-live-browser-pill">jdcwatches.com</div>
+              <div class="jdc-live-browser-pill jdc-live-browser-pill-accent" data-key="jdc_live_browser_badge">Proyecto real</div>
+            </div>
+            <iframe
+              src="https://jdcwatches.com/"
+              title="JDC Watches live website"
+              loading="eager"
+              allow="fullscreen">
+            </iframe>
+
+            <div class="jdc-live-audit-layer" aria-hidden="true">
+              <div class="jdc-live-audit-card jdc-live-audit-card-1">
+                <span class="jdc-live-audit-title" data-key="jdc_live_audit_1_title">Hero con mensaje premium</span>
+                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_1_copy">La primera pantalla vende percepción de marca antes de mostrar precio o catálogo.</span>
+              </div>
+              <div class="jdc-live-audit-card jdc-live-audit-card-2">
+                <span class="jdc-live-audit-title" data-key="jdc_live_audit_2_title">Navegación simple</span>
+                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_2_copy">Pocas decisiones visibles, mejor orientación y menos fricción al explorar.</span>
+              </div>
+              <div class="jdc-live-audit-card jdc-live-audit-card-3">
+                <span class="jdc-live-audit-title" data-key="jdc_live_audit_3_title">Contacto integrado</span>
+                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_3_copy">La experiencia dirige naturalmente al siguiente paso sin parecer agresiva.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="jdc-live-hint" id="jdcLiveHint" data-key="jdc_live_hint">Cambia el modo para ver el mismo proyecto con otra intención</div>
+      </div>
     </div>
   </div>
 </section>
@@ -5268,23 +5987,96 @@
           </div>
         </div>
       </div>
-      <div class="trust-panel fi d2">
-        <article class="trust-point">
-          <h3>Trabajo personalmente cada proyecto</h3>
-          <p>Hablas directamente conmigo, José Guerrero, desde el diagnóstico inicial hasta la revisión final.</p>
-        </article>
-        <article class="trust-point">
-          <h3>No soy agencia</h3>
-          <p>No tercerizo el trabajo ni te paso por varias manos. La web se construye contigo y para tu negocio.</p>
-        </article>
-        <article class="trust-point">
-          <h3>Cambios junto al cliente</h3>
-          <p>El proceso está pensado para ajustar diseño, estructura y mensajes hasta que el resultado te represente de verdad.</p>
-        </article>
-        <article class="trust-point">
-          <h3>Web conectada y medible</h3>
-          <p>Cada proyecto puede quedar conectado a WhatsApp, Google Analytics y reportes mensuales para entender qué está funcionando.</p>
-        </article>
+      <div class="trust-panel fi d2" aria-label="Cómo trabajo en cada proyecto web">
+        <div class="trust-panel-head">
+          <span class="trust-panel-kicker">Cómo trabajamos</span>
+          <h3>No vendo una web genérica. Te acompaño para que el sitio termine diciendo exactamente lo que tu negocio necesita.</h3>
+          <p>Esta parte ahora funciona como un resumen real del proceso: puedes ver cómo trabajamos, cómo se toman decisiones contigo y qué conexiones quedan listas para medir resultados.</p>
+        </div>
+
+        <div class="trust-views" role="tablist" aria-label="Vistas del proceso de trabajo">
+          <button type="button" class="trust-view-btn" data-trust-view="directo" aria-pressed="true">Directo conmigo</button>
+          <button type="button" class="trust-view-btn" data-trust-view="proceso" aria-pressed="false">Proceso contigo</button>
+          <button type="button" class="trust-view-btn" data-trust-view="medicion" aria-pressed="false">Conectado y medible</button>
+        </div>
+
+        <div class="trust-stage">
+          <div class="trust-panel-view is-active" data-trust-panel="directo">
+            <h4>Hablas con José Guerrero de principio a fin, sin pasar por una cadena de intermediarios.</h4>
+            <p>No soy agencia ni tercerizo el trabajo. Eso significa menos ruido, decisiones más rápidas y una web construida con criterio, no con plantillas recicladas entre clientes.</p>
+
+            <div class="trust-highlight-grid">
+              <article class="trust-highlight">
+                <strong>Trabajo personalmente cada proyecto</strong>
+                <span>Desde el diagnóstico inicial hasta la revisión final, la conversación es directa y el criterio también.</span>
+              </article>
+              <article class="trust-highlight">
+                <strong>No soy agencia</strong>
+                <span>No te paso por varias manos ni diluyo tu negocio en procesos impersonales.</span>
+              </article>
+            </div>
+          </div>
+
+          <div class="trust-panel-view" data-trust-panel="proceso">
+            <h4>La web se ajusta contigo para que el resultado final sí te represente.</h4>
+            <p>En lugar de diseñar en aislamiento, el proceso está pensado para revisar estructura, mensajes y presentación contigo en momentos concretos, para corregir a tiempo y afinar mejor.</p>
+
+            <div class="trust-process" aria-label="Etapas del proceso con el cliente">
+              <div class="trust-step">
+                <div class="trust-step-num">01</div>
+                <div>
+                  <strong>Diagnóstico inicial</strong>
+                  <span>Reviso tu web actual o tu situación actual para detectar problemas de claridad, confianza y contacto.</span>
+                </div>
+              </div>
+              <div class="trust-step">
+                <div class="trust-step-num">02</div>
+                <div>
+                  <strong>Ajustes junto al cliente</strong>
+                  <span>Definimos mensajes, estructura visual y prioridades hasta que el sitio se sienta fiel a tu negocio.</span>
+                </div>
+              </div>
+              <div class="trust-step">
+                <div class="trust-step-num">03</div>
+                <div>
+                  <strong>Revisión final orientada a conversión</strong>
+                  <span>Se validan llamados a la acción, experiencia móvil y fluidez del recorrido antes de publicar.</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="trust-panel-view" data-trust-panel="medicion">
+            <h4>La web no se queda solo en diseño: puede salir lista para contacto, seguimiento y aprendizaje.</h4>
+            <p>Si el proyecto lo necesita, la entrega incluye conexiones concretas para que el sitio no solo se vea mejor, sino que también deje señales claras sobre qué está funcionando.</p>
+
+            <div class="trust-highlight-grid">
+              <article class="trust-point">
+                <h5>WhatsApp integrado</h5>
+                <p>Botones y rutas de contacto preparadas para que la persona te escriba sin buscar cómo hacerlo.</p>
+              </article>
+              <article class="trust-point">
+                <h5>Google Analytics</h5>
+                <p>Medición básica lista para entender visitas, páginas clave y comportamiento general.</p>
+              </article>
+              <article class="trust-point">
+                <h5>Lectura de resultados</h5>
+                <p>Reportes mensuales o revisiones puntuales para detectar qué mensaje, página o acción está respondiendo mejor.</p>
+              </article>
+              <article class="trust-point">
+                <h5>Decisiones con evidencia</h5>
+                <p>No se trata solo de gustos. La idea es poder ajustar con datos, no a ciegas.</p>
+              </article>
+            </div>
+          </div>
+        </div>
+
+        <div class="trust-proofbar" aria-label="Resultados del proceso">
+          <span class="trust-proof">Trato directo</span>
+          <span class="trust-proof">Sin terceros</span>
+          <span class="trust-proof">Ajustes contigo</span>
+          <span class="trust-proof">WhatsApp + Analytics</span>
+        </div>
       </div>
     </div>
   </div>
@@ -5736,7 +6528,7 @@
           <img
             class="founder-image"
             src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/ChatGPT%20Image%20May%2030%2C%202026%20at%2012_43_36%20PM.png"
-            alt="Jose Ignacio Guerrero, fundador de NextWebEC"
+            alt="José Ignacio Guerrero, fundador de NextWebEC"
             loading="lazy"
             decoding="async"
           />
@@ -5748,7 +6540,7 @@
         <h2 class="section-title founder-title" data-key="founder_title">Detrás de NextWebEC</h2>
 
         <div class="founder-body">
-          <p data-key="founder_p1">Mi nombre es Jose Ignacio Guerrero.</p>
+          <p data-key="founder_p1">Mi nombre es José Ignacio Guerrero.</p>
           <p data-key="founder_p2">Trabajando con distintos negocios, me di cuenta de algo: muchas empresas hacen un trabajo excelente, pero su presencia digital no refleja realmente el nivel de lo que ofrecen.</p>
           <p class="founder-body-black" data-key="founder_p3">Por eso nació NextWebEC.</p>
           <p class="founder-body-black" data-key="founder_p4">No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.</p>
@@ -5833,7 +6625,7 @@
 /* ─── TRANSLATIONS ─── */
 const T = {
   es: {
-    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_checklist:"Diagnóstico", nav_clients:"Clientes", nav_cta:"Hablemos por WhatsApp",
+    nav_home:"Inicio", nav_benefits:"Beneficios", nav_results:"Resultados", nav_process:"Proceso", nav_checklist:"Diagnóstico", nav_clients:"Clientes", nav_founder:"Fundador", nav_cta:"Hablemos por WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"Diseño y rediseño de webs", hero_t2:"para negocios que no", hero_t3:"generan contactos",
     hero_sub:"Transformo páginas desactualizadas en sitios modernos, rápidos y enfocados en generar confianza, más visitas y más consultas.",
@@ -5922,6 +6714,51 @@ const T = {
     ex1_t:"Una tienda digital que vende confianza antes de vender un producto",
     ex1_d:"Así puede verse tu negocio online: diseño refinado, navegación clara y contacto directo por WhatsApp para cerrar ventas sin intermediarios.",
     ex1_cta:"Ver sitio", ex1_note:"jdcwatches.com",
+    jdc_live_eyebrow:"Caso real · JDC Watches",
+    jdc_live_title:"Un proyecto real que convierte el diseño en <span>confianza inmediata</span>",
+    jdc_live_intro:"Esta sección ya no solo muestra una web. Ahora deja explorar el proyecto en tres modos para entender cómo una buena estructura cambia percepción, navegación y contacto.",
+    jdc_live_metric_1_value:"3",
+    jdc_live_metric_1_label:"modos para revisar el caso: desktop, mobile y auditoría visual",
+    jdc_live_metric_2_value:"1",
+    jdc_live_metric_2_label:"objetivo claro: elevar confianza antes del primer contacto",
+    jdc_live_metric_3_value:"24/7",
+    jdc_live_metric_3_label:"una experiencia de marca que sigue trabajando incluso cuando no respondes",
+    jdc_live_mode_desktop:"Vista desktop",
+    jdc_live_mode_mobile:"Vista mobile",
+    jdc_live_mode_audit:"Auditoría visual",
+    jdc_live_panel_label:"Qué estás viendo",
+    jdc_live_state_desktop:"Modo desktop",
+    jdc_live_state_mobile:"Modo mobile",
+    jdc_live_state_audit:"Modo auditoría",
+    jdc_live_panel_desktop_title:"Jerarquía clara para vender valor antes del catálogo",
+    jdc_live_panel_desktop_copy:"En escritorio importa la composición general: márgenes, ritmo visual, producto protagonista y una navegación que se siente premium sin volverse pesada.",
+    jdc_live_panel_desktop_item_1:"Mensaje de marca visible desde el primer pliegue",
+    jdc_live_panel_desktop_item_2:"Fotografía protagonista con aire y contraste suficiente",
+    jdc_live_panel_desktop_item_3:"Recorrido pensado para explorar y luego escribir por WhatsApp",
+    jdc_live_panel_mobile_title:"Versión mobile diseñada para decidir rápido y tocar menos",
+    jdc_live_panel_mobile_copy:"En celular el reto es otro: menos espacio, menos paciencia y más intención. Por eso el proyecto también se deja evaluar como dispositivo vertical.",
+    jdc_live_panel_mobile_item_1:"Contenido concentrado en una columna limpia y cómoda",
+    jdc_live_panel_mobile_item_2:"Acciones prioritarias visibles sin saturar la pantalla",
+    jdc_live_panel_mobile_item_3:"Sensación premium sin sacrificar rapidez de lectura",
+    jdc_live_panel_audit_title:"Una mini auditoría para entender por qué este diseño sí sostiene la venta",
+    jdc_live_panel_audit_copy:"La función nueva de esta sección es mostrar los criterios detrás del resultado. No es solo “mira qué bonito”; es “mira por qué funciona”.",
+    jdc_live_panel_audit_item_1:"El encabezado explica posicionamiento antes de pedir acción",
+    jdc_live_panel_audit_item_2:"La estructura guía a explorar sin perder orientación",
+    jdc_live_panel_audit_item_3:"La experiencia empuja confianza, permanencia y contacto",
+    jdc_live_cta_primary:"Abrir proyecto real",
+    jdc_live_cta_secondary:"Quiero algo así para mi negocio",
+    jdc_live_stage_title:"Caso interactivo",
+    jdc_live_stage_pill_desktop:"Desktop review",
+    jdc_live_stage_pill_mobile:"Mobile review",
+    jdc_live_stage_pill_audit:"Visual audit",
+    jdc_live_browser_badge:"Proyecto real",
+    jdc_live_hint:"Cambia el modo para ver el mismo proyecto con otra intención",
+    jdc_live_audit_1_title:"Hero con mensaje premium",
+    jdc_live_audit_1_copy:"La primera pantalla vende percepción de marca antes de mostrar precio o catálogo.",
+    jdc_live_audit_2_title:"Navegación simple",
+    jdc_live_audit_2_copy:"Pocas decisiones visibles, mejor orientación y menos fricción al explorar.",
+    jdc_live_audit_3_title:"Contacto integrado",
+    jdc_live_audit_3_copy:"La experiencia dirige naturalmente al siguiente paso sin parecer agresiva.",
     mob_prev_title:"Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y dejar el WhatsApp a un toque.",
     mob_prev_sub:"Por eso cada página web se diseña para celular, con navegación clara y contacto fácil desde el primer segundo.",
     mob_prev_b1:"Diseño adaptado a pantallas pequeñas",
@@ -5985,7 +6822,7 @@ const T = {
     checklist_sending:"Enviando tu diagnóstico...",
     founder_eyebrow:"Fundador · NextWebEC",
     founder_title:"Detrás de NextWebEC",
-    founder_p1:"Mi nombre es Jose Ignacio Guerrero.",
+    founder_p1:"Mi nombre es José Ignacio Guerrero.",
     founder_p2:"Trabajando con distintos negocios, me di cuenta de algo: muchas empresas hacen un trabajo excelente, pero su presencia digital no refleja realmente el nivel de lo que ofrecen.",
     founder_p3:"Por eso nació NextWebEC.",
     founder_p4:"No trabajo como agencia ni tercerizo proyectos. Cada web la diseño personalmente, colaborando directamente con el cliente y realizando todos los ajustes necesarios hasta que el resultado represente exactamente la visión del negocio.",
@@ -6007,7 +6844,7 @@ const T = {
     wa_tip:"Hablemos",
   },
   en: {
-    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_checklist:"Diagnosis", nav_clients:"Clients", nav_cta:"Let's talk on WhatsApp",
+    nav_home:"Home", nav_benefits:"Benefits", nav_results:"Results", nav_process:"Process", nav_checklist:"Diagnosis", nav_clients:"Clients", nav_founder:"Founder", nav_cta:"Let's talk on WhatsApp",
     hero_badge:"NextWebEC",
     hero_t1:"I redesign websites", hero_t2:"for businesses that", hero_t3:"don't generate inquiries",
     hero_sub:"I turn outdated websites into modern, fast, trust-building pages focused on more visits and more inquiries.",
@@ -6095,6 +6932,51 @@ const T = {
     ex1_t:"A digital store that sells trust before selling a product",
     ex1_d:"This is how your business could look online: refined design, clear navigation, and direct WhatsApp contact to close sales without intermediaries.",
     ex1_cta:"View site", ex1_note:"jdcwatches.com",
+    jdc_live_eyebrow:"Real case · JDC Watches",
+    jdc_live_title:"A real project that turns design into <span>instant trust</span>",
+    jdc_live_intro:"This section no longer just shows a website. It lets people explore the project in three modes to understand how strong structure changes perception, navigation, and contact.",
+    jdc_live_metric_1_value:"3",
+    jdc_live_metric_1_label:"ways to review the case: desktop, mobile, and visual audit",
+    jdc_live_metric_2_value:"1",
+    jdc_live_metric_2_label:"clear objective: raise trust before the first contact",
+    jdc_live_metric_3_value:"24/7",
+    jdc_live_metric_3_label:"a brand experience that keeps working even when you are offline",
+    jdc_live_mode_desktop:"Desktop view",
+    jdc_live_mode_mobile:"Mobile view",
+    jdc_live_mode_audit:"Visual audit",
+    jdc_live_panel_label:"What you're seeing",
+    jdc_live_state_desktop:"Desktop mode",
+    jdc_live_state_mobile:"Mobile mode",
+    jdc_live_state_audit:"Audit mode",
+    jdc_live_panel_desktop_title:"Clear hierarchy to sell value before the catalog",
+    jdc_live_panel_desktop_copy:"On desktop, the full composition matters: spacing, visual rhythm, product focus, and navigation that feels premium without becoming heavy.",
+    jdc_live_panel_desktop_item_1:"Brand message visible from the first fold",
+    jdc_live_panel_desktop_item_2:"Hero photography with enough breathing room and contrast",
+    jdc_live_panel_desktop_item_3:"Flow designed to explore first and then move into WhatsApp contact",
+    jdc_live_panel_mobile_title:"Mobile version designed for faster decisions and fewer taps",
+    jdc_live_panel_mobile_copy:"On mobile, the challenge changes: less space, less patience, more intent. That is why the project can also be reviewed as a vertical device experience.",
+    jdc_live_panel_mobile_item_1:"Content condensed into a clean and comfortable single column",
+    jdc_live_panel_mobile_item_2:"Priority actions stay visible without crowding the screen",
+    jdc_live_panel_mobile_item_3:"Premium feel without sacrificing reading speed",
+    jdc_live_panel_audit_title:"A mini audit to show why this design actually supports sales",
+    jdc_live_panel_audit_copy:"The new function of this section is to reveal the thinking behind the result. It is not just “look how nice”; it is “look why it works.”",
+    jdc_live_panel_audit_item_1:"The header explains positioning before asking for action",
+    jdc_live_panel_audit_item_2:"The structure guides exploration without losing orientation",
+    jdc_live_panel_audit_item_3:"The experience drives trust, dwell time, and contact",
+    jdc_live_cta_primary:"Open real project",
+    jdc_live_cta_secondary:"I want something like this",
+    jdc_live_stage_title:"Interactive case",
+    jdc_live_stage_pill_desktop:"Desktop review",
+    jdc_live_stage_pill_mobile:"Mobile review",
+    jdc_live_stage_pill_audit:"Visual audit",
+    jdc_live_browser_badge:"Real project",
+    jdc_live_hint:"Switch modes to review the same project with a different purpose",
+    jdc_live_audit_1_title:"Hero with premium positioning",
+    jdc_live_audit_1_copy:"The first screen sells brand perception before showing price or catalog depth.",
+    jdc_live_audit_2_title:"Simple navigation",
+    jdc_live_audit_2_copy:"Fewer visible decisions improve orientation and reduce friction while browsing.",
+    jdc_live_audit_3_title:"Integrated contact flow",
+    jdc_live_audit_3_copy:"The experience naturally moves toward the next step without feeling pushy.",
     mob_prev_title:"Today your clients look for you on their phones. Your website must look great, load fast, and make contact easy in seconds.",
     mob_prev_sub:"That's why having a mobile-friendly website matters.",
     mob_prev_b1:"Design adapted for small screens",
@@ -6160,7 +7042,7 @@ const T = {
     checklist_sending:"Sending your diagnosis...",
     founder_eyebrow:"Founder · NextWebEC",
     founder_title:"Behind NextWebEC",
-    founder_p1:"My name is Jose Ignacio Guerrero.",
+    founder_p1:"My name is José Ignacio Guerrero.",
     founder_p2:"Working with different businesses, I noticed something: many companies do excellent work, but their digital presence does not really reflect the level of what they offer.",
     founder_p3:"That is why NextWebEC was created.",
     founder_p4:"I do not work as an agency or outsource projects. I design each website personally, collaborating directly with the client and making every adjustment needed until the result reflects the exact vision of the business.",
@@ -6229,9 +7111,38 @@ document.addEventListener('click', e => {
   if (m.classList.contains('open') && !m.contains(e.target) && !h.contains(e.target)) m.classList.remove('open');
 });
 
+/* Trust panel views */
+(function () {
+  const trustPanel = document.querySelector('.trust-panel');
+  if (!trustPanel) return;
+
+  const buttons = Array.from(trustPanel.querySelectorAll('[data-trust-view]'));
+  const panels = Array.from(trustPanel.querySelectorAll('[data-trust-panel]'));
+  if (!buttons.length || !panels.length) return;
+
+  const activateView = (view) => {
+    buttons.forEach((button) => {
+      const isActive = button.getAttribute('data-trust-view') === view;
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      panel.classList.toggle('is-active', panel.getAttribute('data-trust-panel') === view);
+    });
+  };
+
+  buttons.forEach((button) => {
+    button.addEventListener('click', () => {
+      activateView(button.getAttribute('data-trust-view'));
+    });
+  });
+
+  activateView(buttons[0].getAttribute('data-trust-view'));
+})();
+
 /* Scroll spy for active nav links */
 const navLinks = Array.from(document.querySelectorAll('.nav-main-link, .mobile-nav-link'));
-const sectionIds = ['inicio', 'beneficios', 'cambio', 'analytics', 'proceso', 'checklist', 'para-quien'];
+const sectionIds = ['inicio', 'beneficios', 'cambio', 'analytics', 'proceso', 'checklist', 'para-quien', 'detras-nextwebec'];
 
 function setActiveNav(targetId) {
   navLinks.forEach(link => {
@@ -7422,7 +8333,7 @@ setupHeroMockupAnimation();
   window.addEventListener('resize', requestUpdate, { passive: true });
   update();
 })();
-
+ a
 /* ── Custom cursor ── */
 (function () {
   if (window.matchMedia('(hover: none)').matches || prefersReducedMotion) return;
@@ -7594,6 +8505,10 @@ setupHeroMockupAnimation();
   const copy = section.querySelector('.jdc-live-copy');
   const hint = section.querySelector('.jdc-live-hint');
   const iframe = section.querySelector('iframe');
+  const modeButtons = Array.from(section.querySelectorAll('[data-jdc-mode]'));
+  const panels = Array.from(section.querySelectorAll('[data-jdc-panel]'));
+  const panelState = section.querySelector('#jdcLivePanelState');
+  const stagePill = section.querySelector('#jdcLiveStagePill');
 
   if (!frame) return;
 
@@ -7613,6 +8528,47 @@ setupHeroMockupAnimation();
     const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
     return t * t * (3 - 2 * t);
   };
+
+  const modeStateKeys = {
+    desktop: 'jdc_live_state_desktop',
+    mobile: 'jdc_live_state_mobile',
+    audit: 'jdc_live_state_audit'
+  };
+
+  const stagePillKeys = {
+    desktop: 'jdc_live_stage_pill_desktop',
+    mobile: 'jdc_live_stage_pill_mobile',
+    audit: 'jdc_live_stage_pill_audit'
+  };
+
+  function getText(key) {
+    const dict = (window.T && window.T[window.lang]) || (window.T && window.T.es) || null;
+    return dict && dict[key] ? dict[key] : '';
+  }
+
+  function setMode(mode) {
+    const nextMode = ['desktop', 'mobile', 'audit'].includes(mode) ? mode : 'desktop';
+    section.setAttribute('data-mode', nextMode);
+
+    modeButtons.forEach((button) => {
+      const isActive = button.getAttribute('data-jdc-mode') === nextMode;
+      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+    });
+
+    panels.forEach((panel) => {
+      panel.classList.toggle('is-active', panel.getAttribute('data-jdc-panel') === nextMode);
+    });
+
+    if (panelState) {
+      const stateKey = modeStateKeys[nextMode] || modeStateKeys.desktop;
+      panelState.textContent = getText(stateKey) || panelState.textContent;
+    }
+
+    if (stagePill) {
+      const pillKey = stagePillKeys[nextMode] || stagePillKeys.desktop;
+      stagePill.textContent = getText(pillKey) || stagePill.textContent;
+    }
+  }
 
   let ticking = false;
 
@@ -7678,6 +8634,18 @@ setupHeroMockupAnimation();
   window.addEventListener('resize', requestUpdate);
   window.addEventListener('load', requestUpdate);
 
+  modeButtons.forEach((button) => {
+    button.addEventListener('click', function () {
+      setMode(button.getAttribute('data-jdc-mode'));
+    });
+  });
+
+  window.updateJdcLiveLocale = function () {
+    const activeMode = section.getAttribute('data-mode') || 'desktop';
+    setMode(activeMode);
+  };
+
+  setMode(section.getAttribute('data-mode') || 'desktop');
   updateJdcExperience();
 })();
 
@@ -7761,7 +8729,7 @@ setupHeroMockupAnimation();
 
 <div class="cookie-consent" id="cookieConsent" role="dialog" aria-live="polite" aria-hidden="true">
   <p>
-    Usamos cookies de analitica para entender el trafico del sitio. Acepta para activar analitica o rechaza para continuar sin seguimiento.
+    Usamos cookies de analítica para entender el tráfico del sitio. Acepta para activar analítica o rechaza para continuar sin seguimiento.
   </p>
   <div class="cookie-consent-actions">
     <button type="button" class="cookie-btn-accept" id="cookieAccept">Aceptar</button>
