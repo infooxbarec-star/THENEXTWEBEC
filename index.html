@@ -5383,8 +5383,8 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
-  // Endpoint del Worker que recibe el checklist y reenvia la solicitud al destino final.
-  const webhookUrl = 'https://checklist-audit.thenextwebec.workers.dev';
+  // Endpoint de Zapier para capturar el lead del checklist.
+  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bm0xaj/';
   const nameInput = document.getElementById('checklistName');
   const emailInput = document.getElementById('checklistEmail');
   const phoneInput = document.getElementById('checklistPhone');
