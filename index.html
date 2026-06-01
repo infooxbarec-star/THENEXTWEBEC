@@ -3412,7 +3412,7 @@
     /* ── Scene container (sets scroll height) ── */
     .lp-scene {
       position: relative;
-      min-height: 100vh;
+      min-height: 108vh;
       height: auto;
       max-width: 100%;
       width: 100%;
@@ -3423,7 +3423,7 @@
     .lp-sticky {
       position: relative;
       top: auto;
-      min-height: 100vh;
+      min-height: 108vh;
       height: auto;
       overflow: hidden;
       background: #060b14;
@@ -3432,7 +3432,7 @@
       align-items: center;
       justify-content: center;
       perspective: 1400px;
-      padding: 32px 16px;
+      padding: 44px 16px 56px;
       width: 100%;
     }
 
@@ -3478,12 +3478,14 @@
       width: 100%;
       height: 100%;
       padding-bottom: 0;
+      max-width: min(96vw, 1600px);
+      margin: 0 auto;
     }
 
     /* ── Laptop wrapper ── */
     .lp-laptop {
       position: relative;
-      width: clamp(300px, 45vw, 580px);
+      width: min(94vw, 1460px);
       transform-style: preserve-3d;
       z-index: 2;
       margin-bottom: 0;
@@ -3553,9 +3555,24 @@
     .lp-screen-inner {
       position: absolute;
       inset: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
       overflow: hidden;
       opacity: 1;
       z-index: 1;
+      background: linear-gradient(180deg, #0d1626 0%, #09111d 100%);
+    }
+
+    .lp-screen-shot {
+      width: 100%;
+      height: 100%;
+      display: block;
+      object-fit: contain;
+      object-position: center top;
+      background: #09111d;
+      transform: translateY(-1.4%) scale(1.012);
+      transform-origin: center top;
     }
 
     /* ── Simulated website inside screen ── */
@@ -3808,6 +3825,7 @@
     /* ── Mobile: scroll-triggered animation, no sticky pinning ── */
     @media (max-width: 768px) {
       .lp-scene {
+        min-height: auto;
         height: auto;
         overflow-x: hidden;
       }
@@ -3817,7 +3835,7 @@
         min-height: auto;
         overflow: hidden;
         overflow-x: hidden;
-        padding: 72px 16px 64px;
+        padding: 52px 16px 40px;
         perspective: none;
       }
       .lp-stage {
@@ -3830,10 +3848,13 @@
         padding-bottom: 0;
       }
       .lp-laptop {
-        width: min(92vw, 430px);
-        max-width: 92vw;
+        width: min(96vw, 640px);
+        max-width: 94vw;
         transform-origin: center bottom;
         transform-style: preserve-3d;
+      }
+      .lp-screen-shot {
+        transform: translateY(-0.8%) scale(1.01);
       }
       /* laptop starts open on mobile */
       .lp-lid { transform: rotateX(0deg); }
@@ -3866,614 +3887,6 @@
       /* shrink decorative orbs so they don't overflow */
       .lp-orb-l { width: 260px; height: 260px; left: -60px; }
       .lp-orb-r { width: 220px; height: 220px; right: -40px; }
-    }
-
-    .jdc-live-experience {
-      position: relative;
-      min-height: clamp(760px, 126vh, 1080px);
-      height: clamp(760px, 126vh, 1080px);
-      margin-bottom: 0 !important;
-      padding: 0;
-      box-sizing: border-box;
-      background: #071422;
-      overflow: visible;
-      isolation: isolate;
-      --jdc-device-width: min(64vw, 920px);
-      --jdc-device-height: min(72vh, 720px);
-      --jdc-audit-opacity: 0;
-      --jdc-stage-shift: 0px;
-    }
-
-    .jdc-live-pin {
-      position: sticky;
-      top: 72px;
-      width: 100%;
-      height: calc(100vh - 72px);
-      min-height: calc(100svh - 72px);
-      overflow: hidden;
-      display: grid;
-      align-items: center;
-      background:
-        radial-gradient(circle at 18% 16%, rgba(48, 135, 255, 0.18), transparent 34%),
-        radial-gradient(circle at 82% 24%, rgba(107, 214, 255, 0.12), transparent 28%),
-        linear-gradient(180deg, #071422 0%, #06111f 100%);
-    }
-
-    .jdc-live-bg {
-      position: absolute;
-      inset: 0;
-      background:
-        linear-gradient(120deg, rgba(255,255,255,0.04), transparent 28%),
-        radial-gradient(circle at 50% 70%, rgba(9, 186, 255, 0.08), transparent 34%);
-      pointer-events: none;
-      z-index: 0;
-    }
-
-    .jdc-live-layout {
-      position: relative;
-      z-index: 2;
-      width: min(1280px, calc(100% - 40px));
-      margin: 0 auto;
-      display: grid;
-      grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
-      gap: clamp(20px, 2.8vw, 36px);
-      align-items: center;
-      padding: clamp(26px, 3vw, 42px);
-    }
-
-    .jdc-live-copy {
-      position: relative;
-      z-index: 4;
-      opacity: var(--jdc-copy-opacity, 0);
-      transform: translate3d(0, var(--jdc-copy-y, -10px), 0);
-      color: rgba(255,255,255,0.92);
-      pointer-events: auto;
-    }
-
-    .jdc-live-eyebrow {
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.14);
-      color: #d7ebff;
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .jdc-live-title {
-      margin: 18px 0 12px;
-      font-size: clamp(34px, 4.4vw, 58px);
-      line-height: 0.96;
-      color: #fff;
-      letter-spacing: -0.04em;
-    }
-
-    .jdc-live-title span {
-      color: #84d7ff;
-    }
-
-    .jdc-live-copy p {
-      margin: 0;
-      color: rgba(223, 233, 248, 0.84);
-      font-size: 16px;
-      line-height: 1.72;
-      max-width: 42ch;
-    }
-
-    .jdc-live-metrics {
-      display: grid;
-      grid-template-columns: repeat(3, minmax(0, 1fr));
-      gap: 12px;
-      margin-top: 24px;
-    }
-
-    .jdc-live-metric {
-      padding: 16px 14px;
-      border-radius: 18px;
-      background: rgba(255,255,255,0.06);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: inset 0 1px 0 rgba(255,255,255,0.06);
-    }
-
-    .jdc-live-metric-value {
-      display: block;
-      color: #fff;
-      font-size: clamp(24px, 2.3vw, 32px);
-      font-weight: 800;
-      line-height: 1;
-      letter-spacing: -0.04em;
-    }
-
-    .jdc-live-metric-label {
-      display: block;
-      margin-top: 8px;
-      color: rgba(223,233,248,0.76);
-      font-size: 12px;
-      line-height: 1.45;
-    }
-
-    .jdc-live-modes {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-top: 26px;
-    }
-
-    .jdc-live-mode {
-      appearance: none;
-      border: 1px solid rgba(255,255,255,0.14);
-      background: rgba(255,255,255,0.05);
-      color: rgba(255,255,255,0.88);
-      border-radius: 999px;
-      padding: 11px 16px;
-      font: inherit;
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.01em;
-      cursor: pointer;
-      transition: background .22s ease, border-color .22s ease, color .22s ease, transform .22s ease;
-    }
-
-    .jdc-live-mode:hover,
-    .jdc-live-mode[aria-pressed="true"] {
-      background: linear-gradient(135deg, rgba(76, 160, 255, 0.22), rgba(16, 209, 255, 0.18));
-      border-color: rgba(132,215,255,0.38);
-      color: #fff;
-      transform: translateY(-1px);
-    }
-
-    .jdc-live-panel {
-      margin-top: 18px;
-      padding: 20px;
-      border-radius: 24px;
-      background: rgba(6, 17, 31, 0.74);
-      border: 1px solid rgba(255,255,255,0.08);
-      box-shadow: 0 24px 80px rgba(0,0,0,0.22);
-    }
-
-    .jdc-live-panel-header {
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 12px;
-    }
-
-    .jdc-live-panel-label {
-      font-size: 12px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-      color: rgba(132,215,255,0.72);
-    }
-
-    .jdc-live-panel-state {
-      font-size: 12px;
-      font-weight: 700;
-      color: rgba(255,255,255,0.72);
-    }
-
-    .jdc-live-panel-content {
-      display: none;
-    }
-
-    .jdc-live-panel-content.is-active {
-      display: block;
-    }
-
-    .jdc-live-panel-title {
-      margin: 0;
-      color: #fff;
-      font-size: 24px;
-      line-height: 1.1;
-      letter-spacing: -0.03em;
-    }
-
-    .jdc-live-panel-copy {
-      margin: 12px 0 0;
-      color: rgba(223,233,248,0.8);
-      font-size: 15px;
-      line-height: 1.7;
-    }
-
-    .jdc-live-panel-list {
-      list-style: none;
-      padding: 0;
-      margin: 14px 0 0;
-      display: grid;
-      gap: 10px;
-    }
-
-    .jdc-live-panel-list li {
-      position: relative;
-      padding-left: 18px;
-      color: rgba(245,248,255,0.88);
-      font-size: 14px;
-      line-height: 1.55;
-    }
-
-    .jdc-live-panel-list li::before {
-      content: '';
-      position: absolute;
-      left: 0;
-      top: 0.6em;
-      width: 8px;
-      height: 8px;
-      border-radius: 999px;
-      background: linear-gradient(135deg, #84d7ff, #1a6efa);
-      box-shadow: 0 0 0 4px rgba(132,215,255,0.12);
-    }
-
-    .jdc-live-actions {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 12px;
-      margin-top: 20px;
-    }
-
-    .jdc-live-stage {
-      position: relative;
-      display: grid;
-      justify-items: center;
-      padding: 0 0 28px;
-      z-index: 2;
-      transform: translate3d(0, var(--jdc-stage-shift, 0px), 0);
-    }
-
-    .jdc-live-stage-topbar {
-      display: flex;
-      width: min(100%, 860px);
-      align-items: center;
-      justify-content: space-between;
-      gap: 12px;
-      margin-bottom: 14px;
-      color: rgba(223,233,248,0.76);
-    }
-
-    .jdc-live-stage-title {
-      font-size: 13px;
-      font-weight: 700;
-      letter-spacing: 0.12em;
-      text-transform: uppercase;
-    }
-
-    .jdc-live-stage-pill {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      border: 1px solid rgba(255,255,255,0.12);
-      font-size: 12px;
-      font-weight: 700;
-    }
-
-    .jdc-live-frame {
-      position: relative;
-      width: min(100%, 920px);
-      display: grid;
-      justify-items: center;
-      opacity: var(--jdc-frame-opacity, 1);
-      transform: translate3d(0, var(--jdc-frame-y, 0px), 0) scale(var(--jdc-frame-scale, 1));
-      transform-origin: center center;
-      will-change: transform, opacity;
-    }
-
-    .jdc-live-viewport {
-      position: relative;
-      width: var(--jdc-device-width);
-      height: var(--jdc-device-height);
-      border-radius: var(--jdc-radius, 24px);
-      overflow: hidden;
-      background: #000;
-      transition: width .35s ease, height .35s ease, border-radius .35s ease, filter .35s ease;
-      box-shadow:
-        0 42px 130px rgba(0, 0, 0, 0.50),
-        0 0 0 1px rgba(255, 255, 255, 0.10),
-        inset 0 0 0 1px rgba(255, 255, 255, 0.04);
-    }
-
-    .jdc-live-experience[data-mode="mobile"] {
-      --jdc-device-width: min(30vw, 360px);
-      --jdc-device-height: min(70vh, 680px);
-      --jdc-stage-shift: 6px;
-    }
-
-    .jdc-live-experience[data-mode="audit"] {
-      --jdc-device-width: min(62vw, 880px);
-      --jdc-device-height: min(72vh, 700px);
-      --jdc-audit-opacity: 1;
-    }
-
-    .jdc-live-frame iframe {
-      width: 100%;
-      height: 100%;
-      display: block;
-      border: 0;
-      background: #000;
-      pointer-events: auto;
-      transition: filter .35s ease, transform .35s ease;
-    }
-
-    .jdc-live-experience[data-mode="audit"] .jdc-live-frame iframe {
-      filter: saturate(0.82) brightness(0.78);
-      transform: scale(1.02);
-    }
-
-    .jdc-live-browser-bar {
-      position: absolute;
-      top: 0;
-      left: 0;
-      right: 0;
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 18px;
-      z-index: 3;
-      background: linear-gradient(180deg, rgba(5,10,19,0.94), rgba(5,10,19,0.68));
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-    }
-
-    .jdc-live-browser-dots {
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-
-    .jdc-live-browser-dots span {
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: rgba(255,255,255,0.32);
-    }
-
-    .jdc-live-browser-dots span:nth-child(1) { background: #ff5f57; }
-    .jdc-live-browser-dots span:nth-child(2) { background: #febc2e; }
-    .jdc-live-browser-dots span:nth-child(3) { background: #28c840; }
-
-    .jdc-live-browser-pill {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      padding: 8px 12px;
-      border-radius: 999px;
-      background: rgba(255,255,255,0.08);
-      color: rgba(255,255,255,0.74);
-      font-size: 12px;
-      font-weight: 700;
-      white-space: nowrap;
-    }
-
-    .jdc-live-browser-pill-accent {
-      background: rgba(132,215,255,0.14);
-      color: #dff3ff;
-      margin-left: auto;
-    }
-
-    .jdc-live-audit-layer {
-      position: absolute;
-      inset: 0;
-      z-index: 4;
-      pointer-events: none;
-      opacity: var(--jdc-audit-opacity, 0);
-      transition: opacity .28s ease;
-    }
-
-    .jdc-live-audit-card {
-      position: absolute;
-      max-width: min(240px, 42%);
-      padding: 14px 16px;
-      border-radius: 18px;
-      background: rgba(7,20,34,0.88);
-      border: 1px solid rgba(132,215,255,0.18);
-      box-shadow: 0 20px 60px rgba(0,0,0,0.28);
-      color: #fff;
-    }
-
-    .jdc-live-audit-card::before {
-      content: '';
-      position: absolute;
-      width: 10px;
-      height: 10px;
-      border-radius: 50%;
-      background: #84d7ff;
-      box-shadow: 0 0 0 6px rgba(132,215,255,0.16);
-    }
-
-    .jdc-live-audit-card-1 {
-      top: 96px;
-      left: 24px;
-    }
-
-    .jdc-live-audit-card-1::before {
-      right: -24px;
-      top: 22px;
-    }
-
-    .jdc-live-audit-card-2 {
-      top: 180px;
-      right: 24px;
-    }
-
-    .jdc-live-audit-card-2::before {
-      left: -24px;
-      top: 22px;
-    }
-
-    .jdc-live-audit-card-3 {
-      bottom: 30px;
-      left: 50%;
-      transform: translateX(-50%);
-      text-align: center;
-    }
-
-    .jdc-live-audit-card-3::before {
-      top: -24px;
-      left: calc(50% - 5px);
-    }
-
-    .jdc-live-audit-title {
-      display: block;
-      margin-bottom: 6px;
-      font-size: 13px;
-      font-weight: 800;
-      letter-spacing: 0.01em;
-      color: #fff;
-    }
-
-    .jdc-live-audit-copy {
-      display: block;
-      color: rgba(223,233,248,0.78);
-      font-size: 12px;
-      line-height: 1.55;
-    }
-
-    .jdc-live-hint {
-      position: absolute;
-      left: 50%;
-      bottom: clamp(14px, 4vh, 34px);
-      z-index: 5;
-      transform: translate3d(-50%, var(--jdc-hint-y, 0px), 0);
-      opacity: var(--jdc-hint-opacity, 1);
-      pointer-events: none;
-      background: rgba(255,255,255,0.10);
-      color: #fff;
-      border: 1px solid rgba(255,255,255,0.14);
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      border-radius: 999px;
-      padding: 10px 16px;
-      font-size: 13px;
-      font-weight: 600;
-    }
-
-    @media (max-width: 1080px) {
-      .jdc-live-layout {
-        grid-template-columns: 1fr;
-        gap: 20px;
-      }
-
-      .jdc-live-copy p {
-        max-width: 100%;
-      }
-
-      .jdc-live-stage {
-        padding-bottom: 40px;
-      }
-
-      .jdc-live-stage-topbar {
-        width: 100%;
-      }
-    }
-
-    @media (max-width: 768px) {
-      .jdc-live-experience {
-        min-height: auto;
-        height: auto;
-        padding: 0;
-        --jdc-device-width: min(100%, 92vw);
-        --jdc-device-height: min(68svh, 560px);
-      }
-
-      .jdc-live-pin {
-        position: relative;
-        top: 0;
-        height: auto;
-        min-height: auto;
-        padding: 72px 0 28px;
-      }
-
-      .jdc-live-layout {
-        width: min(100%, calc(100% - 24px));
-        padding: 0;
-      }
-
-      .jdc-live-title {
-        font-size: clamp(30px, 9.5vw, 44px);
-      }
-
-      .jdc-live-metrics {
-        grid-template-columns: 1fr;
-      }
-
-      .jdc-live-panel {
-        padding: 18px;
-      }
-
-      .jdc-live-stage-topbar {
-        width: 100%;
-        flex-direction: column;
-        align-items: flex-start;
-      }
-
-      .jdc-live-experience[data-mode="mobile"] {
-        --jdc-device-width: min(100%, 330px);
-        --jdc-device-height: min(72svh, 620px);
-      }
-
-      .jdc-live-audit-card {
-        max-width: calc(100% - 32px);
-      }
-
-      .jdc-live-audit-card-1,
-      .jdc-live-audit-card-2,
-      .jdc-live-audit-card-3 {
-        left: 16px;
-        right: 16px;
-        transform: none;
-      }
-
-      .jdc-live-audit-card-1 { top: 88px; }
-      .jdc-live-audit-card-2 { top: auto; bottom: 124px; }
-      .jdc-live-audit-card-3 { bottom: 18px; }
-
-      .jdc-live-audit-card-1::before,
-      .jdc-live-audit-card-2::before,
-      .jdc-live-audit-card-3::before {
-        display: none;
-      }
-
-      .jdc-live-hint {
-        position: static;
-        margin-top: 16px;
-        transform: none;
-      }
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      .jdc-live-experience {
-        height: auto;
-        padding: 60px 0;
-      }
-
-      .jdc-live-pin {
-        position: relative;
-        top: auto;
-        height: auto;
-        min-height: auto;
-      }
-
-      .jdc-live-stage,
-      .jdc-live-frame,
-      .jdc-live-copy,
-      .jdc-live-viewport,
-      .jdc-live-frame iframe {
-        transform: none !important;
-        transition: none !important;
-        opacity: 1 !important;
-      }
-
-      .jdc-live-frame iframe {
-        pointer-events: auto !important;
-      }
     }
 
     /* ─── LOCAL SEO, SERVICES AND FAQ ─── */
@@ -5292,126 +4705,6 @@
   </div>
 </section>
 
-<section id="jdc-live-experience" class="jdc-live-experience" aria-label="Experiencia en vivo de JDC Watches" data-mode="desktop">
-  <div class="jdc-live-pin">
-    <div class="jdc-live-bg"></div>
-    <div class="jdc-live-layout">
-      <div class="jdc-live-copy">
-        <span class="jdc-live-eyebrow" data-key="jdc_live_eyebrow">Caso real · JDC Watches</span>
-        <h2 class="jdc-live-title" data-key="jdc_live_title">Un proyecto real que convierte el diseño en <span>confianza inmediata</span></h2>
-        <p data-key="jdc_live_intro">Esta sección ya no solo muestra una web. Ahora deja explorar el proyecto en tres modos para entender cómo una buena estructura cambia percepción, navegación y contacto.</p>
-
-        <div class="jdc-live-metrics" aria-label="Datos clave del proyecto JDC Watches">
-          <article class="jdc-live-metric">
-            <span class="jdc-live-metric-value" data-key="jdc_live_metric_1_value">3</span>
-            <span class="jdc-live-metric-label" data-key="jdc_live_metric_1_label">modos para revisar el caso: desktop, mobile y auditoría visual</span>
-          </article>
-          <article class="jdc-live-metric">
-            <span class="jdc-live-metric-value" data-key="jdc_live_metric_2_value">1</span>
-            <span class="jdc-live-metric-label" data-key="jdc_live_metric_2_label">objetivo claro: elevar confianza antes del primer contacto</span>
-          </article>
-          <article class="jdc-live-metric">
-            <span class="jdc-live-metric-value" data-key="jdc_live_metric_3_value">24/7</span>
-            <span class="jdc-live-metric-label" data-key="jdc_live_metric_3_label">una experiencia de marca que sigue trabajando incluso cuando no respondes</span>
-          </article>
-        </div>
-
-        <div class="jdc-live-modes" role="tablist" aria-label="Modos del caso de estudio JDC Watches">
-          <button type="button" class="jdc-live-mode" data-jdc-mode="desktop" aria-pressed="true" data-key="jdc_live_mode_desktop">Vista desktop</button>
-          <button type="button" class="jdc-live-mode" data-jdc-mode="mobile" aria-pressed="false" data-key="jdc_live_mode_mobile">Vista mobile</button>
-          <button type="button" class="jdc-live-mode" data-jdc-mode="audit" aria-pressed="false" data-key="jdc_live_mode_audit">Auditoría visual</button>
-        </div>
-
-        <div class="jdc-live-panel">
-          <div class="jdc-live-panel-header">
-            <span class="jdc-live-panel-label" data-key="jdc_live_panel_label">Qué estás viendo</span>
-            <span class="jdc-live-panel-state" id="jdcLivePanelState" data-key="jdc_live_state_desktop">Modo desktop</span>
-          </div>
-
-          <div class="jdc-live-panel-content is-active" data-jdc-panel="desktop">
-            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_desktop_title">Jerarquía clara para vender valor antes del catálogo</h3>
-            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_desktop_copy">En escritorio importa la composición general: márgenes, ritmo visual, producto protagonista y una navegación que se siente premium sin volverse pesada.</p>
-            <ul class="jdc-live-panel-list">
-              <li data-key="jdc_live_panel_desktop_item_1">Mensaje de marca visible desde el primer pliegue</li>
-              <li data-key="jdc_live_panel_desktop_item_2">Fotografía protagonista con aire y contraste suficiente</li>
-              <li data-key="jdc_live_panel_desktop_item_3">Recorrido pensado para explorar y luego escribir por WhatsApp</li>
-            </ul>
-          </div>
-
-          <div class="jdc-live-panel-content" data-jdc-panel="mobile">
-            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_mobile_title">Versión mobile diseñada para decidir rápido y tocar menos</h3>
-            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_mobile_copy">En celular el reto es otro: menos espacio, menos paciencia y más intención. Por eso el proyecto también se deja evaluar como dispositivo vertical.</p>
-            <ul class="jdc-live-panel-list">
-              <li data-key="jdc_live_panel_mobile_item_1">Contenido concentrado en una columna limpia y cómoda</li>
-              <li data-key="jdc_live_panel_mobile_item_2">Acciones prioritarias visibles sin saturar la pantalla</li>
-              <li data-key="jdc_live_panel_mobile_item_3">Sensación premium sin sacrificar rapidez de lectura</li>
-            </ul>
-          </div>
-
-          <div class="jdc-live-panel-content" data-jdc-panel="audit">
-            <h3 class="jdc-live-panel-title" data-key="jdc_live_panel_audit_title">Una mini auditoría para entender por qué este diseño sí sostiene la venta</h3>
-            <p class="jdc-live-panel-copy" data-key="jdc_live_panel_audit_copy">La función nueva de esta sección es mostrar los criterios detrás del resultado. No es solo “mira qué bonito”; es “mira por qué funciona”.</p>
-            <ul class="jdc-live-panel-list">
-              <li data-key="jdc_live_panel_audit_item_1">El encabezado explica posicionamiento antes de pedir acción</li>
-              <li data-key="jdc_live_panel_audit_item_2">La estructura guía a explorar sin perder orientación</li>
-              <li data-key="jdc_live_panel_audit_item_3">La experiencia empuja confianza, permanencia y contacto</li>
-            </ul>
-          </div>
-
-          <div class="jdc-live-actions">
-            <a href="https://jdcwatches.com/" target="_blank" rel="noopener noreferrer" class="btn btn-primary" data-key="jdc_live_cta_primary">Abrir proyecto real</a>
-            <a href="#checklist" class="btn btn-ghost" onclick="document.querySelector('#checklist')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;" data-key="jdc_live_cta_secondary">Quiero algo así para mi negocio</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="jdc-live-stage">
-        <div class="jdc-live-stage-topbar">
-          <span class="jdc-live-stage-title" data-key="jdc_live_stage_title">Caso interactivo</span>
-          <span class="jdc-live-stage-pill" id="jdcLiveStagePill" data-key="jdc_live_stage_pill_desktop">Desktop review</span>
-        </div>
-
-        <div class="jdc-live-frame">
-          <div class="jdc-live-viewport">
-            <div class="jdc-live-browser-bar" aria-hidden="true">
-              <div class="jdc-live-browser-dots">
-                <span></span>
-                <span></span>
-                <span></span>
-              </div>
-              <div class="jdc-live-browser-pill">jdcwatches.com</div>
-              <div class="jdc-live-browser-pill jdc-live-browser-pill-accent" data-key="jdc_live_browser_badge">Proyecto real</div>
-            </div>
-            <iframe
-              src="https://jdcwatches.com/"
-              title="JDC Watches live website"
-              loading="eager"
-              allow="fullscreen">
-            </iframe>
-
-            <div class="jdc-live-audit-layer" aria-hidden="true">
-              <div class="jdc-live-audit-card jdc-live-audit-card-1">
-                <span class="jdc-live-audit-title" data-key="jdc_live_audit_1_title">Hero con mensaje premium</span>
-                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_1_copy">La primera pantalla vende percepción de marca antes de mostrar precio o catálogo.</span>
-              </div>
-              <div class="jdc-live-audit-card jdc-live-audit-card-2">
-                <span class="jdc-live-audit-title" data-key="jdc_live_audit_2_title">Navegación simple</span>
-                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_2_copy">Pocas decisiones visibles, mejor orientación y menos fricción al explorar.</span>
-              </div>
-              <div class="jdc-live-audit-card jdc-live-audit-card-3">
-                <span class="jdc-live-audit-title" data-key="jdc_live_audit_3_title">Contacto integrado</span>
-                <span class="jdc-live-audit-copy" data-key="jdc_live_audit_3_copy">La experiencia dirige naturalmente al siguiente paso sin parecer agresiva.</span>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="jdc-live-hint" id="jdcLiveHint" data-key="jdc_live_hint">Cambia el modo para ver el mismo proyecto con otra intención</div>
-      </div>
-    </div>
-  </div>
-</section>
-
 <!-- ─── TRUST MARQUEE ─── -->
 <div class="marquee-strip" aria-hidden="true">
   <div class="marquee-track">
@@ -5439,137 +4732,36 @@
 </div>
 
 <!-- ════════════════════════════════════════════════════════════
-     LAPTOP OPENING ANIMATION SECTION — START
-     Scroll-pinned cinematic section. Controlled by scroll progress.
+     LAPTOP SHOWCASE SECTION — START
      ════════════════════════════════════════════════════════════ -->
-<section id="laptop-scene" class="lp-scene" aria-hidden="true">
+<section id="laptop-scene" class="lp-scene" aria-label="Mockup de laptop con vista previa de proyecto">
   <div class="lp-sticky">
-
-    <!-- Ambient background grid -->
     <div class="lp-bg-grid" aria-hidden="true"></div>
-
-    <!-- Ambient orbs -->
     <div class="lp-orb lp-orb-l" aria-hidden="true"></div>
     <div class="lp-orb lp-orb-r" aria-hidden="true"></div>
 
-    <!-- Stage: laptop -->
     <div class="lp-stage">
-      <!-- LAPTOP ASSEMBLY -->
       <div class="lp-laptop" id="lpLaptop">
-
-        <!-- LID (rotates open) -->
         <div class="lp-lid" id="lpLid">
           <div class="lp-lid-outer">
             <div class="lp-cam-wrap"><div class="lp-cam"></div></div>
-            <!-- SCREEN BEZEL -->
             <div class="lp-bezel">
-              <!-- Glow halo when open -->
               <div class="lp-screen-glow" id="lpGlow"></div>
-              <!-- Website preview -->
               <div class="lp-screen-inner" id="lpScreen">
-                <div style="width:100%;height:100%;overflow:hidden;background:#f7f4ef;position:relative;">
-                  <div style="width:900px;height:580px;transform-origin:top left;pointer-events:none;" id="vetScaleWrap">
-                    <div class="vet-wrap">
-                      <div class="vet-nav">
-                        <div class="vet-logo">
-                          <div class="vet-logo-icon">
-                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2z" fill="white" opacity="0.3"/><path d="M7 9.5C7 8.12 8.12 7 9.5 7S12 8.12 12 9.5 10.88 12 9.5 12 7 10.88 7 9.5zM14.5 7C15.88 7 17 8.12 17 9.5S15.88 12 14.5 12 12 10.88 12 9.5 13.12 7 14.5 7zM7 14c0-1.1.9-2 2-2h6c1.1 0 2 .9 2 2v1c0 1.1-.9 2-2 2H9c-1.1 0-2-.9-2-2v-1z" fill="white"/></svg>
-                          </div>
-                          <div class="vet-logo-text">Clínica <span>Patitas</span></div>
-                        </div>
-                        <div class="vet-nav-links">
-                          <a href="#inicio">Inicio</a>
-                          <a href="#servicios">Servicios</a>
-                          <a href="#proceso">Proceso</a>
-                          <a href="#capturas">Galería</a>
-                          <a href="#contacto">Contacto</a>
-                        </div>
-                        <div class="vet-nav-cta">Agendar cita</div>
-                      </div>
-                      <div class="vet-hero">
-                        <div class="vet-hero-left">
-                          <div class="vet-badge"><div class="vet-badge-dot"></div>Veterinaria de confianza en Quito</div>
-                          <div class="vet-hero-h1">Tu mascota merece<br>el mejor <em>cuidado.</em></div>
-                          <div class="vet-hero-sub">Atención veterinaria integral, cálida y profesional. Porque para nosotros, tu compañero es parte de la familia.</div>
-                          <div class="vet-btns">
-                            <div class="vet-btn-primary">Reservar consulta</div>
-                            <div class="vet-btn-ghost">Ver servicios →</div>
-                          </div>
-                        </div>
-                        <div class="vet-hero-right">
-                          <img src="https://axoncomunicacion.net/wp-content/uploads/2023/11/cerca-veterinario-cuidando-perro.jpg" alt="Mockup de página web profesional para clínica veterinaria en Quito" loading="lazy" />
-                          <div class="vet-hero-right-overlay"></div>
-                          <div class="vet-animal-card">
-                            <div class="vet-animal-avatar">🐶</div>
-                            <div>
-                              <div class="vet-animal-name">Max</div>
-                              <div class="vet-animal-status"><div class="vet-animal-status-dot"></div>Próxima cita: Jueves</div>
-                            </div>
-                          </div>
-                        </div>
-                      </div>
-                      <div style="background:#fff; padding: 18px 40px 14px; border-top: 1px solid #eee;">
-                        <div style="font-size:11px; color:#8a9b91; margin-bottom:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase;">Lo que ofrecemos</div>
-                        <div class="vet-pills">
-                          <div class="vet-pill">🩺 Consulta general</div>
-                          <div class="vet-pill">💉 Vacunación</div>
-                          <div class="vet-pill">✂️ Grooming</div>
-                          <div class="vet-pill">🦷 Odontología</div>
-                          <div class="vet-pill">🏥 Cirugías</div>
-                          <div class="vet-pill">🧬 Laboratorio</div>
-                        </div>
-                      </div>
-                      <div class="vet-services">
-                        <div class="vet-service-item">
-                          <div class="vet-service-icon">🕐</div>
-                          <div class="vet-service-title">Emergencias 24h</div>
-                          <div class="vet-service-desc">Atención inmediata cuando más nos necesitas</div>
-                        </div>
-                        <div class="vet-service-item">
-                          <div class="vet-service-icon">👨‍⚕️</div>
-                          <div class="vet-service-title">Equipo experto</div>
-                          <div class="vet-service-desc">Veterinarios especializados con años de experiencia</div>
-                        </div>
-                        <div class="vet-service-item" style="text-align:center;">
-                          <div class="vet-stat">+1,200</div>
-                          <div class="vet-service-desc" style="color:#7a9b87;">mascotas atendidas</div>
-                        </div>
-                        <div class="vet-service-item" style="text-align:center;">
-                          <div class="vet-stat">4.9 ⭐</div>
-                          <div class="vet-service-desc" style="color:#7a9b87;">calificación promedio</div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <script>
-                  (function(){
-                    var wrap = document.getElementById('vetScaleWrap');
-                    if (!wrap) return;
-                    function scaleVet() {
-                      var parent = wrap.parentElement;
-                      var s = Math.max(parent.offsetWidth / 900, parent.offsetHeight / 580);
-                      wrap.style.position = 'absolute';
-                      wrap.style.transformOrigin = 'top left';
-                      wrap.style.transform = 'scale(' + s + ')';
-                      wrap.style.left = Math.round((parent.offsetWidth  - 900 * s) / 2) + 'px';
-                      wrap.style.top  = Math.round((parent.offsetHeight - 580 * s) / 2) + 'px';
-                    }
-                    scaleVet();
-                    window.addEventListener('resize', scaleVet);
-                  })();
-                </script>
+                <img
+                  class="lp-screen-shot"
+                  src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-06-01%20at%2013.23.58.png"
+                  alt="Vista previa de página web mostrada en un mockup de laptop"
+                  loading="eager"
+                />
               </div>
             </div>
           </div>
-          <!-- Lid underside (visible when closed) -->
           <div class="lp-lid-under"></div>
         </div>
 
-        <!-- BASE -->
         <div class="lp-base">
           <div class="lp-base-top">
-            <!-- Trackpad -->
             <div class="lp-trackpad"></div>
           </div>
           <div class="lp-base-edge"></div>
@@ -5578,115 +4770,7 @@
             <div class="lp-foot-r"></div>
           </div>
         </div>
-
-      </div><!-- /lp-laptop -->
-
-      <!-- Headline + CTA (fades in at end) -->
-      <div class="lp-caption" id="lpCaption">
-        <h2 class="lp-caption-title">Tu web cobra vida cuando está bien construida.</h2>
-        <a href="#proceso" class="lp-caption-cta btn btn-primary">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
-          Ver cómo trabajamos
-        </a>
       </div>
-
-    </div><!-- /lp-stage -->
-
-    <!-- Scroll indicator -->
-    <div class="lp-scroll-hint" id="lpScrollHint">
-      <div class="lp-scroll-mouse"><div class="lp-scroll-wheel"></div></div>
-      <span>Desliza para ver</span>
-    </div>
-
-  </div><!-- /lp-sticky -->
-</section>
-<!-- ════════════════════════════════════════════════════════════
-     LAPTOP OPENING ANIMATION SECTION — END
-     ════════════════════════════════════════════════════════════ -->
-
-<div class="divider"></div>
-
-<!-- ─── SCREENSHOT SHOWCASE ─── -->
-<section class="section shots-section" id="capturas">
-  <div class="container">
-    <div class="tc fi">
-      <span class="eyebrow" data-key="shots_eyebrow">Ejemplos visuales</span>
-      <h2 class="section-title" data-key="shots_title">Ejemplos de páginas web modernas para negocios en Ecuador</h2>
-      <p class="section-sub" data-key="shots_sub">Mockups y proyectos con estructura clara, diseño refinado y enfoque en contacto, confianza y conversión.</p>
-    </div>
-    <div class="shots-grid">
-      <figure class="shot-card fi d1">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.56.18.png"
-            alt="Diseño web moderno para negocio de exportación agrícola en Ecuador"
-            class="lightbox-trigger"
-            width="2530"
-            height="1370"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <figure class="shot-card fi d2">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.58.png"
-            alt="Página web elegante para estudio de interiorismo en Ecuador"
-            class="lightbox-trigger"
-            width="2530"
-            height="1370"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <figure class="shot-card fi d3">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-04%20at%2020.54.08.png"
-            alt="Diseño web profesional para taller automotriz en Ecuador"
-            class="lightbox-trigger"
-            width="2530"
-            height="1370"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <figure class="shot-card fi d4">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/auto-studio.png"
-            alt="Mockup de página web para negocio automotriz en Quito"
-            class="lightbox-trigger"
-            width="2688"
-            height="1550"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <figure class="shot-card fi d5">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Screenshot%202026-05-27%20at%2011.53.57.png"
-            alt="Página web responsive creada por NextWebEC para servicios profesionales"
-            class="lightbox-trigger"
-            width="2688"
-            height="1550"
-            loading="lazy"
-          />
-        </div>
-      </figure>
-      <figure class="shot-card fi d1">
-        <div class="shot-card-media">
-          <img
-            src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/casave.png"
-            alt="Diseño web moderno para negocio inmobiliario en Ecuador"
-            class="lightbox-trigger"
-            width="2688"
-            height="1550"
-            loading="lazy"
-          />
-        </div>
-      </figure>
     </div>
   </div>
 </section>
@@ -6714,55 +5798,10 @@ const T = {
     ex_eyebrow:"Lo que podemos crear contigo",
     ex_title:"Resultados posibles para tu negocio",
     ex_sub:"Cada negocio es distinto. Esto es lo que puede lograrse cuando el diseño tiene un propósito claro.",
-    ex1_industry:"Lujo & Moda", ex1_type:"Proyecto real", ex1_cat:"JDC Watches",
+    ex1_industry:"Lujo & Moda", ex1_type:"Proyecto destacado", ex1_cat:"Relojería premium",
     ex1_t:"Una tienda digital que vende confianza antes de vender un producto",
     ex1_d:"Así puede verse tu negocio online: diseño refinado, navegación clara y contacto directo por WhatsApp para cerrar ventas sin intermediarios.",
-    ex1_cta:"Ver sitio", ex1_note:"jdcwatches.com",
-    jdc_live_eyebrow:"Caso real · JDC Watches",
-    jdc_live_title:"Un proyecto real que convierte el diseño en <span>confianza inmediata</span>",
-    jdc_live_intro:"Esta sección ya no solo muestra una web. Ahora deja explorar el proyecto en tres modos para entender cómo una buena estructura cambia percepción, navegación y contacto.",
-    jdc_live_metric_1_value:"3",
-    jdc_live_metric_1_label:"modos para revisar el caso: desktop, mobile y auditoría visual",
-    jdc_live_metric_2_value:"1",
-    jdc_live_metric_2_label:"objetivo claro: elevar confianza antes del primer contacto",
-    jdc_live_metric_3_value:"24/7",
-    jdc_live_metric_3_label:"una experiencia de marca que sigue trabajando incluso cuando no respondes",
-    jdc_live_mode_desktop:"Vista desktop",
-    jdc_live_mode_mobile:"Vista mobile",
-    jdc_live_mode_audit:"Auditoría visual",
-    jdc_live_panel_label:"Qué estás viendo",
-    jdc_live_state_desktop:"Modo desktop",
-    jdc_live_state_mobile:"Modo mobile",
-    jdc_live_state_audit:"Modo auditoría",
-    jdc_live_panel_desktop_title:"Jerarquía clara para vender valor antes del catálogo",
-    jdc_live_panel_desktop_copy:"En escritorio importa la composición general: márgenes, ritmo visual, producto protagonista y una navegación que se siente premium sin volverse pesada.",
-    jdc_live_panel_desktop_item_1:"Mensaje de marca visible desde el primer pliegue",
-    jdc_live_panel_desktop_item_2:"Fotografía protagonista con aire y contraste suficiente",
-    jdc_live_panel_desktop_item_3:"Recorrido pensado para explorar y luego escribir por WhatsApp",
-    jdc_live_panel_mobile_title:"Versión mobile diseñada para decidir rápido y tocar menos",
-    jdc_live_panel_mobile_copy:"En celular el reto es otro: menos espacio, menos paciencia y más intención. Por eso el proyecto también se deja evaluar como dispositivo vertical.",
-    jdc_live_panel_mobile_item_1:"Contenido concentrado en una columna limpia y cómoda",
-    jdc_live_panel_mobile_item_2:"Acciones prioritarias visibles sin saturar la pantalla",
-    jdc_live_panel_mobile_item_3:"Sensación premium sin sacrificar rapidez de lectura",
-    jdc_live_panel_audit_title:"Una mini auditoría para entender por qué este diseño sí sostiene la venta",
-    jdc_live_panel_audit_copy:"La función nueva de esta sección es mostrar los criterios detrás del resultado. No es solo “mira qué bonito”; es “mira por qué funciona”.",
-    jdc_live_panel_audit_item_1:"El encabezado explica posicionamiento antes de pedir acción",
-    jdc_live_panel_audit_item_2:"La estructura guía a explorar sin perder orientación",
-    jdc_live_panel_audit_item_3:"La experiencia empuja confianza, permanencia y contacto",
-    jdc_live_cta_primary:"Abrir proyecto real",
-    jdc_live_cta_secondary:"Quiero algo así para mi negocio",
-    jdc_live_stage_title:"Caso interactivo",
-    jdc_live_stage_pill_desktop:"Desktop review",
-    jdc_live_stage_pill_mobile:"Mobile review",
-    jdc_live_stage_pill_audit:"Visual audit",
-    jdc_live_browser_badge:"Proyecto real",
-    jdc_live_hint:"Cambia el modo para ver el mismo proyecto con otra intención",
-    jdc_live_audit_1_title:"Hero con mensaje premium",
-    jdc_live_audit_1_copy:"La primera pantalla vende percepción de marca antes de mostrar precio o catálogo.",
-    jdc_live_audit_2_title:"Navegación simple",
-    jdc_live_audit_2_copy:"Pocas decisiones visibles, mejor orientación y menos fricción al explorar.",
-    jdc_live_audit_3_title:"Contacto integrado",
-    jdc_live_audit_3_copy:"La experiencia dirige naturalmente al siguiente paso sin parecer agresiva.",
+    ex1_cta:"Ver ejemplo", ex1_note:"Caso de marca premium",
     mob_prev_title:"Hoy tus clientes te buscan desde el teléfono. Tu web debe verse bien, cargar rápido y dejar el WhatsApp a un toque.",
     mob_prev_sub:"Por eso cada página web se diseña para celular, con navegación clara y contacto fácil desde el primer segundo.",
     mob_prev_b1:"Diseño adaptado a pantallas pequeñas",
@@ -6932,55 +5971,10 @@ const T = {
     ex_eyebrow:"What we can build with you",
     ex_title:"Possible results for your business",
     ex_sub:"Every business is different. This is what can be achieved when design has a clear purpose.",
-    ex1_industry:"Luxury & Fashion", ex1_type:"Real project", ex1_cat:"JDC Watches",
+    ex1_industry:"Luxury & Fashion", ex1_type:"Featured project", ex1_cat:"Premium watch brand",
     ex1_t:"A digital store that sells trust before selling a product",
     ex1_d:"This is how your business could look online: refined design, clear navigation, and direct WhatsApp contact to close sales without intermediaries.",
-    ex1_cta:"View site", ex1_note:"jdcwatches.com",
-    jdc_live_eyebrow:"Real case · JDC Watches",
-    jdc_live_title:"A real project that turns design into <span>instant trust</span>",
-    jdc_live_intro:"This section no longer just shows a website. It lets people explore the project in three modes to understand how strong structure changes perception, navigation, and contact.",
-    jdc_live_metric_1_value:"3",
-    jdc_live_metric_1_label:"ways to review the case: desktop, mobile, and visual audit",
-    jdc_live_metric_2_value:"1",
-    jdc_live_metric_2_label:"clear objective: raise trust before the first contact",
-    jdc_live_metric_3_value:"24/7",
-    jdc_live_metric_3_label:"a brand experience that keeps working even when you are offline",
-    jdc_live_mode_desktop:"Desktop view",
-    jdc_live_mode_mobile:"Mobile view",
-    jdc_live_mode_audit:"Visual audit",
-    jdc_live_panel_label:"What you're seeing",
-    jdc_live_state_desktop:"Desktop mode",
-    jdc_live_state_mobile:"Mobile mode",
-    jdc_live_state_audit:"Audit mode",
-    jdc_live_panel_desktop_title:"Clear hierarchy to sell value before the catalog",
-    jdc_live_panel_desktop_copy:"On desktop, the full composition matters: spacing, visual rhythm, product focus, and navigation that feels premium without becoming heavy.",
-    jdc_live_panel_desktop_item_1:"Brand message visible from the first fold",
-    jdc_live_panel_desktop_item_2:"Hero photography with enough breathing room and contrast",
-    jdc_live_panel_desktop_item_3:"Flow designed to explore first and then move into WhatsApp contact",
-    jdc_live_panel_mobile_title:"Mobile version designed for faster decisions and fewer taps",
-    jdc_live_panel_mobile_copy:"On mobile, the challenge changes: less space, less patience, more intent. That is why the project can also be reviewed as a vertical device experience.",
-    jdc_live_panel_mobile_item_1:"Content condensed into a clean and comfortable single column",
-    jdc_live_panel_mobile_item_2:"Priority actions stay visible without crowding the screen",
-    jdc_live_panel_mobile_item_3:"Premium feel without sacrificing reading speed",
-    jdc_live_panel_audit_title:"A mini audit to show why this design actually supports sales",
-    jdc_live_panel_audit_copy:"The new function of this section is to reveal the thinking behind the result. It is not just “look how nice”; it is “look why it works.”",
-    jdc_live_panel_audit_item_1:"The header explains positioning before asking for action",
-    jdc_live_panel_audit_item_2:"The structure guides exploration without losing orientation",
-    jdc_live_panel_audit_item_3:"The experience drives trust, dwell time, and contact",
-    jdc_live_cta_primary:"Open real project",
-    jdc_live_cta_secondary:"I want something like this",
-    jdc_live_stage_title:"Interactive case",
-    jdc_live_stage_pill_desktop:"Desktop review",
-    jdc_live_stage_pill_mobile:"Mobile review",
-    jdc_live_stage_pill_audit:"Visual audit",
-    jdc_live_browser_badge:"Real project",
-    jdc_live_hint:"Switch modes to review the same project with a different purpose",
-    jdc_live_audit_1_title:"Hero with premium positioning",
-    jdc_live_audit_1_copy:"The first screen sells brand perception before showing price or catalog depth.",
-    jdc_live_audit_2_title:"Simple navigation",
-    jdc_live_audit_2_copy:"Fewer visible decisions improve orientation and reduce friction while browsing.",
-    jdc_live_audit_3_title:"Integrated contact flow",
-    jdc_live_audit_3_copy:"The experience naturally moves toward the next step without feeling pushy.",
+    ex1_cta:"View example", ex1_note:"Premium brand case",
     mob_prev_title:"Today your clients look for you on their phones. Your website must look great, load fast, and make contact easy in seconds.",
     mob_prev_sub:"That's why having a mobile-friendly website matters.",
     mob_prev_b1:"Design adapted for small screens",
@@ -8501,158 +7495,6 @@ setupHeroMockupAnimation();
       card.style.removeProperty('--by');
     });
   });
-})();
-
-(function () {
-  const section = document.querySelector('#jdc-live-experience');
-  if (!section) return;
-
-  const frame = section.querySelector('.jdc-live-frame');
-  const copy = section.querySelector('.jdc-live-copy');
-  const hint = section.querySelector('.jdc-live-hint');
-  const iframe = section.querySelector('iframe');
-  const modeButtons = Array.from(section.querySelectorAll('[data-jdc-mode]'));
-  const panels = Array.from(section.querySelectorAll('[data-jdc-panel]'));
-  const panelState = section.querySelector('#jdcLivePanelState');
-  const stagePill = section.querySelector('#jdcLiveStagePill');
-
-  if (!frame) return;
-
-  if (iframe) {
-    iframe.setAttribute('loading', 'eager');
-    iframe.style.pointerEvents = 'auto';
-  }
-
-  const clamp = (value, min, max) => Math.min(Math.max(value, min), max);
-
-  const lerp = (start, end, progress) => {
-    return start + (end - start) * progress;
-  };
-
-  const smoothstep = (edge0, edge1, x) => {
-    if (edge0 === edge1) return x >= edge1 ? 1 : 0;
-    const t = clamp((x - edge0) / (edge1 - edge0), 0, 1);
-    return t * t * (3 - 2 * t);
-  };
-
-  const modeStateKeys = {
-    desktop: 'jdc_live_state_desktop',
-    mobile: 'jdc_live_state_mobile',
-    audit: 'jdc_live_state_audit'
-  };
-
-  const stagePillKeys = {
-    desktop: 'jdc_live_stage_pill_desktop',
-    mobile: 'jdc_live_stage_pill_mobile',
-    audit: 'jdc_live_stage_pill_audit'
-  };
-
-  function getText(key) {
-    const dict = (window.T && window.T[window.lang]) || (window.T && window.T.es) || null;
-    return dict && dict[key] ? dict[key] : '';
-  }
-
-  function setMode(mode) {
-    const nextMode = ['desktop', 'mobile', 'audit'].includes(mode) ? mode : 'desktop';
-    section.setAttribute('data-mode', nextMode);
-
-    modeButtons.forEach((button) => {
-      const isActive = button.getAttribute('data-jdc-mode') === nextMode;
-      button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
-    });
-
-    panels.forEach((panel) => {
-      panel.classList.toggle('is-active', panel.getAttribute('data-jdc-panel') === nextMode);
-    });
-
-    if (panelState) {
-      const stateKey = modeStateKeys[nextMode] || modeStateKeys.desktop;
-      panelState.textContent = getText(stateKey) || panelState.textContent;
-    }
-
-    if (stagePill) {
-      const pillKey = stagePillKeys[nextMode] || stagePillKeys.desktop;
-      stagePill.textContent = getText(pillKey) || stagePill.textContent;
-    }
-  }
-
-  let ticking = false;
-
-  function updateJdcExperience() {
-    ticking = false;
-
-    const rect = section.getBoundingClientRect();
-    const isMobile = window.matchMedia('(max-width: 768px)').matches;
-    const vh = Math.max(window.innerHeight, 1);
-    const start = vh * 0.85;
-    const end = isMobile ? -vh * 0.04 : -vh * 0.06;
-    const raw = (start - rect.top) / (start - end);
-    const progress = clamp(raw, 0, 1);
-
-    const exitStart = isMobile ? 0.78 : 0.8;
-    const exitT = smoothstep(exitStart, 1, progress);
-
-    const baseScale = 1;
-    const endScale = isMobile ? 0.965 : 0.955;
-    const endY = isMobile ? -18 : -34;
-    const endOpacity = 0;
-
-    const scale = lerp(baseScale, endScale, exitT);
-    const y = lerp(0, endY, exitT);
-    const opacity = lerp(1, endOpacity, exitT);
-    const radius = lerp(isMobile ? 20 : 24, isMobile ? 18 : 20, exitT);
-
-    section.style.setProperty('--jdc-frame-scale', scale.toFixed(4));
-    section.style.setProperty('--jdc-frame-y', `${y.toFixed(2)}px`);
-    section.style.setProperty('--jdc-frame-opacity', opacity.toFixed(4));
-    section.style.setProperty('--jdc-radius', `${radius.toFixed(2)}px`);
-
-    section.classList.add('is-interactive');
-
-    if (copy) {
-      const copyIn = smoothstep(0.00, 0.03, progress);
-      const copyOut = smoothstep(0.06, 0.16, progress);
-      const copyOpacity = clamp(copyIn * (1 - copyOut), 0, 1);
-      const copyY = lerp(-10, 0, copyIn) - lerp(0, 20, copyOut);
-
-      section.style.setProperty('--jdc-copy-opacity', copyOpacity.toFixed(4));
-      section.style.setProperty('--jdc-copy-y', `${copyY.toFixed(2)}px`);
-    }
-
-    if (hint) {
-      const hintOut = smoothstep(0.20, 0.34, progress);
-      const hintOpacity = lerp(1, 0, hintOut);
-      const hintY = lerp(0, 10, hintOut);
-
-      section.style.setProperty('--jdc-hint-opacity', hintOpacity.toFixed(4));
-      section.style.setProperty('--jdc-hint-y', `${hintY.toFixed(2)}px`);
-    }
-  }
-
-  function requestUpdate() {
-    if (!ticking) {
-      ticking = true;
-      requestAnimationFrame(updateJdcExperience);
-    }
-  }
-
-  window.addEventListener('scroll', requestUpdate, { passive: true });
-  window.addEventListener('resize', requestUpdate);
-  window.addEventListener('load', requestUpdate);
-
-  modeButtons.forEach((button) => {
-    button.addEventListener('click', function () {
-      setMode(button.getAttribute('data-jdc-mode'));
-    });
-  });
-
-  window.updateJdcLiveLocale = function () {
-    const activeMode = section.getAttribute('data-mode') || 'desktop';
-    setMode(activeMode);
-  };
-
-  setMode(section.getAttribute('data-mode') || 'desktop');
-  updateJdcExperience();
 })();
 
 /* ════════════════════════════════════════════════════════════
