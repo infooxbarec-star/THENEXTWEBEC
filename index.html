@@ -1690,6 +1690,264 @@
     }
 
     /* ─── CHECKLIST ─── */
+    .checklist-hero-entry {
+      position: relative;
+      padding: 28px 0 14px;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,.14), transparent 28%),
+        radial-gradient(circle at bottom right, rgba(26,110,250,.16), transparent 34%),
+        linear-gradient(180deg, rgba(247,247,245,1) 0%, rgba(241,244,248,1) 100%);
+      overflow: hidden;
+    }
+    .checklist-hero-entry::before {
+      content: '';
+      position: absolute;
+      inset: 22px auto auto 50%;
+      width: min(720px, 92vw);
+      height: 1px;
+      transform: translateX(-50%);
+      background: linear-gradient(90deg, transparent, rgba(212,175,55,.45), transparent);
+      pointer-events: none;
+    }
+    .checklist-entry-card {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1.2fr) minmax(280px, .8fr);
+      gap: 24px;
+      align-items: center;
+      padding: 28px;
+      border-radius: 30px;
+      background: linear-gradient(145deg, #071629 0%, #0B1F3A 62%, #132b4d 100%);
+      border: 1px solid rgba(212,175,55,.2);
+      box-shadow: 0 26px 60px rgba(11,31,58,.16);
+      overflow: hidden;
+      isolation: isolate;
+    }
+    .checklist-entry-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at top left, rgba(212,175,55,.16), transparent 30%),
+        radial-gradient(circle at 88% 22%, rgba(147,197,253,.18), transparent 22%),
+        linear-gradient(135deg, rgba(255,255,255,.06), transparent 44%, rgba(212,175,55,.08));
+      pointer-events: none;
+      z-index: -1;
+    }
+    .checklist-entry-copy,
+    .checklist-entry-preview {
+      position: relative;
+      z-index: 1;
+    }
+    .checklist-entry-eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      margin-bottom: 16px;
+      color: rgba(255,255,255,.72);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .12em;
+      text-transform: uppercase;
+    }
+    .checklist-entry-eyebrow::before {
+      content: '';
+      width: 22px;
+      height: 1px;
+      background: rgba(212,175,55,.75);
+    }
+    .checklist-entry-title {
+      max-width: 640px;
+      margin: 0;
+      color: var(--white);
+      font-size: clamp(32px, 4.2vw, 50px);
+      line-height: 1.06;
+      letter-spacing: -1.4px;
+    }
+    .checklist-entry-subtitle {
+      margin: 18px 0 0;
+      max-width: 620px;
+      font-size: 18px;
+      line-height: 1.72;
+      color: rgba(255,255,255,.76);
+    }
+    .checklist-entry-microcopy {
+      margin-top: 14px;
+      font-size: 14px;
+      line-height: 1.7;
+      color: rgba(255,255,255,.66);
+    }
+    .checklist-entry-bullets {
+      display: grid;
+      gap: 10px;
+      margin-top: 22px;
+      padding: 0;
+      list-style: none;
+    }
+    .checklist-entry-bullets li {
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      color: rgba(255,255,255,.88);
+      font-size: 15px;
+      line-height: 1.6;
+    }
+    .checklist-entry-bullets li::before {
+      content: '';
+      flex: 0 0 8px;
+      width: 8px;
+      height: 8px;
+      margin-top: 8px;
+      border-radius: 999px;
+      background: linear-gradient(180deg, #D4AF37 0%, #F4E09A 100%);
+      box-shadow: 0 0 0 5px rgba(212,175,55,.12);
+    }
+    .checklist-entry-benefits {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+      margin-top: 24px;
+    }
+    .checklist-entry-benefit {
+      min-height: 100%;
+      padding: 14px 14px 16px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.06);
+      border: 1px solid rgba(255,255,255,.08);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.04);
+    }
+    .checklist-entry-benefit strong {
+      display: block;
+      color: var(--white);
+      font-size: 14px;
+      line-height: 1.45;
+      letter-spacing: -.2px;
+    }
+    .checklist-entry-actions {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 12px;
+      margin-top: 26px;
+    }
+    .checklist-entry-actions .btn {
+      min-height: 52px;
+      padding-left: 22px;
+      padding-right: 22px;
+    }
+    .checklist-entry-preview {
+      padding: 18px;
+      border-radius: 24px;
+      background: linear-gradient(180deg, rgba(255,255,255,.14), rgba(255,255,255,.06));
+      border: 1px solid rgba(255,255,255,.1);
+      box-shadow: inset 0 1px 0 rgba(255,255,255,.1);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    .checklist-preview-window {
+      border-radius: 20px;
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.08);
+      background: rgba(4,12,24,.72);
+      box-shadow: 0 18px 40px rgba(3,10,22,.22);
+    }
+    .checklist-preview-topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 12px 14px;
+      background: rgba(255,255,255,.06);
+      border-bottom: 1px solid rgba(255,255,255,.06);
+    }
+    .checklist-preview-dots {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .checklist-preview-dots span {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.36);
+    }
+    .checklist-preview-tag {
+      padding: 5px 10px;
+      border-radius: 999px;
+      background: rgba(212,175,55,.16);
+      border: 1px solid rgba(212,175,55,.18);
+      color: #F4E09A;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: .08em;
+      text-transform: uppercase;
+    }
+    .checklist-preview-body {
+      display: grid;
+      gap: 14px;
+      padding: 18px;
+    }
+    .checklist-preview-label {
+      color: rgba(255,255,255,.62);
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: .1em;
+      text-transform: uppercase;
+    }
+    .checklist-preview-headline {
+      color: var(--white);
+      font-size: 20px;
+      font-weight: 800;
+      line-height: 1.25;
+      letter-spacing: -.5px;
+    }
+    .checklist-preview-progress {
+      display: grid;
+      gap: 8px;
+    }
+    .checklist-preview-progress span {
+      color: rgba(255,255,255,.7);
+      font-size: 13px;
+      line-height: 1.5;
+    }
+    .checklist-preview-track {
+      width: 100%;
+      height: 10px;
+      border-radius: 999px;
+      background: rgba(255,255,255,.08);
+      overflow: hidden;
+      border: 1px solid rgba(255,255,255,.05);
+    }
+    .checklist-preview-track::after {
+      content: '';
+      display: block;
+      width: 62%;
+      height: 100%;
+      border-radius: inherit;
+      background: linear-gradient(90deg, #1A6EFA 0%, #D4AF37 100%);
+      box-shadow: 0 10px 24px rgba(26,110,250,.28);
+    }
+    .checklist-preview-list {
+      display: grid;
+      gap: 10px;
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+    .checklist-preview-list li {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      padding: 11px 12px;
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+      color: rgba(255,255,255,.9);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+    .checklist-preview-list li span {
+      color: rgba(255,255,255,.52);
+      font-size: 12px;
+      white-space: nowrap;
+    }
     .checklist-section {
       position: relative;
       overflow: hidden;
@@ -3048,6 +3306,13 @@
 
     /* ─── MOBILE/TABLET: ultra-smooth performance overrides ─── */
     @media (max-width: 900px) {
+      .checklist-entry-card {
+        grid-template-columns: 1fr;
+        gap: 20px;
+      }
+      .checklist-entry-benefits {
+        grid-template-columns: 1fr;
+      }
       .hero-actions .btn-primary,
       .final-cta-inner .btn-primary,
       .eyebrow-accent,
@@ -3070,6 +3335,35 @@
     }
 
     @media (max-width: 768px) {
+      .checklist-hero-entry {
+        padding: 18px 0 88px;
+      }
+      .checklist-entry-card {
+        padding: 22px 18px;
+        border-radius: 24px;
+      }
+      .checklist-entry-title {
+        font-size: 31px;
+        letter-spacing: -1px;
+      }
+      .checklist-entry-subtitle {
+        font-size: 16px;
+      }
+      .checklist-entry-bullets li,
+      .checklist-entry-benefit strong {
+        font-size: 14px;
+      }
+      .checklist-entry-actions {
+        flex-direction: column;
+      }
+      .checklist-entry-actions .btn {
+        width: 100%;
+        justify-content: center;
+      }
+      .checklist-entry-preview {
+        padding: 14px;
+        border-radius: 20px;
+      }
       .hero-orb { display: none; }
       #hero-canvas { display: none; }
       #cursor-dot, #cursor-ring { display: none; }
@@ -4295,6 +4589,70 @@
         </div>
       </div>
 
+    </div>
+  </div>
+</section>
+
+<section class="checklist-hero-entry" aria-labelledby="checklist-entry-title">
+  <div class="container">
+    <div class="checklist-entry-card fi d2">
+      <div class="checklist-entry-copy">
+        <span class="checklist-entry-eyebrow">Diagnóstico gratuito de tu web</span>
+        <h2 class="checklist-entry-title" id="checklist-entry-title">Descubre si tu página está generando confianza o perdiendo clientes</h2>
+        <p class="checklist-entry-subtitle">En menos de 2 minutos puedes revisar los puntos más importantes de tu web: claridad, diseño, versión móvil, velocidad, confianza y facilidad de contacto.</p>
+        <p class="checklist-entry-microcopy">Sin compromiso. Recibes una respuesta automática al instante.</p>
+
+        <ul class="checklist-entry-bullets" aria-label="Ventajas del diagnóstico gratuito">
+          <li>Resultado automático al instante</li>
+          <li>Recomendación personalizada</li>
+          <li>Sin compromiso</li>
+        </ul>
+
+        <div class="checklist-entry-benefits" aria-label="Lo que revisa el diagnóstico">
+          <article class="checklist-entry-benefit">
+            <strong>Detecta problemas de confianza</strong>
+          </article>
+          <article class="checklist-entry-benefit">
+            <strong>Revisa claridad, mobile y conversión</strong>
+          </article>
+          <article class="checklist-entry-benefit">
+            <strong>Recibe una recomendación automática</strong>
+          </article>
+        </div>
+
+        <div class="checklist-entry-actions">
+          <a href="#checklist" class="btn btn-primary" onclick="document.querySelector('#checklist')?.scrollIntoView({ behavior: 'smooth', block: 'start' }); return false;">Hacer diagnóstico gratuito</a>
+          <a href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20quiero%20hablar%20sobre%20el%20diagn%C3%B3stico%20gratuito%20de%20mi%20web" target="_blank" rel="noopener noreferrer" class="btn btn-ghost">Hablar por WhatsApp</a>
+        </div>
+      </div>
+
+      <div class="checklist-entry-preview" aria-hidden="true">
+        <div class="checklist-preview-window">
+          <div class="checklist-preview-topbar">
+            <div class="checklist-preview-dots">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="checklist-preview-tag">15 preguntas</div>
+          </div>
+          <div class="checklist-preview-body">
+            <div>
+              <div class="checklist-preview-label">Mini preview</div>
+              <div class="checklist-preview-headline">Diagnóstico gratuito de tu web en menos de 2 minutos</div>
+            </div>
+            <div class="checklist-preview-progress">
+              <span>Responde preguntas rápidas y descubre si tu web está ayudando o frenando el crecimiento de tu negocio.</span>
+              <div class="checklist-preview-track"></div>
+            </div>
+            <ul class="checklist-preview-list">
+              <li>Confianza y propuesta clara <span>Si / No</span></li>
+              <li>Versión móvil y velocidad <span>Si / No</span></li>
+              <li>Facilidad de contacto y conversión <span>Si / No</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
@@ -6685,7 +7043,7 @@ requestActiveOnScrollUpdate();
     if (recommendationText) recommendationText.textContent = state.result.diagnosis.recommendation || '';
 
     if (issuesSection && issuesList) {
-      issuesList.innerHTML = state.result.negativePoints.map(function (point) {
+      issuesList.innerHTML = state.result.negativePoints.map(function (point, index) {
         return `<li class="checklist-result-item" style="--item-delay:${index * 150}ms">${point}</li>`;
       }).join('');
       issuesSection.hidden = !state.result.negativePoints.length;
@@ -6854,30 +7212,51 @@ requestActiveOnScrollUpdate();
 
 (function () {
   const checklistSection = document.getElementById('checklist');
+  const checklistEntrySection = document.querySelector('.checklist-hero-entry');
   const waFloat = document.querySelector('.wa-float');
-  if (!checklistSection || !waFloat || typeof IntersectionObserver !== 'function') return;
+  const watchSections = [checklistEntrySection, checklistSection].filter(Boolean);
+  if (!watchSections.length || !waFloat || typeof IntersectionObserver !== 'function') return;
 
   const mobileQuery = window.matchMedia('(max-width: 600px)');
-  let checklistVisible = false;
+  let syncRafId = null;
+
+  function isSectionVisible(section) {
+    const rect = section.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight || 0;
+    if (viewportHeight <= 0) return false;
+    return rect.top < viewportHeight * 0.82 && rect.bottom > viewportHeight * 0.18;
+  }
+
+  function requestChecklistFloatStateSync() {
+    if (syncRafId !== null) return;
+    syncRafId = window.requestAnimationFrame(function () {
+      syncRafId = null;
+      syncChecklistFloatState();
+    });
+  }
 
   function syncChecklistFloatState() {
-    document.body.classList.toggle('checklist-wa-focus', mobileQuery.matches && checklistVisible);
+    const hideFloat = mobileQuery.matches && watchSections.some(isSectionVisible);
+    document.body.classList.toggle('checklist-wa-focus', hideFloat);
   }
 
   const observer = new IntersectionObserver((entries) => {
-    checklistVisible = entries.some((entry) => entry.isIntersecting);
-    syncChecklistFloatState();
+    if (entries.length) requestChecklistFloatStateSync();
   }, {
     threshold: 0.18
   });
 
-  observer.observe(checklistSection);
+  watchSections.forEach((section) => observer.observe(section));
+  window.addEventListener('scroll', requestChecklistFloatStateSync, { passive: true });
+  window.addEventListener('resize', requestChecklistFloatStateSync, { passive: true });
 
   if (typeof mobileQuery.addEventListener === 'function') {
-    mobileQuery.addEventListener('change', syncChecklistFloatState);
+    mobileQuery.addEventListener('change', requestChecklistFloatStateSync);
   } else if (typeof mobileQuery.addListener === 'function') {
-    mobileQuery.addListener(syncChecklistFloatState);
+    mobileQuery.addListener(requestChecklistFloatStateSync);
   }
+
+  requestChecklistFloatStateSync();
 })();
 
 /* Fade-in on scroll */
