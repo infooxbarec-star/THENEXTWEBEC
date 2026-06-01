@@ -6293,7 +6293,7 @@ requestActiveOnScrollUpdate();
   if (!form || !status) return;
 
   const CHECKLIST_TOTAL = 15;
-  const checklistLeadEndpoint = '/api/checklist-lead';
+    const checklistLeadEndpoint = 'https://hooks.zapier.com/hooks/catch/27783095/4bm0xaj/';
   const whatsappPhone = '593969349833';
   const panes = {
     lead: form.querySelector('[data-step-pane="lead"]'),
@@ -7002,32 +7002,38 @@ requestActiveOnScrollUpdate();
   }
 
   async function sendLeadToZapier() {
-    const payload = {
-      fecha: new Date().toISOString(),
-      nombre: state.lead.name,
-      whatsapp: state.lead.whatsapp,
-      sitio_web: state.lead.website,
-      score_total: state.result.score,
-      diagnostico_titulo: state.result.diagnosis.title,
-      diagnostico_mensaje: state.result.diagnosis.text,
-      recomendacion: state.result.diagnosis.recommendation,
-      respuestas: state.result.answersDetailed,
-      puntos_negativos: state.result.negativePoints,
-      origen: 'Checklist web NextWebEC'
-    };
+    if (!state.result) return false;
 
-    console.log('NEXTWEBEC CHECKLIST PAYLOAD:', payload);
+    const formData = new FormData();
 
-    const response = await fetch(checklistLeadEndpoint, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(payload)
-    });
+    formData.append('fecha', new Date().toISOString());
+    formData.append('nombre', state.lead.name || '');
+    formData.append('whatsapp', state.lead.whatsapp || '');
+    formData.append('sitio_web', state.lead.website || '');
+    formData.append('score_total', String(state.result.score || 0));
+    formData.append('diagnostico_titulo', state.result.diagnosis?.title || '');
+    formData.append('diagnostico_mensaje', state.result.diagnosis?.text || '');
+    formData.append('recomendacion', state.result.diagnosis?.recommendation || '');
+    formData.append('respuestas', JSON.stringify(state.result.answersDetailed || []));
+    formData.append('puntos_negativos', JSON.stringify(state.result.negativePoints || []));
+    formData.append('origen', 'Checklist web NextWebEC');
 
-    if (!response.ok) {
-      throw new Error('Checklist lead endpoint request failed');
+    try {
+      console.log('NEXTWEBEC CHECKLIST FORMDATA:', {
+        nombre: state.lead.name,
+        whatsapp: state.lead.whatsapp,
+        sitio_web: state.lead.website
+      });
+
+      await fetch(checklistLeadEndpoint, {
+        method: 'POST',
+        body: formData
+      });
+
+      return true;
+    } catch (error) {
+      console.error('NextWebEC Checklist Zapier error:', error);
+      return false;
     }
   }
 
