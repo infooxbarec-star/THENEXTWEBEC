@@ -5663,7 +5663,7 @@ requestActiveOnScrollUpdate();
   const status = document.getElementById('checklistStatus');
   if (!form || !status) return;
 
-  const webhookUrl = 'https://hooks.zapier.com/hooks/catch/27783095/4bm0xaj/';
+  const checklistLeadEndpoint = '/api/checklist-lead';
   const whatsappPhone = '593969349833';
   const panes = {
     lead: form.querySelector('[data-step-pane="lead"]'),
@@ -6095,28 +6095,20 @@ requestActiveOnScrollUpdate();
 
   async function sendLeadToZapier() {
     const payload = {
+      fecha: new Date().toISOString(),
       nombre: state.lead.name,
-      celular: state.lead.whatsapp,
       whatsapp: state.lead.whatsapp,
-      web_actual: state.lead.website,
       sitio_web: state.lead.website,
       score_total: state.result.score,
-      score: state.result.score,
       diagnostico_titulo: state.result.diagnosis.title,
       diagnostico_mensaje: state.result.diagnosis.text,
-      diagnostico: state.result.diagnosis.title,
       recomendacion: state.result.diagnosis.recommendation,
       respuestas: state.result.answersDetailed,
-      respuestas_completas: state.result.answersDetailed,
-      puntos_negativos_detectados: state.result.negativePoints,
       puntos_negativos: state.result.negativePoints,
-      fecha: new Date().toISOString(),
-      origen: 'Checklist web NextWebEC',
-      estado: 'Nuevo',
-      notas: ''
+      origen: 'Checklist web NextWebEC'
     };
 
-    const response = await fetch(webhookUrl, {
+    const response = await fetch(checklistLeadEndpoint, {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
@@ -6125,7 +6117,7 @@ requestActiveOnScrollUpdate();
     });
 
     if (!response.ok) {
-      throw new Error('Zapier webhook request failed');
+      throw new Error('Checklist lead endpoint request failed');
     }
   }
 
