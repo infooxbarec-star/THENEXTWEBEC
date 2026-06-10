@@ -2731,7 +2731,7 @@
   </style>
 
   <style>
-    body.cookie-consent-pending > *:not(.cookie-consent):not(.cookie-consent-overlay):not(#cursor-dot):not(#cursor-ring) {
+    body.cookie-consent-pending > *:not(.cookie-consent):not(.cookie-consent-overlay) {
       filter: blur(6px);
       pointer-events: none;
       user-select: none;
@@ -4520,8 +4520,6 @@ setupHeroMockupAnimation();
 
     function hideBanner() {
       document.body.classList.remove('cookie-consent-pending');
-      document.body.classList.remove('cursor-hidden');
-      document.body.classList.remove('cursor-click');
       overlay.classList.remove('show');
       banner.classList.remove('show');
       banner.setAttribute('aria-hidden', 'true');
