@@ -177,6 +177,23 @@
     }
     .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
 
+    .scroll-progress {
+      position: fixed;
+      top: 0;
+      left: 0;
+      z-index: 80;
+      width: 100%;
+      height: 4px;
+      background: rgba(26,110,250,.12);
+    }
+    .scroll-progress span {
+      display: block;
+      width: 0%;
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent-2));
+      box-shadow: 0 0 18px rgba(26,110,250,.5);
+    }
+
     .nav {
       position: sticky;
       top: 0;
@@ -219,7 +236,7 @@
       position: relative;
       z-index: 1;
       display: grid;
-      grid-template-columns: minmax(0, 1.02fr) minmax(360px, .98fr);
+      grid-template-columns: minmax(0, .92fr) minmax(420px, 1.08fr);
       gap: clamp(36px, 6vw, 82px);
       align-items: center;
     }
@@ -256,16 +273,15 @@
     .metric span { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; font-weight: 700; }
     .hero-showcase {
       position: relative;
-      min-height: 500px;
+      min-height: auto;
       perspective: 1200px;
     }
     .browser-card {
-      position: absolute;
       overflow: hidden;
       border-radius: 24px;
       background: #07182f;
       border: 1px solid rgba(255,255,255,.2);
-      box-shadow: 0 36px 110px rgba(11,31,58,.32);
+      box-shadow: 0 34px 95px rgba(11,31,58,.28);
     }
     .browser-card::before {
       content: "";
@@ -278,34 +294,40 @@
         linear-gradient(90deg, rgba(255,255,255,.13), rgba(255,255,255,.04));
     }
     .browser-card img { width: 100%; height: calc(100% - 34px); object-fit: cover; }
-    .hero-main-shot { inset: 18px 0 auto 0; height: 306px; transform: rotateY(-9deg) rotateX(4deg); }
-    .hero-side-shot { right: -10px; bottom: 46px; width: 48%; height: 228px; transform: rotateY(13deg) rotateX(3deg); }
-    .hero-phone {
-      position: absolute;
-      left: 12px;
-      bottom: 0;
-      width: 154px;
-      height: 300px;
-      border-radius: 34px;
-      padding: 11px;
-      background: #06142a;
-      box-shadow: 0 28px 70px rgba(11,31,58,.34);
-      border: 1px solid rgba(255,255,255,.16);
+    .hero-main-shot {
+      position: relative;
+      width: 100%;
+      aspect-ratio: 16 / 10;
+      transform: rotateY(-4deg) rotateX(2deg);
     }
-    .hero-phone img { width: 100%; height: 100%; object-fit: cover; border-radius: 25px; }
-    .floating-note {
-      position: absolute;
-      right: 8px;
-      top: 346px;
-      max-width: 240px;
+    .hero-main-shot img { object-position: center top; }
+    .hero-showcase-caption {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 16px;
+      align-items: center;
+      margin-top: 18px;
       padding: 18px;
-      color: #fff;
-      border-radius: 18px;
-      background: linear-gradient(135deg, var(--primary), var(--primary-2));
-      box-shadow: var(--shadow);
+      border-radius: 20px;
+      background: rgba(255,255,255,.74);
+      border: 1px solid rgba(11,31,58,.1);
+      box-shadow: 0 16px 44px rgba(11,31,58,.08);
     }
-    .floating-note strong { display: block; margin-bottom: 4px; }
-    .floating-note span { color: rgba(255,255,255,.74); font-size: 13px; }
+    .hero-showcase-caption strong { display: block; color: var(--primary); font-size: 18px; }
+    .hero-showcase-caption span { color: var(--muted); font-weight: 700; font-size: 14px; }
+    .remote-chip {
+      display: inline-flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 38px;
+      padding: 8px 12px;
+      color: #fff;
+      background: var(--primary);
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 900;
+      white-space: nowrap;
+    }
 
     .strip {
       overflow: hidden;
@@ -509,15 +531,176 @@
     .proof strong { display: block; color: var(--primary); font-size: 24px; line-height: 1; }
     .proof span { display: block; margin-top: 8px; color: var(--muted); font-weight: 700; }
 
+    .designer-section {
+      background:
+        radial-gradient(circle at 20% 20%, rgba(26,110,250,.1), transparent 30%),
+        linear-gradient(180deg, #fff, #f7f7f5);
+    }
+    .designer-grid {
+      display: grid;
+      grid-template-columns: .95fr 1.05fr;
+      gap: clamp(28px, 6vw, 70px);
+      align-items: center;
+    }
+    .designer-photo {
+      overflow: hidden;
+      border-radius: 28px;
+      background: var(--soft);
+      box-shadow: var(--shadow);
+      border: 1px solid rgba(11,31,58,.08);
+    }
+    .designer-photo img { width: 100%; height: 100%; object-fit: cover; }
+    .designer-points {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-top: 24px;
+    }
+    .designer-point {
+      padding: 16px;
+      border-radius: 18px;
+      background: #fff;
+      border: 1px solid rgba(11,31,58,.08);
+      box-shadow: 0 12px 34px rgba(11,31,58,.06);
+    }
+    .designer-point strong { display: block; color: var(--primary); line-height: 1.15; }
+    .designer-point span { display: block; margin-top: 7px; color: var(--muted); font-size: 13px; font-weight: 700; }
+
+    .diagnostic-section {
+      background:
+        radial-gradient(circle at 80% 12%, rgba(88,183,255,.18), transparent 30%),
+        linear-gradient(135deg, #071529, #0b1f3a 62%, #10294a);
+    }
+    .diagnostic-grid {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 26px;
+      align-items: start;
+    }
+    .diagnostic-section h2,
+    .diagnostic-section h3 { color: #fff; }
+    .diagnostic-section p { color: rgba(255,255,255,.72); }
+    .diagnostic-card {
+      border-radius: 24px;
+      background: rgba(255,255,255,.08);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 24px 80px rgba(0,0,0,.18);
+    }
+    .diagnostic-copy { padding: 28px; }
+    .diagnostic-copy .eyebrow { color: #9bd7ff; }
+    .diagnostic-list { list-style: none; display: grid; gap: 12px; margin-top: 24px; }
+    .diagnostic-list li {
+      display: flex;
+      gap: 10px;
+      color: rgba(255,255,255,.82);
+      font-weight: 700;
+    }
+    .diagnostic-list li::before { content: "✓"; color: var(--accent-2); font-weight: 900; }
+    .diagnostic-form { padding: 24px; background: #fff; }
+    .form-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 12px; }
+    .field { display: grid; gap: 7px; }
+    .field label { color: var(--primary); font-size: 13px; font-weight: 900; }
+    .field input {
+      width: 100%;
+      min-height: 48px;
+      border: 1px solid rgba(11,31,58,.12);
+      border-radius: 14px;
+      padding: 12px 13px;
+      font: inherit;
+      color: var(--primary);
+      background: #f8fbff;
+    }
+    .question-list { display: grid; gap: 12px; margin-top: 20px; }
+    .question {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 14px;
+      align-items: center;
+      padding: 14px;
+      border-radius: 16px;
+      border: 1px solid rgba(11,31,58,.09);
+      background: #f8fbff;
+    }
+    .question span { color: var(--primary); font-weight: 800; line-height: 1.28; }
+    .choice-group { display: flex; gap: 7px; }
+    .choice {
+      position: relative;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      min-width: 54px;
+      min-height: 36px;
+      padding: 8px 10px;
+      border-radius: 999px;
+      border: 1px solid rgba(11,31,58,.12);
+      color: var(--primary);
+      background: #fff;
+      font-size: 13px;
+      font-weight: 900;
+      cursor: pointer;
+    }
+    .choice input { position: absolute; opacity: 0; pointer-events: none; }
+    .choice:has(input:checked) {
+      color: #fff;
+      background: var(--accent);
+      border-color: var(--accent);
+      box-shadow: 0 10px 24px rgba(26,110,250,.22);
+    }
+    .diagnostic-result {
+      display: none;
+      margin-top: 18px;
+      padding: 18px;
+      border-radius: 18px;
+      background: var(--soft);
+      border: 1px solid rgba(26,110,250,.16);
+    }
+    .diagnostic-result.is-visible { display: block; }
+    .diagnostic-result strong { display: block; color: var(--primary); font-size: 20px; }
+    .diagnostic-result p { color: var(--muted); margin-top: 6px; }
+    .diagnostic-actions { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 18px; }
+
     .final-cta {
       position: relative;
       overflow: hidden;
       color: #fff;
       background:
-        linear-gradient(90deg, rgba(7,21,41,.82), rgba(7,21,41,.52)),
+        linear-gradient(90deg, rgba(7,21,41,.9), rgba(7,21,41,.72)),
         url("Screenshot 2026-06-01 at 13.23.58.png") center/cover;
     }
-    .final-box { max-width: 760px; }
+    .final-cta::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 78% 24%, rgba(26,110,250,.28), transparent 36%),
+        linear-gradient(180deg, rgba(7,21,41,.12), rgba(7,21,41,.88));
+    }
+    .final-shell {
+      position: relative;
+      z-index: 1;
+      display: grid;
+      grid-template-columns: 1fr .78fr;
+      gap: 24px;
+      align-items: end;
+    }
+    .final-box {
+      max-width: 760px;
+      padding: clamp(28px, 5vw, 54px);
+      border-radius: 28px;
+      background: rgba(7,21,41,.72);
+      border: 1px solid rgba(255,255,255,.16);
+      box-shadow: 0 26px 90px rgba(0,0,0,.25);
+      backdrop-filter: blur(10px);
+    }
+    .final-proof {
+      padding: 24px;
+      border-radius: 24px;
+      background: rgba(255,255,255,.1);
+      border: 1px solid rgba(255,255,255,.14);
+      backdrop-filter: blur(10px);
+    }
+    .final-proof strong { display: block; color: #fff; font-size: 30px; line-height: 1; }
+    .final-proof span { display: block; color: rgba(255,255,255,.74); margin-top: 8px; font-weight: 700; }
     .final-cta h2 { color: #fff; }
     .final-cta p { color: rgba(255,255,255,.78); }
     .final-cta .eyebrow { color: #9bd7ff; }
@@ -548,18 +731,40 @@
     }
     .wa-float:hover { transform: translateY(-3px) scale(1.02); }
 
+    .back-top {
+      position: fixed;
+      right: 20px;
+      bottom: 92px;
+      z-index: 45;
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      background: var(--primary);
+      box-shadow: 0 14px 34px rgba(11,31,58,.26);
+      text-decoration: none;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(10px);
+      transition: opacity .2s ease, transform .2s ease;
+    }
+    .back-top.is-visible { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
     @media (max-width: 980px) {
       .nav-links { display: none; }
-      .hero-grid, .trust-grid { grid-template-columns: 1fr; }
-      .hero-showcase { min-height: 500px; max-width: 640px; }
+      .hero-grid, .trust-grid, .designer-grid, .diagnostic-grid, .final-shell { grid-template-columns: 1fr; }
+      .hero-showcase { max-width: 640px; }
       .industry-grid { grid-auto-rows: 280px; }
       .industry-grid { grid-template-columns: repeat(2, 1fr); }
       .services-grid, .benefit-grid, .pricing-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
       .price-card.featured { transform: none; }
+      .form-grid, .designer-points { grid-template-columns: 1fr; }
     }
     @media (max-width: 640px) {
       .container { width: min(100% - 28px, 1160px); }
@@ -572,14 +777,14 @@
       .cta-row, .hero-actions { width: 100%; }
       .cta-row .btn, .hero-actions .btn { width: 100%; }
       .hero-metrics { grid-template-columns: 1fr; }
-      .hero-showcase { min-height: 410px; }
-      .hero-main-shot { height: 235px; }
-      .hero-side-shot { width: 56%; height: 185px; bottom: 20px; }
-      .hero-phone { width: 128px; height: 252px; }
-      .floating-note { top: 286px; right: 0; max-width: 190px; padding: 14px; }
+      .hero-main-shot { aspect-ratio: 16 / 11; transform: none; }
+      .hero-showcase-caption { grid-template-columns: 1fr; }
       .industry-grid, .process-grid, .proof-grid { grid-template-columns: 1fr; }
       .industry-grid { grid-auto-rows: 250px; }
       .industry-card, .industry-card img { min-height: 0; }
+      .question { grid-template-columns: 1fr; }
+      .choice-group { width: 100%; }
+      .choice { flex: 1; }
       .section { padding: 64px 0; }
       .price { font-size: 46px; }
       .price-card p { min-height: auto; }
@@ -588,12 +793,15 @@
   </style>
 </head>
 <body>
+  <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
   <nav class="nav" aria-label="Navegación principal">
     <div class="container nav-inner">
       <a class="logo" href="#inicio">Next<span>WebEC</span></a>
       <ul class="nav-links">
         <li><a href="#ejemplos">Ejemplos</a></li>
         <li><a href="#servicios">Servicios</a></li>
+        <li><a href="#diagnostico">Diagnóstico</a></li>
+        <li><a href="#disenador">Diseñador</a></li>
         <li><a href="#proceso">Proceso</a></li>
         <li><a href="#precios">Precios</a></li>
       </ul>
@@ -605,15 +813,15 @@
     <section class="hero">
       <div class="container hero-grid">
         <div>
-          <div class="hero-badge"><strong>NextWebEC</strong> Diseño web comercial en Ecuador</div>
+          <div class="hero-badge"><strong>NextWebEC</strong> Diseño web comercial · 100% remoto</div>
           <h1>Tu negocio merece una web que se vea <span>profesional</span> y ayude a vender.</h1>
-          <p class="lead">Creamos páginas modernas, rápidas y visuales para negocios que quieren generar confianza, explicar mejor lo que ofrecen y convertir visitantes en clientes.</p>
+          <p class="lead">Creamos páginas modernas, rápidas y visuales para negocios que quieren generar confianza, explicar mejor lo que ofrecen y convertir visitantes en clientes. Todo el proceso puede hacerse de forma remota, con seguimiento claro y directo.</p>
           <div class="cta-row hero-actions">
             <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20quiero%20una%20web%20moderna%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer">Quiero mi web profesional</a>
-            <a class="btn btn-secondary" href="#ejemplos">Ver ejemplos visuales</a>
+            <a class="btn btn-secondary" href="#diagnostico">Hacer diagnóstico</a>
           </div>
           <div class="hero-metrics" aria-label="Beneficios principales">
-            <div class="metric"><strong>3</strong><span>formas de trabajar: desde cero, rediseño o mantenimiento</span></div>
+            <div class="metric"><strong>100%</strong><span>remoto, guiado y sin reuniones innecesarias</span></div>
             <div class="metric"><strong>100%</strong><span>adaptada a tu tipo de negocio y a celular</span></div>
             <div class="metric"><strong>1 clic</strong><span>para que el cliente te escriba por WhatsApp</span></div>
           </div>
@@ -621,17 +829,14 @@
 
         <div class="hero-showcase" aria-label="Vista previa visual de páginas web">
           <div class="browser-card hero-main-shot">
-            <img src="ChatGPT Image May 21, 2026 at 12_15_03 PM.png" alt="Mockup de página web moderna creada para un negocio" loading="eager" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" alt="Mockup de página web moderna creada para un negocio profesional" loading="eager" />
           </div>
-          <div class="browser-card hero-side-shot">
-            <img src="Screenshot 2026-05-04 at 20.54.58.png" alt="Vista visual de una página web premium para servicios" loading="eager" />
-          </div>
-          <div class="hero-phone">
-            <img src="IMG_3679.jpg" alt="Vista móvil de una página web moderna" loading="eager" />
-          </div>
-          <div class="floating-note">
-            <strong>Más claro. Más visual. Más vendible.</strong>
-            <span>Cada sección se diseña para que el cliente entienda rápido y dé el siguiente paso.</span>
+          <div class="hero-showcase-caption">
+            <div>
+              <strong>Un mockup claro, no diez piezas compitiendo.</strong>
+              <span>Tu visitante debe entender rápido cómo se vería una web profesional para su negocio.</span>
+            </div>
+            <div class="remote-chip">100% remoto</div>
           </div>
         </div>
       </div>
@@ -639,7 +844,7 @@
 
     <div class="strip" aria-hidden="true">
       <div class="strip-track">
-        <span>Diseño moderno</span><span>Webs listas para vender</span><span>WhatsApp integrado</span><span>Responsive</span><span>Rediseño web</span><span>Mantenimiento mensual</span><span>Diseño moderno</span><span>Webs listas para vender</span><span>WhatsApp integrado</span><span>Responsive</span><span>Rediseño web</span><span>Mantenimiento mensual</span>
+        <span>Diseño moderno</span><span>100% remoto</span><span>Webs listas para vender</span><span>WhatsApp integrado</span><span>Responsive</span><span>Rediseño web</span><span>Mantenimiento mensual</span><span>Diseño moderno</span><span>100% remoto</span><span>Webs listas para vender</span><span>WhatsApp integrado</span><span>Responsive</span>
       </div>
     </div>
 
@@ -749,6 +954,64 @@
       </div>
     </section>
 
+    <section class="section diagnostic-section" id="diagnostico">
+      <div class="container diagnostic-grid">
+        <aside class="diagnostic-card diagnostic-copy reveal">
+          <span class="eyebrow">Diagnóstico gratuito</span>
+          <h2>Descubre si tu web está ayudando o frenando tus ventas.</h2>
+          <p class="lead">Responde 10 preguntas de sí o no. Al final recibirás una recomendación inmediata para decidir si necesitas una web nueva, un rediseño o mantenimiento.</p>
+          <ul class="diagnostic-list">
+            <li>Recolecta nombre, teléfono y web actual para conectar después con Zapier.</li>
+            <li>Detecta problemas de claridad, confianza, móvil y conversión.</li>
+            <li>Te deja un mensaje listo para continuar la conversación por WhatsApp.</li>
+          </ul>
+        </aside>
+
+        <form class="diagnostic-card diagnostic-form reveal" id="diagnosticForm" novalidate>
+          <div class="form-grid">
+            <div class="field">
+              <label for="leadName">Nombre</label>
+              <input id="leadName" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
+            </div>
+            <div class="field">
+              <label for="leadPhone">Teléfono / WhatsApp</label>
+              <input id="leadPhone" name="telefono" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" required>
+            </div>
+            <div class="field">
+              <label for="leadWebsite">Web actual</label>
+              <input id="leadWebsite" name="web_actual" type="text" placeholder="empresa.com" inputmode="url">
+            </div>
+          </div>
+
+          <div class="question-list" id="diagnosticQuestions">
+            <div class="question"><span>¿Tu visitante entiende qué vendes en menos de 5 segundos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q1" value="yes" required></label><label class="choice">No<input type="radio" name="q1" value="no"></label></div></div>
+            <div class="question"><span>¿Tu web se ve profesional en celular?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q2" value="yes" required></label><label class="choice">No<input type="radio" name="q2" value="no"></label></div></div>
+            <div class="question"><span>¿Tienes botones claros para WhatsApp o contacto?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q3" value="yes" required></label><label class="choice">No<input type="radio" name="q3" value="no"></label></div></div>
+            <div class="question"><span>¿Tus servicios están explicados con beneficios concretos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q4" value="yes" required></label><label class="choice">No<input type="radio" name="q4" value="no"></label></div></div>
+            <div class="question"><span>¿La web muestra imágenes reales o ejemplos visuales de calidad?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q5" value="yes" required></label><label class="choice">No<input type="radio" name="q5" value="no"></label></div></div>
+            <div class="question"><span>¿Tu página carga rápido y se navega sin confusión?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q6" value="yes" required></label><label class="choice">No<input type="radio" name="q6" value="no"></label></div></div>
+            <div class="question"><span>¿Tienes testimonios, resultados o señales de confianza?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q7" value="yes" required></label><label class="choice">No<input type="radio" name="q7" value="no"></label></div></div>
+            <div class="question"><span>¿La web guía al cliente hacia una acción específica?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q8" value="yes" required></label><label class="choice">No<input type="radio" name="q8" value="no"></label></div></div>
+            <div class="question"><span>¿Puedes actualizar contenido sin complicarte?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q9" value="yes" required></label><label class="choice">No<input type="radio" name="q9" value="no"></label></div></div>
+            <div class="question"><span>¿Tu web actual te genera consultas de forma constante?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q10" value="yes" required></label><label class="choice">No<input type="radio" name="q10" value="no"></label></div></div>
+          </div>
+
+          <div class="diagnostic-actions">
+            <button class="btn btn-primary" type="submit">Ver recomendación</button>
+            <a class="btn btn-secondary" href="#precios">Ver planes</a>
+          </div>
+
+          <div class="diagnostic-result" id="diagnosticResult" aria-live="polite">
+            <strong id="diagnosticTitle"></strong>
+            <p id="diagnosticText"></p>
+            <div class="diagnostic-actions">
+              <a class="btn btn-primary" id="diagnosticWhatsapp" href="https://wa.me/593969349833" target="_blank" rel="noopener noreferrer">Enviar mi diagnóstico por WhatsApp</a>
+            </div>
+          </div>
+        </form>
+      </div>
+    </section>
+
     <section class="section" id="proceso">
       <div class="container">
         <div class="section-head reveal">
@@ -818,15 +1081,40 @@
       </div>
     </section>
 
+    <section class="section designer-section" id="disenador">
+      <div class="container designer-grid">
+        <figure class="designer-photo reveal">
+          <img src="ChatGPT Image May 30, 2026 at 12_43_36 PM.png" alt="José Guerrero, diseñador de NextWebEC">
+        </figure>
+        <div class="reveal">
+          <span class="eyebrow">Tu diseñador</span>
+          <h2>Trabajo directamente contigo para que tu web represente el nivel real de tu negocio.</h2>
+          <p class="lead">Soy José Guerrero, fundador y diseñador de NextWebEC. No trabajo como una agencia impersonal: escucho tu caso, ordeno tu mensaje y diseño una web que se vea profesional, clara y lista para convertir visitas en clientes.</p>
+          <p class="lead">El proceso puede ser 100% remoto. Tú me cuentas qué necesitas, revisamos avances y ajustamos hasta que la página tenga sentido para tu negocio.</p>
+          <div class="designer-points">
+            <div class="designer-point"><strong>Diseño directo</strong><span>Sin intermediarios ni terceros.</span></div>
+            <div class="designer-point"><strong>Enfoque comercial</strong><span>Secciones pensadas para vender.</span></div>
+            <div class="designer-point"><strong>Proceso remoto</strong><span>Claro, simple y acompañado.</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
     <section class="section final-cta" id="contacto">
       <div class="container">
-        <div class="final-box reveal">
-          <span class="eyebrow">Empecemos</span>
-          <h2>Convierte tu web en una mejor primera impresión.</h2>
-          <p class="lead">Cuéntame qué negocio tienes y qué necesitas: una web desde cero, un rediseño o mantenimiento. Te respondo con el siguiente paso claro.</p>
-          <div class="cta-row" style="margin-top: 28px;">
-            <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20NextWebEC%20y%20quiero%20mejorar%20mi%20web." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
-            <a class="btn btn-dark" href="mailto:thenextwebec@gmail.com">thenextwebec@gmail.com</a>
+        <div class="final-shell">
+          <div class="final-box reveal">
+            <span class="eyebrow">Empecemos</span>
+            <h2>Convierte tu web en una primera impresión que sí venda.</h2>
+            <p class="lead">Cuéntame qué negocio tienes y qué necesitas: una web desde cero, un rediseño o mantenimiento. Te respondo con una recomendación clara y el siguiente paso.</p>
+            <div class="cta-row" style="margin-top: 28px;">
+              <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20NextWebEC%20y%20quiero%20mejorar%20mi%20web." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
+              <a class="btn btn-dark" href="#diagnostico">Hacer diagnóstico</a>
+            </div>
+          </div>
+          <div class="final-proof reveal">
+            <strong>100% remoto</strong>
+            <span>Diseño, revisión y lanzamiento con comunicación directa, sin complicar tu agenda.</span>
           </div>
         </div>
       </div>
@@ -842,6 +1130,9 @@
 
   <a class="wa-float" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20quiero%20mejorar%20mi%20p%C3%A1gina%20web." target="_blank" rel="noopener noreferrer" aria-label="Hablar por WhatsApp">
     <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347M12.05 21.785h-.004a9.87 9.87 0 0 1-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 0 1-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 0 1 2.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0 0 12.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 0 0 5.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 0 0-3.48-8.413z"/></svg>
+  </a>
+  <a class="back-top" href="#inicio" aria-label="Volver al inicio">
+    <svg width="22" height="22" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 19V5m0 0-6 6m6-6 6 6" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg>
   </a>
 
   <script>
@@ -860,6 +1151,72 @@
       el.style.transitionDelay = `${Math.min(index % 6, 5) * 55}ms`;
       observer.observe(el);
     });
+
+    const progressBar = document.getElementById('scrollProgressBar');
+    const backTop = document.querySelector('.back-top');
+    function updateScrollUi() {
+      const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = maxScroll > 0 ? (window.scrollY / maxScroll) * 100 : 0;
+      if (progressBar) progressBar.style.width = `${Math.min(100, Math.max(0, progress))}%`;
+      if (backTop) backTop.classList.toggle('is-visible', window.scrollY > 520);
+    }
+    updateScrollUi();
+    window.addEventListener('scroll', updateScrollUi, { passive: true });
+    window.addEventListener('resize', updateScrollUi);
+
+    const diagnosticForm = document.getElementById('diagnosticForm');
+    const diagnosticResult = document.getElementById('diagnosticResult');
+    const diagnosticTitle = document.getElementById('diagnosticTitle');
+    const diagnosticText = document.getElementById('diagnosticText');
+    const diagnosticWhatsapp = document.getElementById('diagnosticWhatsapp');
+
+    if (diagnosticForm) {
+      diagnosticForm.addEventListener('submit', (event) => {
+        event.preventDefault();
+        const data = new FormData(diagnosticForm);
+        const name = String(data.get('nombre') || '').trim();
+        const phone = String(data.get('telefono') || '').trim();
+        const website = String(data.get('web_actual') || '').trim();
+        const unanswered = Array.from({ length: 10 }, (_, index) => `q${index + 1}`).filter((key) => !data.get(key));
+
+        if (!name || !phone || unanswered.length) {
+          diagnosticResult.classList.add('is-visible');
+          diagnosticTitle.textContent = 'Faltan algunos datos';
+          diagnosticText.textContent = 'Completa tu nombre, WhatsApp y las 10 respuestas para generar una recomendación clara.';
+          diagnosticWhatsapp.href = 'https://wa.me/593969349833';
+          return;
+        }
+
+        const noCount = Array.from({ length: 10 }, (_, index) => data.get(`q${index + 1}`)).filter((answer) => answer === 'no').length;
+        let title = '';
+        let text = '';
+
+        if (noCount <= 2) {
+          title = `Buen punto de partida: ${10 - noCount}/10`;
+          text = 'Tu web parece tener una base saludable. Lo más probable es que te convenga mantenimiento, ajustes puntuales o mejoras de conversión antes de rehacer todo.';
+        } else if (noCount <= 5) {
+          title = `Hay oportunidades claras: ${10 - noCount}/10`;
+          text = 'Tu web funciona parcialmente, pero puede estar perdiendo confianza o contactos. Un rediseño enfocado en estructura, visuales y mensajes podría ayudarte bastante.';
+        } else {
+          title = `Tu web necesita atención: ${10 - noCount}/10`;
+          text = 'Hay varias señales de que la web puede estar frenando ventas. Lo más recomendable es evaluar un rediseño profundo o una web nueva pensada para vender desde el inicio.';
+        }
+
+        diagnosticResult.classList.add('is-visible');
+        diagnosticTitle.textContent = title;
+        diagnosticText.textContent = text;
+
+        const message = [
+          'Hola José, hice el diagnóstico de NextWebEC.',
+          `Nombre: ${name}`,
+          `Teléfono: ${phone}`,
+          `Web actual: ${website || 'No indiqué'}`,
+          `Resultado: ${title}`,
+          `Recomendación: ${text}`
+        ].join('\n');
+        diagnosticWhatsapp.href = `https://wa.me/593969349833?text=${encodeURIComponent(message)}`;
+      });
+    }
 
     const cookieKey = 'nextwebec-cookie-choice';
     if (!localStorage.getItem(cookieKey)) {
