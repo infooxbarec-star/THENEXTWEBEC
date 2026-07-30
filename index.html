@@ -92,6 +92,7 @@
       overflow-x: hidden;
       -webkit-font-smoothing: antialiased;
     }
+    body.modal-open { overflow: hidden; }
     body::before {
       content: "";
       position: fixed;
@@ -335,10 +336,15 @@
     .hero-main-shot {
       position: relative;
       width: 100%;
-      aspect-ratio: 16 / 10;
+      aspect-ratio: 16 / 9;
       transform: rotateY(-4deg) rotateX(2deg);
     }
-    .hero-main-shot img { object-position: center top; }
+    .hero-main-shot::before { content: none; }
+    .hero-main-shot img {
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+    }
     .hero-showcase-caption {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -405,6 +411,11 @@
       background: #07182f;
       box-shadow: 0 18px 54px rgba(11,31,58,.11);
       isolation: isolate;
+      cursor: zoom-in;
+    }
+    .industry-card:focus-visible {
+      outline: 3px solid rgba(26,110,250,.38);
+      outline-offset: 4px;
     }
     .industry-card img {
       width: 100%;
@@ -441,6 +452,114 @@
     }
     .industry-content h3 { color: #fff; font-size: 21px; }
     .industry-content p { color: rgba(255,255,255,.74); font-size: 14px; margin-top: 6px; }
+    .industry-content::after {
+      content: "Ver grande ->";
+      display: inline-flex;
+      margin-top: 12px;
+      padding: 7px 10px;
+      border-radius: 999px;
+      color: #fff;
+      background: rgba(255,255,255,.16);
+      border: 1px solid rgba(255,255,255,.18);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .gallery-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 120;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: clamp(18px, 4vw, 46px);
+      background: rgba(7,21,41,.82);
+      backdrop-filter: blur(14px);
+    }
+    .gallery-modal.is-open { display: flex; }
+    .gallery-dialog {
+      position: relative;
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) 320px;
+      width: min(1180px, 100%);
+      max-height: min(760px, calc(100dvh - 48px));
+      overflow: hidden;
+      border-radius: 26px;
+      background: #f8fbff;
+      box-shadow: 0 30px 110px rgba(0,0,0,.42);
+      border: 1px solid rgba(255,255,255,.18);
+    }
+    .gallery-media {
+      min-height: 0;
+      background: #071529;
+    }
+    .gallery-media img {
+      width: 100%;
+      height: 100%;
+      max-height: min(760px, calc(100dvh - 48px));
+      object-fit: contain;
+      background: #071529;
+    }
+    .gallery-copy {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 12px;
+      padding: 28px;
+      background: linear-gradient(180deg, #fff, #eef4ff);
+    }
+    .gallery-copy small {
+      color: var(--accent);
+      font-size: 12px;
+      font-weight: 900;
+      text-transform: uppercase;
+      letter-spacing: .06em;
+    }
+    .gallery-copy h3 { font-size: 30px; }
+    .gallery-copy p { font-size: 15px; }
+    .gallery-count {
+      margin-top: 12px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 900;
+    }
+    .gallery-close,
+    .gallery-arrow {
+      position: absolute;
+      z-index: 2;
+      display: grid;
+      place-items: center;
+      border: 0;
+      color: #fff;
+      background: rgba(7,21,41,.88);
+      box-shadow: 0 14px 34px rgba(0,0,0,.22);
+      cursor: pointer;
+      transition: transform .2s ease, background .2s ease;
+    }
+    .gallery-close:hover,
+    .gallery-arrow:hover { transform: translateY(-1px); background: var(--accent); }
+    .gallery-close:focus-visible,
+    .gallery-arrow:focus-visible { outline: 3px solid rgba(88,183,255,.55); outline-offset: 3px; }
+    .gallery-close {
+      top: 18px;
+      right: 18px;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      font-size: 26px;
+      line-height: 1;
+    }
+    .gallery-arrow {
+      top: 50%;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      font-size: 32px;
+      transform: translateY(-50%);
+    }
+    .gallery-arrow:hover { transform: translateY(calc(-50% - 1px)); }
+    .gallery-prev { left: clamp(12px, 2vw, 28px); }
+    .gallery-next { right: clamp(12px, 2vw, 28px); }
 
     .services-grid, .benefit-grid, .pricing-grid {
       display: grid;
@@ -873,6 +992,9 @@
       .hero-showcase { max-width: 640px; }
       .industry-grid { grid-auto-rows: 280px; }
       .industry-grid { grid-template-columns: repeat(2, 1fr); }
+      .gallery-dialog { grid-template-columns: 1fr; }
+      .gallery-media img { max-height: 58dvh; }
+      .gallery-copy { padding: 22px; }
       .services-grid, .benefit-grid, .pricing-grid { grid-template-columns: 1fr; }
       .process-grid { grid-template-columns: repeat(2, 1fr); }
       .price-card.featured { transform: none; }
@@ -890,11 +1012,16 @@
       .cta-row, .hero-actions { width: 100%; }
       .cta-row .btn, .hero-actions .btn { width: 100%; }
       .hero-metrics { grid-template-columns: 1fr; }
-      .hero-main-shot { aspect-ratio: 16 / 11; transform: none; }
+      .hero-main-shot { aspect-ratio: 16 / 10; transform: none; }
       .hero-showcase-caption { grid-template-columns: 1fr; }
       .industry-grid, .process-grid, .proof-grid { grid-template-columns: 1fr; }
       .industry-grid { grid-auto-rows: 250px; }
       .industry-card, .industry-card img { min-height: 0; }
+      .gallery-modal { padding: 12px; }
+      .gallery-dialog { max-height: calc(100dvh - 24px); border-radius: 20px; }
+      .gallery-media img { max-height: 52dvh; }
+      .gallery-copy h3 { font-size: 25px; }
+      .gallery-arrow { width: 46px; height: 46px; font-size: 28px; }
       .question { grid-template-columns: 1fr; }
       .choice-group { width: 100%; }
       .choice { flex: 1; }
@@ -1243,6 +1370,23 @@
     </section>
   </main>
 
+  <div class="gallery-modal" id="galleryModal" role="dialog" aria-modal="true" aria-hidden="true" aria-labelledby="galleryTitle">
+    <button class="gallery-close" id="galleryClose" type="button" aria-label="Cerrar imagen ampliada">×</button>
+    <button class="gallery-arrow gallery-prev" id="galleryPrev" type="button" aria-label="Ver negocio anterior">‹</button>
+    <figure class="gallery-dialog">
+      <div class="gallery-media">
+        <img id="galleryImage" src="" alt="" />
+      </div>
+      <figcaption class="gallery-copy">
+        <small id="galleryCategory"></small>
+        <h3 id="galleryTitle"></h3>
+        <p id="galleryDescription"></p>
+        <span class="gallery-count" id="galleryCount"></span>
+      </figcaption>
+    </figure>
+    <button class="gallery-arrow gallery-next" id="galleryNext" type="button" aria-label="Ver siguiente negocio">›</button>
+  </div>
+
   <footer class="footer">
     <div class="container footer-inner">
       <div><strong>NextWebEC</strong> · José Guerrero</div>
@@ -1321,6 +1465,87 @@
     updateScrollUi();
     window.addEventListener('scroll', updateScrollUi, { passive: true });
     window.addEventListener('resize', updateScrollUi);
+
+    const industryCards = Array.from(document.querySelectorAll('.industry-card'));
+    const galleryModal = document.getElementById('galleryModal');
+    const galleryImage = document.getElementById('galleryImage');
+    const galleryCategory = document.getElementById('galleryCategory');
+    const galleryTitle = document.getElementById('galleryTitle');
+    const galleryDescription = document.getElementById('galleryDescription');
+    const galleryCount = document.getElementById('galleryCount');
+    const galleryClose = document.getElementById('galleryClose');
+    const galleryPrev = document.getElementById('galleryPrev');
+    const galleryNext = document.getElementById('galleryNext');
+    let activeGalleryIndex = 0;
+
+    const galleryItems = industryCards.map((card) => {
+      const image = card.querySelector('img');
+      const category = card.querySelector('small')?.textContent?.trim() || '';
+      const title = card.querySelector('h3')?.textContent?.trim() || '';
+      const description = card.querySelector('p')?.textContent?.trim() || '';
+      return {
+        src: image?.currentSrc || image?.src || '',
+        alt: image?.alt || `Ejemplo visual para ${title}`,
+        category,
+        title,
+        description: `${description} Una referencia visual para imaginar cómo tu negocio puede comunicar confianza desde el primer vistazo.`
+      };
+    });
+
+    function renderGallery(index) {
+      if (!galleryItems.length) return;
+      activeGalleryIndex = (index + galleryItems.length) % galleryItems.length;
+      const item = galleryItems[activeGalleryIndex];
+      if (galleryImage) {
+        galleryImage.src = item.src;
+        galleryImage.alt = item.alt;
+      }
+      if (galleryCategory) galleryCategory.textContent = item.category;
+      if (galleryTitle) galleryTitle.textContent = item.title;
+      if (galleryDescription) galleryDescription.textContent = item.description;
+      if (galleryCount) galleryCount.textContent = `${activeGalleryIndex + 1} de ${galleryItems.length}`;
+    }
+
+    function openGallery(index) {
+      renderGallery(index);
+      galleryModal?.classList.add('is-open');
+      galleryModal?.setAttribute('aria-hidden', 'false');
+      document.body.classList.add('modal-open');
+      galleryNext?.focus();
+    }
+
+    function closeGallery() {
+      galleryModal?.classList.remove('is-open');
+      galleryModal?.setAttribute('aria-hidden', 'true');
+      document.body.classList.remove('modal-open');
+    }
+
+    industryCards.forEach((card, index) => {
+      const title = card.querySelector('h3')?.textContent?.trim() || 'este negocio';
+      card.tabIndex = 0;
+      card.setAttribute('role', 'button');
+      card.setAttribute('aria-label', `Abrir ejemplo visual de ${title}`);
+      card.addEventListener('click', () => openGallery(index));
+      card.addEventListener('keydown', (event) => {
+        if (event.key === 'Enter' || event.key === ' ') {
+          event.preventDefault();
+          openGallery(index);
+        }
+      });
+    });
+
+    galleryNext?.addEventListener('click', () => renderGallery(activeGalleryIndex + 1));
+    galleryPrev?.addEventListener('click', () => renderGallery(activeGalleryIndex - 1));
+    galleryClose?.addEventListener('click', closeGallery);
+    galleryModal?.addEventListener('click', (event) => {
+      if (event.target === galleryModal) closeGallery();
+    });
+    window.addEventListener('keydown', (event) => {
+      if (!galleryModal?.classList.contains('is-open')) return;
+      if (event.key === 'Escape') closeGallery();
+      if (event.key === 'ArrowRight') renderGallery(activeGalleryIndex + 1);
+      if (event.key === 'ArrowLeft') renderGallery(activeGalleryIndex - 1);
+    });
 
     const diagnosticForm = document.getElementById('diagnosticForm');
     const diagnosticResult = document.getElementById('diagnosticResult');
