@@ -774,6 +774,32 @@
       padding-bottom: 18px;
       border-bottom: 1px solid rgba(11,31,58,.1);
     }
+    .gate-title,
+    .question-group {
+      border-radius: 18px;
+      border: 1px solid rgba(11,31,58,.09);
+      background: #f8fbff;
+    }
+    .gate-title {
+      padding: 16px;
+    }
+    .gate-title strong,
+    .question-group legend {
+      display: block;
+      color: var(--primary);
+      font-size: 17px;
+      line-height: 1.18;
+      font-weight: 900;
+    }
+    .gate-title span,
+    .question-group p {
+      display: block;
+      margin-top: 6px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 700;
+      line-height: 1.45;
+    }
     .consent-box {
       display: grid;
       grid-template-columns: auto 1fr;
@@ -814,7 +840,7 @@
       font-weight: 800;
     }
     .unlock-feedback.is-visible { display: block; }
-    .question-list { display: grid; gap: 12px; margin-top: 20px; }
+    .question-list { display: grid; gap: 16px; margin-top: 20px; }
     .diagnostic-form.is-locked .question-list,
     .diagnostic-form.is-locked .diagnostic-submit-row,
     .diagnostic-form.is-locked .diagnostic-result { display: none; }
@@ -829,6 +855,17 @@
       font-weight: 900;
     }
     .diagnostic-form:not(.is-locked) .diagnostic-unlocked-note { display: block; }
+    .question-group {
+      display: grid;
+      gap: 10px;
+      padding: 16px;
+    }
+    .question-group legend {
+      float: left;
+      width: 100%;
+      padding: 0;
+    }
+    .question-group p { clear: both; margin-bottom: 2px; }
     .question {
       display: grid;
       grid-template-columns: 1fr auto;
@@ -837,7 +874,7 @@
       padding: 14px;
       border-radius: 16px;
       border: 1px solid rgba(11,31,58,.09);
-      background: #f8fbff;
+      background: #fff;
     }
     .question span { color: var(--primary); font-weight: 800; line-height: 1.28; }
     .choice-group { display: flex; gap: 7px; }
@@ -1206,6 +1243,10 @@
 
         <form class="diagnostic-card diagnostic-form reveal is-locked" id="diagnosticForm" novalidate>
           <div class="lead-gate" id="leadGate">
+            <div class="gate-title">
+              <strong>Recolección de datos</strong>
+              <span>Primero guardamos tus datos básicos para que el diagnóstico tenga contexto y pueda continuar por WhatsApp.</span>
+            </div>
             <div class="form-grid">
               <div class="field">
                 <label for="leadName">Nombre</label>
@@ -1232,16 +1273,30 @@
           <div class="diagnostic-unlocked-note">Datos registrados en esta sesión. Ya puedes responder las 10 preguntas.</div>
 
           <div class="question-list" id="diagnosticQuestions" aria-hidden="true">
-            <div class="question"><span>¿Tu visitante entiende qué vendes en menos de 5 segundos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q1" value="yes"></label><label class="choice">No<input type="radio" name="q1" value="no"></label></div></div>
-            <div class="question"><span>¿Tu web se ve profesional en celular?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q2" value="yes"></label><label class="choice">No<input type="radio" name="q2" value="no"></label></div></div>
-            <div class="question"><span>¿Tienes botones claros para WhatsApp o contacto?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q3" value="yes"></label><label class="choice">No<input type="radio" name="q3" value="no"></label></div></div>
-            <div class="question"><span>¿Tus servicios están explicados con beneficios concretos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q4" value="yes"></label><label class="choice">No<input type="radio" name="q4" value="no"></label></div></div>
-            <div class="question"><span>¿La web muestra imágenes reales o ejemplos visuales de calidad?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q5" value="yes"></label><label class="choice">No<input type="radio" name="q5" value="no"></label></div></div>
-            <div class="question"><span>¿Tu página carga rápido y se navega sin confusión?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q6" value="yes"></label><label class="choice">No<input type="radio" name="q6" value="no"></label></div></div>
-            <div class="question"><span>¿Tienes testimonios, resultados o señales de confianza?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q7" value="yes"></label><label class="choice">No<input type="radio" name="q7" value="no"></label></div></div>
-            <div class="question"><span>¿La web guía al cliente hacia una acción específica?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q8" value="yes"></label><label class="choice">No<input type="radio" name="q8" value="no"></label></div></div>
-            <div class="question"><span>¿Puedes actualizar contenido sin complicarte?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q9" value="yes"></label><label class="choice">No<input type="radio" name="q9" value="no"></label></div></div>
-            <div class="question"><span>¿Tu web actual te genera consultas de forma constante?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q10" value="yes"></label><label class="choice">No<input type="radio" name="q10" value="no"></label></div></div>
+            <fieldset class="question-group">
+              <legend>Conversión</legend>
+              <p>¿Tu página en verdad vende como debería?</p>
+              <div class="question"><span>¿Tu visitante entiende qué vendes en menos de 5 segundos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q1" value="yes"></label><label class="choice">No<input type="radio" name="q1" value="no"></label></div></div>
+              <div class="question"><span>¿Tienes botones claros para WhatsApp o contacto?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q3" value="yes"></label><label class="choice">No<input type="radio" name="q3" value="no"></label></div></div>
+              <div class="question"><span>¿La web guía al cliente hacia una acción específica?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q8" value="yes"></label><label class="choice">No<input type="radio" name="q8" value="no"></label></div></div>
+              <div class="question"><span>¿Tu web actual te genera consultas de forma constante?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q10" value="yes"></label><label class="choice">No<input type="radio" name="q10" value="no"></label></div></div>
+            </fieldset>
+
+            <fieldset class="question-group">
+              <legend>Claridad y confianza</legend>
+              <p>¿La web ayuda a que el cliente crea en tu negocio antes de escribirte?</p>
+              <div class="question"><span>¿Tus servicios están explicados con beneficios concretos?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q4" value="yes"></label><label class="choice">No<input type="radio" name="q4" value="no"></label></div></div>
+              <div class="question"><span>¿La web muestra imágenes reales o ejemplos visuales de calidad?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q5" value="yes"></label><label class="choice">No<input type="radio" name="q5" value="no"></label></div></div>
+              <div class="question"><span>¿Tienes testimonios, resultados o señales de confianza?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q7" value="yes"></label><label class="choice">No<input type="radio" name="q7" value="no"></label></div></div>
+            </fieldset>
+
+            <fieldset class="question-group">
+              <legend>Experiencia y mantenimiento</legend>
+              <p>¿La página se siente fácil, rápida y lista para mantenerse viva?</p>
+              <div class="question"><span>¿Tu web se ve profesional en celular?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q2" value="yes"></label><label class="choice">No<input type="radio" name="q2" value="no"></label></div></div>
+              <div class="question"><span>¿Tu página carga rápido y se navega sin confusión?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q6" value="yes"></label><label class="choice">No<input type="radio" name="q6" value="no"></label></div></div>
+              <div class="question"><span>¿Puedes actualizar contenido sin complicarte?</span><div class="choice-group"><label class="choice">Sí<input type="radio" name="q9" value="yes"></label><label class="choice">No<input type="radio" name="q9" value="no"></label></div></div>
+            </fieldset>
           </div>
 
           <div class="diagnostic-actions diagnostic-submit-row">
