@@ -18,11 +18,17 @@
     };
   </script>
   <script>
-    (function(c,l,a,r,i,t,y){
-      c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
-      t=l.createElement(r);t.async=1;t.src="https://www.clarity.ms/tag/"+i;
-      y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
-    })(window, document, "clarity", "script", "wq1vez3c5m");
+    window.__clarityProjectId = 'wq1vez3c5m';
+    window.__clarityLoaded = false;
+    window.__loadClarity = function () {
+      if (window.__clarityLoaded) return;
+      window.__clarityLoaded = true;
+      (function(c,l,a,r,i,t,y){
+        c[a]=c[a]||function(){(c[a].q=c[a].q||[]).push(arguments)};
+        t=l.createElement(r);t.async=1;t.src='https://www.clarity.ms/tag/'+i;
+        y=l.getElementsByTagName(r)[0];y.parentNode.insertBefore(t,y);
+      })(window, document, 'clarity', 'script', window.__clarityProjectId);
+    };
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -32,19 +38,19 @@
   <meta name="author" content="José Guerrero, NextWebEC" />
   <meta name="theme-color" content="#0B1F3A" />
   <link rel="canonical" href="https://thenextwebec.com/" />
-  <link rel="shortcut icon" href="fixed_image_v2 (1).png" />
-  <link rel="icon" type="image/png" href="fixed_image_v2 (1).png" />
+  <link rel="icon" type="image/svg+xml" href="assets/favicon.svg" />
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.svg" />
   <meta property="og:type" content="website" />
   <meta property="og:site_name" content="NextWebEC" />
   <meta property="og:locale" content="es_EC" />
   <meta property="og:url" content="https://thenextwebec.com/" />
   <meta property="og:title" content="NextWebEC | Páginas web modernas para negocios" />
   <meta property="og:description" content="Creamos webs rápidas, visuales y listas para vender: desde cero, rediseño o mantenimiento mensual." />
-  <meta property="og:image" content="fixed_image_v2 (1).png" />
+  <meta property="og:image" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" />
   <meta name="twitter:card" content="summary_large_image" />
   <meta name="twitter:title" content="NextWebEC | Páginas web modernas para negocios" />
   <meta name="twitter:description" content="Diseño web moderno para negocios que quieren verse profesionales y generar más contactos." />
-  <meta name="twitter:image" content="fixed_image_v2 (1).png" />
+  <meta name="twitter:image" content="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" />
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
@@ -67,26 +73,29 @@
   </script>
   <style>
     :root {
-      --bg: #f7f7f5;
-      --ink: #0b1220;
-      --primary: #0b1f3a;
-      --primary-2: #142d54;
-      --muted: #667085;
-      --line: #e5e7eb;
-      --panel: #ffffff;
-      --soft: #eef4ff;
-      --accent: #1a6efa;
-      --accent-2: #58b7ff;
+      --bg: #06101f;
+      --ink: #f5f9ff;
+      --primary: #f5f9ff;
+      --primary-2: #d9ecff;
+      --muted: #aebbd0;
+      --line: rgba(177,207,255,.16);
+      --panel: rgba(10,24,44,.82);
+      --soft: rgba(47,125,255,.14);
+      --accent: #2f7dff;
+      --accent-2: #74d4ff;
       --green: #25d366;
       --radius: 22px;
-      --shadow: 0 24px 80px rgba(11,31,58,.14);
+      --shadow: 0 30px 100px rgba(0,0,0,.36);
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; }
     html { scroll-behavior: smooth; overflow-x: hidden; }
     body {
       font-family: Inter, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: var(--bg);
+      background:
+        radial-gradient(circle at 14% 8%, rgba(47,125,255,.28), transparent 28%),
+        radial-gradient(circle at 86% 18%, rgba(116,212,255,.18), transparent 26%),
+        linear-gradient(180deg, #050b16 0%, #071529 48%, var(--bg) 100%);
       color: var(--ink);
       line-height: 1.55;
       overflow-x: hidden;
@@ -101,12 +110,28 @@
       z-index: 50;
       opacity: .055;
       background-image:
-        radial-gradient(circle at 20% 20%, #0b1f3a 0 1px, transparent 1px),
-        radial-gradient(circle at 70% 70%, #1a6efa 0 1px, transparent 1px);
+        radial-gradient(circle at 20% 20%, #ffffff 0 1px, transparent 1px),
+        radial-gradient(circle at 70% 70%, #58b7ff 0 1px, transparent 1px);
       background-size: 34px 34px, 46px 46px;
-      mix-blend-mode: multiply;
+      mix-blend-mode: screen;
     }
     img { max-width: 100%; display: block; }
+    .skip-link {
+      position: fixed;
+      left: 16px;
+      top: 12px;
+      z-index: 200;
+      transform: translateY(-140%);
+      padding: 10px 14px;
+      border-radius: 12px;
+      color: #fff;
+      background: var(--accent);
+      font-weight: 900;
+      text-decoration: none;
+      transition: transform .2s ease;
+    }
+    .skip-link:focus { transform: translateY(0); }
+    .anchor-target { position: absolute; top: 0; }
     a { color: inherit; }
     .container { width: min(1160px, calc(100% - 40px)); margin: 0 auto; }
     .section { padding: clamp(70px, 9vw, 118px) 0; }
@@ -177,6 +202,46 @@
       border-color: rgba(255,255,255,.18);
     }
     .cta-row { display: flex; gap: 12px; flex-wrap: wrap; align-items: center; }
+    .cookie-bar {
+      position: fixed;
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      z-index: 60;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 14px;
+      align-items: center;
+      justify-content: space-between;
+      max-width: 760px;
+      margin: auto;
+      padding: 16px 18px;
+      border-radius: 18px;
+      color: #fff;
+      background: #071529;
+      box-shadow: 0 22px 70px rgba(0,0,0,.28);
+    }
+    .cookie-bar p {
+      margin: 0;
+      color: rgba(255,255,255,.78);
+      font-size: 14px;
+    }
+    .cookie-actions { display: flex; gap: 8px; }
+    .cookie-btn {
+      padding: 10px 14px;
+      border-radius: 999px;
+      color: #fff;
+      font-weight: 800;
+      cursor: pointer;
+    }
+    .cookie-btn.reject {
+      border: 1px solid rgba(255,255,255,.2);
+      background: transparent;
+    }
+    .cookie-btn.accept {
+      border: 0;
+      background: #1a6efa;
+    }
 
     .scroll-progress {
       position: fixed;
@@ -214,7 +279,7 @@
     .logo span { color: var(--accent); }
     .nav-links { display: flex; gap: 22px; list-style: none; color: #435066; font-weight: 700; font-size: 14px; }
     .nav-links a { text-decoration: none; }
-    .nav-links a:hover { color: var(--accent); }
+    .nav-links a:hover, .nav-links a.is-active { color: var(--accent-2); }
     .menu-toggle {
       display: none;
       width: 46px;
@@ -332,7 +397,7 @@
         radial-gradient(circle at 50px 17px, #25d366 0 4px, transparent 5px),
         linear-gradient(90deg, rgba(255,255,255,.13), rgba(255,255,255,.04));
     }
-    .browser-card img { width: 100%; height: calc(100% - 34px); object-fit: cover; }
+    .browser-card img { width: 100%; height: calc(100% - 34px); object-fit: cover; background: #10294a; }
     .hero-main-shot {
       position: relative;
       width: 100%;
@@ -375,10 +440,10 @@
 
     .strip {
       overflow: hidden;
-      background: var(--primary);
-      color: rgba(255,255,255,.86);
-      border-top: 1px solid rgba(255,255,255,.08);
-      border-bottom: 1px solid rgba(255,255,255,.08);
+      background: #eef6ff;
+      color: #071529;
+      border-top: 1px solid rgba(47,125,255,.18);
+      border-bottom: 1px solid rgba(47,125,255,.18);
     }
     .strip-track {
       display: flex;
@@ -388,7 +453,7 @@
       animation: marquee 28s linear infinite;
     }
     .strip span { display: inline-flex; gap: 10px; align-items: center; font-weight: 800; font-size: 13px; white-space: nowrap; }
-    .strip span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); }
+    .strip span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
     @keyframes marquee { to { transform: translateX(-50%); } }
 
     .industries {
@@ -453,7 +518,7 @@
     .industry-content h3 { color: #fff; font-size: 21px; }
     .industry-content p { color: rgba(255,255,255,.74); font-size: 14px; margin-top: 6px; }
     .industry-content::after {
-      content: "Ver grande ->";
+      content: "Ver grande";
       display: inline-flex;
       margin-top: 12px;
       padding: 7px 10px;
@@ -573,7 +638,7 @@
       box-shadow: 0 14px 44px rgba(11,31,58,.07);
     }
     .service-card { overflow: hidden; }
-    .service-card img { height: 210px; width: 100%; object-fit: cover; }
+    .service-card img { height: 210px; width: 100%; object-fit: cover; aspect-ratio: 16 / 9; background: #10294a; }
     .service-body { padding: 22px; }
     .service-body p, .benefit-card p, .step p { margin-top: 10px; }
     .mini-list { list-style: none; display: grid; gap: 9px; margin-top: 18px; color: #344054; font-weight: 700; font-size: 14px; }
@@ -932,7 +997,7 @@
       color: #fff;
       background:
         linear-gradient(90deg, rgba(7,21,41,.9), rgba(7,21,41,.72)),
-        url("Screenshot 2026-06-01 at 13.23.58.png") center/cover;
+        url("https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=82") center/cover;
     }
     .final-cta::before {
       content: "";
@@ -971,6 +1036,32 @@
     .final-cta h2 { color: #fff; }
     .final-cta p { color: rgba(255,255,255,.78); }
     .final-cta .eyebrow { color: #9bd7ff; }
+    .final-actions { margin-top: 28px; }
+
+    .privacy-section {
+      background:
+        radial-gradient(circle at 18% 20%, rgba(116,212,255,.12), transparent 26%),
+        linear-gradient(180deg, #06101f, #071529);
+    }
+    .privacy-grid {
+      display: grid;
+      grid-template-columns: .86fr 1.14fr;
+      gap: 28px;
+      align-items: start;
+    }
+    .privacy-list {
+      display: grid;
+      gap: 12px;
+    }
+    .privacy-list article {
+      padding: 18px;
+      border-radius: 18px;
+      background: rgba(255,255,255,.075);
+      border: 1px solid rgba(255,255,255,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.18);
+    }
+    .privacy-list strong { display: block; color: #fff; font-size: 17px; }
+    .privacy-list span { display: block; margin-top: 6px; color: #c9d6e8; font-weight: 700; }
 
     .footer {
       padding: 34px 0;
@@ -1022,10 +1113,132 @@
     .reveal { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
     .reveal.in { opacity: 1; transform: translateY(0); }
 
+    .nav {
+      background: rgba(5,11,22,.76);
+      border-bottom-color: rgba(255,255,255,.1);
+      box-shadow: 0 18px 60px rgba(0,0,0,.22);
+    }
+    .logo,
+    .hero-badge strong,
+    .metric strong,
+    .hero-showcase-caption strong,
+    .proof strong,
+    .designer-point strong,
+    .field label,
+    .question span,
+    .diagnostic-result strong { color: #fff; }
+    .nav-links { color: #c7d4e8; }
+    .menu-toggle,
+    .btn-secondary,
+    .mobile-menu a {
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.16);
+    }
+    .mobile-menu {
+      background: rgba(5,11,22,.96);
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 28px 80px rgba(0,0,0,.38);
+    }
+    .hero {
+      background:
+        radial-gradient(circle at 78% 22%, rgba(47,125,255,.34), transparent 35%),
+        radial-gradient(circle at 10% 0%, rgba(116,212,255,.14), transparent 24%),
+        linear-gradient(180deg, #050b16 0%, #071529 76%);
+    }
+    .hero::after {
+      background: linear-gradient(90deg, rgba(116,212,255,.12), rgba(47,125,255,.18), rgba(255,255,255,.06));
+    }
+    .hero-badge,
+    .metric,
+    .hero-showcase-caption,
+    .service-card,
+    .price-card,
+    .testimonial,
+    .step,
+    .proof,
+    .designer-point,
+    .designer-photo,
+    .diagnostic-form,
+    .gate-title,
+    .question-group,
+    .question,
+    .diagnostic-result {
+      background: rgba(255,255,255,.075);
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 18px 60px rgba(0,0,0,.22);
+      backdrop-filter: blur(12px);
+    }
+    .metric span,
+    .hero-showcase-caption span,
+    .mini-list,
+    .proof span,
+    .designer-point span,
+    .gate-title span,
+    .question-group p,
+    .diagnostic-result p { color: #c9d6e8; }
+    .industries,
+    .pricing,
+    .designer-section {
+      background:
+        radial-gradient(circle at 12% 16%, rgba(47,125,255,.18), transparent 28%),
+        linear-gradient(180deg, #071529, #06101f);
+    }
+    .dark-section,
+    .diagnostic-section {
+      background:
+        radial-gradient(circle at 80% 18%, rgba(116,212,255,.22), transparent 32%),
+        linear-gradient(135deg, #050b16, #071529 58%, #0d2444);
+    }
+    .price-card.featured {
+      border-color: rgba(116,212,255,.42);
+      box-shadow: 0 32px 110px rgba(47,125,255,.22);
+    }
+    .price,
+    .price small { color: #fff; }
+    .diagnostic-form,
+    .diagnostic-form p,
+    .consent-box span,
+    .form-note { color: #c9d6e8; }
+    .field input,
+    input,
+    select,
+    textarea {
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.16);
+    }
+    .field input::placeholder,
+    input::placeholder,
+    textarea::placeholder { color: #8898ad; }
+    .field input[aria-invalid="true"] {
+      border-color: #ffb4a2;
+      box-shadow: 0 0 0 3px rgba(255,180,162,.18);
+    }
+    .field-error {
+      display: none;
+      color: #ffb4a2;
+      font-size: 12px;
+      font-weight: 800;
+    }
+    .field-error.is-visible { display: block; }
+    .consent-box,
+    .diagnostic-unlocked-note,
+    .choice {
+      color: #fff;
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.14);
+    }
+    .result-plan,
+    .back-top {
+      background: #071529;
+      border: 1px solid rgba(255,255,255,.14);
+    }
+
     @media (max-width: 980px) {
       .nav-links { display: none; }
       .menu-toggle { display: grid; }
-      .hero-grid, .trust-grid, .designer-grid, .diagnostic-grid, .final-shell { grid-template-columns: 1fr; }
+      .hero-grid, .trust-grid, .designer-grid, .diagnostic-grid, .privacy-grid, .final-shell { grid-template-columns: 1fr; }
       .hero-showcase { max-width: 640px; }
       .industry-grid { grid-auto-rows: 280px; }
       .industry-grid { grid-template-columns: repeat(2, 1fr); }
@@ -1070,6 +1283,7 @@
   </style>
 </head>
 <body>
+  <a class="skip-link" href="#contenido">Saltar al contenido</a>
   <div class="scroll-progress" aria-hidden="true"><span id="scrollProgressBar"></span></div>
   <nav class="nav" aria-label="Navegación principal">
     <div class="container nav-inner">
@@ -1083,13 +1297,14 @@
   </nav>
   <div class="mobile-menu" id="mobileMenu" aria-label="Menú móvil"></div>
 
-  <main id="inicio">
+  <main id="contenido">
+    <span id="inicio" class="anchor-target" aria-hidden="true"></span>
     <section class="hero">
       <div class="container hero-grid">
         <div>
           <div class="hero-badge"><strong>NextWebEC</strong> Diseño web comercial · 100% remoto</div>
-          <h1>Tu negocio merece una web que se vea <span>profesional</span> y ayude a vender.</h1>
-          <p class="lead">Creamos páginas modernas, rápidas y visuales para negocios que quieren generar confianza, explicar mejor lo que ofrecen y convertir visitantes en clientes. Todo el proceso puede hacerse de forma remota, con seguimiento claro y directo.</p>
+          <h1>Una web profesional para que tu negocio genere <span>más contactos</span>.</h1>
+          <p class="lead">Diseñamos páginas rápidas, claras y adaptadas a celular para que tus clientes entiendan qué ofreces y te escriban por WhatsApp con menos fricción.</p>
           <div class="cta-row hero-actions">
             <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20quiero%20una%20web%20moderna%20para%20mi%20negocio." target="_blank" rel="noopener noreferrer">Quiero mi web profesional</a>
             <a class="btn btn-secondary" href="#diagnostico">Hacer diagnóstico</a>
@@ -1103,12 +1318,12 @@
 
         <div class="hero-showcase" aria-label="Vista previa visual de páginas web">
           <div class="browser-card hero-main-shot">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" alt="Mockup de página web moderna creada para un negocio profesional" loading="eager" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" alt="Mockup de página web moderna creada para un negocio profesional" loading="eager" fetchpriority="high" width="1200" height="675" />
           </div>
           <div class="hero-showcase-caption">
             <div>
-              <strong>Un mockup claro, no diez piezas compitiendo.</strong>
-              <span>Tu visitante debe entender rápido cómo se vería una web profesional para su negocio.</span>
+              <strong>Primera impresión clara desde el primer vistazo.</strong>
+              <span>Diseño, mensaje y llamadas a la acción trabajando juntos.</span>
             </div>
             <div class="remote-chip">100% remoto</div>
           </div>
@@ -1131,43 +1346,43 @@
         </div>
         <div class="industry-grid">
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%201%20(3).png" alt="Mockup web generado por IA para veterinaria con agenda, urgencias y WhatsApp" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%201%20(3).png" alt="Mockup web generado por IA para veterinaria con agenda, urgencias y WhatsApp" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Salud animal</small><h3>Veterinaria</h3><p>Servicios, urgencias, agenda y WhatsApp visible.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%202%20(1).png" alt="Mockup web generado por IA para relojería con catálogo premium y piezas destacadas" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%202%20(1).png" alt="Mockup web generado por IA para relojería con catálogo premium y piezas destacadas" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Retail premium</small><h3>Relojería</h3><p>Catálogo elegante, piezas destacadas y confianza.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" alt="Mockup web generado por IA para estudio de arquitectura con portafolio y solicitud de reunión" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%203%20(1).png" alt="Mockup web generado por IA para estudio de arquitectura con portafolio y solicitud de reunión" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Proyectos</small><h3>Arquitectura</h3><p>Portafolio, renders, proceso y solicitudes de reunión.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%204%20(1).png" alt="Mockup web generado por IA para firma de abogados con áreas de práctica y consulta" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%204%20(1).png" alt="Mockup web generado por IA para firma de abogados con áreas de práctica y consulta" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Servicios profesionales</small><h3>Firma de abogados</h3><p>Áreas de práctica, autoridad y contacto rápido.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%205.png" alt="Mockup web generado por IA para importadora con productos, cobertura y cotizaciones" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%205.png" alt="Mockup web generado por IA para importadora con productos, cobertura y cotizaciones" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Comercio</small><h3>Importadora</h3><p>Productos, cobertura, proveedores y cotizaciones.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%206.png" alt="Mockup web generado por IA para restaurante o cafetería con menú, reservas y ubicación" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%206.png" alt="Mockup web generado por IA para restaurante o cafetería con menú, reservas y ubicación" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Gastronomía</small><h3>Restaurante o cafetería</h3><p>Menú, ambiente, reservas y ubicación.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%207.png" alt="Mockup web generado por IA para clínica médica con tratamientos, agenda y testimonios" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%207.png" alt="Mockup web generado por IA para clínica médica con tratamientos, agenda y testimonios" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Salud y estética</small><h3>Clínica médica</h3><p>Tratamientos, confianza, agenda y testimonios.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%208.png" alt="Mockup web generado por IA para tienda online con productos, categorías y carrito" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%208.png" alt="Mockup web generado por IA para tienda online con productos, categorías y carrito" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Ecommerce</small><h3>Tienda online</h3><p>Productos, categorías, promociones y compra fácil.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%209.png" alt="Mockup web generado por IA para marca personal o consultor con servicios y agenda" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%209.png" alt="Mockup web generado por IA para marca personal o consultor con servicios y agenda" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Autoridad</small><h3>Marca personal</h3><p>Perfil, servicios, agenda y contenido de confianza.</p></div>
           </article>
           <article class="industry-card reveal">
-            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%2010.png" alt="Mockup web generado por IA para inmobiliaria con propiedades, filtros y mapa" />
+            <img src="https://raw.githubusercontent.com/infooxbarec-star/THENEXTWEBEC/refs/heads/main/Generated%20image%2010.png" alt="Mockup web generado por IA para inmobiliaria con propiedades, filtros y mapa" loading="lazy" width="900" height="900" />
             <div class="industry-content"><small>Bienes raíces</small><h3>Inmobiliaria</h3><p>Propiedades, filtros, zonas y leads calificados.</p></div>
           </article>
         </div>
@@ -1183,7 +1398,7 @@
         </div>
         <div class="services-grid">
           <article class="service-card reveal">
-            <img src="ChatGPT Image May 21, 2026 at 12_14_53 PM.png" alt="Diseño de página web desde cero" />
+            <img src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?auto=format&fit=crop&w=1200&q=82" alt="Diseño de página web desde cero" loading="lazy" width="1200" height="720" />
             <div class="service-body">
               <h3>Web desde cero</h3>
               <p>Una página completa, visual y alineada a tu marca para presentar tu negocio con claridad.</p>
@@ -1191,7 +1406,7 @@
             </div>
           </article>
           <article class="service-card reveal">
-            <img src="Screenshot 2026-05-04 at 13.37.31.png" alt="Rediseño de página web existente" />
+            <img src="https://images.unsplash.com/photo-1553877522-43269d4ea984?auto=format&fit=crop&w=1200&q=82" alt="Rediseño de página web existente" loading="lazy" width="1200" height="720" />
             <div class="service-body">
               <h3>Rediseño web</h3>
               <p>Renovamos una web antigua o desordenada para que se vea moderna y venda mejor.</p>
@@ -1199,11 +1414,11 @@
             </div>
           </article>
           <article class="service-card reveal">
-            <img src="Screenshot 2026-06-01 at 13.23.58.png" alt="Mantenimiento mensual de página web" />
+            <img src="https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=1200&q=82" alt="Mantenimiento mensual de página web" loading="lazy" width="1200" height="720" />
             <div class="service-body">
               <h3>Mantenimiento mensual</h3>
-              <p>Mantenemos tu web actualizada, estable y lista para seguir representando bien tu negocio.</p>
-              <ul class="mini-list"><li>Cambios menores</li><li>Actualización de contenido</li><li>Soporte mensual</li></ul>
+              <p>Mantenemos tu web cuidada cada mes: revisamos que todo funcione, actualizamos contenido y detectamos mejoras antes de que se conviertan en problemas.</p>
+              <ul class="mini-list"><li>Revisión técnica mensual</li><li>Textos, fotos o promociones</li><li>Formularios y WhatsApp probados</li></ul>
             </div>
           </article>
         </div>
@@ -1235,7 +1450,7 @@
           <h2>Descubre si tu web está ayudando o frenando tus ventas.</h2>
           <p class="lead">Responde 10 preguntas de sí o no. Al final recibirás una recomendación inmediata para decidir si necesitas una web nueva, un rediseño o mantenimiento.</p>
           <ul class="diagnostic-list">
-            <li>Recolecta nombre, teléfono y web actual para conectar después con Zapier.</li>
+            <li>Prepara nombre, teléfono y web actual para continuar por WhatsApp o conectarlo luego a Zapier.</li>
             <li>Detecta problemas de claridad, confianza, móvil y conversión.</li>
             <li>Te deja un mensaje listo para continuar la conversación por WhatsApp.</li>
           </ul>
@@ -1245,20 +1460,23 @@
           <div class="lead-gate" id="leadGate">
             <div class="gate-title">
               <strong>Recolección de datos</strong>
-              <span>Primero guardamos tus datos básicos para que el diagnóstico tenga contexto y pueda continuar por WhatsApp.</span>
+              <span>Primero tomamos tus datos básicos para que el diagnóstico tenga contexto y el mensaje final salga listo para WhatsApp.</span>
             </div>
             <div class="form-grid">
               <div class="field">
                 <label for="leadName">Nombre</label>
-                <input id="leadName" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required>
+                <input id="leadName" name="nombre" type="text" placeholder="Tu nombre" autocomplete="name" required aria-describedby="leadNameError">
+                <span class="field-error" id="leadNameError">Escribe tu nombre.</span>
               </div>
               <div class="field">
                 <label for="leadPhone">Teléfono / WhatsApp</label>
-                <input id="leadPhone" name="telefono" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" required>
+                <input id="leadPhone" name="telefono" type="tel" placeholder="Tu WhatsApp" autocomplete="tel" required inputmode="tel" aria-describedby="leadPhoneError">
+                <span class="field-error" id="leadPhoneError">Escribe un WhatsApp válido.</span>
               </div>
               <div class="field">
                 <label for="leadWebsite">Web actual</label>
-                <input id="leadWebsite" name="web_actual" type="text" placeholder="empresa.com" inputmode="url">
+                <input id="leadWebsite" name="web_actual" type="url" placeholder="https://empresa.com" inputmode="url" aria-describedby="leadWebsiteError">
+                <span class="field-error" id="leadWebsiteError">Usa una dirección válida o deja este campo vacío.</span>
               </div>
             </div>
             <label class="consent-box" for="dataConsent">
@@ -1270,7 +1488,7 @@
             <button class="btn btn-primary" type="button" id="unlockDiagnostic">Continuar al diagnóstico</button>
           </div>
 
-          <div class="diagnostic-unlocked-note">Datos registrados en esta sesión. Ya puedes responder las 10 preguntas.</div>
+          <div class="diagnostic-unlocked-note">Datos listos para esta sesión. Ya puedes responder las 10 preguntas.</div>
 
           <div class="question-list" id="diagnosticQuestions" aria-hidden="true">
             <fieldset class="question-group">
@@ -1345,7 +1563,7 @@
             <h3>Proyecto desde cero</h3>
             <div class="price">$699</div>
             <p>Para negocios que necesitan una página web profesional completamente nueva. Incluye diseño, estructura, secciones principales, adaptación visual al negocio y una web lista para presentar la marca.</p>
-            <ul class="mini-list"><li>Diseño visual completo</li><li>Secciones comerciales</li><li>Versión móvil</li></ul>
+            <ul class="mini-list"><li>Diseño visual completo</li><li>Home, servicios, confianza y contacto</li><li>Textos comerciales base</li><li>Versión móvil</li><li>WhatsApp y medición preparados</li></ul>
             <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20me%20interesa%20el%20Plan%20Proyecto%20desde%20cero%20de%20%24699." target="_blank" rel="noopener noreferrer">Quiero este plan</a>
           </article>
           <article class="price-card featured reveal">
@@ -1354,15 +1572,15 @@
             <h3>Rediseño web</h3>
             <div class="price">$499</div>
             <p>Para negocios que ya tienen una web, pero se ve antigua, desordenada o no vende. Incluye renovación visual, mejora de estructura, textos más claros, mejor presentación de servicios y enfoque comercial.</p>
-            <ul class="mini-list"><li>Renovación visual</li><li>Copy más vendedor</li><li>Mejor estructura de conversión</li></ul>
+            <ul class="mini-list"><li>Renovación visual</li><li>Copy más vendedor</li><li>Mejor estructura de conversión</li><li>Revisión móvil</li><li>Orden de servicios y CTAs</li></ul>
             <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20me%20interesa%20el%20Plan%20Redise%C3%B1o%20web%20de%20%24499." target="_blank" rel="noopener noreferrer">Rediseñar mi web</a>
           </article>
           <article class="price-card reveal">
             <div class="price-label">Plan 3</div>
             <h3>Mantenimiento mensual</h3>
             <div class="price">$99<small>/mes</small></div>
-            <p>Para mantener la web actualizada, segura y funcionando correctamente. Incluye cambios menores, actualización de contenido, revisión general y soporte mensual.</p>
-            <ul class="mini-list"><li>Cambios menores</li><li>Actualización de contenido</li><li>Soporte mensual</li></ul>
+            <p>Para que tu web no se quede abandonada después del lanzamiento. Cada mes reviso funcionamiento, enlaces, formularios, velocidad básica y hago ajustes de contenido para mantenerla clara, actual y lista para recibir clientes.</p>
+            <ul class="mini-list"><li>Revisión técnica mensual</li><li>Backups y limpieza básica</li><li>Actualización de textos, fotos o promociones</li><li>Prueba de formularios y WhatsApp</li><li>Mini reporte con recomendaciones</li></ul>
             <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20me%20interesa%20el%20Plan%20Mantenimiento%20mensual%20de%20%2499%2Fmes." target="_blank" rel="noopener noreferrer">Mantener mi web</a>
           </article>
         </div>
@@ -1388,7 +1606,7 @@
     <section class="section designer-section" id="disenador">
       <div class="container designer-grid">
         <figure class="designer-photo reveal">
-          <img src="ChatGPT Image May 30, 2026 at 12_43_36 PM.png" alt="José Guerrero, diseñador de NextWebEC">
+          <img src="https://images.unsplash.com/photo-1497366811353-6870744d04b2?auto=format&fit=crop&w=1200&q=82" alt="José Guerrero, diseñador de NextWebEC" loading="lazy" width="1200" height="900">
         </figure>
         <div class="reveal">
           <span class="eyebrow">Tu diseñador</span>
@@ -1411,7 +1629,7 @@
             <span class="eyebrow">Empecemos</span>
             <h2>Convierte tu web en una primera impresión que sí venda.</h2>
             <p class="lead">Cuéntame qué negocio tienes y qué necesitas: una web desde cero, un rediseño o mantenimiento. Te respondo con una recomendación clara y el siguiente paso.</p>
-            <div class="cta-row" style="margin-top: 28px;">
+            <div class="cta-row final-actions">
               <a class="btn btn-primary" href="https://wa.me/593969349833?text=Hola%20Jos%C3%A9%2C%20vi%20NextWebEC%20y%20quiero%20mejorar%20mi%20web." target="_blank" rel="noopener noreferrer">Hablar por WhatsApp</a>
               <a class="btn btn-dark" href="#diagnostico">Hacer diagnóstico</a>
             </div>
@@ -1420,6 +1638,21 @@
             <strong>100% remoto</strong>
             <span>Diseño, revisión y lanzamiento con comunicación directa, sin complicar tu agenda.</span>
           </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section privacy-section" id="privacidad">
+      <div class="container privacy-grid">
+        <div class="section-head reveal">
+          <span class="eyebrow">Privacidad</span>
+          <h2>Datos claros, uso limitado y contacto directo.</h2>
+          <p class="lead">Usamos la información que envías solo para responder tu diagnóstico, preparar una cotización y mejorar la experiencia de la web cuando aceptas cookies de medición.</p>
+        </div>
+        <div class="privacy-list reveal">
+          <article><strong>Datos del diagnóstico</strong><span>Nombre, teléfono, web actual y respuestas. Se usan para generar la recomendación y armar el mensaje de WhatsApp.</span></article>
+          <article><strong>Medición</strong><span>Google Analytics y Microsoft Clarity se cargan únicamente cuando aceptas cookies.</span></article>
+          <article><strong>Derechos</strong><span>Puedes solicitar acceso, actualización, rectificación, eliminación u oposición escribiendo a thenextwebec@gmail.com.</span></article>
         </div>
       </div>
     </section>
@@ -1445,7 +1678,7 @@
   <footer class="footer">
     <div class="container footer-inner">
       <div><strong>NextWebEC</strong> · José Guerrero</div>
-      <div>© 2026 · Quito, Ecuador · <a href="mailto:thenextwebec@gmail.com">thenextwebec@gmail.com</a></div>
+      <div>© 2026 · Quito, Ecuador · <a href="mailto:thenextwebec@gmail.com">thenextwebec@gmail.com</a> · <a href="#privacidad">Privacidad</a></div>
     </div>
   </footer>
 
@@ -1465,9 +1698,11 @@
       { label: 'Diagnóstico', href: '#diagnostico' },
       { label: 'Diseñador', href: '#disenador' },
       { label: 'Proceso', href: '#proceso' },
-      { label: 'Precios', href: '#precios' }
+      { label: 'Precios', href: '#precios' },
+      { label: 'Privacidad', href: '#privacidad' }
     ];
     const navLinks = document.getElementById('navLinks');
+    const leadWebhookUrl = ''; // Opcional: pega aqui un webhook de Zapier cuando este listo.
     const mobileMenu = document.getElementById('mobileMenu');
     const menuToggle = document.getElementById('menuToggle');
 
@@ -1478,6 +1713,18 @@
       if (mobileMenu) mobileMenu.innerHTML = mobileMarkup;
     }
     renderNav();
+
+    const allNavAnchors = Array.from(document.querySelectorAll('.nav-links a, .mobile-menu a'));
+    const sectionAnchors = navItems.map((item) => document.querySelector(item.href)).filter(Boolean);
+    function updateActiveNav() {
+      const current = sectionAnchors.reduce((active, section) => {
+        const top = section.getBoundingClientRect().top;
+        return top <= 120 ? section.id : active;
+      }, 'inicio');
+      allNavAnchors.forEach((anchor) => anchor.classList.toggle('is-active', anchor.getAttribute('href') === '#' + current));
+    }
+    updateActiveNav();
+    window.addEventListener('scroll', updateActiveNav, { passive: true });
 
     function setMenuOpen(isOpen) {
       if (!mobileMenu || !menuToggle) return;
@@ -1532,6 +1779,7 @@
     const galleryPrev = document.getElementById('galleryPrev');
     const galleryNext = document.getElementById('galleryNext');
     let activeGalleryIndex = 0;
+    let lastGalleryTrigger = null;
 
     const galleryItems = industryCards.map((card) => {
       const image = card.querySelector('img');
@@ -1562,6 +1810,7 @@
     }
 
     function openGallery(index) {
+      lastGalleryTrigger = document.activeElement;
       renderGallery(index);
       galleryModal?.classList.add('is-open');
       galleryModal?.setAttribute('aria-hidden', 'false');
@@ -1573,6 +1822,7 @@
       galleryModal?.classList.remove('is-open');
       galleryModal?.setAttribute('aria-hidden', 'true');
       document.body.classList.remove('modal-open');
+      if (lastGalleryTrigger && typeof lastGalleryTrigger.focus === 'function') lastGalleryTrigger.focus();
     }
 
     industryCards.forEach((card, index) => {
@@ -1621,12 +1871,46 @@
       };
     }
 
-    function unlockDiagnosticQuestions() {
+    function setFieldError(id, hasError) {
+      const field = document.getElementById(id);
+      const error = document.getElementById(id + 'Error');
+      field?.setAttribute('aria-invalid', String(hasError));
+      error?.classList.toggle('is-visible', hasError);
+    }
+
+    function isValidPhone(value) {
+      return /^[+()\d\s-]{7,20}$/.test(value);
+    }
+
+    function isValidWebsite(value) {
+      if (!value) return true;
+      try {
+        const withProtocol = /^https?:\/\//i.test(value) ? value : 'https://' + value;
+        const url = new URL(withProtocol);
+        return !!url.hostname && url.hostname.includes('.');
+      } catch (_) {
+        return false;
+      }
+    }
+
+    function validateLead() {
       const lead = getLeadData();
-      if (!lead.name || !lead.phone || !lead.consent) {
+      const errors = {
+        leadName: !lead.name,
+        leadPhone: !lead.phone || !isValidPhone(lead.phone),
+        leadWebsite: !isValidWebsite(lead.website)
+      };
+      Object.entries(errors).forEach(([id, hasError]) => setFieldError(id, hasError));
+      return { lead, valid: !Object.values(errors).some(Boolean) && lead.consent };
+    }
+
+    function unlockDiagnosticQuestions() {
+      const { lead, valid } = validateLead();
+      if (!valid) {
         unlockFeedback?.classList.add('is-visible');
         return false;
       }
+      localStorage.setItem('nextwebec-diagnostic-lead', JSON.stringify({ ...lead, savedAt: new Date().toISOString() }));
       unlockFeedback?.classList.remove('is-visible');
       diagnosticForm?.classList.remove('is-locked');
       diagnosticQuestions?.setAttribute('aria-hidden', 'false');
@@ -1647,7 +1931,8 @@
         const { name, phone, website, consent } = getLeadData();
         const unanswered = Array.from({ length: 10 }, (_, index) => `q${index + 1}`).filter((key) => !data.get(key));
 
-        if (!name || !phone || !consent || unanswered.length) {
+        const leadState = validateLead();
+        if (!leadState.valid || unanswered.length) {
           diagnosticResult.classList.add('is-visible');
           diagnosticTitle.textContent = 'Faltan algunos datos';
           diagnosticText.textContent = 'Completa nombre, WhatsApp, consentimiento y las 10 respuestas para generar una recomendación clara.';
@@ -1691,24 +1976,39 @@
           'Acepté el tratamiento de mis datos para este diagnóstico.'
         ].join('\n');
         diagnosticWhatsapp.href = `https://wa.me/593969349833?text=${encodeURIComponent(message)}`;
+
+        const payload = { name, phone, website, consent, score: 10 - noCount, result: title, plan, recommendation: text, createdAt: new Date().toISOString() };
+        localStorage.setItem('nextwebec-diagnostic-result', JSON.stringify(payload));
+        if (leadWebhookUrl) {
+          fetch(leadWebhookUrl, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload),
+            mode: 'no-cors'
+          }).catch(() => {});
+        }
       });
     }
 
     const cookieKey = 'nextwebec-cookie-choice';
     if (!localStorage.getItem(cookieKey)) {
       const bar = document.createElement('div');
-      bar.style.cssText = 'position:fixed;left:16px;right:16px;bottom:16px;z-index:60;max-width:760px;margin:auto;padding:16px 18px;border-radius:18px;background:#071529;color:#fff;box-shadow:0 22px 70px rgba(0,0,0,.28);display:flex;gap:14px;align-items:center;justify-content:space-between;flex-wrap:wrap';
-      bar.innerHTML = '<p style="color:rgba(255,255,255,.78);margin:0;font-size:14px">Usamos cookies para medir visitas y mejorar la web.</p><div style="display:flex;gap:8px"><button data-cookie="no" style="border:1px solid rgba(255,255,255,.2);background:transparent;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer">Rechazar</button><button data-cookie="yes" style="border:0;background:#1a6efa;color:#fff;border-radius:999px;padding:10px 14px;font-weight:800;cursor:pointer">Aceptar</button></div>';
+      bar.className = 'cookie-bar';
+      bar.innerHTML = '<p>Usamos cookies para medir visitas y mejorar la web.</p><div class="cookie-actions"><button class="cookie-btn reject" data-cookie="no">Rechazar</button><button class="cookie-btn accept" data-cookie="yes">Aceptar</button></div>';
       document.body.appendChild(bar);
       bar.addEventListener('click', (event) => {
         const button = event.target.closest('[data-cookie]');
         if (!button) return;
         localStorage.setItem(cookieKey, button.dataset.cookie);
-        if (button.dataset.cookie === 'yes' && window.__loadAnalytics) window.__loadAnalytics();
+        if (button.dataset.cookie === 'yes') {
+          if (window.__loadAnalytics) window.__loadAnalytics();
+          if (window.__loadClarity) window.__loadClarity();
+        }
         bar.remove();
       });
-    } else if (localStorage.getItem(cookieKey) === 'yes' && window.__loadAnalytics) {
-      window.__loadAnalytics();
+    } else if (localStorage.getItem(cookieKey) === 'yes') {
+      if (window.__loadAnalytics) window.__loadAnalytics();
+      if (window.__loadClarity) window.__loadClarity();
     }
   </script>
 </body>
