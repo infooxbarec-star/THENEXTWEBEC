@@ -440,6 +440,10 @@
 
     .strip {
       overflow: hidden;
+      background: var(--primary);
+      color: rgba(255,255,255,.86);
+      border-top: 1px solid rgba(255,255,255,.08);
+      border-bottom: 1px solid rgba(255,255,255,.08);
       background: #eef6ff;
       color: #071529;
       border-top: 1px solid rgba(47,125,255,.18);
@@ -453,6 +457,7 @@
       animation: marquee 28s linear infinite;
     }
     .strip span { display: inline-flex; gap: 10px; align-items: center; font-weight: 800; font-size: 13px; white-space: nowrap; }
+    .strip span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent-2); }
     .strip span::before { content: ""; width: 7px; height: 7px; border-radius: 50%; background: var(--accent); }
     @keyframes marquee { to { transform: translateX(-50%); } }
 
