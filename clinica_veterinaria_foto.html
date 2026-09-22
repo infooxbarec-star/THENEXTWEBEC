@@ -24,7 +24,10 @@
   .vet-hero-right img { width: 100%; height: 100%; object-fit: cover; object-position: center top; display: block; }
   .vet-hero-right-overlay { position: absolute; inset: 0; background: linear-gradient(to right, rgba(255,255,255,0.18) 0%, transparent 40%); }
   .vet-animal-card { position: absolute; bottom: 24px; left: 20px; background: #fff; border-radius: 14px; padding: 12px 16px; box-shadow: 0 4px 20px rgba(0,0,0,0.15); display: flex; align-items: center; gap: 10px; }
-  .vet-animal-avatar { width: 38px; height: 38px; background: #fef3e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 18px; }
+  .vet-animal-avatar { width: 38px; height: 38px; background: #fef3e2; border-radius: 50%; display: flex; align-items: center; justify-content: center; }
+  .vet-icon { display: block; width: 18px; height: 18px; }
+  .vet-animal-avatar .vet-icon { width: 20px; height: 20px; }
+  .vet-service-icon .vet-icon { width: 19px; height: 19px; }
   .vet-animal-name { font-size: 13px; font-weight: 800; color: #1a2e24; letter-spacing: -0.3px; }
   .vet-animal-status { display: flex; align-items: center; gap: 4px; font-size: 10.5px; color: #2d6b48; font-weight: 600; margin-top: 2px; }
   .vet-animal-status-dot { width: 5px; height: 5px; background: #3a7d5c; border-radius: 50%; }
@@ -33,7 +36,7 @@
   .vet-services { display: grid; grid-template-columns: repeat(4, 1fr); background: #1a2e24; }
   .vet-service-item { padding: 24px 22px; border-right: 1px solid rgba(255,255,255,0.08); }
   .vet-service-item:last-child { border-right: none; }
-  .vet-service-icon { width: 36px; height: 36px; background: rgba(58,125,92,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; font-size: 16px; }
+  .vet-service-icon { width: 36px; height: 36px; background: rgba(58,125,92,0.3); border-radius: 10px; display: flex; align-items: center; justify-content: center; margin-bottom: 10px; }
   .vet-service-title { font-size: 13px; color: #e8f5ee; font-weight: 700; margin-bottom: 5px; letter-spacing: -0.3px; }
   .vet-service-desc { font-size: 11px; color: #7a9b87; line-height: 1.5; font-weight: 400; }
   .vet-stat { font-size: 26px; color: #a8d5bc; font-weight: 800; letter-spacing: -1px; }
@@ -70,7 +73,7 @@
       <img src="https://axoncomunicacion.net/wp-content/uploads/2023/11/cerca-veterinario-cuidando-perro.jpg" alt="Veterinario cuidando a un perro" />
       <div class="vet-hero-right-overlay"></div>
       <div class="vet-animal-card">
-        <div class="vet-animal-avatar">🐶</div>
+        <div class="vet-animal-avatar"><img class="vet-icon" src="https://api.iconify.design/tabler/dog.svg?color=%233a7d5c" alt="" aria-hidden="true"></div>
         <div>
           <div class="vet-animal-name">Max</div>
           <div class="vet-animal-status"><div class="vet-animal-status-dot"></div>Próxima cita: Jueves</div>
@@ -82,23 +85,23 @@
   <div style="background:#fff; padding: 18px 40px 14px; border-top: 1px solid #eee;">
     <div style="font-size:11px; color:#8a9b91; margin-bottom:10px; font-weight:700; letter-spacing:0.8px; text-transform:uppercase;">Lo que ofrecemos</div>
     <div class="vet-pills">
-      <div class="vet-pill">🩺 Consulta general</div>
-      <div class="vet-pill">💉 Vacunación</div>
-      <div class="vet-pill">✂️ Grooming</div>
-      <div class="vet-pill">🦷 Odontología</div>
-      <div class="vet-pill">🏥 Cirugías</div>
-      <div class="vet-pill">🧬 Laboratorio</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/stethoscope.svg?color=%233a7d5c" alt="" aria-hidden="true">Consulta general</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/vaccine.svg?color=%233a7d5c" alt="" aria-hidden="true">Vacunación</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/cut.svg?color=%233a7d5c" alt="" aria-hidden="true">Grooming</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/dental.svg?color=%233a7d5c" alt="" aria-hidden="true">Odontología</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/building-hospital.svg?color=%233a7d5c" alt="" aria-hidden="true">Cirugías</div>
+      <div class="vet-pill"><img class="vet-icon" src="https://api.iconify.design/tabler/microscope.svg?color=%233a7d5c" alt="" aria-hidden="true">Laboratorio</div>
     </div>
   </div>
 
   <div class="vet-services">
     <div class="vet-service-item">
-      <div class="vet-service-icon">🕐</div>
+      <div class="vet-service-icon"><img class="vet-icon" src="https://api.iconify.design/tabler/clock-hour-4.svg?color=%23e8f5ee" alt="" aria-hidden="true"></div>
       <div class="vet-service-title">Emergencias 24h</div>
       <div class="vet-service-desc">Atención inmediata cuando más nos necesitas</div>
     </div>
     <div class="vet-service-item">
-      <div class="vet-service-icon">👨‍⚕️</div>
+      <div class="vet-service-icon"><img class="vet-icon" src="https://api.iconify.design/tabler/user-heart.svg?color=%23e8f5ee" alt="" aria-hidden="true"></div>
       <div class="vet-service-title">Equipo experto</div>
       <div class="vet-service-desc">Veterinarios especializados con años de experiencia</div>
     </div>
@@ -107,7 +110,7 @@
       <div class="vet-service-desc" style="color:#7a9b87;">mascotas atendidas</div>
     </div>
     <div class="vet-service-item" style="text-align:center;">
-      <div class="vet-stat">4.9 ⭐</div>
+      <div class="vet-stat">4.9</div>
       <div class="vet-service-desc" style="color:#7a9b87;">calificación promedio</div>
     </div>
   </div>
